@@ -1,14 +1,14 @@
 {
-  "name": "template-ts-basic",
+  "name": "fe-course-2025q3-final-frontend",
   "version": "1.0.0",
-  "description": "basic template for rss mentorship",
-  "homepage": "https://github.com/rss-mentoring-ansiv/template-ts-basic#readme",
+  "description": "RSS FE-course-2025q3 final-task. Frontend",
+  "homepage": "https://github.com/rss-mentoring-ansiv/fe-course-2025Q3-final#readme",
   "bugs": {
-    "url": "https://github.com/rss-mentoring-ansiv/template-ts-basic/issues"
+    "url": "https://github.com/rss-mentoring-ansiv/fe-course-2025Q3-final/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rss-mentoring-ansiv/template-ts-basic.git"
+    "url": "git+https://github.com/rss-mentoring-ansiv/fe-course-2025Q3-final.git"
   },
   "license": "ISC",
   "author": "ZAS",
