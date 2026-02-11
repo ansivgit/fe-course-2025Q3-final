@@ -61,6 +61,13 @@
 - **Biome**
 - **Git / GitHub**
 
+---
+
+## 🔗 Репозиторий бэкенда
+
+- [fe-course-2025Q3-final-backend](https://github.com/rss-mentoring-ansiv/fe-course-2025Q3-final-backend)
+
+---
 
 ## 📌 Статус проекта
 
