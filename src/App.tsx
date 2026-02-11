@@ -1,6 +1,8 @@
+// import styles from './App.module.css';
+import styles from '@/App.module.css';
+
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
-import styles from './App.module.css';
 
 const cx = classNames.bind(styles);
 
