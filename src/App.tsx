@@ -1,5 +1,6 @@
 // import styles from './App.module.css';
 import styles from '@/App.module.css';
+import { mockUsers } from '@/data/user/user';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
@@ -9,7 +10,14 @@ const cx = classNames.bind(styles);
 export function App(): ReactElement {
   return (
     <div>
-      <h1 className={cx('title')}>Hello, Tandem</h1>
+      <h2 className={cx('title')}>Users</h2>
+      <ul>
+        {mockUsers.map((user) => (
+          <li key={user.id}>
+            <h3>{user.userName}</h3>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
