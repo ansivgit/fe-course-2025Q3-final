@@ -14,7 +14,7 @@ export function App(): ReactElement {
       <ul>
         {mockUsers.map((user) => (
           <li key={user.id}>
-            <h3>{user.userName}</h3>
+            <h3>{user.name}</h3>
           </li>
         ))}
       </ul>

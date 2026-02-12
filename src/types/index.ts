@@ -1,8 +1,8 @@
 export type User = {
   id: string;
-  userName: string;
-  email: string;
-  passwordHash: string;
+  name: string;
+  login: string;
+  password: string;
   createdAt: string;
   session: Session[];
   settings: Settings;
