@@ -1,9 +1,9 @@
 // import styles from './App.module.css';
 import styles from '@/App.module.css';
-import { mockUsers } from '@/data/user/user';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
+import { mockUsers } from './../data/user';
 
 const cx = classNames.bind(styles);
 
