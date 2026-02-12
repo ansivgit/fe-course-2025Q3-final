@@ -1,8 +1,10 @@
 import type { User } from '@/types';
 
+import { v4 as uuid } from 'uuid';
+
 export const mockUsers: User[] = [
   {
-    id: 'u1',
+    id: uuid(),
     name: 'Max',
     login: 'max@example.com',
     password: 'hashed_password_123',
@@ -11,7 +13,7 @@ export const mockUsers: User[] = [
     settings: {},
   },
   {
-    id: 'u2',
+    id: uuid(),
     name: 'Leo',
     login: 'leo@example.com',
     password: 'hashed_password_456',
@@ -20,7 +22,7 @@ export const mockUsers: User[] = [
     settings: {},
   },
   {
-    id: 'u3',
+    id: uuid(),
     name: 'Mia',
     login: 'mia@example.com',
     password: 'hashed_password_789',
