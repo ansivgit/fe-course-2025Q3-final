@@ -1,0 +1,66 @@
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.button--size--small { 
+  padding: 0.5rem 1rem; 
+  font-size: 0.875rem; 
+}
+
+.button--size--medium { 
+  padding: 0.75rem 1.5rem; 
+  font-size: 1rem; 
+}
+
+.button--size--large { 
+  padding: 1rem 2rem; 
+  font-size: 1.125rem; 
+}
+
+.button--color--gradient {
+  color: var(--color-white);
+  border: none;
+  box-shadow: var(--button--shadow-glow-1), var(--button--shadow-glow-2);
+  background: linear-gradient(135deg, var(--button--color-gradient-start), var(--button--color-gradient-end));
+}
+
+.button--color--ghost {
+  color: var(--color-white-70);
+  border: none;
+  background-color: transparent;
+}
+
+.button--color--ghost:hover {
+  color: var(--color-white-70);
+  background: var(--color-white-05);
+}
+
+.button--color--dark {
+  color: var(--color-white);
+  border: 1px solid var(--button--color-dark-border);
+  box-shadow: var(--button--shadow-inset);
+  background: var(--button--color-dark-bg);
+}
+
+.button--color--outline {
+  color: var(--color-white);;
+  border: 1px solid var( --button--color-outline-border);
+  box-shadow: var(--button--shadow-inset);
+  background: var(--button--color-outline-bg);
+}
