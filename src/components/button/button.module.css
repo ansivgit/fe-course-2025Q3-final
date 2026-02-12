@@ -36,8 +36,8 @@
 .button--color--gradient {
   color: var(--color-white);
   border: none;
-  box-shadow: var(--button--shadow-glow-1), var(--button--shadow-glow-2);
-  background: linear-gradient(135deg, var(--button--color-gradient-start), var(--button--color-gradient-end));
+  box-shadow: var(--shadow-glow-1), var(--shadow-glow-2);
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
 }
 
 .button--color--ghost {
@@ -51,16 +51,16 @@
   background: var(--color-white-05);
 }
 
-.button--color--dark {
+.button--color--outline {
   color: var(--color-white);
-  border: 1px solid var(--button--color-dark-border);
-  box-shadow: var(--button--shadow-inset);
-  background: var(--button--color-dark-bg);
+  border: 1px solid var(--color-dark-border);
+  box-shadow: var(--shadow-inset);
+  background: var(--color-dark-bg);
 }
 
-.button--color--outline {
+.button--color--outline:active {
   color: var(--color-white);;
-  border: 1px solid var( --button--color-outline-border);
-  box-shadow: var(--button--shadow-inset);
-  background: var(--button--color-outline-bg);
+  border: 1px solid var(--color-outline-border);
+  box-shadow: var(--shadow-inset);
+  background: var(--color-outline-bg);
 }

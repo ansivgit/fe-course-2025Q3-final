@@ -1,4 +1,4 @@
-type ButtonColor = 'gradient' | 'dark' | 'outline' | 'ghost';
+type ButtonColor = 'gradient' | 'outline' | 'ghost';
 type ButtonSize = 'small' | 'medium' | 'large';
 
 export type ButtonProps = {
