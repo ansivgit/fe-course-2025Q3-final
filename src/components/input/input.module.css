@@ -1,0 +1,57 @@
+.input-wrapper {
+  padding: 20px;
+}
+
+.input-label {
+  display: block;
+  color: var(--color-white);
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.input-field {
+  position: relative;
+}
+
+.custom-input {
+  background-color: var(--color-input-bg);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-dark-border);
+  font-size: 100%;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.custom-input.has-left {
+  padding-left: 3rem;
+}
+
+.custom-input.has-right {
+  padding-right: 3rem;
+}
+
+.custom-input:focus {
+  outline: 2px solid var(--color-outline-border);
+  border-color: transparent;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.input-icon.left {
+  left: 0.75rem;
+}
+
+.input-icon.right {
+  right: 0.75rem;
+  pointer-events: auto;
+  cursor: pointer;
+}

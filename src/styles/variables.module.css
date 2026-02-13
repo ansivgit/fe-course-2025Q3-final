@@ -1,0 +1,7 @@
+:global(:root) {
+  --color-white: #ffffff;
+  --color-input-bg: rgb(22, 22, 29);
+
+  --color-dark-border: rgb(43, 43, 59);
+  --color-outline-border: rgba(196, 77, 255, 0.5);
+}
