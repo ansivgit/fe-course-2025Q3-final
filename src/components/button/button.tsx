@@ -1,10 +1,21 @@
 import classNames from 'classnames/bind';
 import styles from '@/components/button/button.module.css';
-
-import type { ButtonProps } from '@/types/index';
 import type { ReactElement } from 'react';
 
 const cx = classNames.bind(styles);
+
+type ButtonColor = 'gradient' | 'outline' | 'ghost';
+
+type ButtonSize = 'small' | 'medium' | 'large';
+
+type ButtonProps = {
+  children: React.ReactNode;
+  className?: string;
+  color?: ButtonColor;
+  size?: ButtonSize;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
+}
 
 export const Button = ({
   children,
