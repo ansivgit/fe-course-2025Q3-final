@@ -1,18 +1,26 @@
 :root {
-  --color-white: #ffffff;
-  --color-white-05: #ffffff0d;
-  --color-white-70: #ffffffb3;
-  
-  --color-dark-bg: rgb(26, 26, 35);
-  --color-outline-bg: rgba(196, 77, 255, 0.15);
 
-  --color-dark-border: rgb(43, 43, 59);
-  --color-outline-border: rgba(196, 77, 255, 0.5);
+  /* COLORS */
 
-  --color-gradient-start: hsl(280 100% 65%);
-  --color-gradient-end: hsl(180 100% 50%);
+  /* White colors */
+  --color-white: hsl(0, 0%, 100%);
 
-  --shadow-glow-1: 0 0 40px #c44dff4d;
-  --shadow-glow-2: 0 0 80px #c44dff1a;
-  --shadow-inset: inset 0 0 20px #c44dff1a;
+  /* Gray colors */
+  --color-gray-900: hsl(240, 15%, 12%);
+
+  /* Purple colors */
+  --color-purple-900: hsl(240, 16%, 20%);
+  --color-purple-500: hsl(280, 100%, 65%);
+
+  /* Teal colors */
+  --color-teal-500: hsl(180, 100%, 50%);
+
+  /* OPACITY  */
+
+  --opacity-70: 0.70;
+  --opacity-50: 0.50;
+  --opacity-30: 0.30;
+  --opacity-15: 0.15;
+  --opacity-10: 0.10;
+  --opacity-05: 0.05;
 }
