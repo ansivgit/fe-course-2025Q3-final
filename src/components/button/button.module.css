@@ -7,58 +7,58 @@
   font-weight: 500;
   transition: all 0.2s;
   cursor: pointer;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
 }
 
-.button:hover {
-  transform: scale(1.05);
-}
-
-.button:disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.button--size--small { 
+.small { 
   padding: 0.5rem 1rem; 
   font-size: 0.875rem; 
 }
 
-.button--size--medium { 
+.medium { 
   padding: 0.75rem 1.5rem; 
   font-size: 1rem; 
 }
 
-.button--size--large { 
+.large { 
   padding: 1rem 2rem; 
   font-size: 1.125rem; 
 }
 
-.button--color--gradient {
+.gradient {
   color: var(--color-white);
   border: none;
   box-shadow: var(--shadow-glow-1), var(--shadow-glow-2);
   background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
 }
 
-.button--color--ghost {
+.ghost {
   color: var(--color-white-70);
   border: none;
   background-color: transparent;
+
+    &:hover {
+      color: var(--color-white-70);
+      background: var(--color-white-05);
+    }
 }
 
-.button--color--ghost:hover {
-  color: var(--color-white-70);
-  background: var(--color-white-05);
-}
-
-.button--color--outline {
+.outline {
   color: var(--color-white);
   border: 1px solid var(--color-dark-border);
   box-shadow: var(--shadow-inset);
   background: var(--color-dark-bg);
 }
 
-.button--color--outline:active {
+.selected {
   color: var(--color-white);;
   border: 1px solid var(--color-outline-border);
   box-shadow: var(--shadow-inset);
