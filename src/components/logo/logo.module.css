@@ -1,0 +1,39 @@
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.logo-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(
+    135deg,
+    var(--color-gradient-start),
+    var(--color-gradient-end)
+  );
+  border-radius: 0.75rem;
+}
+
+.small-logo .logo-icon-wrapper {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.logo-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: var(--color-white);
+  text-transform: uppercase;
+}
+
+.small-logo .logo-label {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
