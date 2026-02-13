@@ -18,7 +18,6 @@ export const Button = ({
         [styles.button]: true,
         [styles[`button--color--${color}`]]: color,
         [styles[`button--size--${size}`]]: size,
-        [styles['button--disabled']]: disabled,
         [className ?? '']: Boolean(className),
       })}
       disabled={disabled}
