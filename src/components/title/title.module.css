@@ -1,0 +1,36 @@
+.title {
+  color: var(--color-white);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.small {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.medium {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.large {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.default {
+  margin-bottom: 0.5rem;
+}
+
+.compact {
+  margin-bottom: 0;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
