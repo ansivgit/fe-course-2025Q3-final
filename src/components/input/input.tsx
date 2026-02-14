@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import type { ChangeEvent, ReactNode } from 'react';
+import type { ChangeEvent, ReactElement, ReactNode } from 'react';
 import styles from './input.module.css';
 
 const cx = classNames.bind(styles);
@@ -18,7 +18,7 @@ type InputProps = {
   rightIcon?: ReactNode;
 };
 
-export const Input: React.FC<InputProps> = ({
+export const Input = ({
   id,
   label,
   type = 'text',
@@ -36,7 +36,7 @@ export const Input: React.FC<InputProps> = ({
   className = '',
   leftIcon,
   rightIcon,
-}) => {
+}: InputProps): ReactElement => {
   return (
     <div className={cx('input-wrapper', className)}>
       {label && (
