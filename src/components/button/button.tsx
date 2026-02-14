@@ -14,7 +14,7 @@ type ButtonProps = {
   color?: ButtonColor;
   size?: ButtonSize;
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  selected?: boolean;
+  isActive?: boolean;
   disabled?: boolean;
 }
 
@@ -23,7 +23,7 @@ export const Button = ({
   className,
   color = 'gradient',
   size = 'medium',
-  selected = false,
+  isActive = false,
   disabled = false,
   ...rest
 }: ButtonProps): ReactElement => {
@@ -33,7 +33,7 @@ export const Button = ({
         'button',
         color,
         size,
-        { selected },
+        { active: isActive },
         className,
       )}
       disabled={disabled}
