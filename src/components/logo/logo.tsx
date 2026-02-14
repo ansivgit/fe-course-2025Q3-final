@@ -1,7 +1,7 @@
 import LogoIcon from '@/assets/icons/logo.svg';
 
 import classNames from 'classnames/bind';
-import type { MouseEvent } from 'react';
+import type { MouseEvent, ReactElement } from 'react';
 import styles from './logo.module.css';
 
 const cx = classNames.bind(styles);
@@ -12,7 +12,7 @@ type LogoProps = {
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
 };
 
-export const Logo: React.FC<LogoProps> = ({ className = '', onClick }) => {
+export const Logo = ({ className = '', onClick }: LogoProps): ReactElement => {
   return (
     <a
       href="/"
