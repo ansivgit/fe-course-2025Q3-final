@@ -10,7 +10,7 @@
   --color-gray-950: hsl(240, 14%, 10%);
 
   /* Purple colors */
-  --color-purple-500-50: hsla(280, 100%, 65%, 0.5);
+  --color-purple-300: hsl(268, 91%, 65%);
 }
 
 * {
@@ -21,4 +21,16 @@
 
 body {
   font-family: 'Inter', sans-serif;
+}
+
+button {
+  all: unset;
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
 }
