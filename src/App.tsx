@@ -1,4 +1,5 @@
 import '@/styles/index.css';
+
 import type { ReactElement } from 'react';
 
 export function App(): ReactElement {

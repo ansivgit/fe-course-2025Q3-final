@@ -55,7 +55,7 @@ export const Input: React.FC<InputProps> = ({
           onChange={onChange}
           onBlur={onBlur}
           onFocus={onFocus}
-          className={cx('custom-input', {
+          className={cx('input', {
             'has-left': leftIcon,
             'has-right': rightIcon,
           })}
