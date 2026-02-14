@@ -3,6 +3,7 @@
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
+  padding: 20px;
 }
 
 .logo-icon-wrapper {
@@ -13,8 +14,8 @@
   height: 3rem;
   background: linear-gradient(
     135deg,
-    var(--color-gradient-start),
-    var(--color-gradient-end)
+    var(--color-purple-500),
+    var(--color-teal-500)
   );
   border-radius: 0.75rem;
 }

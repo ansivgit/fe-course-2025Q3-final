@@ -1,0 +1,19 @@
+@import './variables.css';
+@import './reset.css';
+
+body {
+  background-color: var(--color-gray-950);
+  font-family: 'Inter', sans-serif;
+}
+
+button {
+  all: unset;
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}

@@ -1,6 +1,0 @@
-:global(:root) {
-  --color-white: #ffffff;
-
-  --color-gradient-start: hsl(280 100% 65%);
-  --color-gradient-end: hsl(180 100% 50%);
-}

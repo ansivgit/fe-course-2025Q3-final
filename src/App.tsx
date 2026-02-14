@@ -1,15 +1,13 @@
-import '@/styles/variables.module.css';
-import styles from '@/App.module.css';
+import '@/styles/index.css';
 
-import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
-
-const cx = classNames.bind(styles);
+import { Logo } from './components/logo/logo';
 
 export function App(): ReactElement {
   return (
     <div>
-      <h1 className={cx('title')}>Hello, Tandem</h1>
+      <h1>Hello, Tandem</h1>
+      <Logo />
     </div>
   );
 }
