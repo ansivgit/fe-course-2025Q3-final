@@ -1,0 +1,42 @@
+.subtitle {
+  font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.white {
+  color: var(--color-white);
+}
+
+.red {
+  color: var(--color-red-500);
+}
+
+.medium {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.large {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.compact {
+  margin-bottom: 0;
+}
+
+.short {
+  margin-bottom: 0.25rem;
+}
+
+.default {
+  margin-bottom: 0.5rem;
+}
+
+.spacious {
+  margin-bottom: 1rem;
+}
+
+.extraspacious {
+  margin-bottom: 1.5rem;
+}

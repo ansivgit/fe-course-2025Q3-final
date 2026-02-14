@@ -1,36 +1,5 @@
-:root {
-  /* COLORS */
-
-  /* White colors */
-  --color-white: hsl(0, 0%, 100%);
-
-  /* Gray colors */
-  --color-gray-800: hsl(240, 13%, 17%);
-  --color-gray-900: hsl(240, 15%, 12%);
-  --color-gray-950: hsl(240, 14%, 10%);
-
-  /* Purple colors */
-  --color-purple-300: hsl(268, 91%, 65%);
-  --color-purple-500: hsl(280, 100%, 65%);
-  --color-purple-900: hsl(240, 16%, 20%);
-
-  /* Teal colors */
-  --color-teal-500: hsl(180, 100%, 50%);
-
-  /* OPACITY  */
-  --opacity-70: 0.7;
-  --opacity-50: 0.5;
-  --opacity-30: 0.3;
-  --opacity-15: 0.15;
-  --opacity-10: 0.1;
-  --opacity-05: 0.05;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@import './variables.css';
+@import './reset.css';
 
 body {
   font-family: 'Inter', sans-serif;
