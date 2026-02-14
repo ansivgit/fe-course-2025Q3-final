@@ -24,19 +24,19 @@
   font-size: 100%;
   width: 100%;
   transition: all 0.3s ease;
-}
 
-.input.has-left {
-  padding-left: 3rem;
-}
+  &.has-left {
+    padding-left: 3rem;
+  }
 
-.input.has-right {
-  padding-right: 3rem;
-}
+  &.has-right {
+    padding-right: 3rem;
+  }
 
-.input:focus {
-  outline: 2px solid var(--color-purple-500-50);
-  border-color: transparent;
+  &:focus {
+    outline: 2px solid var(--color-purple-500-50);
+    border-color: transparent;
+  }
 }
 
 .input-icon {
@@ -44,14 +44,14 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-}
 
-.input-icon.left {
-  left: 0.75rem;
-}
+  &.left {
+    left: 0.75rem;
+  }
 
-.input-icon.right {
-  right: 0.75rem;
-  pointer-events: auto;
-  cursor: pointer;
+  &.right {
+    right: 0.75rem;
+    pointer-events: auto;
+    cursor: pointer;
+  }
 }
