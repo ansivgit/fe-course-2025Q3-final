@@ -16,11 +16,11 @@
 }
 
 .custom-input {
-  background-color: var(--color-input-bg);
+  background-color: var(--color-gray-950);
   color: #fff;
   padding: 0.75rem 1rem;
   border-radius: 0.75rem;
-  border: 1px solid var(--color-dark-border);
+  border: 1px solid var(--color-gray-800);
   font-size: 100%;
   width: 100%;
   transition: all 0.3s ease;
@@ -35,7 +35,7 @@
 }
 
 .custom-input:focus {
-  outline: 2px solid var(--color-outline-border);
+  outline: 2px solid var(--color-purple-500-50);
   border-color: transparent;
 }
 
