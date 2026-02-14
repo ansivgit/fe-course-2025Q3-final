@@ -23,17 +23,5 @@ export const Title = ({
   margin = 'default',
   weight = 'bold',
 }: TitleProps): ReactElement => {
-  return (
-    <h1
-      className={cx(
-        'title',
-        size,
-        margin,
-        weight,
-        className,
-      )}
-    >
-      {children}
-    </h1>
-  );
+  return <h1 className={cx('title', size, margin, weight, className)}>{children}</h1>;
 };

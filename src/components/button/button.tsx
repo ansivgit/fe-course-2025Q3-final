@@ -29,13 +29,7 @@ export const Button = ({
 }: ButtonProps): ReactElement => {
   return (
     <button
-      className={cx(
-        'button',
-        color,
-        size,
-        { active: isActive },
-        className,
-      )}
+      className={cx('button', color, size, { active: isActive }, className)}
       disabled={disabled}
       {...rest}
     >
