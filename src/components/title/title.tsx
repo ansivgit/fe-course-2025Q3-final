@@ -1,5 +1,6 @@
-import classNames from 'classnames/bind';
 import styles from '@/components/title/title.module.css';
+
+import classNames from 'classnames/bind';
 import type { ReactElement, ReactNode } from 'react';
 
 const cx = classNames.bind(styles);
