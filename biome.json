@@ -38,9 +38,6 @@
     "formatter": {
       "enabled": true,
       "quoteStyle": "single"
-    },
-    "parser": {
-      "cssModules": true
     }
   },
   "assist": {
