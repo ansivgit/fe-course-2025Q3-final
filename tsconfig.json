@@ -32,6 +32,6 @@
     "noImplicitAny": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src", "vite.config.ts"],
+  "include": ["src", "vite.config.ts", "data"],
   "exclude": ["node_modules", "out"]
 }
