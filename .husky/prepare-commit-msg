@@ -1,5 +1,11 @@
 COMMIT_MSG_FILE=$1
 
+if head -n1 "$COMMIT_MSG_FILE" | grep -qE "^(Merge|Revert|cherry picked from)"
+then
+  echo "Service commit (Merge/Revert/cherry-pick) - skip verification"
+  exit 0
+fi
+
 BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 
 BRANCH_NUMBER=$(echo "$BRANCH_NAME" | grep -o '[0-9]\+' || true)
