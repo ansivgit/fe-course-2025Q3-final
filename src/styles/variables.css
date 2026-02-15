@@ -24,4 +24,7 @@
   --opacity-15: 0.15;
   --opacity-10: 0.1;
   --opacity-05: 0.05;
+
+  /* font weights */
+  --font-weight-bold: 700;
 }

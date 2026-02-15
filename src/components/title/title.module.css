@@ -1,7 +1,7 @@
 .title {
   color: var(--color-white);
   font-family: 'Inter', sans-serif;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .small {
