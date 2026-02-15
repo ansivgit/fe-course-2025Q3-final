@@ -1,6 +1,5 @@
-import '@/styles/index.css';
-
 import type { ReactElement } from 'react';
+import '@/styles/index.css';
 
 export function App(): ReactElement {
   return (
