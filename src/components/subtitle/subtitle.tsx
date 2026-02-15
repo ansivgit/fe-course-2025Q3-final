@@ -11,7 +11,6 @@ export const SUBTITLE_LEVEL_3 = 3;
 type SubtitleLevel = typeof SUBTITLE_LEVEL_2 | typeof SUBTITLE_LEVEL_3;
 type SubtitleSize = 'medium' | 'large';
 type SubtitleColor = 'white' | 'red';
-type SubtitleMargin = 'compact' | 'short' | 'default' | 'spacious' | 'extraspacious';
 
 type SubtitleProps = {
   children: ReactNode;
@@ -19,7 +18,6 @@ type SubtitleProps = {
   level?: SubtitleLevel;
   size?: SubtitleSize;
   color?: SubtitleColor;
-  margin?: SubtitleMargin;
 };
 
 export const Subtitle = ({
@@ -28,9 +26,8 @@ export const Subtitle = ({
   level = SUBTITLE_LEVEL_3,
   size = 'medium',
   color = 'white',
-  margin = 'default',
 }: SubtitleProps): ReactElement => {
   const Tag: ElementType = `h${level}`;
 
-  return <Tag className={cx('subtitle', size, color, margin, className)}>{children}</Tag>;
+  return <Tag className={cx('subtitle', size, color, className)}>{children}</Tag>;
 };
