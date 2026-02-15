@@ -7,8 +7,9 @@ const cx = classNames.bind(styles);
 
 type LayoutProps = {
   children: ReactNode;
+  verticalAlign?: 'top' | 'center';
 };
 
-export const Layout = ({ children }: LayoutProps): ReactElement => {
-  return <div className={cx('layout')}>{children}</div>;
+export const Layout = ({ children, verticalAlign = 'top' }: LayoutProps): ReactElement => {
+  return <div className={cx('layout', verticalAlign)}>{children}</div>;
 };

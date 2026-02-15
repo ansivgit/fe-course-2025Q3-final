@@ -1,11 +1,13 @@
 import '@/styles/index.css';
 
+import { Layout } from '@/components/layout/layout';
+
 import type { ReactElement } from 'react';
 
 export function App(): ReactElement {
   return (
-    <div>
+    <Layout verticalAlign="top">
       <h1>Hello, Tandem</h1>
-    </div>
+    </Layout>
   );
 }

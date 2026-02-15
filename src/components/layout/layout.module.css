@@ -1,9 +1,22 @@
 .layout {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  padding: 1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   background-color: var(--color-black-900);
+}
+
+.top {
+  justify-content: flex-start;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.center {
+  justify-content: center;
+  padding-top: 0;
+  padding-bottom: 0;
 }
