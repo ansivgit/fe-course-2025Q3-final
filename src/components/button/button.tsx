@@ -1,5 +1,6 @@
-import classNames from 'classnames/bind';
 import styles from '@/components/button/button.module.css';
+
+import classNames from 'classnames/bind';
 import type { MouseEventHandler, ReactElement, ReactNode } from 'react';
 
 const cx = classNames.bind(styles);
@@ -16,7 +17,7 @@ type ButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   isActive?: boolean;
   disabled?: boolean;
-}
+};
 
 export const Button = ({
   children,
@@ -29,13 +30,7 @@ export const Button = ({
 }: ButtonProps): ReactElement => {
   return (
     <button
-      className={cx(
-        'button',
-        color,
-        size,
-        { active: isActive },
-        className,
-      )}
+      className={cx('button', color, size, { active: isActive }, className)}
       disabled={disabled}
       {...rest}
     >
@@ -43,4 +38,3 @@ export const Button = ({
     </button>
   );
 };
-
