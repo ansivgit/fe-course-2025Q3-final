@@ -9,10 +9,11 @@
 
 body {
   font-family: 'Inter', sans-serif;
+  background-color: var(--color-gray-1000);
 }
 
 button {
-  all: unset;
+  width: 100%;
   appearance: none;
   border: none;
   background: none;
@@ -21,4 +22,17 @@ button {
   font: inherit;
   color: inherit;
   cursor: pointer;
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  max-width: 450px;
+  border: 1px solid hsl(280 100% 65% / 0.5);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background-color: var(--color-gray-950);
 }
