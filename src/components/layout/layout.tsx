@@ -9,6 +9,6 @@ type LayoutProps = {
   children: ReactNode;
 };
 
-export const Layout = ({ children }: LayoutProps): ReactElement => {
+export const Layout = ({ children }: LayoutProps) => {
   return <div className={cx('layout')}>{children}</div>;
 };
