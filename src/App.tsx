@@ -6,7 +6,7 @@ import type { ReactElement } from 'react';
 
 export function App(): ReactElement {
   return (
-    <Layout verticalAlign="top">
+    <Layout verticalAlign="center">
       <h1>Hello, Tandem</h1>
     </Layout>
   );
