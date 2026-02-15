@@ -1,21 +1,6 @@
 .subtitle {
-  font-weight: var(--font-weight-bold);
-}
-
-.white {
-  color: var(--color-white);
-}
-
-.red {
-  color: var(--color-red-500);
-}
-
-.medium {
-  font-size: 1.125rem;
-  line-height: 1.5;
-}
-
-.large {
   font-size: 1.25rem;
   line-height: 1.4;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
 }
