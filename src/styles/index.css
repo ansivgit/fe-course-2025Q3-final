@@ -24,9 +24,23 @@ button {
   cursor: pointer;
 }
 
+.link {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--color-purple-300);
+  transition: color 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-purple-500);
+  }
+}
+
 .form-wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .form {
@@ -35,4 +49,11 @@ button {
   border-radius: 1rem;
   padding: 1.5rem;
   background-color: var(--color-gray-950);
+}
+
+.form-footer {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-gray-500);
+  margin-top: 1.5rem;
 }

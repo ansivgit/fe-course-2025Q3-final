@@ -51,6 +51,12 @@ export const LoginForm = (): ReactElement => {
           Login
         </Button>
       </form>
+      <div className="form-footer">
+        <span>No account? </span>
+        <a href="/register" className="link">
+          Register
+        </a>
+      </div>
     </div>
   );
 };
