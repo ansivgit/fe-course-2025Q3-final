@@ -2,6 +2,7 @@
 @import './reset.css';
 
 body {
+  background-color: var(--color-gray-950);
   font-family: 'Inter', sans-serif;
 }
 
