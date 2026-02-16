@@ -30,10 +30,12 @@ export const AppRouter = (): ReactElement => (
     <Route path={ROUTES.register} element={<Register />} />
     <Route path={ROUTES.dashboard} element={<Dashboard />} />
 
-    <Route path={ROUTES.practice} element={<Practice />} />
+    <Route path={ROUTES.practice} element={<Practice />}>
+      <Route index element={<div>Widgets</div>} />
+    </Route>
+
     <Route path={ROUTES.mentor} element={<Mentor />} />
     <Route path={ROUTES.profile} element={<Profile />} />
-
     <Route path={ROUTES.notFound} element={<NotFound />} />
   </Routes>
 );
