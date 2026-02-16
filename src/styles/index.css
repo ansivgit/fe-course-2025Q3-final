@@ -46,10 +46,19 @@ button {
 }
 
 .form-footer {
+  margin-top: 1.5rem;
   font-size: 0.875rem;
   line-height: 1.4;
   color: var(--color-gray-500);
-  margin-top: 1.5rem;
+}
+
+.form-error {
+  margin-bottom: 1.5rem;
+  color: var(--color-red-500);
+  font-weight: var(--font-weight-bold);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  line-height: 1.2;
 }
 
 h2 {

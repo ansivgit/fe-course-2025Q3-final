@@ -7,22 +7,28 @@ import { useState } from 'react';
 import { PasswordInput } from '../password-input/password-input';
 import '@/styles/index.css';
 
-import { checkLogin } from './check-login';
+type LoginFormProps = {
+  onSubmit: (credentials: { email: string; password: string }) => string;
+};
 
-export const LoginForm = (): ReactElement => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+export const LoginForm = ({ onSubmit }: LoginFormProps): ReactElement => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setEmail(event.target.value);
+    setErrorMessage('');
   };
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setPassword(event.target.value);
+    setErrorMessage('');
   };
 
   const handleLoginClick = (): void => {
-    checkLogin({ email, password });
+    const message = onSubmit({ email, password });
+    setErrorMessage(message);
   };
 
   return (
@@ -44,6 +50,8 @@ export const LoginForm = (): ReactElement => {
         />
 
         <PasswordInput value={password} onChange={handlePasswordChange} />
+
+        {errorMessage && <div className="form-error">{errorMessage}</div>}
 
         <Button size="large" onClick={handleLoginClick}>
           Login
