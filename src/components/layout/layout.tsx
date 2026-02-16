@@ -5,11 +5,18 @@ import type { ReactElement, ReactNode } from 'react';
 
 const cx = classNames.bind(styles);
 
+import { Logo } from '@/components/logo/logo';
+
 type LayoutProps = {
   children: ReactNode;
   verticalAlign?: 'top' | 'center';
 };
 
 export const Layout = ({ children, verticalAlign = 'top' }: LayoutProps): ReactElement => {
-  return <div className={cx('layout', verticalAlign)}>{children}</div>;
+  return (
+    <div className={cx('layout', verticalAlign)}>
+      <Logo size="small" />
+      {children}
+    </div>
+  );
 };
