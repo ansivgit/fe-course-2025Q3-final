@@ -5,7 +5,6 @@ import type { MouseEvent, ReactElement } from 'react';
 import styles from './logo.module.css';
 
 const cx = classNames.bind(styles);
-const LOGO_TEXT = 'Tandem';
 
 type LogoProps = {
   className?: string;
@@ -25,7 +24,7 @@ export const Logo = ({ className = '', onClick }: LogoProps): ReactElement => {
       <div className={cx('logo-icon-wrapper')}>
         <img src={LogoIcon} alt="TANDEM logo" className={cx('logo-svg')} />
       </div>
-      <span className={cx('logo-label')}>{LOGO_TEXT}</span>
+      <span className={cx('logo-label')}>Tandem</span>
     </a>
   );
 };
