@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { PasswordInput } from '../password-input/password-input';
 import '@/styles/index.css';
 
+import { checkLogin } from './check-login';
+
 export const LoginForm = (): ReactElement => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -20,11 +22,7 @@ export const LoginForm = (): ReactElement => {
   };
 
   const handleLoginClick = (): void => {
-    if (!email || !password) {
-      alert('Please enter email and password');
-      return;
-    }
-    alert(`Logging in with\nEmail: ${email}\nPassword: ${password}`);
+    checkLogin({ email, password });
   };
 
   return (
