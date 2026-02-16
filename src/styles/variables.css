@@ -16,4 +16,18 @@
 
   /* Teal colors */
   --color-teal-500: hsl(180, 100%, 50%);
+
+  /* Red colors */
+  --color-red-500: hsl(0, 84%, 60%);
+
+  /* OPACITY  */
+  --opacity-70: 0.7;
+  --opacity-50: 0.5;
+  --opacity-30: 0.3;
+  --opacity-15: 0.15;
+  --opacity-10: 0.1;
+  --opacity-05: 0.05;
+
+  /* font weights */
+  --font-weight-bold: 700;
 }
