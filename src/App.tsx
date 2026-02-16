@@ -8,6 +8,7 @@ export function App(): ReactElement {
     <div>
       <h1>Hello, Tandem</h1>
       <Logo />
+      <Logo size="small" />
     </div>
   );
 }

@@ -8,17 +8,18 @@ const cx = classNames.bind(styles);
 
 type LogoProps = {
   className?: string;
+  size?: 'default' | 'small';
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
 };
 
-export const Logo = ({ className = '', onClick }: LogoProps): ReactElement => {
+export const Logo = ({ className = '', size = 'default', onClick }: LogoProps): ReactElement => {
   return (
     <a
       href="/"
-      className={cx('logo-link', className)}
+      className={cx('logo-link', size === 'small' && 'small', className)}
       onClick={(event) => {
         event.preventDefault();
-        console.log('Logo clicked', onClick);
+        console.warn('Logo clicked', onClick);
       }}
     >
       <div className={cx('logo-icon-wrapper')}>

@@ -2,8 +2,20 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  text-decoration: none;
   padding: 20px;
+  text-decoration: none;
+
+  &.small {
+    .logo-icon-wrapper {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .logo-label {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+  }
 }
 
 .logo-icon-wrapper {
@@ -12,17 +24,12 @@
   align-items: center;
   width: 3rem;
   height: 3rem;
+  border-radius: 0.75rem;
   background: linear-gradient(
     135deg,
     var(--color-purple-500),
     var(--color-teal-500)
   );
-  border-radius: 0.75rem;
-}
-
-.small-logo .logo-icon-wrapper {
-  width: 2.5rem;
-  height: 2.5rem;
 }
 
 .logo-label {
@@ -30,11 +37,6 @@
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 700;
-  color: var(--color-white);
   text-transform: uppercase;
-}
-
-.small-logo .logo-label {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+  color: var(--color-white);
 }
