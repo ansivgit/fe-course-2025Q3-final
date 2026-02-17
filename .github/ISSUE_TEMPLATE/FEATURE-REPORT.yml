@@ -3,7 +3,6 @@ description: File a feature report.
 title: '[🚀 Feat]: '
 labels: ['feature']
 projects: ['ansivgit/1']
-# milestone: ['Sprint 1']
 type: feature
 body:
   - type: textarea
@@ -29,4 +28,4 @@ body:
       description: Provide clear criteria that signify the feature's successful implementation
       placeholder: This is what we did
     validations:
-      required: false
+      required: true
