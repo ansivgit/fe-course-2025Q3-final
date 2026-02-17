@@ -15,7 +15,7 @@ type LayoutProps = {
 export const Layout = ({ children, verticalAlign = 'top' }: LayoutProps): ReactElement => {
   return (
     <div className={cx('layout', verticalAlign)}>
-      <Logo />
+      <Logo className={cx('logo-left')} />
       {children}
     </div>
   );
