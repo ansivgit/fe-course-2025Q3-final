@@ -18,7 +18,7 @@ type LoginFormProps = {
   isRegistered: boolean;
 };
 
-type AuthFooterProps = {
+type AuthToggleProps = {
   isRegistered: boolean;
 };
 
@@ -85,12 +85,12 @@ export const LoginForm = ({ isRegistered }: LoginFormProps): ReactElement => {
 
         <Button size="large">Login</Button>
       </form>
-      <AuthFooter isRegistered={isRegistered} />
+      <AuthToggle isRegistered={isRegistered} />
     </div>
   );
 };
 
-export const AuthFooter = ({ isRegistered }: AuthFooterProps): ReactElement => {
+export const AuthToggle = ({ isRegistered }: AuthToggleProps): ReactElement => {
   const text = isRegistered ? 'No account?' : 'Already have an account?';
 
   const linkText = isRegistered ? 'Register' : 'Login';
