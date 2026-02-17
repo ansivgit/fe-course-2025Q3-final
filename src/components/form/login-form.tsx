@@ -12,7 +12,7 @@ import styles from './login-form.module.css';
 
 const cx = classNames.bind(styles);
 
-type AuthFooterProps = {
+type AuthToggleProps = {
   isRegistered: boolean;
 };
 
@@ -72,12 +72,12 @@ export const LoginForm = (isRegistered = true): ReactElement => {
 
         <Button size="large">Login</Button>
       </form>
-      <AuthFooter isRegistered={isRegistered} />
+      <AuthToggle isRegistered={isRegistered} />
     </div>
   );
 };
 
-export const AuthFooter = ({ isRegistered }: AuthFooterProps): ReactElement => {
+export const AuthToggle = ({ isRegistered }: AuthToggleProps): ReactElement => {
   const text = isRegistered ? 'No account?' : 'Already have an account?';
 
   const linkText = isRegistered ? 'Register' : 'Login';
