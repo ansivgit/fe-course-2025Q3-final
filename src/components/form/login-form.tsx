@@ -8,8 +8,8 @@ import { PasswordInput } from '../password-input/password-input';
 import '@/styles/index.css';
 
 export const LoginForm = (): ReactElement => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setEmail(event.target.value);

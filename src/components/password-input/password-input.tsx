@@ -21,7 +21,7 @@ export const PasswordInput = ({
   label = 'Password',
   id = 'password',
 }: PasswordInputProps): ReactElement => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = (): void => {
     setShowPassword((previous) => !previous);
