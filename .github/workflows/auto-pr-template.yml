@@ -1,0 +1,84 @@
+name: Auto PR Template
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  update-pr:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Extract branch info
+        id: branch
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          ISSUE_NUMBER=$(echo "$BRANCH_NAME" | grep -oE '[0-9]+' | head -1)
+          echo "issue_number=$ISSUE_NUMBER" >> $GITHUB_OUTPUT
+
+      - name: Set PR title to branch name
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branchName = '${{ steps.branch.outputs.branch_name }}';
+            let cleanTitle = branchName.replace(/[-_]/g, ' ');
+            cleanTitle = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              title: cleanTitle
+            });
+
+      - name: Set assignee to creator
+        uses: actions/github-script@v8
+        with:
+          script: |
+            await github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              assignees: [context.actor]
+            });
+
+      - name: Copy labels from issue and add closing reference
+        if: steps.branch.outputs.issue_number != ''
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const issueNumber = ${{ steps.branch.outputs.issue_number }};
+            const prNumber = context.payload.pull_request.number;
+
+            const issue = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber
+            });
+            const labels = issue.data.labels.map(l => l.name);
+
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                labels: labels
+              });
+            }
+
+            const currentBody = context.payload.pull_request.body || '';
+            const newBody = currentBody + `\n\nCloses #${issueNumber}`;
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber,
+              body: newBody
+            });
