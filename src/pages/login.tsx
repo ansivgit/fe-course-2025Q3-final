@@ -8,7 +8,7 @@ export const Login = (): ReactElement => {
   const navigate = useNavigate();
 
   const handleLogin = (): void => {
-    void navigate('/dashboard');
+    void navigate('/practice');
   };
 
   return (
