@@ -1,18 +1,29 @@
 import mailIcon from '@/assets/icons/email.svg';
+import eyeIcon from '@/assets/icons/eye.svg';
+import eyeOffIcon from '@/assets/icons/eye-off.svg';
+import passwordIcon from '@/assets/icons/password.svg';
 import { Button } from '@/components/button/button';
-import { Input } from '@/components/input/input';
 
 import classNames from 'classnames/bind';
 import type { ChangeEvent, ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
+import { Input } from '../input/input';
 import styles from './login-form.module.css';
-import { PasswordInput } from './password-input/password-input';
 
 const cx = classNames.bind(styles);
+
+type AuthFooterProps = {
+  isRegistered: boolean;
+};
 
 export const LoginForm = (isRegistered = true): ReactElement => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = (): void => {
+    setShowPassword((previous) => !previous);
+  };
 
   const handleLoginChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setLogin(event.target.value);
@@ -45,27 +56,43 @@ export const LoginForm = (isRegistered = true): ReactElement => {
           leftIcon={<img src={mailIcon} alt="Mail" />}
         />
 
-        <PasswordInput value={password} onChange={handlePasswordChange} />
+        <Input
+          id="password"
+          label="Password"
+          type={showPassword ? 'text' : 'password'}
+          placeholder="Enter your password"
+          value={password}
+          onChange={handlePasswordChange}
+          leftIcon={<img src={passwordIcon} alt="Password icon" />}
+          rightIcon={
+            <button type="button" onClick={toggleShowPassword}>
+              <img
+                src={showPassword ? eyeOffIcon : eyeIcon}
+                alt={showPassword ? 'Hide password' : 'Show password'}
+              />
+            </button>
+          }
+        />
 
         <Button size="large">Login</Button>
       </form>
-      <div className={cx('form-footer')}>
-        {isRegistered ? (
-          <>
-            <span>No account? </span>
-            <a href="/register" className={cx('link')}>
-              Register
-            </a>
-          </>
-        ) : (
-          <>
-            <span>Already have an account? </span>
-            <a href="/login" className={cx('link')}>
-              Login
-            </a>
-          </>
-        )}
-      </div>
+      <AuthFooter isRegistered={isRegistered} />
+    </div>
+  );
+};
+
+export const AuthFooter = ({ isRegistered }: AuthFooterProps): ReactElement => {
+  const text = isRegistered ? 'No account?' : 'Already have an account?';
+
+  const linkText = isRegistered ? 'Register' : 'Login';
+  const linkHref = isRegistered ? '/register' : '/login';
+
+  return (
+    <div className={cx('form-footer')}>
+      <span>{text} </span>
+      <a href={linkHref} className={cx('link')}>
+        {linkText}
+      </a>
     </div>
   );
 };
