@@ -3,7 +3,7 @@ import { Button } from '@/components/button/button';
 import { Input } from '@/components/input/input';
 
 import classNames from 'classnames/bind';
-import type { ChangeEvent, ReactElement } from 'react';
+import type { ChangeEvent, ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
 import { PasswordInput } from '../password-input/password-input';
 import styles from './login-form.module.css';
@@ -22,22 +22,19 @@ export const LoginForm = (): ReactElement => {
     setPassword(event.target.value);
   };
 
-  const handleLoginClick = (): void => {
+  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
+    event.preventDefault();
     if (!login || !password) {
       console.warn('Please enter email and password');
       return;
     }
+
     console.warn(`Logging in with\nEmail: ${login}\nPassword: ${password}`);
   };
 
   return (
     <div>
-      <form
-        className={cx('form')}
-        onSubmit={(event) => {
-          event.preventDefault();
-        }}
-      >
+      <form className={cx('form')} onSubmit={handleSubmit}>
         <Input
           id="login"
           label="Email"
@@ -50,9 +47,7 @@ export const LoginForm = (): ReactElement => {
 
         <PasswordInput value={password} onChange={handlePasswordChange} />
 
-        <Button size="large" onClick={handleLoginClick}>
-          Login
-        </Button>
+        <Button size="large">Login</Button>
       </form>
       <div className={cx('form-footer')}>
         <span>No account? </span>
