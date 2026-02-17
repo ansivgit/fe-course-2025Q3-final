@@ -6,15 +6,6 @@
   background-color: var(--color-gray-900);
 }
 
-.form-footer {
-  max-width: 450px;
-  text-align: center;
-  font-size: 0.875rem;
-  line-height: 1.4;
-  color: var(--color-gray-500);
-  margin-top: 1.5rem;
-}
-
 .form-error {
   margin-bottom: 1.5rem;
   color: var(--color-red-500);
@@ -22,16 +13,4 @@
   font-size: 0.875rem;
   margin-top: 0.5rem;
   line-height: 1.2;
-}
-
-.link {
-  text-decoration: none;
-  font-weight: 500;
-  color: var(--color-purple-300);
-  transition: color 0.3s ease;
-  cursor: pointer;
-
-  &:hover {
-    color: var(--color-purple-500);
-  }
 }

@@ -7,6 +7,7 @@ import type { LoginResponse } from '@/types';
 import classNames from 'classnames/bind';
 import type { ChangeEvent, ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
+import { AuthFooter } from '../auth-footer/auth-footer';
 import styles from './login-form.module.css';
 import { PasswordInput } from './password-input/password-input';
 
@@ -64,23 +65,7 @@ export const LoginForm = ({ isRegistered }: LoginFormProps): ReactElement => {
 
         <Button size="large">Login</Button>
       </form>
-      <div className={cx('form-footer')}>
-        {isRegistered ? (
-          <>
-            <span>No account? </span>
-            <a href="/register" className={cx('link')}>
-              Register
-            </a>
-          </>
-        ) : (
-          <>
-            <span>Already have an account? </span>
-            <a href="/login" className={cx('link')}>
-              Login
-            </a>
-          </>
-        )}
-      </div>
+      <AuthFooter isRegistered={isRegistered} />
     </div>
   );
 };
