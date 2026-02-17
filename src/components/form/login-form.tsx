@@ -2,10 +2,13 @@ import mailIcon from '@/assets/icons/email.svg';
 import { Button } from '@/components/button/button';
 import { Input } from '@/components/input/input';
 
+import classNames from 'classnames/bind';
 import type { ChangeEvent, ReactElement } from 'react';
 import { useState } from 'react';
 import { PasswordInput } from '../password-input/password-input';
-import '@/styles/index.css';
+import styles from './login-form.module.css';
+
+const cx = classNames.bind(styles);
 
 export const LoginForm = (): ReactElement => {
   const [login, setLogin] = useState('');
@@ -30,7 +33,7 @@ export const LoginForm = (): ReactElement => {
   return (
     <div>
       <form
-        className="form"
+        className={cx('form')}
         onSubmit={(event) => {
           event.preventDefault();
         }}
@@ -51,9 +54,9 @@ export const LoginForm = (): ReactElement => {
           Login
         </Button>
       </form>
-      <div className="form-footer">
+      <div className={cx('form-footer')}>
         <span>No account? </span>
-        <a href="/register" className="link">
+        <a href="/register" className={cx('link')}>
           Register
         </a>
       </div>

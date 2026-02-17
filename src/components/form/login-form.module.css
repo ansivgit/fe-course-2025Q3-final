@@ -1,0 +1,28 @@
+.form {
+  max-width: 450px;
+  border: 1px solid hsl(280 100% 65% / 0.5);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background-color: var(--color-gray-950);
+}
+
+.form-footer {
+  max-width: 450px;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--color-gray-500);
+  margin-top: 1.5rem;
+}
+
+.link {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--color-purple-300);
+  transition: color 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-purple-500);
+  }
+}
