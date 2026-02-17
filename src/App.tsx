@@ -1,6 +1,5 @@
 import '@/styles/index.css';
 
-import { Landing } from '@/pages/landing';
 import { Login } from '@/pages/login';
 import { NotFound } from '@/pages/not-found';
 import { Practice } from '@/pages/practice';
@@ -15,7 +14,6 @@ export function App(): ReactElement {
 
 export const AppRouter = (): ReactElement => (
   <Routes>
-    <Route path={ROUTES.landing} element={<Landing />} />
     <Route path={ROUTES.login} element={<Login />} />
     <Route path={ROUTES.practice} element={<Practice />} />
     <Route path={ROUTES.notFound} element={<NotFound />} />
