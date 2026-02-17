@@ -8,11 +8,11 @@ import { PasswordInput } from '../password-input/password-input';
 import '@/styles/index.css';
 
 export const LoginForm = (): ReactElement => {
-  const [email, setEmail] = useState('');
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setEmail(event.target.value);
+  const handleLoginChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setLogin(event.target.value);
   };
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -20,11 +20,11 @@ export const LoginForm = (): ReactElement => {
   };
 
   const handleLoginClick = (): void => {
-    if (!email || !password) {
+    if (!login || !password) {
       alert('Please enter email and password');
       return;
     }
-    alert(`Logging in with\nEmail: ${email}\nPassword: ${password}`);
+    alert(`Logging in with\nEmail: ${login}\nPassword: ${password}`);
   };
 
   return (
@@ -36,12 +36,12 @@ export const LoginForm = (): ReactElement => {
         }}
       >
         <Input
-          id="email"
+          id="login"
           label="Email"
           type="email"
           placeholder="Enter your email"
-          value={email}
-          onChange={handleEmailChange}
+          value={login}
+          onChange={handleLoginChange}
           leftIcon={<img src={mailIcon} alt="Mail" />}
         />
 
