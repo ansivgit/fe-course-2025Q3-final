@@ -2,66 +2,80 @@ import mailIcon from '@/assets/icons/email.svg';
 import { Button } from '@/components/button/button';
 import { Input } from '@/components/input/input';
 
-import type { ChangeEvent, ReactElement } from 'react';
+import classNames from 'classnames/bind';
+import type { ChangeEvent, ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
-import { PasswordInput } from '../password-input/password-input';
-import '@/styles/index.css';
+import styles from './login-form.module.css';
+import { PasswordInput } from './password-input/password-input';
 
-type LoginFormProps = {
-  onSubmit: (credentials: { email: string; password: string }) => string;
-};
+const cx = classNames.bind(styles);
 
-export const LoginForm = ({ onSubmit }: LoginFormProps): ReactElement => {
-  const [email, setEmail] = useState('');
+// type LoginFormProps = {
+//   onSubmit: (credentials: { email: string; password: string }) => string;
+// };
+
+export const LoginForm = (isRegistered = true): ReactElement => {
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  // const [errorMessage, setErrorMessage] = useState('');
 
-  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setEmail(event.target.value);
-    setErrorMessage('');
+  const handleLoginChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setLogin(event.target.value);
+    // setErrorMessage('');
   };
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setPassword(event.target.value);
-    setErrorMessage('');
+    // setErrorMessage('');
   };
 
-  const handleLoginClick = (): void => {
-    const message = onSubmit({ email, password });
-    setErrorMessage(message);
+  // const handleLoginClick = (): void => {
+  //   const message = onSubmit({ email, password });
+  //   setErrorMessage(message);
+  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    if (!login || !password) {
+      console.warn('Please enter email and password');
+      return;
+    }
+    console.warn(`Logging in with\nEmail: ${login}\nPassword: ${password}`);
   };
 
   return (
-    <div className="form-wrapper">
-      <form
-        className="form"
-        onSubmit={(event) => {
-          event.preventDefault();
-        }}
-      >
+    <div>
+      <form className={cx('form')} onSubmit={handleSubmit}>
         <Input
-          id="email"
+          id="login"
           label="Email"
-          type="email"
+          type="text"
           placeholder="Enter your email"
-          value={email}
-          onChange={handleEmailChange}
+          value={login}
+          onChange={handleLoginChange}
           leftIcon={<img src={mailIcon} alt="Mail" />}
         />
 
         <PasswordInput value={password} onChange={handlePasswordChange} />
 
-        {errorMessage && <div className="form-error">{errorMessage}</div>}
+        {/* {errorMessage && <div className="form-error">{errorMessage}</div>} */}
 
-        <Button size="large" onClick={handleLoginClick}>
-          Login
-        </Button>
+        <Button size="large">Login</Button>
       </form>
-      <div className="form-footer">
-        <span>No account? </span>
-        <a href="/register" className="link">
-          Register
-        </a>
+      <div className={cx('form-footer')}>
+        {isRegistered ? (
+          <>
+            <span>No account? </span>
+            <a href="/register" className={cx('link')}>
+              Register
+            </a>
+          </>
+        ) : (
+          <>
+            <span>Already have an account? </span>
+            <a href="/login" className={cx('link')}>
+              Login
+            </a>
+          </>
+        )}
       </div>
     </div>
   );

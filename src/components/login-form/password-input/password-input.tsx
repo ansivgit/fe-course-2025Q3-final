@@ -4,7 +4,7 @@ import passwordIcon from '@/assets/icons/password.svg';
 
 import type { ChangeEvent, ReactElement } from 'react';
 import { useState } from 'react';
-import { Input } from '../input/input';
+import { Input } from '../../input/input';
 
 type PasswordInputProps = {
   value: string;
@@ -21,7 +21,7 @@ export const PasswordInput = ({
   label = 'Password',
   id = 'password',
 }: PasswordInputProps): ReactElement => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = (): void => {
     setShowPassword((previous) => !previous);
