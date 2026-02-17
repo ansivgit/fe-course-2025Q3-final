@@ -21,10 +21,10 @@ export const LoginForm = (): ReactElement => {
 
   const handleLoginClick = (): void => {
     if (!login || !password) {
-      alert('Please enter email and password');
+      console.warn('Please enter email and password');
       return;
     }
-    alert(`Logging in with\nEmail: ${login}\nPassword: ${password}`);
+    console.warn(`Logging in with\nEmail: ${login}\nPassword: ${password}`);
   };
 
   return (

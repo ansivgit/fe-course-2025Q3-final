@@ -28,10 +28,10 @@ export const Input = ({
     return;
   },
   onBlur = (event): void => {
-    console.log('Validating email', event.target.value);
+    console.warn('Validating email', event.target.value);
   },
   onFocus = (event): void => {
-    console.log('Input focused', event.target.value);
+    console.warn('Input focused', event.target.value);
   },
   className = '',
   leftIcon,
