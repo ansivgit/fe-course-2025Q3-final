@@ -16,15 +16,16 @@ header {
 
 main {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
 .layout.top main {
+  align-items: flex-start;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
 }
 
 .layout.center main {
-  justify-content: center;
+  align-items: center;
 }

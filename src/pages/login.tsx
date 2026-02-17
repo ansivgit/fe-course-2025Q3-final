@@ -16,7 +16,7 @@ export const Login = (): ReactElement => {
   return (
     <Layout verticalAlign="center">
       <Title>Login</Title>
-      <Button onClick={handleLogin}>Login</Button>
+      <Button onClick={handleLogin}>Practice</Button>
     </Layout>
   );
 };
