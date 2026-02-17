@@ -5,40 +5,36 @@ import { Input } from '@/components/input/input';
 import classNames from 'classnames/bind';
 import type { ChangeEvent, ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
+import { checkLogin } from './check-login';
 import styles from './login-form.module.css';
 import { PasswordInput } from './password-input/password-input';
 
 const cx = classNames.bind(styles);
 
-// type LoginFormProps = {
-//   onSubmit: (credentials: { email: string; password: string }) => string;
-// };
+type LoginFormProps = {
+  isRegistered: boolean;
+};
 
-export const LoginForm = (isRegistered = true): ReactElement => {
+export const LoginForm = ({ isRegistered }: LoginFormProps): ReactElement => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  // const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleLoginChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setLogin(event.target.value);
-    // setErrorMessage('');
+    setErrorMessage('');
   };
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setPassword(event.target.value);
-    // setErrorMessage('');
+    setErrorMessage('');
   };
 
-  // const handleLoginClick = (): void => {
-  //   const message = onSubmit({ email, password });
-  //   setErrorMessage(message);
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (!login || !password) {
-      console.warn('Please enter email and password');
-      return;
-    }
-    console.warn(`Logging in with\nEmail: ${login}\nPassword: ${password}`);
+
+    const message = checkLogin({ email: login, password });
+    setErrorMessage(message);
   };
 
   return (
@@ -56,7 +52,7 @@ export const LoginForm = (isRegistered = true): ReactElement => {
 
         <PasswordInput value={password} onChange={handlePasswordChange} />
 
-        {/* {errorMessage && <div className="form-error">{errorMessage}</div>} */}
+        {errorMessage && <div className={cx('form-error')}>{errorMessage}</div>}
 
         <Button size="large">Login</Button>
       </form>

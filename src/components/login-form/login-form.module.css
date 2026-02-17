@@ -15,6 +15,15 @@
   margin-top: 1.5rem;
 }
 
+.form-error {
+  margin-bottom: 1.5rem;
+  color: var(--color-red-500);
+  font-weight: var(--font-weight-bold);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  line-height: 1.2;
+}
+
 .link {
   text-decoration: none;
   font-weight: 500;
