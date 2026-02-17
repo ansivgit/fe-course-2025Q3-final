@@ -60,7 +60,7 @@ export const LoginForm = ({ isRegistered }: LoginFormProps): ReactElement => {
           placeholder="Enter your email"
           value={login}
           onChange={handleLoginChange}
-          leftIcon={<img src={mailIcon} alt="Mail" />}
+          leftIcon={<img src={mailIcon} alt="" />}
         />
 
         <Input
@@ -70,13 +70,10 @@ export const LoginForm = ({ isRegistered }: LoginFormProps): ReactElement => {
           placeholder="Enter your password"
           value={password}
           onChange={handlePasswordChange}
-          leftIcon={<img src={passwordIcon} alt="Password icon" />}
+          leftIcon={<img src={passwordIcon} alt="" />}
           rightIcon={
             <button type="button" onClick={toggleShowPassword}>
-              <img
-                src={showPassword ? eyeOffIcon : eyeIcon}
-                alt={showPassword ? 'Hide password' : 'Show password'}
-              />
+              <img src={showPassword ? eyeOffIcon : eyeIcon} alt="" />
             </button>
           }
         />
