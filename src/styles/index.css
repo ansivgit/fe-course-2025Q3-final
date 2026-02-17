@@ -30,13 +30,6 @@ button {
   }
 }
 
-.form-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
 .form {
   max-width: 450px;
   border: 1px solid hsl(280 100% 65% / 0.5);
@@ -46,6 +39,8 @@ button {
 }
 
 .form-footer {
+  max-width: 450px;
+  text-align: center;
   font-size: 0.875rem;
   line-height: 1.4;
   color: var(--color-gray-500);

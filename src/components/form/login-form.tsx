@@ -28,7 +28,7 @@ export const LoginForm = (): ReactElement => {
   };
 
   return (
-    <div className="form-wrapper">
+    <div>
       <form
         className="form"
         onSubmit={(event) => {
