@@ -1,11 +1,12 @@
 import mailIcon from '@/assets/icons/email.svg';
 import { Button } from '@/components/button/button';
 import { Input } from '@/components/input/input';
+import { loginApi } from '@/service/login';
+import type { LoginResponse } from '@/types';
 
 import classNames from 'classnames/bind';
 import type { ChangeEvent, ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
-import { checkLogin } from './check-login';
 import styles from './login-form.module.css';
 import { PasswordInput } from './password-input/password-input';
 
@@ -19,6 +20,7 @@ export const LoginForm = ({ isRegistered }: LoginFormProps): ReactElement => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [_, setUserData] = useState<LoginResponse['user'] | null>(null);
 
   const handleLoginChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setLogin(event.target.value);
@@ -32,9 +34,15 @@ export const LoginForm = ({ isRegistered }: LoginFormProps): ReactElement => {
 
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
     event.preventDefault();
-
-    const message = checkLogin({ email: login, password });
-    setErrorMessage(message);
+    const response = loginApi({ login, password });
+    if (response.success) {
+      setErrorMessage('');
+      setUserData(response.user);
+      console.warn('Logged in user data:', response.user);
+    } else {
+      setErrorMessage(response.message);
+      setUserData(null);
+    }
   };
 
   return (
