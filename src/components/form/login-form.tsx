@@ -5,8 +5,8 @@ import { Input } from '@/components/input/input';
 import classNames from 'classnames/bind';
 import type { ChangeEvent, ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
-import { PasswordInput } from '../password-input/password-input';
 import styles from './login-form.module.css';
+import { PasswordInput } from './password-input/password-input';
 
 const cx = classNames.bind(styles);
 

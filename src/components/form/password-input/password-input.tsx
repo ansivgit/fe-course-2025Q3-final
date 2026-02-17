@@ -4,7 +4,7 @@ import passwordIcon from '@/assets/icons/password.svg';
 
 import type { ChangeEvent, ReactElement } from 'react';
 import { useState } from 'react';
-import { Input } from '../input/input';
+import { Input } from '../../input/input';
 
 type PasswordInputProps = {
   value: string;
