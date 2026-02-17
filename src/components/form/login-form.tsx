@@ -10,7 +10,7 @@ import { PasswordInput } from './password-input/password-input';
 
 const cx = classNames.bind(styles);
 
-export const LoginForm = (): ReactElement => {
+export const LoginForm = (isRegistered = true): ReactElement => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
@@ -50,10 +50,21 @@ export const LoginForm = (): ReactElement => {
         <Button size="large">Login</Button>
       </form>
       <div className={cx('form-footer')}>
-        <span>No account? </span>
-        <a href="/register" className={cx('link')}>
-          Register
-        </a>
+        {isRegistered ? (
+          <>
+            <span>No account? </span>
+            <a href="/register" className={cx('link')}>
+              Register
+            </a>
+          </>
+        ) : (
+          <>
+            <span>Already have an account? </span>
+            <a href="/login" className={cx('link')}>
+              Login
+            </a>
+          </>
+        )}
       </div>
     </div>
   );
