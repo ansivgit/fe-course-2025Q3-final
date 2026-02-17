@@ -1,4 +1,5 @@
 import { Button } from '@/components/button/button';
+import { Layout } from '@/components/layout/layout';
 import { Title } from '@/components/title/title';
 import { ROUTES } from '@/constants/constants';
 
@@ -13,9 +14,9 @@ export const Login = (): ReactElement => {
   };
 
   return (
-    <div>
+    <Layout verticalAlign="center">
       <Title>Login</Title>
       <Button onClick={handleLogin}>Login</Button>
-    </div>
+    </Layout>
   );
 };

@@ -1,13 +1,13 @@
+import { Layout } from '@/components/layout/layout';
 import { Title } from '@/components/title/title';
 
 import type { ReactElement } from 'react';
-import { Outlet } from 'react-router-dom';
 
 export const Practice = (): ReactElement => {
   return (
-    <div>
+    <Layout>
       <Title>Practice</Title>
-      <Outlet />
-    </div>
+      <Title>Practice</Title>
+    </Layout>
   );
 };
