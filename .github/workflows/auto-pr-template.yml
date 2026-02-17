@@ -30,13 +30,46 @@ jobs:
         with:
           script: |
             const branchName = '${{ steps.branch.outputs.branch_name }}';
-            let cleanTitle = branchName.replace(/[-_]/g, ' ');
-            cleanTitle = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
+            const issueNumber = '${{ steps.branch.outputs.issue_number }}';
+            const prNumber = context.payload.pull_request.number;
+
+            let newTitle;
+
+            if (issueNumber) {
+              const issue = await github.rest.issues.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber
+              });
+              const issueTitle = issue.data.title;
+
+              let description = issueTitle;
+              const colonIndex = issueTitle.indexOf(': ');
+              if (colonIndex !== -1) {
+                description = issueTitle.substring(colonIndex + 2); // +2 чтобы пропустить ": "
+              }
+
+              const afterNumber = branchName.substring(issueNumber.length + 1); // пропускаем "число-"
+              const firstDash = afterNumber.indexOf('-');
+              let type = 'task';
+              if (firstDash !== -1) {
+                type = afterNumber.substring(0, firstDash);
+              } else {
+                type = afterNumber;
+              }
+
+              newTitle = `${issueNumber}-${type}: ${description}`;
+            } else {
+              let cleanTitle = branchName.replace(/[-_]/g, ' ');
+              cleanTitle = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
+              newTitle = cleanTitle;
+            }
+
             await github.rest.pulls.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number,
-              title: cleanTitle
+              pull_number: prNumber,
+              title: newTitle
             });
 
       - name: Set assignee to creator
@@ -50,7 +83,7 @@ jobs:
               assignees: [context.actor]
             });
 
-      - name: Copy labels from issue and add closing reference
+      - name: Copy labels and replace placeholder in PR body
         if: steps.branch.outputs.issue_number != ''
         uses: actions/github-script@v8
         with:
@@ -75,7 +108,15 @@ jobs:
             }
 
             const currentBody = context.payload.pull_request.body || '';
-            const newBody = currentBody + `\n\nCloses #${issueNumber}`;
+            const placeholder = '<!-- Closes issue will be added here by the bot -->';
+
+            let newBody;
+            if (currentBody.includes(placeholder)) {
+              newBody = currentBody.replace(placeholder, `Closes Issue #${issueNumber}`);
+            } else {
+              newBody = currentBody + `\n\nCloses Issue #${issueNumber}`;
+            }
+
             await github.rest.pulls.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
