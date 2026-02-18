@@ -15,14 +15,14 @@ import styles from './login-form.module.css';
 const cx = classNames.bind(styles);
 
 type LoginFormProps = {
+  isRegistered?: boolean;
+};
+
+type AuthToggleProps = {
   isRegistered: boolean;
 };
 
-type AuthFooterProps = {
-  isRegistered: boolean;
-};
-
-export const LoginForm = ({ isRegistered }: LoginFormProps): ReactElement => {
+export const LoginForm = ({ isRegistered = true }: LoginFormProps): ReactElement => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -87,7 +87,7 @@ export const LoginForm = ({ isRegistered }: LoginFormProps): ReactElement => {
   );
 };
 
-export const AuthFooter = ({ isRegistered }: AuthFooterProps): ReactElement => {
+export const AuthFooter = ({ isRegistered }: AuthToggleProps): ReactElement => {
   const text = isRegistered ? 'No account?' : 'Already have an account?';
 
   const linkText = isRegistered ? 'Register' : 'Login';
