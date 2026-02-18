@@ -9,7 +9,7 @@ export function App(): ReactElement {
   return (
     <Layout>
       <h1>Hello, Tandem</h1>
-      <LoginForm isRegistered={false} />
+      <LoginForm />
     </Layout>
   );
 }
