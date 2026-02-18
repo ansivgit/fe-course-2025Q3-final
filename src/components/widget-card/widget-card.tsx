@@ -58,7 +58,7 @@ export const Widget = ({
       </div>
       <div className={cx('meta-action')}>
         <span>Play</span>
-        <img src={ArrowIcon} alt="" className={cx('arrow')} />
+        <img src={ArrowIcon} alt="" />
       </div>
     </a>
   );
