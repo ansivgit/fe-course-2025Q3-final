@@ -14,6 +14,7 @@ export function App(): ReactElement {
 
 export const AppRouter = (): ReactElement => (
   <Routes>
+    <Route path={'/'} element={<Login />} />
     <Route path={ROUTES.login} element={<Login />} />
     <Route path={ROUTES.practice} element={<Practice />} />
     <Route path={ROUTES.notFound} element={<NotFound />} />
