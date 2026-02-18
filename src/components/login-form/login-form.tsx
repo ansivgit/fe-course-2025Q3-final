@@ -12,11 +12,15 @@ import styles from './login-form.module.css';
 
 const cx = classNames.bind(styles);
 
+type LoginFormProps = {
+  isRegistered?: boolean;
+};
+
 type AuthToggleProps = {
   isRegistered: boolean;
 };
 
-export const LoginForm = (isRegistered = true): ReactElement => {
+export const LoginForm = ({ isRegistered = true }: LoginFormProps): ReactElement => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
