@@ -82,12 +82,12 @@ export const LoginForm = ({ isRegistered = true }: LoginFormProps): ReactElement
 
         <Button size="large">Login</Button>
       </form>
-      <AuthFooter isRegistered={isRegistered} />
+      <AuthToggle isRegistered={isRegistered} />
     </div>
   );
 };
 
-export const AuthFooter = ({ isRegistered }: AuthToggleProps): ReactElement => {
+export const AuthToggle = ({ isRegistered }: AuthToggleProps): ReactElement => {
   const text = isRegistered ? 'No account?' : 'Already have an account?';
 
   const linkText = isRegistered ? 'Register' : 'Login';
