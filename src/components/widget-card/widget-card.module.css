@@ -1,0 +1,100 @@
+.widget {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  font-size: 0.875rem;
+  text-decoration: none;
+  line-height: 1.25rem;
+  border: 1px solid hsla(from var(--color-purple-500) h s l / var(--opacity-50));
+  border-radius: 1rem;
+  box-shadow: inset 0 0 20px
+    hsla(from var(--color-purple-500) h s l / var(--opacity-10));
+  background: var(--color-gray-900);
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:hover .meta-action {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1.25rem;
+  border-radius: 1rem;
+}
+
+.quiz .image-container {
+  background: hsla(from var(--color-purple-500) h s l / var(--opacity-15));
+}
+
+.match-game .image-container {
+  background: hsla(from var(--color-teal-500) h s l / var(--opacity-15));
+}
+
+.code-order .image-container {
+  background: hsla(from var(--color-pink-500) h s l / var(--opacity-15));
+}
+
+.widget-image {
+  width: 2rem;
+  height: 2rem;
+}
+
+.heading {
+  margin-bottom: 0.5rem;
+}
+
+.subheading {
+  margin-bottom: 1rem;
+  color: var(--color-gray-500);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-gray-500);
+}
+
+.meta-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.meta-image {
+  width: 1rem;
+  height: 1rem;
+}
+
+.meta-action {
+  color: var(--color-purple-400);
+  transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.meta-action {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.meta-action img {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.25rem;
+}
