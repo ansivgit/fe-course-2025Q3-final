@@ -6,9 +6,7 @@ import type { ReactElement } from 'react';
 
 const cx = classNames.bind(styles);
 
-import ArrowIcon from '@/assets/icons/arrow.svg';
-import ClockIcon from '@/assets/icons/clock.svg';
-import LightningIcon from '@/assets/icons/lightning.svg';
+import { ArrowIcon, ClockIcon, LightningIcon } from '@/assets/icons';
 
 type WidgetProps = {
   className?: string;
