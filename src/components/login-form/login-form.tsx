@@ -18,10 +18,10 @@ type AuthToggleProps = {
 };
 
 export const LoginForm = (): ReactElement => {
+  const [isRegistered, setIsRegistered] = useState(true);
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [isRegistered, setIsRegistered] = useState(true);
   const [errors, setErrors] = useState<LoginErrors>();
 
   const handleLoginChange = (value: string, error?: string): void => {
