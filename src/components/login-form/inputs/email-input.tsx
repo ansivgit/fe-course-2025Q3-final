@@ -18,7 +18,7 @@ export const EmailInput = ({ value, onChange }: EmailInputProps): ReactElement =
 
   return (
     <Input
-      id="login"
+      name="login"
       label="Email"
       type="text"
       placeholder="Enter your email"

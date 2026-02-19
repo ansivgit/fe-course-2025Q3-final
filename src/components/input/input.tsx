@@ -5,7 +5,7 @@ import styles from './input.module.css';
 const cx = classNames.bind(styles);
 
 type InputProps = {
-  id: string;
+  name: string;
   label?: string;
   type?: 'text' | 'password' | 'email' | 'number';
   placeholder?: string;
@@ -18,7 +18,7 @@ type InputProps = {
 };
 
 export const Input = ({
-  id,
+  name,
   label,
   type = 'text',
   placeholder = '',
@@ -33,28 +33,26 @@ export const Input = ({
 }: InputProps): ReactElement => {
   return (
     <div className={cx('input-wrapper', className)}>
-      {label && (
-        <label htmlFor={id} className={cx('input-label')}>
-          {label}
-        </label>
-      )}
-      <div className={cx('input-field')}>
-        {leftIcon && <span className={cx('input-icon', 'left')}>{leftIcon}</span>}
+      <label className={cx('input-label')}>
+        {label && <span>{label}</span>}
+        <div className={cx('input-field')}>
+          {leftIcon && <span className={cx('input-icon', 'left')}>{leftIcon}</span>}
 
-        <input
-          id={id}
-          type={type}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          className={cx('input', {
-            'has-left': leftIcon,
-            'has-right': rightIcon,
-          })}
-        />
+          <input
+            name={name}
+            type={type}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+            className={cx('input', {
+              'has-left': leftIcon,
+              'has-right': rightIcon,
+            })}
+          />
 
-        {rightIcon && <span className={cx('input-icon', 'right')}>{rightIcon}</span>}
-      </div>
+          {rightIcon && <span className={cx('input-icon', 'right')}>{rightIcon}</span>}
+        </div>
+      </label>
       {error && <div className={cx('error')}>{error}</div>}
     </div>
   );

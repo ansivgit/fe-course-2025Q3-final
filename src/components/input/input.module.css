@@ -2,7 +2,7 @@
   margin-bottom: 20px;
 }
 
-.input-label {
+.input-label span {
   display: block;
   color: var(--color-white);
   font-weight: 500;

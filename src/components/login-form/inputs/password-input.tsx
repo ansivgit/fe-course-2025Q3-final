@@ -27,7 +27,7 @@ export const PasswordInput = ({ value, onChange }: PasswordInputProps): ReactEle
 
   return (
     <Input
-      id="password"
+      name="password"
       label="Password"
       type={showPassword ? 'text' : 'password'}
       placeholder="Enter your password"
