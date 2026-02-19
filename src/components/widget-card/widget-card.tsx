@@ -1,4 +1,4 @@
-import { Subtitle } from '@/components/subtitle/subtitle';
+import { HeadingBlock } from '@/components/heading-block/heading-block';
 import styles from '@/components/widget-card/widget-card.module.css';
 import { ROUTES } from '@/constants/constants';
 
@@ -19,7 +19,7 @@ type WidgetCardProps = {
   color?: string;
 };
 
-export type WidgetStyleProps = React.CSSProperties & {
+export type WidgetCardStyleProps = React.CSSProperties & {
   '--bg-color'?: string;
 };
 
@@ -33,7 +33,7 @@ export const WidgetCard = ({
   color = 'transparent',
 }: WidgetCardProps): ReactElement => {
   const path = `/${ROUTES.practice}/${name}`;
-  const style: WidgetStyleProps = { '--bg-color': color };
+  const style: WidgetCardStyleProps = { '--bg-color': color };
 
   return (
     <a
@@ -48,8 +48,7 @@ export const WidgetCard = ({
         <img src={image} alt="" className={cx('widget-image')} />
       </div>
 
-      <Subtitle className={cx('heading')}>{heading}</Subtitle>
-      <p className={cx('subheading')}>{subheading}</p>
+      <HeadingBlock heading={heading} subheading={subheading} />
 
       <div className={cx('meta')}>
         <span className={cx('meta-item')}>
