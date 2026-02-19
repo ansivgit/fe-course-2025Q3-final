@@ -39,7 +39,7 @@ export const Widget = ({
       className={cx('widget', className)}
     >
       <div className={cx('image-container')}>
-        <img src={image} alt={heading} className={cx('widget-image')} />
+        <img src={image} alt="" className={cx('widget-image')} />
       </div>
 
       <Subtitle className={cx('heading')}>{heading}</Subtitle>
