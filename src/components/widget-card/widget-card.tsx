@@ -1,5 +1,6 @@
 import { Subtitle } from '@/components/subtitle/subtitle';
 import styles from '@/components/widget-card/widget-card.module.css';
+import { ROUTES } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
@@ -8,24 +9,31 @@ const cx = classNames.bind(styles);
 
 import { ArrowIcon, ClockIcon, LightningIcon } from '@/assets/icons';
 
-type WidgetProps = {
-  className?: string;
+type WidgetCardProps = {
+  name?: string;
   image: string;
   heading: string;
   subheading: string;
-  text1: string;
-  text2: string;
+  tasks: string;
+  time: string;
+  color?: string;
 };
 
-export const Widget = ({
-  className,
+export type WidgetStyleProps = React.CSSProperties & {
+  '--bg-color'?: string;
+};
+
+export const WidgetCard = ({
+  name,
   image,
   heading,
   subheading,
-  text1,
-  text2,
-}: WidgetProps): ReactElement => {
-  const path = `/widgets/${heading.toLowerCase().replaceAll(/\s+/g, '-')}`;
+  tasks,
+  time,
+  color = 'transparent',
+}: WidgetCardProps): ReactElement => {
+  const path = `/${ROUTES.practice}/${name}`;
+  const style: WidgetStyleProps = { '--bg-color': color };
 
   return (
     <a
@@ -34,9 +42,9 @@ export const Widget = ({
         event.preventDefault();
         console.log(path);
       }}
-      className={cx('widget', className)}
+      className={cx('widget')}
     >
-      <div className={cx('image-container')}>
+      <div className={cx('image-container')} style={style}>
         <img src={image} alt="" className={cx('widget-image')} />
       </div>
 
@@ -46,12 +54,12 @@ export const Widget = ({
       <div className={cx('meta')}>
         <span className={cx('meta-item')}>
           <img src={LightningIcon} alt="" className={cx('meta-image')} />
-          {text1}
+          {tasks}
         </span>
 
         <span className={cx('meta-item')}>
           <img src={ClockIcon} alt="" className={cx('meta-image')} />
-          {text2}
+          {time}
         </span>
       </div>
       <div className={cx('meta-action')}>

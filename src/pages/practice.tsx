@@ -1,9 +1,7 @@
-import CodeIcon from '@/assets/icons/code.svg';
-import MatchGameIcon from '@/assets/icons/match-game.svg';
-import QuizIcon from '@/assets/icons/quiz.svg';
+import { CodeIcon, MatchGameIcon, QuizIcon } from '@/assets/icons';
 import { Layout } from '@/components/layout/layout';
 import { Title } from '@/components/title/title';
-import { Widget } from '@/components/widget-card/widget-card';
+import { WidgetCard } from '@/components/widget-card/widget-card';
 
 import type { ReactElement } from 'react';
 
@@ -11,31 +9,34 @@ export const Practice = (): ReactElement => {
   return (
     <Layout>
       <Title>Practice</Title>
-      <Widget
-        className="quiz"
+      <WidgetCard
+        name="quiz"
         image={QuizIcon}
         heading="Quiz"
         subheading="Test your knowledge with multiple questions"
-        text1="150 questions"
-        text2="2 min"
+        tasks="150 questions"
+        time="2 min"
+        color="hsla(from var(--color-purple-500) h s l / var(--opacity-15))"
       />
 
-      <Widget
-        className="match-game"
+      <WidgetCard
+        name="match-game"
         image={MatchGameIcon}
         heading="Memory Game"
         subheading="Find and match all pairs of concept cards"
-        text1="20 Pairs"
-        text2="5 min"
+        tasks="20 Pairs"
+        time="5 min"
+        color="hsla(from var(--color-teal-500) h s l / var(--opacity-15))"
       />
 
-      <Widget
-        className="code-order"
+      <WidgetCard
+        name="code-order"
         image={CodeIcon}
         heading="Code Ordering"
         subheading="Arrange lines of code in the correct order"
-        text1="50 tasks"
-        text2="3 min"
+        tasks="50 tasks"
+        time="3 min"
+        color="hsla(from var(--color-pink-500) h s l / var(--opacity-15))"
       />
     </Layout>
   );
