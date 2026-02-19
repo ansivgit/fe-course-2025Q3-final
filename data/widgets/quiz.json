@@ -1,0 +1,53 @@
+[
+  {
+    "id": "quiz-01",
+    "type": "quiz",
+    "tags": ["js", "falsy"],
+    "payload": {
+      "question": "Which values are falsy in JavaScript?",
+      "options": [
+        { "id": "a", "option": "0" },
+        { "id": "b", "option": "{}" },
+        { "id": "c", "option": "null" },
+        { "id": "d", "option": "''" },
+        { "id": "e", "option": "undefined" }
+      ],
+      "correctIds": ["a", "c", "d", "e"],
+      "explanation": "0, null, '', and undefined are falsy; empty object {} is truthy."
+    }
+  },
+  {
+    "id": "quiz-02",
+    "type": "quiz",
+    "tags": ["js", "arrays"],
+    "payload": {
+      "question": "Which Array methods return a new array without modifying the original?",
+      "options": [
+        { "id": "a", "option": "map()" },
+        { "id": "b", "option": "forEach()" },
+        { "id": "c", "option": "filter()" },
+        { "id": "d", "option": "push()" },
+        { "id": "e", "option": "slice()" }
+      ],
+      "correctIds": ["a", "c", "e"],
+      "explanation": "map(), filter(), and slice() return new arrays; forEach() and push() modify the original."
+    }
+  },
+  {
+    "id": "quiz-03",
+    "type": "quiz",
+    "tags": ["js", "async"],
+    "payload": {
+      "question": "Which tasks are handled in the microtask queue?",
+      "options": [
+        { "id": "a", "option": "Promise.then callbacks" },
+        { "id": "b", "option": "setTimeout callbacks" },
+        { "id": "c", "option": "MutationObserver callbacks" },
+        { "id": "d", "option": "fetch() response handling" },
+        { "id": "e", "option": "requestAnimationFrame callbacks" }
+      ],
+      "correctIds": ["a", "c"],
+      "explanation": "Promise.then and MutationObserver callbacks are microtasks; setTimeout, fetch(), and requestAnimationFrame are macrotasks."
+    }
+  }
+]
