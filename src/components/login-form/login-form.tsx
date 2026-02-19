@@ -1,102 +1,78 @@
-import mailIcon from '@/assets/icons/email.svg';
-import eyeIcon from '@/assets/icons/eye.svg';
-import eyeOffIcon from '@/assets/icons/eye-off.svg';
-import passwordIcon from '@/assets/icons/password.svg';
 import { Button } from '@/components/button/button';
-import { Input } from '@/components/input/input';
 import { loginApi } from '@/service/login';
-import type { LoginResponse } from '@/types';
+import type { LoginErrors } from '@/types';
+import { isValid } from '@/utils/login-validation';
 
 import classNames from 'classnames/bind';
-import type { ChangeEvent, ReactElement, SyntheticEvent } from 'react';
+import type { ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
+import { EmailInput } from './inputs/email-input';
+import { PasswordInput } from './inputs/password-input';
 import styles from './login-form.module.css';
 
 const cx = classNames.bind(styles);
 
-type LoginFormProps = {
-  isRegistered?: boolean;
-};
-
 type AuthToggleProps = {
   isRegistered: boolean;
+  onToggle: () => void;
 };
 
-export const LoginForm = ({ isRegistered = true }: LoginFormProps): ReactElement => {
+export const LoginForm = (): ReactElement => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [_, setUserData] = useState<LoginResponse['user'] | null>(null);
+  const [isRegistered, setIsRegistered] = useState(true);
+  const [errors, setErrors] = useState<LoginErrors>();
 
-  const toggleShowPassword = (): void => {
-    setShowPassword((previous) => !previous);
+  const handleLoginChange = (value: string, error?: string): void => {
+    setErrorMessage('');
+    setLogin(value);
+    setErrors({ ...errors, login: error });
   };
 
-  const handleLoginChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setLogin(event.target.value);
+  const handlePasswordChange = (value: string, error?: string): void => {
     setErrorMessage('');
-  };
-
-  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setPassword(event.target.value);
-    setErrorMessage('');
+    setPassword(value);
+    setErrors({ ...errors, password: error });
   };
 
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    const { success, message, user } = loginApi({ login, password });
-    setErrorMessage(success ? '' : message);
-    setUserData(success ? user : null);
+    const { message } = loginApi({ login, password });
+    setErrorMessage(message);
+  };
+
+  const toggleAuth = (): void => {
+    setIsRegistered((previous) => !previous);
   };
 
   return (
     <div>
       <form className={cx('form')} onSubmit={handleSubmit}>
-        <Input
-          id="login"
-          label="Email"
-          type="text"
-          placeholder="Enter your email"
-          value={login}
-          onChange={handleLoginChange}
-          leftIcon={<img src={mailIcon} alt="" />}
-        />
+        <EmailInput value={login} onChange={handleLoginChange} />
+        <PasswordInput value={password} onChange={handlePasswordChange} />
 
-        <Input
-          id="password"
-          label="Password"
-          type={showPassword ? 'text' : 'password'}
-          placeholder="Enter your password"
-          value={password}
-          onChange={handlePasswordChange}
-          leftIcon={<img src={passwordIcon} alt="" />}
-          rightIcon={
-            <button type="button" onClick={toggleShowPassword}>
-              <img src={showPassword ? eyeOffIcon : eyeIcon} alt="" />
-            </button>
-          }
-        />
+        {errorMessage && <div className={cx('error')}>{errorMessage}</div>}
 
-        {errorMessage && <div className={cx('form-error')}>{errorMessage}</div>}
-
-        <Button size="large">Login</Button>
+        <Button size="large" disabled={!isValid(errors)}>
+          Login
+        </Button>
       </form>
-      <AuthToggle isRegistered={isRegistered} />
+      <AuthToggle isRegistered={isRegistered} onToggle={toggleAuth} />
     </div>
   );
 };
 
-export const AuthToggle = ({ isRegistered }: AuthToggleProps): ReactElement => {
+export const AuthToggle = ({ isRegistered, onToggle }: AuthToggleProps): ReactElement => {
   const text = isRegistered ? 'No account?' : 'Already have an account?';
 
   const linkText = isRegistered ? 'Register' : 'Login';
   const linkHref = isRegistered ? '/register' : '/login';
 
   return (
-    <div className={cx('form-footer')}>
+    <div className={cx('form-toggle')}>
       <span>{text} </span>
-      <a href={linkHref} className={cx('link')}>
+      <a href={linkHref} className={cx('link')} onClick={onToggle}>
         {linkText}
       </a>
     </div>

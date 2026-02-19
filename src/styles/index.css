@@ -27,3 +27,13 @@ h3 {
   font-size: 1.125rem;
   line-height: 1.5;
 }
+
+.error {
+  margin-bottom: 1.5rem;
+  color: var(--color-red-500);
+  font-weight: var(--font-weight-bold);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  line-height: 1.2;
+  max-width: 100%;
+}

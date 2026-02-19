@@ -16,7 +16,6 @@ export const loginApi = ({ login, password }: LoginCredentials): LoginResponse =
   const user = getUser(login);
 
   if (!user) {
-    console.warn('User not found, redirecting to registration');
     return { success: false, message: USER_MESSAGES.userNotFound };
   }
 
@@ -26,5 +25,5 @@ export const loginApi = ({ login, password }: LoginCredentials): LoginResponse =
 
   const { password: _, ...userData } = user;
   console.warn('Login successful, redirecting to Dashboard');
-  return { success: true, message: 'Login successful', user: userData };
+  return { success: true, message: '', user: userData };
 };

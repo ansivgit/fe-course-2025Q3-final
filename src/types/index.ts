@@ -22,3 +22,8 @@ export type LoginResponse = {
   message: string;
   user?: Omit<User, 'password'>;
 };
+
+export type LoginErrors = {
+  login?: string;
+  password?: string;
+};

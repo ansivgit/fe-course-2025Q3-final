@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import type { ChangeEvent, FocusEvent, ReactElement, ReactNode } from 'react';
+import type { ChangeEvent, ReactElement, ReactNode } from 'react';
 import styles from './input.module.css';
 
 const cx = classNames.bind(styles);
@@ -11,10 +11,10 @@ type InputProps = {
   placeholder?: string;
   value?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
   className?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  error?: string;
 };
 
 export const Input = ({
@@ -26,12 +26,10 @@ export const Input = ({
   onChange = (): void => {
     return;
   },
-  onBlur = (event): void => {
-    console.warn('Validating email', event.target.value);
-  },
   className = '',
   leftIcon,
   rightIcon,
+  error,
 }: InputProps): ReactElement => {
   return (
     <div className={cx('input-wrapper', className)}>
@@ -49,7 +47,6 @@ export const Input = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          onBlur={onBlur}
           className={cx('input', {
             'has-left': leftIcon,
             'has-right': rightIcon,
@@ -58,6 +55,7 @@ export const Input = ({
 
         {rightIcon && <span className={cx('input-icon', 'right')}>{rightIcon}</span>}
       </div>
+      {error && <div className={cx('error')}>{error}</div>}
     </div>
   );
 };
