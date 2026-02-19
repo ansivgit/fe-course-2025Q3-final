@@ -3,18 +3,27 @@ import { Input } from '@/components/input/input';
 import { validateLogin } from '@/utils/login-validation';
 
 import type { ChangeEvent, ReactElement } from 'react';
+import { useState } from 'react';
 
 type EmailInputProps = {
   value: string;
   onChange: (value: string, error?: string) => void;
+  onBlur: (error?: string) => void;
 };
 
-export const EmailInput = ({ value, onChange }: EmailInputProps): ReactElement => {
+export const EmailInput = ({ value, onChange, onBlur }: EmailInputProps): ReactElement => {
+  const [error, setError] = useState<string>();
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setError('');
     onChange(event.target.value, validateLogin(event.target.value));
   };
 
-  const error = validateLogin(value);
+  const handleBlur = (event: ChangeEvent<HTMLInputElement>): void => {
+    const validationResult = validateLogin(event.target.value);
+    onBlur(validationResult);
+    setError(validationResult);
+  };
 
   return (
     <Input
@@ -24,6 +33,7 @@ export const EmailInput = ({ value, onChange }: EmailInputProps): ReactElement =
       placeholder="Enter your email"
       value={value}
       onChange={handleChange}
+      onBlur={handleBlur}
       leftIcon={<img src={mailIcon} alt="" />}
       error={error}
     />

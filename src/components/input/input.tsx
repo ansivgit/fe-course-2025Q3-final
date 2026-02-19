@@ -11,6 +11,7 @@ type InputProps = {
   placeholder?: string;
   value?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
@@ -24,6 +25,9 @@ export const Input = ({
   placeholder = '',
   value = '',
   onChange = (): void => {
+    return;
+  },
+  onBlur = (): void => {
     return;
   },
   className = '',
@@ -44,6 +48,7 @@ export const Input = ({
             placeholder={placeholder}
             value={value}
             onChange={onChange}
+            onBlur={onBlur}
             className={cx('input', {
               'has-left': leftIcon,
               'has-right': rightIcon,

@@ -10,20 +10,27 @@ import { useState } from 'react';
 type PasswordInputProps = {
   value: string;
   onChange: (value: string, error?: string) => void;
+  onBlur: (error?: string) => void;
 };
 
-export const PasswordInput = ({ value, onChange }: PasswordInputProps): ReactElement => {
+export const PasswordInput = ({ value, onChange, onBlur }: PasswordInputProps): ReactElement => {
+  const [error, setError] = useState<string>();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setError('');
     onChange(event.target.value, validatePassword(event.target.value));
+  };
+
+  const handleBlur = (event: ChangeEvent<HTMLInputElement>): void => {
+    const validationResult = validatePassword(event.target.value);
+    onBlur(validationResult);
+    setError(validationResult);
   };
 
   const toggleShowPassword = (): void => {
     setShowPassword((previous) => !previous);
   };
-
-  const error = validatePassword(value);
 
   return (
     <Input
@@ -33,6 +40,7 @@ export const PasswordInput = ({ value, onChange }: PasswordInputProps): ReactEle
       placeholder="Enter your password"
       value={value}
       onChange={handleChange}
+      onBlur={handleBlur}
       leftIcon={<img src={passwordIcon} alt="" />}
       rightIcon={
         <button type="button" onClick={toggleShowPassword}>

@@ -36,6 +36,14 @@ export const LoginForm = (): ReactElement => {
     setErrors({ ...errors, password: error });
   };
 
+  const handleLoginBlur = (error?: string): void => {
+    setErrors({ ...errors, login: error });
+  };
+
+  const handlePasswordBlur = (error?: string): void => {
+    setErrors({ ...errors, password: error });
+  };
+
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const { message } = loginApi({ login, password });
@@ -49,8 +57,12 @@ export const LoginForm = (): ReactElement => {
   return (
     <div>
       <form className={cx('form')} onSubmit={handleSubmit}>
-        <EmailInput value={login} onChange={handleLoginChange} />
-        <PasswordInput value={password} onChange={handlePasswordChange} />
+        <EmailInput value={login} onChange={handleLoginChange} onBlur={handleLoginBlur} />
+        <PasswordInput
+          value={password}
+          onChange={handlePasswordChange}
+          onBlur={handlePasswordBlur}
+        />
 
         {errorMessage && <div className={cx('error')}>{errorMessage}</div>}
 
