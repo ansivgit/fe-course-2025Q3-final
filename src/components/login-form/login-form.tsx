@@ -3,11 +3,13 @@ import eyeIcon from '@/assets/icons/eye.svg';
 import eyeOffIcon from '@/assets/icons/eye-off.svg';
 import passwordIcon from '@/assets/icons/password.svg';
 import { Button } from '@/components/button/button';
+import { Input } from '@/components/input/input';
+import { loginApi } from '@/service/login';
+import type { LoginResponse } from '@/types';
 
 import classNames from 'classnames/bind';
 import type { ChangeEvent, ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
-import { Input } from '../input/input';
 import styles from './login-form.module.css';
 
 const cx = classNames.bind(styles);
@@ -24,27 +26,28 @@ export const LoginForm = ({ isRegistered = true }: LoginFormProps): ReactElement
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [_, setUserData] = useState<LoginResponse['user'] | null>(null);
 
   const toggleShowPassword = (): void => {
     setShowPassword((previous) => !previous);
   };
 
   const handleLoginChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setErrorMessage('');
     setLogin(event.target.value);
   };
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setErrorMessage('');
     setPassword(event.target.value);
   };
 
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (!login || !password) {
-      console.warn('Please enter email and password');
-      return;
-    }
-
-    console.warn(`Logging in with\nEmail: ${login}\nPassword: ${password}`);
+    const { success, message, user } = loginApi({ login, password });
+    setErrorMessage(message);
+    setUserData(success ? user : null);
   };
 
   return (
@@ -73,6 +76,8 @@ export const LoginForm = ({ isRegistered = true }: LoginFormProps): ReactElement
             </button>
           }
         />
+
+        {errorMessage && <div className={cx('form-error')}>{errorMessage}</div>}
 
         <Button size="large">Login</Button>
       </form>

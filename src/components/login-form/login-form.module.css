@@ -6,6 +6,15 @@
   background-color: var(--color-gray-900);
 }
 
+.form-error {
+  margin-bottom: 1.5rem;
+  color: var(--color-red-500);
+  font-weight: var(--font-weight-bold);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  line-height: 1.2;
+}
+
 .form-footer {
   max-width: 450px;
   text-align: center;

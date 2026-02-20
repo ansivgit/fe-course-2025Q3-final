@@ -11,3 +11,14 @@ export type User = {
 export type Settings = unknown;
 
 export type Session = unknown;
+
+export type LoginCredentials = {
+  login: string;
+  password: string;
+};
+
+export type LoginResponse = {
+  success: boolean;
+  message: string;
+  user?: Omit<User, 'password'>;
+};
