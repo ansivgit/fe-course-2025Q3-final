@@ -1,4 +1,5 @@
-import { HeadingBlock } from '@/components/heading-block/heading-block';
+import { Paragraph } from '@/components/paragraph/paragraph';
+import { Subtitle } from '@/components/subtitle/subtitle';
 import styles from '@/components/widget-card/widget-card.module.css';
 import { ROUTES } from '@/constants/constants';
 
@@ -48,7 +49,8 @@ export const WidgetCard = ({
         <img src={image} alt="" className={cx('widget-image')} />
       </div>
 
-      <HeadingBlock heading={heading} subheading={subheading} />
+      <Subtitle className={cx('heading')}>{heading}</Subtitle>
+      <Paragraph text={subheading}></Paragraph>
 
       <div className={cx('meta')}>
         <span className={cx('meta-item')}>
