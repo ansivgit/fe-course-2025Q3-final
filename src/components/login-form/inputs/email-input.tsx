@@ -9,10 +9,20 @@ type EmailInputProps = {
   value: string;
   onChange: (value: string, error?: string) => void;
   onBlur: (error?: string) => void;
+  clearError?: boolean;
 };
 
-export const EmailInput = ({ value, onChange, onBlur }: EmailInputProps): ReactElement => {
+export const EmailInput = ({
+  value,
+  onChange,
+  onBlur,
+  clearError,
+}: EmailInputProps): ReactElement => {
   const [error, setError] = useState<string>();
+
+  if (clearError && error) {
+    setError('');
+  }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setError('');

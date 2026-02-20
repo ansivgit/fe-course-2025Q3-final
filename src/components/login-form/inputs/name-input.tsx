@@ -9,10 +9,20 @@ type NameInputProps = {
   value: string;
   onChange: (value: string, error?: string) => void;
   onBlur: (error?: string) => void;
+  clearError?: boolean;
 };
 
-export const NameInput = ({ value, onChange, onBlur }: NameInputProps): ReactElement => {
+export const NameInput = ({
+  value,
+  onChange,
+  onBlur,
+  clearError,
+}: NameInputProps): ReactElement => {
   const [error, setError] = useState<string>();
+
+  if (clearError && error) {
+    setError('');
+  }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setError('');

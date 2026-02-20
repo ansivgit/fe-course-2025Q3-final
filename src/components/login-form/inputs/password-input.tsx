@@ -11,11 +11,21 @@ type PasswordInputProps = {
   value: string;
   onChange: (value: string, error?: string) => void;
   onBlur: (error?: string) => void;
+  clearError?: boolean;
 };
 
-export const PasswordInput = ({ value, onChange, onBlur }: PasswordInputProps): ReactElement => {
+export const PasswordInput = ({
+  value,
+  onChange,
+  onBlur,
+  clearError,
+}: PasswordInputProps): ReactElement => {
   const [error, setError] = useState<string>();
   const [showPassword, setShowPassword] = useState(false);
+
+  if (clearError && error) {
+    setError('');
+  }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setError('');

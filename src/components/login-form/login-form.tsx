@@ -6,7 +6,7 @@ import { ROUTES } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
 import type { ReactElement, SyntheticEvent } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { EmailInput } from './inputs/email-input';
 import { NameInput } from './inputs/name-input';
@@ -28,6 +28,7 @@ export const LoginForm = (): ReactElement => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState<LoginErrors>();
+  const [clearInputsError, setClearInputsError] = useState(false);
 
   const handleNameChange = (value: string, error?: string): void => {
     setName(value);
@@ -80,19 +81,37 @@ export const LoginForm = (): ReactElement => {
     setName('');
     setLogin('');
     setPassword('');
+    setClearInputsError(true);
   };
+
+  useEffect(() => {
+    if (clearInputsError) {
+      setClearInputsError(false);
+    }
+  }, [clearInputsError]);
 
   return (
     <div>
       <form className={cx('form')} onSubmit={handleSubmit}>
         {!isRegistered && (
-          <NameInput value={name} onChange={handleNameChange} onBlur={handleNameBlur} />
+          <NameInput
+            value={name}
+            onChange={handleNameChange}
+            onBlur={handleNameBlur}
+            clearError={clearInputsError}
+          />
         )}
-        <EmailInput value={login} onChange={handleLoginChange} onBlur={handleLoginBlur} />
+        <EmailInput
+          value={login}
+          onChange={handleLoginChange}
+          onBlur={handleLoginBlur}
+          clearError={clearInputsError}
+        />
         <PasswordInput
           value={password}
           onChange={handlePasswordChange}
           onBlur={handlePasswordBlur}
+          clearError={clearInputsError}
         />
 
         <div className={cx('error')}>{errorMessage || '\u00A0'}</div>
