@@ -56,7 +56,6 @@ export const LoginForm = ({ isRegistered = true }: LoginFormProps): ReactElement
         <Input
           id="login"
           label="Email"
-          type="text"
           placeholder="Enter your email"
           value={login}
           onChange={handleLoginChange}
