@@ -58,7 +58,7 @@ export const Input = ({
           {rightIcon && <span className={cx('input-icon', 'right')}>{rightIcon}</span>}
         </div>
       </label>
-      {error && <div className={cx('error')}>{error}</div>}
+      <div className={cx('error')}>{error ?? '\u00A0'}</div>
     </div>
   );
 };
