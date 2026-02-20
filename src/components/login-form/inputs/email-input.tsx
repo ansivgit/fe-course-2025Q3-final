@@ -29,7 +29,6 @@ export const EmailInput = ({ value, onChange, onBlur }: EmailInputProps): ReactE
     <Input
       name="login"
       label="Email"
-      type="text"
       placeholder="Enter your email"
       value={value}
       onChange={handleChange}
