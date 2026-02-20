@@ -12,7 +12,6 @@ type InputProps = {
   value?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
-  className?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   error?: string;
@@ -30,13 +29,12 @@ export const Input = ({
   onBlur = (): void => {
     return;
   },
-  className = '',
   leftIcon,
   rightIcon,
   error,
 }: InputProps): ReactElement => {
   return (
-    <div className={cx('input-wrapper', className)}>
+    <>
       <label className={cx('input-label')}>
         {label && <span>{label}</span>}
         <div className={cx('input-field')}>
@@ -59,6 +57,6 @@ export const Input = ({
         </div>
       </label>
       <div className={cx('error')}>{error ?? '\u00A0'}</div>
-    </div>
+    </>
   );
 };
