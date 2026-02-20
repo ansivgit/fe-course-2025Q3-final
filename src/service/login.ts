@@ -11,7 +11,7 @@ import { addUser, getUser } from './data-access';
 const USER_MESSAGES = {
   emptyFields: 'Please fill all fields',
   incorrectPassword: 'Incorrect password',
-  userNotFound: 'User not found',
+  userNotFound: 'Please register',
   userExists: 'User with this email already exists',
 };
 

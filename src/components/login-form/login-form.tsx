@@ -2,10 +2,12 @@ import { Button } from '@/components/button/button';
 import { loginApi, registerApi } from '@/service/login';
 import type { LoginErrors } from '@/types';
 import { isValid } from '@/utils/login-validation';
+import { ROUTES } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
 import type { ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { EmailInput } from './inputs/email-input';
 import { NameInput } from './inputs/name-input';
 import { PasswordInput } from './inputs/password-input';
@@ -19,6 +21,7 @@ type AuthToggleProps = {
 };
 
 export const LoginForm = (): ReactElement => {
+  const navigate = useNavigate();
   const [isRegistered, setIsRegistered] = useState(true);
   const [name, setName] = useState('');
   const [login, setLogin] = useState('');
@@ -57,13 +60,17 @@ export const LoginForm = (): ReactElement => {
 
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (isRegistered) {
-      const { message } = loginApi({ login, password });
-      setErrorMessage(message);
-    } else {
-      const { message } = registerApi({ name, login, password });
-      setErrorMessage(message);
+
+    const response = isRegistered
+      ? loginApi({ login, password })
+      : registerApi({ name, login, password });
+
+    if (response.success) {
+      void navigate(`/${ROUTES.practice}`);
+      return;
     }
+
+    setErrorMessage(response.message);
   };
 
   const toggleAuth = (): void => {
