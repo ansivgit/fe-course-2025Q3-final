@@ -50,6 +50,11 @@ export function answerWidget(
   pendingAnswers[widgetId] = undefined;
 }
 
+if (import.meta.env.DEV) {
+  // added to the global scope for testing the widget in the console
+  globalThis.answerWidget = answerWidget;
+}
+
 function isWidgetData(item: unknown): item is { type: string } {
   if (typeof item !== 'object' || item === null) {
     return false;
