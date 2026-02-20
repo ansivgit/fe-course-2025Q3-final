@@ -1,5 +1,5 @@
 .input-wrapper {
-  padding: 20px;
+  margin-bottom: 20px;
 }
 
 .input-label {
@@ -7,7 +7,7 @@
   color: var(--color-white);
   font-weight: 500;
   font-size: 0.875rem;
-  line-height: 1.25rem;
+  line-height: 1.4;
   margin-bottom: 0.5rem;
 }
 
@@ -16,12 +16,12 @@
 }
 
 .input {
-  background-color: var(--color-gray-950);
+  background-color: var(--color-gray-900);
   color: #fff;
   padding: 0.75rem 1rem;
   border-radius: 0.75rem;
   border: 1px solid var(--color-gray-800);
-  font-size: 100%;
+  font-size: 0.9rem;
   width: 100%;
   transition: all 0.3s ease;
 
@@ -53,5 +53,9 @@
     right: 0.75rem;
     pointer-events: auto;
     cursor: pointer;
+  }
+
+  img {
+    width: 20px;
   }
 }
