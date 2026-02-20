@@ -1,5 +1,7 @@
 import type { Widget, WidgetAnswerMap, WidgetStrategy } from '@/types/widgets';
 
+import { WidgetSchemas } from './schemas';
+
 const strategies = new Map<
   Widget['type'],
   WidgetStrategy<Widget, WidgetAnswerMap[Widget['type']]>
@@ -15,19 +17,6 @@ export function registerStrategy<T extends Widget>(
   strategy: WidgetStrategy<T, WidgetAnswerMap[T['type']]>,
 ): void {
   strategies.set(strategy.type, strategy);
-}
-
-export function answerWidget(
-  widgetId: string,
-  answer: WidgetAnswerMap[keyof WidgetAnswerMap],
-): void {
-  const resolve = pendingAnswers[widgetId];
-  if (!resolve) {
-    console.warn('No pending question for widget:', widgetId);
-    return;
-  }
-  resolve(answer);
-  pendingAnswers[widgetId] = undefined;
 }
 
 export async function runWidgets(widgets: Widget[]): Promise<void> {
@@ -46,4 +35,54 @@ export async function runWidgets(widgets: Widget[]): Promise<void> {
     widgetAnswers[widget.id] = answer;
     strategy.validate(widget, answer);
   }
+}
+
+export function answerWidget(
+  widgetId: string,
+  answer: WidgetAnswerMap[keyof WidgetAnswerMap],
+): void {
+  const resolve = pendingAnswers[widgetId];
+  if (!resolve) {
+    console.warn('No pending question for widget:', widgetId);
+    return;
+  }
+  resolve(answer);
+  pendingAnswers[widgetId] = undefined;
+}
+
+function isWidgetData(item: unknown): item is { type: string } {
+  if (typeof item !== 'object' || item === null) {
+    return false;
+  }
+
+  if (!('type' in item)) {
+    return false;
+  }
+
+  return true;
+}
+
+export function parseWidgets(data: unknown): Widget[] {
+  if (!Array.isArray(data)) {
+    return [];
+  }
+
+  const widgets: Widget[] = [];
+
+  for (const item of data) {
+    if (!isWidgetData(item)) {
+      continue;
+    }
+
+    const type = item.type;
+    const schema = WidgetSchemas[type];
+
+    try {
+      widgets.push(schema.parse(item));
+    } catch (error) {
+      console.warn('Invalid widget data:', error);
+    }
+  }
+
+  return widgets;
 }
