@@ -23,9 +23,26 @@ export const validatePassword = (value: string): string | undefined => {
   return '';
 };
 
-export const isValid = (errors: LoginErrors | undefined): boolean => {
+export const validateName = (value: string): string | undefined => {
+  if (!value) {
+    return '';
+  }
+
+  if (value.trim().length < 2) {
+    return 'Name must be at least 2 characters';
+  }
+
+  return '';
+};
+
+export const isValid = (errors: LoginErrors | undefined, isRegistered: boolean): boolean => {
   if (!errors) {
     return false;
   }
+
+  if (isRegistered) {
+    return errors.name === '' && errors.login === '' && errors.password === '';
+  }
+
   return errors.login === '' && errors.password === '';
 };

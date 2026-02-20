@@ -17,13 +17,26 @@ export type LoginCredentials = {
   password: string;
 };
 
+export type RegisterCredentials = {
+  name: string;
+  login: string;
+  password: string;
+};
+
 export type LoginResponse = {
   success: boolean;
   message: string;
   user?: Omit<User, 'password'>;
 };
 
+export type RegisterResponse = {
+  success: boolean;
+  message: string;
+  user?: Omit<User, 'password'>;
+};
+
 export type LoginErrors = {
+  name?: string;
   login?: string;
   password?: string;
 };

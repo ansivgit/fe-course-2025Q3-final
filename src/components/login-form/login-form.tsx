@@ -1,5 +1,5 @@
 import { Button } from '@/components/button/button';
-import { loginApi } from '@/service/login';
+import { loginApi, registerApi } from '@/service/login';
 import type { LoginErrors } from '@/types';
 import { isValid } from '@/utils/login-validation';
 
@@ -7,6 +7,7 @@ import classNames from 'classnames/bind';
 import type { ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
 import { EmailInput } from './inputs/email-input';
+import { NameInput } from './inputs/name-input';
 import { PasswordInput } from './inputs/password-input';
 import styles from './login-form.module.css';
 
@@ -19,10 +20,16 @@ type AuthToggleProps = {
 
 export const LoginForm = (): ReactElement => {
   const [isRegistered, setIsRegistered] = useState(true);
+  const [name, setName] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState<LoginErrors>();
+
+  const handleNameChange = (value: string, error?: string): void => {
+    setName(value);
+    setErrors({ ...errors, name: error });
+  };
 
   const handleLoginChange = (value: string, error?: string): void => {
     setErrorMessage('');
@@ -36,6 +43,10 @@ export const LoginForm = (): ReactElement => {
     setErrors({ ...errors, password: error });
   };
 
+  const handleNameBlur = (error?: string): void => {
+    setErrors({ ...errors, name: error });
+  };
+
   const handleLoginBlur = (error?: string): void => {
     setErrors({ ...errors, login: error });
   };
@@ -46,17 +57,30 @@ export const LoginForm = (): ReactElement => {
 
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    const { message } = loginApi({ login, password });
-    setErrorMessage(message);
+    if (isRegistered) {
+      const { message } = loginApi({ login, password });
+      setErrorMessage(message);
+    } else {
+      const { message } = registerApi({ name, login, password });
+      setErrorMessage(message);
+    }
   };
 
   const toggleAuth = (): void => {
     setIsRegistered((previous) => !previous);
+    setErrors({});
+    setErrorMessage('');
+    setName('');
+    setLogin('');
+    setPassword('');
   };
 
   return (
     <div>
       <form className={cx('form')} onSubmit={handleSubmit}>
+        {!isRegistered && (
+          <NameInput value={name} onChange={handleNameChange} onBlur={handleNameBlur} />
+        )}
         <EmailInput value={login} onChange={handleLoginChange} onBlur={handleLoginBlur} />
         <PasswordInput
           value={password}
@@ -66,8 +90,8 @@ export const LoginForm = (): ReactElement => {
 
         <div className={cx('error')}>{errorMessage || '\u00A0'}</div>
 
-        <Button size="large" disabled={!isValid(errors)}>
-          Login
+        <Button size="large" disabled={!isValid(errors, !isRegistered)}>
+          {isRegistered ? 'Login' : 'Register'}
         </Button>
       </form>
       <AuthToggle isRegistered={isRegistered} onToggle={toggleAuth} />
