@@ -17,8 +17,10 @@ type WidgetCardProps = {
   subheading: string;
   tasks: string;
   time: string;
-  color?: string;
+  color?: WidgetCardColor;
 };
+
+type WidgetCardColor = 'purple' | 'teal' | 'pink';
 
 export type WidgetCardStyleProps = React.CSSProperties & {
   '--bg-color'?: string;
@@ -31,10 +33,9 @@ export const WidgetCard = ({
   subheading,
   tasks,
   time,
-  color = 'transparent',
+  color = 'purple',
 }: WidgetCardProps): ReactElement => {
   const path = `/${ROUTES.practice}/${name}`;
-  const style: WidgetCardStyleProps = { '--bg-color': color };
 
   return (
     <a
@@ -43,9 +44,9 @@ export const WidgetCard = ({
         event.preventDefault();
         console.log(path);
       }}
-      className={cx('widget')}
+      className={cx('widget-card')}
     >
-      <div className={cx('image-container')} style={style}>
+      <div className={cx('image-container', color)}>
         <img src={image} alt="" className={cx('widget-image')} />
       </div>
 

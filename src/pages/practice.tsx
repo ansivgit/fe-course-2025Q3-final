@@ -16,7 +16,7 @@ export const Practice = (): ReactElement => {
         subheading="Test your knowledge with multiple questions"
         tasks="150 questions"
         time="2 min"
-        color="hsla(from var(--color-purple-500) h s l / var(--opacity-15))"
+        color="purple"
       />
 
       <WidgetCard
@@ -26,7 +26,7 @@ export const Practice = (): ReactElement => {
         subheading="Find and match all pairs of concept cards"
         tasks="20 Pairs"
         time="5 min"
-        color="hsla(from var(--color-teal-500) h s l / var(--opacity-15))"
+        color="teal"
       />
 
       <WidgetCard
@@ -36,7 +36,7 @@ export const Practice = (): ReactElement => {
         subheading="Arrange lines of code in the correct order"
         tasks="50 tasks"
         time="3 min"
-        color="hsla(from var(--color-pink-500) h s l / var(--opacity-15))"
+        color="pink"
       />
     </Layout>
   );
