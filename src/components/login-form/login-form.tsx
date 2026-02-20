@@ -46,7 +46,7 @@ export const LoginForm = ({ isRegistered = true }: LoginFormProps): ReactElement
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const { success, message, user } = loginApi({ login, password });
-    setErrorMessage(success ? '' : message);
+    setErrorMessage(message);
     setUserData(success ? user : null);
   };
 
