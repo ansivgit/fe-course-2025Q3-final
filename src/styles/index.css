@@ -43,3 +43,31 @@ h3 {
     opacity: 1;
   }
 }
+
+.description {
+  margin-top: 0.5rem;
+  color: var(--color-gray-500);
+}
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    & {
+      margin-bottom: 2.2rem;
+    }
+  }
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 10px;
+}

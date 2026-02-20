@@ -4,6 +4,13 @@
   border-radius: 1rem;
   padding: 1.5rem;
   background-color: var(--color-gray-900);
+
+  @media (max-width: 768px) {
+    & {
+      width: 100%;
+      padding: 1rem;
+    }
+  }
 }
 
 .form-toggle {
@@ -13,6 +20,13 @@
   line-height: 1.4;
   color: var(--color-gray-500);
   margin-top: 1.5rem;
+
+  @media (max-width: 768px) {
+    & {
+      font-size: 0.8rem;
+      margin-top: 1rem;
+    }
+  }
 }
 
 .link {
