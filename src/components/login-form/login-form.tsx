@@ -34,13 +34,13 @@ export const LoginForm = ({ isRegistered = true }: LoginFormProps): ReactElement
   };
 
   const handleLoginChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setLogin(event.target.value);
     setErrorMessage('');
+    setLogin(event.target.value);
   };
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setPassword(event.target.value);
     setErrorMessage('');
+    setPassword(event.target.value);
   };
 
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
