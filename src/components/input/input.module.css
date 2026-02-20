@@ -19,6 +19,7 @@
   border: 1px solid var(--color-gray-800);
   font-size: 0.9rem;
   width: 100%;
+  outline: 2px solid transparent;
   transition: all 0.3s ease;
 
   &.has-left {
@@ -31,7 +32,7 @@
 
   &:focus {
     outline: 2px solid var(--color-purple-300);
-    border-color: transparent;
+    border: 1px solid transparent;
   }
 }
 
