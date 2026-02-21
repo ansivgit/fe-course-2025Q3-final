@@ -37,7 +37,7 @@ h3 {
   line-height: 1.2;
   max-width: 100%;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-default) ease;
 
   &:not(:empty) {
     opacity: 1;
