@@ -4,7 +4,7 @@ import styles from '@/components/widget-card/widget-card.module.css';
 import { ROUTES } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
-import type { ReactElement } from 'react';
+import type { ComponentType, ReactElement, SVGProps } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -12,7 +12,7 @@ import { ArrowIcon, ClockIcon, LightningIcon } from '@/assets/icons';
 
 type WidgetCardProps = {
   name?: string;
-  image: string;
+  image: ComponentType<SVGProps<SVGSVGElement>>;
   heading: string;
   subheading: string;
   tasks: string;
@@ -28,7 +28,7 @@ export type WidgetCardStyleProps = React.CSSProperties & {
 
 export const WidgetCard = ({
   name,
-  image,
+  image: Icon,
   heading,
   subheading,
   tasks,
@@ -47,7 +47,9 @@ export const WidgetCard = ({
       className={cx('widget-card')}
     >
       <div className={cx('image-container', color)}>
-        <img src={image} alt="" className={cx('widget-image')} />
+        <div className={cx('widget-image')}>
+          <Icon className={cx(color)} />
+        </div>
       </div>
 
       <Subtitle className={cx('heading')}>{heading}</Subtitle>
@@ -55,18 +57,24 @@ export const WidgetCard = ({
 
       <div className={cx('meta')}>
         <span className={cx('meta-item')}>
-          <img src={LightningIcon} alt="" className={cx('meta-image')} />
+          <div className={cx('meta-action-image')}>
+            <LightningIcon />
+          </div>
           {tasks}
         </span>
 
         <span className={cx('meta-item')}>
-          <img src={ClockIcon} alt="" className={cx('meta-image')} />
+          <div className={cx('meta-image')}>
+            <ClockIcon />
+          </div>
           {time}
         </span>
       </div>
       <div className={cx('meta-action')}>
         <span>Play</span>
-        <img src={ArrowIcon} alt="" />
+        <div className={cx('meta-action-image')}>
+          <ArrowIcon />
+        </div>
       </div>
     </a>
   );

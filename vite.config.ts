@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react';
-import svgr from 'vite-plugin-svgr';
 import { defineConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
 
 /* biome-ignore lint/style/noDefaultExport: Vite requires default export */
 export default defineConfig({
