@@ -19,7 +19,7 @@ export type QuizOption = {
 export type QuizPayload = {
   question: string;
   options: QuizOption[];
-  correctIds: string[];
+  correctAnswersIds: string[];
   explanation?: string;
 };
 

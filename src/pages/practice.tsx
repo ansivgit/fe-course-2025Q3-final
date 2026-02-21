@@ -12,6 +12,7 @@ export const Practice = (): ReactElement => {
 
   useEffect(() => {
     if (startedRef.current) {
+      // TODO: Remove or change after UI implementation
       return;
     }
 

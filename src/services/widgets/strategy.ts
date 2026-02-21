@@ -12,10 +12,10 @@ export const quizStrategy: WidgetStrategy<QuizWidget, QuizAnswer> = {
         console.log(`${opt.id} - ${opt.option}`);
       });
 
-      const correctIds = widget.payload.correctIds.map((id) => `'${id}'`);
+      const correctAnswersIds = widget.payload.correctAnswersIds.map((id) => `'${id}'`);
 
       console.log(
-        `➡ To answer, call: answerWidget('${widget.id}', { selectedIds: [${correctIds.join(
+        `➡ To answer, call: answerWidget('${widget.id}', { selectedIds: [${correctAnswersIds.join(
           ', ',
         )}] })`,
       );
@@ -23,11 +23,12 @@ export const quizStrategy: WidgetStrategy<QuizWidget, QuizAnswer> = {
   },
 
   validate: (widget, answer) => {
-    const correctIds = widget.payload.correctIds;
+    const correctAnswersIds = widget.payload.correctAnswersIds;
     const selected = answer.selectedIds;
 
     const isCorrect =
-      selected.length === correctIds.length && selected.every((id) => correctIds.includes(id));
+      selected.length === correctAnswersIds.length &&
+      selected.every((id) => correctAnswersIds.includes(id));
 
     console.log('Selected:', answer.selectedIds);
     console.log(isCorrect ? '✅ Correct!' : '❌ Wrong!');

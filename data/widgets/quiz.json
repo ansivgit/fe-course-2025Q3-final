@@ -12,7 +12,7 @@
         { "id": "d", "option": "''" },
         { "id": "e", "option": "undefined" }
       ],
-      "correctIds": ["a", "c", "d", "e"],
+      "correctAnswersIds": ["a", "c", "d", "e"],
       "explanation": "0, null, '', and undefined are falsy; empty object {} is truthy."
     }
   },
@@ -29,7 +29,7 @@
         { "id": "d", "option": "push()" },
         { "id": "e", "option": "slice()" }
       ],
-      "correctIds": ["a", "c", "e"],
+      "correctAnswersIds": ["a", "c", "e"],
       "explanation": "map(), filter(), and slice() return new arrays; forEach() and push() modify the original."
     }
   },
@@ -46,7 +46,7 @@
         { "id": "d", "option": "fetch() response handling" },
         { "id": "e", "option": "requestAnimationFrame callbacks" }
       ],
-      "correctIds": ["a", "c"],
+      "correctAnswersIds": ["a", "c"],
       "explanation": "Promise.then and MutationObserver callbacks are microtasks; setTimeout, fetch(), and requestAnimationFrame are macrotasks."
     }
   }
