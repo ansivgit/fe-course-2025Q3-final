@@ -11,7 +11,7 @@ export default defineConfig([
   eslintPluginUnicorn.configs.recommended,
 
   {
-    files: ['**/*.{ts,js}'],
+    files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -109,7 +109,7 @@ export default defineConfig([
       'unicorn/no-null': 'off',
       'unicorn/filename-case': 'off',
       'unicorn/number-literal-case': 'off',
-      'unicorn/prefer-query-selector': 'warn',
+      'unicorn/prefer-query-selector': 'off',
       '@typescript-eslint/no-misused-promises': 'off', //* switched off for now
       '@typescript-eslint/restrict-template-expressions': 'off', //* switched off for now
       '@typescript-eslint/no-inferrable-types': 'error',
