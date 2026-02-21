@@ -26,13 +26,13 @@ export type RegisterCredentials = {
 export type LoginResponse = {
   success: boolean;
   message: string;
-  user?: Omit<User, 'password'>;
+  user?: User;
 };
 
 export type RegisterResponse = {
   success: boolean;
   message: string;
-  user?: Omit<User, 'password'>;
+  user?: User;
 };
 
 export type LoginErrors = {

@@ -30,8 +30,7 @@ export const loginApi = ({ login, password }: LoginCredentials): LoginResponse =
     return { success: false, message: USER_MESSAGES.incorrectPassword };
   }
 
-  const { password: _, ...userData } = user;
-  return { success: true, message: '', user: userData };
+  return { success: true, message: '', user };
 };
 
 export const registerApi = ({ name, login, password }: RegisterCredentials): RegisterResponse => {
@@ -44,7 +43,7 @@ export const registerApi = ({ name, login, password }: RegisterCredentials): Reg
     return { success: false, message: USER_MESSAGES.userExists };
   }
 
-  const newUser = addUser({
+  const user = addUser({
     id: uuidv4(),
     name,
     login,
@@ -54,7 +53,5 @@ export const registerApi = ({ name, login, password }: RegisterCredentials): Reg
     settings: {},
   });
 
-  const { password: _, ...userWithoutPassword } = newUser;
-
-  return { success: true, message: '', user: userWithoutPassword };
+  return { success: true, message: '', user };
 };

@@ -48,6 +48,8 @@ export const useLoginForm = (): UseLoginFormReturn => {
       ? loginApi({ login, password })
       : registerApi({ name, login, password });
 
+    console.warn(response.success, response.user);
+
     if (response.success) {
       navigate(`/${ROUTES.practice}`);
       return;
