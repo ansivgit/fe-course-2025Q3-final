@@ -10,6 +10,6 @@ type ParagraphProps = {
   className?: string;
 };
 
-export const Paragraph = ({ text, className }: ParagraphProps): ReactElement => {
+export const Paragraph = ({ text, className = '' }: ParagraphProps): ReactElement => {
   return <p className={cx('paragraph', className)}>{text}</p>;
 };

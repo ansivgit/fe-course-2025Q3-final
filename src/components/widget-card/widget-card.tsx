@@ -22,10 +22,6 @@ type WidgetCardProps = {
 
 type WidgetCardColor = 'purple' | 'teal' | 'pink';
 
-export type WidgetCardStyleProps = React.CSSProperties & {
-  '--bg-color'?: string;
-};
-
 export const WidgetCard = ({
   name,
   image: Icon,
