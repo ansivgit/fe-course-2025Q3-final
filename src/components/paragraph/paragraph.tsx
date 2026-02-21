@@ -7,9 +7,8 @@ const cx = classNames.bind(styles);
 
 type ParagraphProps = {
   text: string;
-  className?: string;
 };
 
-export const Paragraph = ({ text, className = '' }: ParagraphProps): ReactElement => {
-  return <p className={cx('paragraph', className)}>{text}</p>;
+export const Paragraph = ({ text }: ParagraphProps): ReactElement => {
+  return <p className={cx('paragraph')}>{text}</p>;
 };
