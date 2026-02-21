@@ -68,12 +68,11 @@ export const LoginForm = (): ReactElement => {
           onBlur={handlePasswordBlur}
           clearError={clearInputsError}
         />
-
-        <div className={cx('error')}>{errorMessage || '\u00A0'}</div>
-
         <Button size="large" disabled={!isValid(errors, !isRegistered)}>
           {isRegistered ? 'Login' : 'Register'}
         </Button>
+
+        <div className={cx('error')}>{errorMessage || '\u00A0'}</div>
       </form>
 
       <AuthToggle isRegistered={isRegistered} onToggle={toggleAuth} />
