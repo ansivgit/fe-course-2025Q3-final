@@ -64,7 +64,7 @@ export const WidgetCard = ({
         </span>
 
         <span className={cx('meta-item')}>
-          <div className={cx('meta-image')}>
+          <div className={cx('meta-action-image')}>
             <ClockIcon />
           </div>
           {time}
