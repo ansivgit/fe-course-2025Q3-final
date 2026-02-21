@@ -1,17 +1,12 @@
 import mailIcon from '@/assets/icons/email.svg';
 import { Input } from '@/components/input/input';
+import type { InputProps } from '@/types';
 import { validateLogin } from '@/utils/login-validation';
 
 import type { ChangeEvent, ReactElement } from 'react';
 import { useState } from 'react';
 
-type EmailInputProps = {
-  value: string;
-  onChange: (value: string, error?: string) => void;
-  onBlur: (error?: string) => void;
-};
-
-export const EmailInput = ({ value, onChange, onBlur }: EmailInputProps): ReactElement => {
+export const EmailInput = ({ value, onChange, onBlur }: InputProps): ReactElement => {
   const [error, setError] = useState<string>();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
