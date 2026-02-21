@@ -8,7 +8,12 @@ import { validatePassword } from '@/utils/login-validation';
 import type { ChangeEvent, ReactElement } from 'react';
 import { useState } from 'react';
 
-export const PasswordInput = ({ value, onChange, onBlur }: InputProps): ReactElement => {
+export const PasswordInput = ({
+  value,
+  onChange,
+  onBlur,
+  clearError,
+}: InputProps): ReactElement => {
   const [error, setError] = useState<string>();
   const [showPassword, setShowPassword] = useState(false);
 
