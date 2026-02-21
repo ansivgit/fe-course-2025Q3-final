@@ -54,7 +54,7 @@ export default defineConfig([
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-magic-numbers': ['error', { ignore: [0, 1, 2, -1] }],
       'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
-      // 'max-lines-per-function': ['warn', { max: 60, skipBlankLines: true }],
+      'max-lines-per-function': ['warn', { max: 60, skipBlankLines: true }],
       '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
       '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
       '@typescript-eslint/consistent-type-imports': [
