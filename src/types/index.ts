@@ -40,3 +40,9 @@ export type LoginErrors = {
   login?: string;
   password?: string;
 };
+
+export type InputProps = {
+  value: string;
+  onChange: (value: string, error?: string) => void;
+  onBlur: (error?: string) => void;
+};

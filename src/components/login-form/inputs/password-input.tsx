@@ -2,24 +2,13 @@ import eyeIcon from '@/assets/icons/eye.svg';
 import eyeOffIcon from '@/assets/icons/eye-off.svg';
 import passwordIcon from '@/assets/icons/password.svg';
 import { Input } from '@/components/input/input';
+import type { InputProps } from '@/types';
 import { validatePassword } from '@/utils/login-validation';
 
 import type { ChangeEvent, ReactElement } from 'react';
 import { useState } from 'react';
 
-type PasswordInputProps = {
-  value: string;
-  onChange: (value: string, error?: string) => void;
-  onBlur: (error?: string) => void;
-  clearError?: boolean;
-};
-
-export const PasswordInput = ({
-  value,
-  onChange,
-  onBlur,
-  clearError,
-}: PasswordInputProps): ReactElement => {
+export const PasswordInput = ({ value, onChange, onBlur }: InputProps): ReactElement => {
   const [error, setError] = useState<string>();
   const [showPassword, setShowPassword] = useState(false);
 
