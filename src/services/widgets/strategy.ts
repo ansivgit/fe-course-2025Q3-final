@@ -9,7 +9,7 @@ export const quizStrategy: QuizWidgetStrategy = {
       console.log('Options:');
 
       widget.payload.options.forEach((opt) => {
-        console.log(`${opt.id} - ${opt.option}`);
+        console.log(`${opt.name} - ${opt.value}`);
       });
 
       const correctAnswersIds = widget.payload.correctAnswersIds.map((id) => `'${id}'`);

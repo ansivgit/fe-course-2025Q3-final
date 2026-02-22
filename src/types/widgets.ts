@@ -8,8 +8,8 @@ export type Widget = {
 };
 
 export type WidgetOption = {
-  id: string;
-  option: string;
+  name: string;
+  value: string;
 };
 
 export type QuizPayload = {
