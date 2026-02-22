@@ -29,7 +29,7 @@ export const EmailInput = ({ value, onChange, onBlur }: InputProps): ReactElemen
       onChange={handleChange}
       onBlur={handleBlur}
       leftIcon={<img src={mailIcon} alt="" />}
-      error={error}
+      errorMessage={error}
     />
   );
 };

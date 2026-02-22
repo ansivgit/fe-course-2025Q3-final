@@ -14,7 +14,7 @@ type InputProps = {
   onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
-  error?: string;
+  errorMessage?: string;
 };
 
 export const Input = ({
@@ -31,7 +31,7 @@ export const Input = ({
   },
   leftIcon,
   rightIcon,
-  error,
+  errorMessage,
 }: InputProps): ReactElement => {
   return (
     <>
@@ -56,7 +56,7 @@ export const Input = ({
           {rightIcon && <span className={cx('input-icon', 'right')}>{rightIcon}</span>}
         </div>
       </label>
-      <div className={cx('error')}>{error ?? '\u00A0'}</div>
+      <div className={cx('error')}>{errorMessage ?? '\u00A0'}</div>
     </>
   );
 };

@@ -42,7 +42,7 @@ export const PasswordInput = ({ value, onChange, onBlur }: InputProps): ReactEle
           <img src={showPassword ? eyeOffIcon : eyeIcon} alt="" />
         </button>
       }
-      error={error}
+      errorMessage={error}
     />
   );
 };
