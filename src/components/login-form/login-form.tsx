@@ -7,7 +7,7 @@ import { Button } from '@/components/button/button';
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
 import { useState } from 'react';
-import { ErrorMessage } from '../error/error';
+import { ErrorMessage } from '../error/error-message';
 import { Input } from '../input/input';
 import styles from './login-form.module.css';
 import { useLoginForm } from './use-login-form';

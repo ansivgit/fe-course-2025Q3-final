@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import type { ChangeEvent, ReactElement, ReactNode } from 'react';
 import { useState } from 'react';
-import { ErrorMessage } from '../error/error';
+import { ErrorMessage } from '../error/error-message';
 import styles from './input.module.css';
 
 const cx = classNames.bind(styles);
