@@ -1,0 +1,15 @@
+.error {
+  min-height: 0.7rem;
+  color: var(--color-red-500);
+  font-weight: var(--font-weight-bold);
+  font-size: 0.7rem;
+  margin: 0.5rem 0;
+  line-height: 1.2;
+  max-width: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &:not(:empty) {
+    opacity: 1;
+  }
+}

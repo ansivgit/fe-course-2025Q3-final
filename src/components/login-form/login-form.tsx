@@ -6,6 +6,7 @@ import { isValid } from '@/utils/login-validation';
 import classNames from 'classnames/bind';
 import type { ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
+import { ErrorMessage } from '../error/error';
 import { LoginInput } from './inputs/login-input';
 import { PasswordInput } from './inputs/password-input';
 import styles from './login-form.module.css';
@@ -64,7 +65,7 @@ export const LoginForm = (): ReactElement => {
           onBlur={handlePasswordBlur}
         />
 
-        <div className={cx('error')}>{errorMessage}</div>
+        <ErrorMessage message={errorMessage} />
 
         <Button type="submit" size="large" disabled={!isValid(errors)}>
           Login
