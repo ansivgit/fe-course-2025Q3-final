@@ -14,14 +14,7 @@ import { useLoginForm } from './use-login-form';
 
 const cx = classNames.bind(styles);
 
-type AuthToggleProps = {
-  isRegistered: boolean;
-  onToggle: () => void;
-};
-
 export const LoginForm = (): ReactElement => {
-  const [isRegistered, setIsRegistered] = useState(true);
-
   const {
     errorMessage,
     errors,
@@ -32,10 +25,6 @@ export const LoginForm = (): ReactElement => {
     handlePasswordChange,
     handleSubmit,
   } = useLoginForm();
-
-  const toggleAuth = (): void => {
-    setIsRegistered((previous) => !previous);
-  };
 
   return (
     <div>
@@ -69,21 +58,25 @@ export const LoginForm = (): ReactElement => {
         </Button>
       </form>
 
-      <AuthToggle isRegistered={isRegistered} onToggle={toggleAuth} />
+      <AuthToggle />
     </div>
   );
 };
 
-export const AuthToggle = ({ isRegistered, onToggle }: AuthToggleProps): ReactElement => {
-  const text = isRegistered ? 'No account?' : 'Already have an account?';
-
-  const linkText = isRegistered ? 'Register' : 'Login';
+const AuthToggle = (): ReactElement => {
+  const [isRegistered, setIsRegistered] = useState(true);
 
   return (
     <div className={cx('form-link')}>
-      <span>{text} </span>
-      <button type="button" onClick={onToggle}>
-        {linkText}
+      <span>{isRegistered ? 'No account?' : 'Already have an account?'} </span>
+
+      <button
+        type="button"
+        onClick={() => {
+          setIsRegistered((previous) => !previous);
+        }}
+      >
+        {isRegistered ? 'Register' : 'Login'}
       </button>
     </div>
   );
