@@ -25,28 +25,28 @@ export const LoginForm = (): ReactElement => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState<LoginErrors>({
-    login: '',
-    password: '',
+    loginError: '',
+    passwordError: '',
   });
 
   const handleLoginChange = (value: string, error?: string): void => {
     setErrorMessage('');
     setLogin(value);
-    setErrors({ ...errors, login: error });
+    setErrors({ ...errors, loginError: error });
   };
 
   const handlePasswordChange = (value: string, error?: string): void => {
     setErrorMessage('');
     setPassword(value);
-    setErrors({ ...errors, password: error });
+    setErrors({ ...errors, passwordError: error });
   };
 
   const handleLoginBlur = (error?: string): void => {
-    setErrors({ ...errors, login: error });
+    setErrors({ ...errors, loginError: error });
   };
 
   const handlePasswordBlur = (error?: string): void => {
-    setErrors({ ...errors, password: error });
+    setErrors({ ...errors, passwordError: error });
   };
 
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {

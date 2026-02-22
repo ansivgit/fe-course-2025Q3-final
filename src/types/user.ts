@@ -21,8 +21,8 @@ export type LoginResponse = {
 };
 
 export type LoginErrors = {
-  login?: string;
-  password?: string;
+  loginError?: string;
+  passwordError?: string;
 };
 
 export type InputProps = {
