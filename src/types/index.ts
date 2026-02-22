@@ -12,10 +12,7 @@ export type Settings = unknown;
 
 export type Session = unknown;
 
-export type LoginCredentials = {
-  login: string;
-  password: string;
-};
+export type LoginCredentials = Pick<User, 'login' | 'password'>;
 
 export type LoginResponse = {
   success: boolean;
