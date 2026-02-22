@@ -9,18 +9,18 @@ import type { ChangeEvent, ReactElement } from 'react';
 import { useState } from 'react';
 
 export const PasswordInput = ({ value, onChange, onBlur }: InputProps): ReactElement => {
-  const [error, setError] = useState<string>();
+  const [errorMessage, setErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setError('');
+    setErrorMessage('');
     onChange(event.target.value, validatePassword(event.target.value));
   };
 
   const handleBlur = (event: ChangeEvent<HTMLInputElement>): void => {
     const validationResult = validatePassword(event.target.value);
     onBlur(validationResult);
-    setError(validationResult);
+    setErrorMessage(validationResult);
   };
 
   const toggleShowPassword = (): void => {
@@ -42,7 +42,7 @@ export const PasswordInput = ({ value, onChange, onBlur }: InputProps): ReactEle
           <img src={showPassword ? eyeOffIcon : eyeIcon} alt="" />
         </button>
       }
-      errorMessage={error}
+      errorMessage={errorMessage}
     />
   );
 };

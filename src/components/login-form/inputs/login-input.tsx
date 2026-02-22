@@ -7,17 +7,17 @@ import type { ChangeEvent, ReactElement } from 'react';
 import { useState } from 'react';
 
 export const LoginInput = ({ value, onChange, onBlur }: InputProps): ReactElement => {
-  const [error, setError] = useState<string>();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setError('');
+    setErrorMessage('');
     onChange(event.target.value, validateLogin(event.target.value));
   };
 
   const handleBlur = (event: ChangeEvent<HTMLInputElement>): void => {
     const validationResult = validateLogin(event.target.value);
     onBlur(validationResult);
-    setError(validationResult);
+    setErrorMessage(validationResult);
   };
 
   return (
@@ -29,7 +29,7 @@ export const LoginInput = ({ value, onChange, onBlur }: InputProps): ReactElemen
       onChange={handleChange}
       onBlur={handleBlur}
       leftIcon={<img src={Icon} alt="" />}
-      errorMessage={error}
+      errorMessage={errorMessage}
     />
   );
 };

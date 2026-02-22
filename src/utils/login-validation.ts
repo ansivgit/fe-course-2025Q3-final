@@ -3,9 +3,9 @@ import type { LoginErrors } from '@/types';
 export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
 
-export const validateLogin = (value: string): string | undefined => {
+export const validateLogin = (value: string): string => {
   if (!value) {
-    return '';
+    return 'Email is required';
   }
   if (!emailRegex.test(value)) {
     return 'Invalid email format';
@@ -13,9 +13,9 @@ export const validateLogin = (value: string): string | undefined => {
   return '';
 };
 
-export const validatePassword = (value: string): string | undefined => {
+export const validatePassword = (value: string): string => {
   if (!value) {
-    return undefined;
+    return 'Password is required';
   }
   if (!passwordRegex.test(value)) {
     return 'At least 8 characters and contain a number';
@@ -23,9 +23,6 @@ export const validatePassword = (value: string): string | undefined => {
   return '';
 };
 
-export const isValid = (errors: LoginErrors | undefined): boolean => {
-  if (!errors) {
-    return false;
-  }
-  return errors.login === '' && errors.password === '';
+export const isValid = (errors: LoginErrors): boolean => {
+  return Object.values(errors).every((error) => error === '');
 };

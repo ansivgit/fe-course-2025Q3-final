@@ -22,7 +22,7 @@ export const LoginForm = (): ReactElement => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [errors, setErrors] = useState<LoginErrors>();
+  const [errors, setErrors] = useState<LoginErrors>({ login: '', password: '' });
 
   const handleLoginChange = (value: string, error?: string): void => {
     setErrorMessage('');
