@@ -21,36 +21,30 @@ type AuthToggleProps = {
 
 export const LoginForm = (): ReactElement => {
   const [isRegistered, setIsRegistered] = useState(true);
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState<LoginErrors>({
     loginError: '',
     passwordError: '',
   });
 
-  const handleLoginChange = (value: string, error?: string): void => {
-    setErrorMessage('');
-    setLogin(value);
+  const handleLoginChange = (isBlur: boolean, error?: string): void => {
+    if (!isBlur) {
+      setErrorMessage('');
+    }
     setErrors({ ...errors, loginError: error });
   };
 
-  const handlePasswordChange = (value: string, error?: string): void => {
-    setErrorMessage('');
-    setPassword(value);
-    setErrors({ ...errors, passwordError: error });
-  };
-
-  const handleLoginBlur = (error?: string): void => {
-    setErrors({ ...errors, loginError: error });
-  };
-
-  const handlePasswordBlur = (error?: string): void => {
+  const handlePasswordChange = (isBlur: boolean, error?: string): void => {
+    if (!isBlur) {
+      setErrorMessage('');
+    }
     setErrors({ ...errors, passwordError: error });
   };
 
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    const login: string = event.currentTarget.login;
+    const password: string = event.currentTarget.password;
     const { message } = loginApi({ login, password });
     setErrorMessage(message);
   };
@@ -62,12 +56,8 @@ export const LoginForm = (): ReactElement => {
   return (
     <div>
       <form className={cx('form')} onSubmit={handleSubmit}>
-        <LoginInput value={login} onChange={handleLoginChange} onBlur={handleLoginBlur} />
-        <PasswordInput
-          value={password}
-          onChange={handlePasswordChange}
-          onBlur={handlePasswordBlur}
-        />
+        <LoginInput onStateChange={handleLoginChange} />
+        <PasswordInput onStateChange={handlePasswordChange} />
 
         <ErrorMessage message={errorMessage} />
 

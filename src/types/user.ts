@@ -26,7 +26,5 @@ export type LoginErrors = {
 };
 
 export type CredentialsInputProps = {
-  value: string;
-  onChange: (value: string, error?: string) => void;
-  onBlur: (error?: string) => void;
+  onStateChange: (isBlur: boolean, error?: string) => void;
 };

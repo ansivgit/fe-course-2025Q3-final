@@ -7,17 +7,20 @@ import type { CredentialsInputProps } from '@/types/user';
 import type { ChangeEvent, ReactElement } from 'react';
 import { useState } from 'react';
 
-export const LoginInput = ({ value, onChange, onBlur }: CredentialsInputProps): ReactElement => {
+export const LoginInput = ({ onStateChange }: CredentialsInputProps): ReactElement => {
+  const [value, setValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const value = event.target.value;
+    setValue(value);
     setErrorMessage('');
-    onChange(event.target.value, validateLogin(event.target.value));
+    onStateChange(false, validateLogin(value));
   };
 
   const handleBlur = (event: ChangeEvent<HTMLInputElement>): void => {
     const validationResult = validateLogin(event.target.value);
-    onBlur(validationResult);
+    onStateChange(true, validationResult);
     setErrorMessage(validationResult);
   };
 

@@ -9,18 +9,21 @@ import type { CredentialsInputProps } from '@/types/user';
 import type { ChangeEvent, ReactElement } from 'react';
 import { useState } from 'react';
 
-export const PasswordInput = ({ value, onChange, onBlur }: CredentialsInputProps): ReactElement => {
+export const PasswordInput = ({ onStateChange }: CredentialsInputProps): ReactElement => {
+  const [value, setValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setErrorMessage('');
-    onChange(event.target.value, validatePassword(event.target.value));
+    const value = event.target.value;
+    setValue(value);
+    onStateChange(false, validatePassword(value));
   };
 
   const handleBlur = (event: ChangeEvent<HTMLInputElement>): void => {
     const validationResult = validatePassword(event.target.value);
-    onBlur(validationResult);
+    onStateChange(true, validationResult);
     setErrorMessage(validationResult);
   };
 
