@@ -1,7 +1,7 @@
 import type { LoginErrors } from '@/types/user';
 
 export const loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
 export const validateLogin = (value: string): string => {
   if (!value) {
@@ -18,7 +18,7 @@ export const validatePassword = (value: string): string => {
     return 'Password is required';
   }
   if (!passwordRegex.test(value)) {
-    return 'At least 8 characters and contain a number';
+    return 'At least 8 characters, contain a number and have no spaces';
   }
   return '';
 };
