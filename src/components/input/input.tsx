@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import type { ChangeEvent, ReactElement, ReactNode } from 'react';
+import type { ChangeEvent, FocusEvent, ReactElement, ReactNode } from 'react';
 import styles from './input.module.css';
 
 const cx = classNames.bind(styles);
@@ -11,8 +11,7 @@ type InputProps = {
   placeholder?: string;
   value?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
   className?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
@@ -28,10 +27,7 @@ export const Input = ({
     return;
   },
   onBlur = (event): void => {
-    console.log('Validating email', event.target.value);
-  },
-  onFocus = (event): void => {
-    console.log('Input focused', event.target.value);
+    console.warn('Validating email', event.target.value);
   },
   className = '',
   leftIcon,
@@ -54,7 +50,6 @@ export const Input = ({
           value={value}
           onChange={onChange}
           onBlur={onBlur}
-          onFocus={onFocus}
           className={cx('input', {
             'has-left': leftIcon,
             'has-right': rightIcon,
