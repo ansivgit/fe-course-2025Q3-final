@@ -20,12 +20,14 @@ type UseLoginFormReturn = {
   handleSubmit: (event: SyntheticEvent<HTMLFormElement>) => void;
 };
 
+const initialErrors: LoginErrors = {
+  loginError: '',
+  passwordError: '',
+};
+
 export const useLoginForm = (): UseLoginFormReturn => {
+  const [errors, setErrors] = useState(initialErrors);
   const [errorMessage, setErrorMessage] = useState('');
-  const [errors, setErrors] = useState<LoginErrors>({
-    loginError: '',
-    passwordError: '',
-  });
 
   const [isValid, setIsValid] = useState({
     login: false,
