@@ -6,7 +6,7 @@ import { isValid } from '@/utils/login-validation';
 import classNames from 'classnames/bind';
 import type { ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
-import { EmailInput } from './inputs/email-input';
+import { LoginInput } from './inputs/login-input';
 import { PasswordInput } from './inputs/password-input';
 import styles from './login-form.module.css';
 
@@ -57,7 +57,7 @@ export const LoginForm = (): ReactElement => {
   return (
     <div>
       <form className={cx('form')} onSubmit={handleSubmit}>
-        <EmailInput value={login} onChange={handleLoginChange} onBlur={handleLoginBlur} />
+        <LoginInput value={login} onChange={handleLoginChange} onBlur={handleLoginBlur} />
         <PasswordInput
           value={password}
           onChange={handlePasswordChange}

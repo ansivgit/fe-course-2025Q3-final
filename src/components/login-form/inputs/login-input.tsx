@@ -6,7 +6,7 @@ import { validateLogin } from '@/utils/login-validation';
 import type { ChangeEvent, ReactElement } from 'react';
 import { useState } from 'react';
 
-export const EmailInput = ({ value, onChange, onBlur }: InputProps): ReactElement => {
+export const LoginInput = ({ value, onChange, onBlur }: InputProps): ReactElement => {
   const [error, setError] = useState<string>();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
