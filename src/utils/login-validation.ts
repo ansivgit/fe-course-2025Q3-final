@@ -1,4 +1,4 @@
-import type { LoginErrors } from '@/types';
+import type { LoginErrors } from '@/types/user';
 
 export const loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;

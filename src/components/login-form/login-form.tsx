@@ -1,7 +1,8 @@
 import { Button } from '@/components/button/button';
 import { loginApi } from '@/service/login';
-import type { LoginErrors } from '@/types';
 import { isValid } from '@/utils/login-validation';
+
+import type { LoginErrors } from '@/types/user';
 
 import classNames from 'classnames/bind';
 import type { ReactElement, SyntheticEvent } from 'react';
@@ -23,7 +24,10 @@ export const LoginForm = (): ReactElement => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [errors, setErrors] = useState<LoginErrors>({ login: '', password: '' });
+  const [errors, setErrors] = useState<LoginErrors>({
+    login: '',
+    password: '',
+  });
 
   const handleLoginChange = (value: string, error?: string): void => {
     setErrorMessage('');

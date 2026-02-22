@@ -1,7 +1,8 @@
 import Icon from '@/assets/icons/email.svg';
 import { Input } from '@/components/input/input';
-import type { InputProps } from '@/types';
 import { validateLogin } from '@/utils/login-validation';
+
+import type { InputProps } from '@/types/user';
 
 import type { ChangeEvent, ReactElement } from 'react';
 import { useState } from 'react';

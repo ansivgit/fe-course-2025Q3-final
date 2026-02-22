@@ -1,4 +1,4 @@
-import type { LoginCredentials, LoginResponse } from '@/types';
+import type { LoginCredentials, LoginResponse } from '@/types/user';
 
 import { getUser } from './data-access';
 
