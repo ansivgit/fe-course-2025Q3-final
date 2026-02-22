@@ -40,9 +40,9 @@ export const quizStrategy: QuizWidgetStrategy = {
     const isCorrect = Object.values(result).every((state) => state === 'correct');
 
     console.log('Selected:', selectedIds);
+    console.log('Boolean result:', isCorrect ? '✅ Correct' : '❌ Wrong');
     console.log('Validation result:', result);
     console.log('Explanation:', widget.payload.explanation);
-    console.log('Boolean result:', isCorrect ? '✅ Correct' : '❌ Wrong');
     console.log('---');
 
     return { isCorrect, result };
