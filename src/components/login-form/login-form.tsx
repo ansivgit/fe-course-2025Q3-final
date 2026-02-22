@@ -64,7 +64,7 @@ export const LoginForm = (): ReactElement => {
           onBlur={handlePasswordBlur}
         />
 
-        <div className={cx('error')}>{errorMessage || '\u00A0'}</div>
+        <div className={cx('error')}>{errorMessage}</div>
 
         <Button type="submit" size="large" disabled={!isValid(errors)}>
           Login
