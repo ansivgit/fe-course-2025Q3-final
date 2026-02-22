@@ -23,6 +23,6 @@ export const validatePassword = (value: string): string => {
   return '';
 };
 
-export const isValid = (errors: LoginErrors): boolean => {
+export const validate = (errors: LoginErrors): boolean => {
   return Object.values(errors).every((error) => error === '');
 };

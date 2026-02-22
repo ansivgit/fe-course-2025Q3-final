@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import type { ChangeEvent, ReactElement, ReactNode } from 'react';
+import { useState } from 'react';
 import { ErrorMessage } from '../error/error';
 import styles from './input.module.css';
 
@@ -10,9 +11,7 @@ type InputProps = {
   label?: string;
   type?: 'text' | 'password';
   placeholder?: string;
-  value?: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (isBlur: boolean, value: string) => void;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   errorMessage?: string;
@@ -23,17 +22,25 @@ export const Input = ({
   label,
   type = 'text',
   placeholder = '',
-  value = '',
-  onChange = (): void => {
-    return;
-  },
-  onBlur = (): void => {
-    return;
-  },
+  onChange,
   leftIcon,
   rightIcon,
   errorMessage,
 }: InputProps): ReactElement => {
+  const [value, setValue] = useState('');
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const value = event.target.value;
+    setValue(value);
+    onChange(false, value);
+  };
+
+  const handleBlur = (event: ChangeEvent<HTMLInputElement>): void => {
+    const value = event.target.value;
+    setValue(value);
+    onChange(true, value);
+  };
+
   return (
     <>
       <label className={cx('input-label')}>
@@ -46,8 +53,8 @@ export const Input = ({
             type={type}
             placeholder={placeholder}
             value={value}
-            onChange={onChange}
-            onBlur={onBlur}
+            onChange={handleChange}
+            onBlur={handleBlur}
             className={cx('input', {
               'has-left': leftIcon,
               'has-right': rightIcon,
