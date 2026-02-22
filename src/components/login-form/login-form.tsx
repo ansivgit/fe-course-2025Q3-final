@@ -32,6 +32,7 @@ export const LoginForm = (): ReactElement => {
         <Input
           name="login"
           label="Email"
+          placeholder="Enter your email"
           onChange={handleLoginChange}
           errorMessage={errors.loginError}
           leftIcon={<img src={loginIcon} alt="" />}
@@ -40,6 +41,7 @@ export const LoginForm = (): ReactElement => {
         <Input
           name="password"
           label="Password"
+          placeholder="Enter your password"
           type={showPassword ? 'text' : 'password'}
           onChange={handlePasswordChange}
           errorMessage={errors.passwordError}
