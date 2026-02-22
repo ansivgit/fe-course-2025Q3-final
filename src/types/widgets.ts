@@ -30,20 +30,14 @@ export type WidgetAnswerMap = {
 export type WidgetStrategy<T extends Widget, A> = {
   type: T['type'];
   run(widget: T, onAnswer: (answer: A) => void): void;
-  validate(widget: T, answer: A): boolean;
-};
-
-export type QuizWidgetStrategy = {
-  type: 'quiz';
-  run(widget: Widget, onAnswer: (answer: Answer) => void): void;
-  validate(widget: Widget, answer: Answer): QuizValidateReturn;
+  validate(widget: Widget, answer: Answer): ValidateReturn;
 };
 
 type OptionValidationState = 'correct' | 'wrong' | 'missed';
 
-export type QuizValidationResult = Record<string, OptionValidationState>;
+export type ValidationResult = Record<string, OptionValidationState>;
 
-export type QuizValidateReturn = {
+export type ValidateReturn = {
   isCorrect: boolean;
-  result: QuizValidationResult;
+  result: ValidationResult;
 };

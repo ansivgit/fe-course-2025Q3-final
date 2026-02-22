@@ -1,6 +1,6 @@
-import type { QuizValidationResult, QuizWidgetStrategy } from '@/types/widgets';
+import type { Answer, ValidationResult, Widget, WidgetStrategy } from '@/types/widgets';
 
-export const quizStrategy: QuizWidgetStrategy = {
+export const quizStrategy: WidgetStrategy<Widget, Answer> = {
   type: 'quiz',
 
   run: (widget, _onAnswer) => {
@@ -27,7 +27,7 @@ export const quizStrategy: QuizWidgetStrategy = {
     const selectedIds = answer.selectedIds;
 
     const allAnswersIds = new Set([...selectedIds, ...correctAnswersIds]);
-    const result: QuizValidationResult = {};
+    const result: ValidationResult = {};
 
     allAnswersIds.forEach((id) => {
       if (selectedIds.includes(id)) {
