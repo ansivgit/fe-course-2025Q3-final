@@ -1,4 +1,4 @@
-import mailIcon from '@/assets/icons/email.svg';
+import Icon from '@/assets/icons/email.svg';
 import { Input } from '@/components/input/input';
 import type { InputProps } from '@/types';
 import { validateLogin } from '@/utils/login-validation';
@@ -28,7 +28,7 @@ export const LoginInput = ({ value, onChange, onBlur }: InputProps): ReactElemen
       value={value}
       onChange={handleChange}
       onBlur={handleBlur}
-      leftIcon={<img src={mailIcon} alt="" />}
+      leftIcon={<img src={Icon} alt="" />}
       errorMessage={error}
     />
   );

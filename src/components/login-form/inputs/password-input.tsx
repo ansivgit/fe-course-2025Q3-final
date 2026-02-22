@@ -1,6 +1,6 @@
 import eyeIcon from '@/assets/icons/eye.svg';
 import eyeOffIcon from '@/assets/icons/eye-off.svg';
-import passwordIcon from '@/assets/icons/password.svg';
+import Icon from '@/assets/icons/password.svg';
 import { Input } from '@/components/input/input';
 import type { InputProps } from '@/types';
 import { validatePassword } from '@/utils/login-validation';
@@ -36,7 +36,7 @@ export const PasswordInput = ({ value, onChange, onBlur }: InputProps): ReactEle
       value={value}
       onChange={handleChange}
       onBlur={handleBlur}
-      leftIcon={<img src={passwordIcon} alt="" />}
+      leftIcon={<img src={Icon} alt="" />}
       rightIcon={
         <button type="button" onClick={toggleShowPassword}>
           <img src={showPassword ? eyeOffIcon : eyeIcon} alt="" />
