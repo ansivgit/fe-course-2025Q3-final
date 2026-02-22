@@ -1,5 +1,7 @@
 import { Layout } from '@/components/layout/layout';
 import { Title } from '@/components/title/title';
+import { WidgetCard } from '@/components/widget-card/widget-card';
+import { WIDGET_CARDS_CONFIG } from '@/components/widget-card/widget-card.config';
 import styles from '@/pages/practice/practice.module.css';
 
 import classNames from 'classnames/bind';
@@ -7,7 +9,7 @@ import type { ReactElement } from 'react';
 
 const cx = classNames.bind(styles);
 
-import WidgetIcon from '@/assets/icons/widget.svg';
+import { WidgetIcon } from '@/assets/icons';
 
 export const Practice = (): ReactElement => {
   return (
@@ -15,13 +17,28 @@ export const Practice = (): ReactElement => {
       <div className={cx('container')}>
         <section className={cx('title-section')}>
           <div className={cx('pre-title')}>
-            <img src={WidgetIcon} alt="" className={cx('image')} />
+            <div className={cx('image')}>
+              <WidgetIcon />
+            </div>
             <span>Interactive Practice</span>
           </div>
           <Title size="large">Learning Widgets</Title>
           <p className={cx('description')}>Learn through play — a gamified approach to learning</p>
         </section>
-        <section className={cx('widget-container')}></section>
+        <section className={cx('widget-container')}>
+          {WIDGET_CARDS_CONFIG.map((widget) => (
+            <WidgetCard
+              key={widget.name}
+              name={widget.name}
+              image={widget.image}
+              heading={widget.heading}
+              subheading={widget.subheading}
+              tasks={widget.tasks}
+              time={widget.time}
+              color={widget.color}
+            />
+          ))}
+        </section>
       </div>
     </Layout>
   );

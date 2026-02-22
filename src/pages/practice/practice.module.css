@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .pre-title {
@@ -38,14 +38,21 @@
   -webkit-text-fill-color: transparent;
 }
 
-.pre-title img {
+.image {
   width: 1rem;
   height: 1rem;
+}
+
+.image svg {
+  width: 100%;
+  height: 100%;
+  color: var(--color-purple-500);
 }
 
 .description {
   margin-top: 0.5rem;
   color: var(--color-gray-500);
+  text-align: center;
 }
 
 .widget-container {
@@ -53,9 +60,10 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 870px) {
     & {
       grid-template-columns: 1fr;
+      gap: 0.5rem;
     }
   }
 }
