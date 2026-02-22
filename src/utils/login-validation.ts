@@ -1,13 +1,13 @@
 import type { LoginErrors } from '@/types';
 
-export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
 
 export const validateLogin = (value: string): string => {
   if (!value) {
     return 'Email is required';
   }
-  if (!emailRegex.test(value)) {
+  if (!loginRegex.test(value)) {
     return 'Invalid email format';
   }
   return '';
