@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
-import styles from './error.module.css';
+import styles from './error-message.module.css';
 
 const cx = classNames.bind(styles);
 
