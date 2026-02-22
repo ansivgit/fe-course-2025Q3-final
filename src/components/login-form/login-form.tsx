@@ -3,17 +3,14 @@ import eyeIcon from '@/assets/icons/eye.svg';
 import eyeOffIcon from '@/assets/icons/eye-off.svg';
 import passwordIcon from '@/assets/icons/password.svg';
 import { Button } from '@/components/button/button';
-import { loginApi } from '@/service/login';
-import { validateLogin, validatePassword } from '@/utils/login-validation';
-
-import type { LoginErrors } from '@/types/user';
 
 import classNames from 'classnames/bind';
-import type { ReactElement, SyntheticEvent } from 'react';
+import type { ReactElement } from 'react';
 import { useState } from 'react';
 import { ErrorMessage } from '../error/error';
 import { Input } from '../input/input';
 import styles from './login-form.module.css';
+import { useLoginForm } from './use-login-form';
 
 const cx = classNames.bind(styles);
 
@@ -24,67 +21,17 @@ type AuthToggleProps = {
 
 export const LoginForm = (): ReactElement => {
   const [isRegistered, setIsRegistered] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [errors, setErrors] = useState<LoginErrors>({
-    loginError: '',
-    passwordError: '',
-  });
-  const [isValid, setIsValid] = useState({ login: false, password: false });
 
-  const [showPassword, setShowPassword] = useState(false);
-
-  const toggleShowPassword = (): void => {
-    setShowPassword((previous) => !previous);
-  };
-
-  const handleLoginChange = (isBlur: boolean, value: string): void => {
-    const loginError = validateLogin(value);
-    setIsValid((previous) => ({
-      ...previous,
-      login: !loginError,
-    }));
-    if (isBlur) {
-      setErrors((previous) => ({
-        ...previous,
-        loginError,
-      }));
-    } else {
-      setErrors((previous) => ({
-        ...previous,
-        loginError: '',
-      }));
-      setErrorMessage('');
-    }
-  };
-
-  const handlePasswordChange = (isBlur: boolean, value: string): void => {
-    const passwordError = validatePassword(value);
-    setIsValid((previous) => ({
-      ...previous,
-      password: !passwordError,
-    }));
-    if (isBlur) {
-      setErrors((previous) => ({
-        ...previous,
-        passwordError,
-      }));
-    } else {
-      setErrors((previous) => ({
-        ...previous,
-        passwordError: '',
-      }));
-      setErrorMessage('');
-    }
-  };
-
-  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-
-    const login: string = event.currentTarget.login;
-    const password: string = event.currentTarget.password;
-    const { message } = loginApi({ login, password });
-    setErrorMessage(message);
-  };
+  const {
+    errorMessage,
+    errors,
+    isValid,
+    showPassword,
+    toggleShowPassword,
+    handleLoginChange,
+    handlePasswordChange,
+    handleSubmit,
+  } = useLoginForm();
 
   const toggleAuth = (): void => {
     setIsRegistered((previous) => !previous);
@@ -121,6 +68,7 @@ export const LoginForm = (): ReactElement => {
           Login
         </Button>
       </form>
+
       <AuthToggle isRegistered={isRegistered} onToggle={toggleAuth} />
     </div>
   );
