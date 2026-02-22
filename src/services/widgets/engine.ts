@@ -1,4 +1,4 @@
-import type { Widget, WidgetAnswerMap, WidgetStrategy } from '@/types/widgets';
+import type { Widget, WidgetAnswerMap, WidgetStrategy, WidgetType } from '@/types/widgets';
 
 import { WidgetSchemas } from '../../schemas/widget-schemas';
 
@@ -7,10 +7,11 @@ const strategies = new Map<
   WidgetStrategy<Widget, WidgetAnswerMap[Widget['type']]>
 >();
 
-export const widgetAnswers: Partial<Record<string, WidgetAnswerMap[keyof WidgetAnswerMap]>> = {};
+export const widgetAnswers: Record<string, WidgetAnswerMap[WidgetType] | undefined> = {};
 
-export const pendingAnswers: Partial<
-  Record<string, (answer: WidgetAnswerMap[keyof WidgetAnswerMap]) => void>
+export const pendingAnswers: Record<
+  string,
+  ((answer: WidgetAnswerMap[WidgetType]) => void) | undefined
 > = {};
 
 export function registerStrategy<T extends Widget>(
