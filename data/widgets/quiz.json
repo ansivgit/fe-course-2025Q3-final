@@ -13,7 +13,7 @@
         { "name": "e", "value": "undefined" }
       ],
       "correctAnswersIds": ["a", "c", "d", "e"],
-      "explanation": "0, null, '', and undefined are falsy; empty object {} is truthy."
+      "explanation": "0, null, '', and undefined are falsy; any object is always truthy."
     }
   },
   {
