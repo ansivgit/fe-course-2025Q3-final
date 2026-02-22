@@ -79,14 +79,13 @@ export const AuthToggle = ({ isRegistered, onToggle }: AuthToggleProps): ReactEl
   const text = isRegistered ? 'No account?' : 'Already have an account?';
 
   const linkText = isRegistered ? 'Register' : 'Login';
-  const linkHref = isRegistered ? '/register' : '/login';
 
   return (
-    <div className={cx('form-toggle')}>
+    <div className={cx('form-link')}>
       <span>{text} </span>
-      <a href={linkHref} className={cx('link')} onClick={onToggle}>
+      <button type="button" onClick={onToggle}>
         {linkText}
-      </a>
+      </button>
     </div>
   );
 };
