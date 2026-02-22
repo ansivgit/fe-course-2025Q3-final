@@ -17,7 +17,7 @@ export type LoginCredentials = Pick<User, 'login' | 'password'>;
 export type LoginResponse = {
   success: boolean;
   message: string;
-  user?: Omit<User, 'password'>;
+  user?: User;
 };
 
 export type LoginErrors = {

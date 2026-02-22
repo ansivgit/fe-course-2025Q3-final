@@ -23,7 +23,6 @@ export const loginApi = ({ login, password }: LoginCredentials): LoginResponse =
     return { success: false, message: USER_MESSAGES.incorrectPassword };
   }
 
-  const { password: _, ...userData } = user;
-  console.warn('Login successful, redirecting to Dashboard');
-  return { success: true, message: '', user: userData };
+  console.warn('Login successful, redirecting to Dashboard', user);
+  return { success: true, message: '', user };
 };
