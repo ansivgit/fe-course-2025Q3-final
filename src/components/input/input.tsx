@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 type InputProps = {
   name: string;
   label?: string;
-  type?: 'text' | 'password' | 'email' | 'number';
+  type?: 'text' | 'password';
   placeholder?: string;
   value?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
