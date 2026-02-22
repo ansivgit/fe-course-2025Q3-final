@@ -8,29 +8,29 @@ export type BaseWidget = {
 
 export type QuizWidget = BaseWidget & {
   type: 'quiz';
-  payload: QuizPayload;
+  payload: WidgetPayload;
 };
 
-export type QuizOption = {
+export type WidgetOption = {
   id: string;
   option: string;
 };
 
-export type QuizPayload = {
+export type WidgetPayload = {
   question: string;
-  options: QuizOption[];
+  options: WidgetOption[];
   correctAnswersIds: string[];
   explanation?: string;
 };
 
 export type Widget = QuizWidget;
 
-export type QuizAnswer = {
+export type Answer = {
   selectedIds: string[];
 };
 
 export type WidgetAnswerMap = {
-  quiz: QuizAnswer;
+  quiz: Answer;
 };
 
 export type WidgetStrategy<T extends Widget, A> = {
@@ -41,8 +41,8 @@ export type WidgetStrategy<T extends Widget, A> = {
 
 export type QuizWidgetStrategy = {
   type: 'quiz';
-  run(widget: QuizWidget, onAnswer: (answer: QuizAnswer) => void): void;
-  validate(widget: QuizWidget, answer: QuizAnswer): QuizValidateReturn;
+  run(widget: QuizWidget, onAnswer: (answer: Answer) => void): void;
+  validate(widget: QuizWidget, answer: Answer): QuizValidateReturn;
 };
 
 type OptionValidationState = 'correct' | 'wrong' | 'missed';
