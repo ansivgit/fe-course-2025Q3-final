@@ -66,7 +66,7 @@ export const LoginForm = (): ReactElement => {
 
         <div className={cx('error')}>{errorMessage || '\u00A0'}</div>
 
-        <Button size="large" disabled={!isValid(errors)}>
+        <Button type="submit" size="large" disabled={!isValid(errors)}>
           Login
         </Button>
       </form>
