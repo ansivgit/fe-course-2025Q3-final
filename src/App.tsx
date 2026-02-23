@@ -7,6 +7,7 @@ import { ROUTES } from '@/constants/constants';
 
 import type { ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Quiz } from './pages/practice/quiz';
 
 export function App(): ReactElement {
   return <AppRouter />;
@@ -17,6 +18,7 @@ export const AppRouter = (): ReactElement => (
     <Route path={'/'} element={<Login />} />
     <Route path={ROUTES.login} element={<Login />} />
     <Route path={ROUTES.practice} element={<Practice />} />
+    <Route path={`${ROUTES.practice}/quiz`} element={<Quiz />} />
     <Route path={ROUTES.notFound} element={<NotFound />} />
   </Routes>
 );
