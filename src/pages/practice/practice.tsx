@@ -9,19 +9,11 @@ import type { ReactElement } from 'react';
 
 const cx = classNames.bind(styles);
 
-import { WidgetIcon } from '@/assets/icons';
-
 export const Practice = (): ReactElement => {
   return (
     <Layout>
       <div className={cx('container')}>
         <section className={cx('title-section')}>
-          <div className={cx('pre-title')}>
-            <div className={cx('image')}>
-              <WidgetIcon />
-            </div>
-            <span>Interactive Practice</span>
-          </div>
           <Title size="large">Learning Widgets</Title>
           <p className={cx('description')}>Learn through play — a gamified approach to learning</p>
         </section>
