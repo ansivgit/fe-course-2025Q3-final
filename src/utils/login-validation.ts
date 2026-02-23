@@ -1,24 +1,24 @@
-import type { LoginErrors } from '@/types';
+import type { LoginErrors } from '@/types/user';
 
-export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+export const loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
-export const validateLogin = (value: string): string | undefined => {
+export const validateLogin = (value: string): string => {
   if (!value) {
-    return '';
+    return 'Email is required';
   }
-  if (!emailRegex.test(value)) {
+  if (!loginRegex.test(value)) {
     return 'Invalid email format';
   }
   return '';
 };
 
-export const validatePassword = (value: string): string | undefined => {
+export const validatePassword = (value: string): string => {
   if (!value) {
-    return undefined;
+    return 'Password is required';
   }
   if (!passwordRegex.test(value)) {
-    return 'At least 8 characters and contain a number';
+    return 'At least 8 characters, contain a number and have no spaces';
   }
   return '';
 };
@@ -35,14 +35,16 @@ export const validateName = (value: string): string | undefined => {
   return '';
 };
 
-export const isValid = (errors: LoginErrors | undefined, isRegistered: boolean): boolean => {
-  if (!errors) {
-    return false;
-  }
+// export const isValid = (errors: LoginErrors | undefined, isRegistered: boolean): boolean => {
+//   if (!errors) {
+//     return false;
+//   }
 
-  if (isRegistered) {
-    return errors.name === '' && errors.login === '' && errors.password === '';
-  }
+//   if (isRegistered) {
+//     return errors.name === '' && errors.login === '' && errors.password === '';
+//   }
 
-  return errors.login === '' && errors.password === '';
+//   return errors.login === '' && errors.password === '';
+export const validate = (errors: LoginErrors): boolean => {
+  return Object.values(errors).every((error) => error === '');
 };

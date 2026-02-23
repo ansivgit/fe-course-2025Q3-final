@@ -12,10 +12,7 @@ export type Settings = unknown;
 
 export type Session = unknown;
 
-export type LoginCredentials = {
-  login: string;
-  password: string;
-};
+export type LoginCredentials = Pick<User, 'login' | 'password'>;
 
 export type RegisterCredentials = {
   name: string;
@@ -41,9 +38,14 @@ export type LoginErrors = {
   password?: string;
 };
 
-export type InputProps = {
-  value: string;
-  onChange: (value: string, error?: string) => void;
-  onBlur: (error?: string) => void;
-  clearError?: boolean;
-};
+// export type InputProps = {
+//   value: string;
+//   onChange: (value: string, error?: string) => void;
+//   onBlur: (error?: string) => void;
+//   clearError?: boolean;
+// };
+
+// export type LoginErrors = {
+//   loginError?: string;
+//   passwordError?: string;
+// };

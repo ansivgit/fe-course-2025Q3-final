@@ -1,9 +1,16 @@
+// import type {
+//   LoginCredentials,
+//   LoginResponse,
+//   RegisterCredentials,
+//   RegisterResponse,
+// } from '@/types';
+
 import type {
   LoginCredentials,
   LoginResponse,
   RegisterCredentials,
   RegisterResponse,
-} from '@/types';
+} from '@/types/user';
 
 import { v4 as uuidv4 } from 'uuid';
 import { addUser, getUser } from './data-access';
@@ -38,10 +45,10 @@ export const registerApi = ({ name, login, password }: RegisterCredentials): Reg
     return { success: false, message: USER_MESSAGES.emptyFields };
   }
 
-  const existingUser = getUser(login);
-  if (existingUser) {
-    return { success: false, message: USER_MESSAGES.userExists };
-  }
+  // const existingUser = getUser(login);
+  // if (existingUser) {
+  //   return { success: false, message: USER_MESSAGES.userExists };
+  // }
 
   const user = addUser({
     id: uuidv4(),
@@ -53,5 +60,6 @@ export const registerApi = ({ name, login, password }: RegisterCredentials): Reg
     settings: {},
   });
 
+  // console.warn('Login successful, redirecting to Dashboard', user);
   return { success: true, message: '', user };
 };
