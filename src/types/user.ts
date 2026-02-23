@@ -33,9 +33,9 @@ export type RegisterResponse = {
 };
 
 export type LoginErrors = {
-  name?: string;
-  login?: string;
-  password?: string;
+  nameError?: string;
+  loginError?: string;
+  passwordError?: string;
 };
 
 // export type InputProps = {
