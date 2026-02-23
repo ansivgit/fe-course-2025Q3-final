@@ -9,13 +9,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.description {
-  margin-top: 0.5rem;
-  color: var(--color-gray-500);
-  text-align: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .widget-container {

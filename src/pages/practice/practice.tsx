@@ -1,4 +1,5 @@
 import { Layout } from '@/components/layout/layout';
+import { Paragraph } from '@/components/paragraph/paragraph';
 import { Title } from '@/components/title/title';
 import { WidgetCard } from '@/components/widget-card/widget-card';
 import { WIDGET_CARDS_CONFIG } from '@/components/widget-card/widget-card.config';
@@ -15,7 +16,7 @@ export const Practice = (): ReactElement => {
       <div className={cx('container')}>
         <section className={cx('title-section')}>
           <Title size="large">Learning Widgets</Title>
-          <p className={cx('description')}>Learn through play — a gamified approach to learning</p>
+          <Paragraph text="Learn through play — a gamified approach to learning"></Paragraph>
         </section>
         <div className={cx('widget-container')}>
           {WIDGET_CARDS_CONFIG.map((widget) => (
