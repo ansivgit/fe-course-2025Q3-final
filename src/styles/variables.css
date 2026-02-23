@@ -12,6 +12,7 @@
 
   /* Purple colors */
   --color-purple-300: hsl(268, 91%, 65%);
+  --color-purple-400: hsl(270, 95%, 75%);
   --color-purple-500: hsl(280, 100%, 65%);
   --color-purple-900: hsl(240, 16%, 20%);
 
@@ -20,6 +21,9 @@
 
   /* Red colors */
   --color-red-500: hsl(0, 84%, 60%);
+
+  /* Pink colors */
+  --color-pink-500: hsl(320, 100%, 50%);
 
   /* OPACITY  */
   --opacity-70: 0.7;
@@ -31,4 +35,10 @@
 
   /* font weights */
   --font-weight-bold: 700;
+
+  /* Easing functions */
+  --ease-in-cubic: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Transition */
+  --transition-default: 0.3s;
 }
