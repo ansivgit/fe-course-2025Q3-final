@@ -17,7 +17,7 @@ export const Practice = (): ReactElement => {
           <Title size="large">Learning Widgets</Title>
           <p className={cx('description')}>Learn through play — a gamified approach to learning</p>
         </section>
-        <section className={cx('widget-container')}>
+        <div className={cx('widget-container')}>
           {WIDGET_CARDS_CONFIG.map((widget) => (
             <WidgetCard
               key={widget.name}
@@ -30,7 +30,7 @@ export const Practice = (): ReactElement => {
               color={widget.color}
             />
           ))}
-        </section>
+        </div>
       </div>
     </Layout>
   );
