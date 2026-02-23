@@ -20,16 +20,7 @@ export const Practice = (): ReactElement => {
         </section>
         <div className={cx('widget-container')}>
           {WIDGET_CARDS_CONFIG.map((widget) => (
-            <WidgetCard
-              key={widget.name}
-              name={widget.name}
-              image={widget.image}
-              heading={widget.heading}
-              subheading={widget.subheading}
-              tasks={widget.tasks}
-              time={widget.time}
-              color={widget.color}
-            />
+            <WidgetCard key={widget.name} widget={widget} />
           ))}
         </div>
       </div>
