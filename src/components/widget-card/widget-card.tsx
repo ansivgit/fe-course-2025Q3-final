@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 
 import { ArrowIcon, ClockIcon, LightningIcon } from '@/assets/icons';
 
-type WidgetCardConfig = {
+type WidgetCard = {
   name: string;
   image: ComponentType<SVGProps<SVGSVGElement>>;
   heading: string;
@@ -23,7 +23,7 @@ type WidgetCardConfig = {
 type WidgetCardColor = 'purple' | 'teal' | 'pink';
 
 type WidgetCardProps = {
-  widget: WidgetCardConfig;
+  widget: WidgetCard;
 };
 
 export const WidgetCard = ({ widget }: WidgetCardProps): ReactElement => {
