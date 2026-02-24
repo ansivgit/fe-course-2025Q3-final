@@ -2,7 +2,7 @@ import '@/styles/index.css';
 
 import { Login } from '@/pages/login';
 import { NotFound } from '@/pages/not-found';
-import { Practice } from '@/pages/practice';
+import { Practice } from '@/pages/practice/practice';
 import { ROUTES } from '@/constants/constants';
 
 import type { ReactElement } from 'react';

@@ -1,17 +1,21 @@
-import { CodeIcon, MatchGameIcon, QuizIcon } from '@/assets/icons';
 import { Layout } from '@/components/layout/layout';
+import { Paragraph } from '@/components/paragraph/paragraph';
 import { Title } from '@/components/title/title';
 import { WidgetCard } from '@/components/widget-card/widget-card';
+import { WIDGET_CARDS_CONFIG } from '@/components/widget-card/widget-card.config';
+import styles from '@/pages/practice/practice.module.css';
 import { parseWidgets, registerStrategy, runWidgets } from '@/services/widgets/engine';
 import { quizStrategy } from '@/services/widgets/strategy';
 
+import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
 import { useEffect, useRef } from 'react';
-import widgetsData from '../../data/widgets/quiz.json';
+import widgetsData from '../../../data/widgets/quiz.json';
+
+const cx = classNames.bind(styles);
 
 export const Practice = (): ReactElement => {
   const startedRef = useRef(false);
-
   useEffect(() => {
     if (startedRef.current) {
       // TODO: Remove or change after UI implementation
@@ -20,7 +24,6 @@ export const Practice = (): ReactElement => {
 
     startedRef.current = true;
     registerStrategy(quizStrategy);
-
     const widgets = parseWidgets(widgetsData);
 
     runWidgets(widgets).catch((error: unknown) => {
@@ -33,36 +36,17 @@ export const Practice = (): ReactElement => {
   }, []);
   return (
     <Layout>
-      <Title>Practice</Title>
-      <WidgetCard
-        name="quiz"
-        image={QuizIcon}
-        heading="Quiz"
-        subheading="Test your knowledge with multiple questions"
-        tasks="150 questions"
-        time="2 min"
-        color="purple"
-      />
-
-      <WidgetCard
-        name="match-game"
-        image={MatchGameIcon}
-        heading="Memory Game"
-        subheading="Find and match all pairs of concept cards"
-        tasks="20 Pairs"
-        time="5 min"
-        color="teal"
-      />
-
-      <WidgetCard
-        name="code-order"
-        image={CodeIcon}
-        heading="Code Ordering"
-        subheading="Arrange lines of code in the correct order"
-        tasks="50 tasks"
-        time="3 min"
-        color="pink"
-      />
+      <div className={cx('container')}>
+        <section className={cx('title-section')}>
+          <Title size="large">Learning Widgets</Title>
+          <Paragraph text="Learn through play — a gamified approach to learning"></Paragraph>
+        </section>
+        <div className={cx('widget-container')}>
+          {WIDGET_CARDS_CONFIG.map((widget) => (
+            <WidgetCard key={widget.name} widget={widget} />
+          ))}
+        </div>
+      </div>
     </Layout>
   );
 };
