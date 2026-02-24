@@ -1,9 +1,10 @@
 import { EyeIcon, EyeOffIcon, LoginIcon, PasswordIcon } from '@/assets/icons';
 import { Button } from '@/components/button/button';
+import { ROUTES } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
-import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Input } from '../input/input';
 import styles from './login-form.module.css';
 import { useLoginForm } from './use-login-form';
@@ -62,20 +63,17 @@ export const LoginForm = (): ReactElement => {
 };
 
 const AuthToggle = (): ReactElement => {
-  const [isRegistered, setIsRegistered] = useState(true);
+  const location = useLocation();
+
+  const isLoginPage = location.pathname === `/${ROUTES.login}`;
 
   return (
     <div className={cx('form-link')}>
-      <span>{isRegistered ? 'No account?' : 'Already have an account?'} </span>
+      <span>{isLoginPage ? 'No account?' : 'Already have an account?'} </span>
 
-      <button
-        type="button"
-        onClick={() => {
-          setIsRegistered((previous) => !previous);
-        }}
-      >
-        {isRegistered ? 'Register' : 'Login'}
-      </button>
+      <Link to={isLoginPage ? `/${ROUTES.register}` : `/${ROUTES.login}`}>
+        {isLoginPage ? 'Register' : 'Login'}
+      </Link>
     </div>
   );
 };
