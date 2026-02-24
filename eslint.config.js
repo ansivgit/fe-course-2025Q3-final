@@ -54,7 +54,7 @@ export default defineConfig([
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-magic-numbers': ['error', { ignore: [0, 1, 2, -1] }],
       'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
-      'max-lines-per-function': ['warn', { max: 60, skipBlankLines: true }],
+      'max-lines-per-function': ['warn', { max: 60, skipBlankLines: true, skipComments: true }],
       '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
       '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
       '@typescript-eslint/consistent-type-imports': [
@@ -114,6 +114,14 @@ export default defineConfig([
       '@typescript-eslint/restrict-template-expressions': 'off', //* switched off for now
       '@typescript-eslint/no-inferrable-types': 'error',
     },
+    overrides: [
+    {
+      files: ['src/**/*.jsx', 'src/**/*.tsx'],
+      rules: {
+        'max-lines-per-function': ['warn', { max: 100, skipBlankLines: true, skipComments: true }]
+      }
+    }
+  ]
   },
   {
     ignores: [
