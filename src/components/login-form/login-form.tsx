@@ -1,7 +1,4 @@
-import loginIcon from '@/assets/icons/email.svg';
-import eyeIcon from '@/assets/icons/eye.svg';
-import eyeOffIcon from '@/assets/icons/eye-off.svg';
-import passwordIcon from '@/assets/icons/password.svg';
+import { EyeIcon, EyeOffIcon, LoginIcon, PasswordIcon } from '@/assets/icons';
 import { Button } from '@/components/button/button';
 
 import classNames from 'classnames/bind';
@@ -34,7 +31,7 @@ export const LoginForm = (): ReactElement => {
           placeholder="Enter your email"
           onChange={handleLoginChange}
           errorMessage={errors.loginError}
-          leftIcon={<img src={loginIcon} alt="" />}
+          leftIcon={<LoginIcon />}
         />
 
         <Input
@@ -44,10 +41,10 @@ export const LoginForm = (): ReactElement => {
           type={showPassword ? 'text' : 'password'}
           onChange={handlePasswordChange}
           errorMessage={errors.passwordError}
-          leftIcon={<img src={passwordIcon} alt="" />}
+          leftIcon={<PasswordIcon />}
           rightIcon={
             <button type="button" onClick={toggleShowPassword}>
-              <img src={showPassword ? eyeOffIcon : eyeIcon} alt="" />
+              {showPassword ? <EyeOffIcon /> : <EyeIcon />}
             </button>
           }
         />

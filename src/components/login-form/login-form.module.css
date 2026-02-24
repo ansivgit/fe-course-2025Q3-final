@@ -56,3 +56,8 @@
     opacity: 1;
   }
 }
+
+.form svg {
+  width: 20px;
+  height: 20px;
+}
