@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 import type { ChangeEvent, ReactElement, ReactNode } from 'react';
 import { useState } from 'react';
-import { ErrorMessage } from '../error/error-message';
 import styles from './input.module.css';
 
 const cx = classNames.bind(styles);
@@ -64,7 +63,7 @@ export const Input = ({
           {rightIcon && <span className={cx('input-icon', 'right')}>{rightIcon}</span>}
         </div>
       </label>
-      <ErrorMessage message={errorMessage} />
+      <p className={cx('error')}>{errorMessage}</p>
     </>
   );
 };
