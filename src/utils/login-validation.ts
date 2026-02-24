@@ -18,7 +18,7 @@ export const validatePassword = (value: string): string => {
     return 'Password is required';
   }
   if (!passwordRegex.test(value)) {
-    return 'At least 8 characters, contain a number and have no spaces';
+    return 'At least 8 characters and 1 digit';
   }
   return '';
 };
