@@ -1,41 +1,50 @@
-import { EyeIcon, EyeOffIcon, LoginIcon, PasswordIcon } from '@/assets/icons';
+// import { EyeIcon, EyeOffIcon, LoginIcon, PasswordIcon } from '@/assets/icons';
+import { LoginIcon } from '@/assets/icons';
 import { Button } from '@/components/button/button';
+import { validateLogin } from '@/utils/login-validation';
 import { ROUTES } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Input } from '../input/input';
 import styles from './login-form.module.css';
-import { useLoginForm } from './use-login-form';
 
 const cx = classNames.bind(styles);
 
 export const LoginForm = (): ReactElement => {
-  const {
-    errorMessage,
-    errors,
-    isValid,
-    showPassword,
-    toggleShowPassword,
-    handleLoginChange,
-    handlePasswordChange,
-    handleSubmit,
-  } = useLoginForm();
+  const [loginValue, setLoginValue] = useState('');
+  // const [passwordError, setPasswordError] = useState('');
+  const [formErrors, setFormErrors] = useState(false);
+
+  // код ниже может понадобиться для сабмита формы, если все будет работать и без него - можно удалить
+  // const formValidation = (): boolean => {
+  //   if (loginValue === '' || formErrors) { // сюда добавить проверку для пароля
+  //     return false;
+  //   }
+  //   return true;
+  // };
+
+  // useEffect(() => {
+  //   formValidation();
+  // }, [loginValue, formErrors]);
 
   return (
     <div>
-      <form className={cx('form')} onSubmit={handleSubmit}>
+      <form className={cx('form')}>
         <Input
           name="login"
+          value={loginValue}
           label="Email"
           placeholder="Enter your email"
-          onChange={handleLoginChange}
-          errorMessage={errors.loginError}
+          onInputChange={setLoginValue}
+          onErrors={setFormErrors}
+          validation={validateLogin}
           leftIcon={<LoginIcon />}
         />
 
-        <Input
+        {/* <Input
           name="password"
           label="Password"
           placeholder="Enter your password"
@@ -48,11 +57,12 @@ export const LoginForm = (): ReactElement => {
               {showPassword ? <EyeOffIcon /> : <EyeIcon />}
             </button>
           }
-        />
+        /> */}
 
-        <p className={cx('error')}>{errorMessage}</p>
+        {/* c с учетом того, что мы показываем сообщения под инпутами, не уверена что это сообщение надо вообще */}
+        {/* {formErrors && <p className={cx('error')}>Please, check the form</p>} */}
 
-        <Button type="submit" size="large" disabled={!isValid.login || !isValid.password}>
+        <Button type="submit" size="large" disabled={loginValue === '' || formErrors}>
           Login
         </Button>
       </form>
