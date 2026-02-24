@@ -1,28 +1,43 @@
 import type { LoginCredentials, LoginResponse } from '@/types/user';
 
-import { getUser } from './data-access';
-
 const USER_MESSAGES = {
   emptyFields: 'Please enter email and password',
   incorrectPassword: 'Incorrect password',
   userNotFound: 'User not found',
 };
 
-export const loginApi = ({ login, password }: LoginCredentials): LoginResponse => {
+export const loginApi = async ({ login, password }: LoginCredentials): Promise<LoginResponse> => {
   if (!login || !password) {
-    return { success: false, message: USER_MESSAGES.emptyFields };
+    return {
+      data: null,
+      error: USER_MESSAGES.emptyFields,
+    };
   }
 
-  const user = getUser(login);
+  try {
+    const response = await fetch('http://localhost:3000/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ login, password }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  if (!user) {
-    return { success: false, message: USER_MESSAGES.userNotFound };
+    const result: LoginResponse = await response.json();
+
+    if (!response.ok) {
+      return {
+        data: null,
+        error: result.error ?? USER_MESSAGES.userNotFound,
+      };
+    }
+
+    console.warn(`User successfully logged in: ${login}`);
+    return result;
+  } catch {
+    return {
+      data: null,
+      error: 'Server error',
+    };
   }
-
-  if (user.password !== password) {
-    return { success: false, message: USER_MESSAGES.incorrectPassword };
-  }
-
-  console.warn('Login successful, redirecting to Dashboard', user);
-  return { success: true, message: '', user };
 };

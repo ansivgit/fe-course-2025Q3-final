@@ -72,7 +72,7 @@ export const useLoginForm = (): UseLoginFormReturn => {
     }
   };
 
-  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -80,8 +80,8 @@ export const useLoginForm = (): UseLoginFormReturn => {
     const login = getString(formData, 'login');
     const password = getString(formData, 'password');
 
-    const { message } = loginApi({ login, password });
-    setErrorMessage(message);
+    const { error } = await loginApi({ login, password });
+    setErrorMessage(error ?? '');
   };
 
   return {

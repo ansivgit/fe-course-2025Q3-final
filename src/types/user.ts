@@ -15,9 +15,8 @@ export type Session = unknown;
 export type LoginCredentials = Pick<User, 'login' | 'password'>;
 
 export type LoginResponse = {
-  success: boolean;
-  message: string;
-  user?: User;
+  data: User | null;
+  error: string | null;
 };
 
 export type LoginErrors = {
