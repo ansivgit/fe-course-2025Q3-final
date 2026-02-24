@@ -1,48 +1,41 @@
 import { EyeIcon, EyeOffIcon, LoginIcon, PasswordIcon } from '@/assets/icons';
 import { Button } from '@/components/button/button';
-import { validateLogin } from '@/utils/login-validation';
 import { ROUTES } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
-import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Input } from '../input/input';
 import styles from './login-form.module.css';
+import { useLoginForm } from './use-login-form';
 
 const cx = classNames.bind(styles);
 
 export const LoginForm = (): ReactElement => {
-  const [loginValue, setLoginValue] = useState('');
-  // const [passwordError, setPasswordError] = useState('');
-  const [formErrors, setFormErrors] = useState(false);
-
-  const formValidation = (): boolean => {
-    if (loginValue === '' || formErrors) { // сюда добавить проверку для пароля
-      return false;
-    }
-    return true;
-  };
-
-  useEffect(() => {
-    formValidation();
-  }, [loginValue, formErrors]);
+  const {
+    errorMessage,
+    errors,
+    isValid,
+    showPassword,
+    toggleShowPassword,
+    handleLoginChange,
+    handlePasswordChange,
+    handleSubmit,
+  } = useLoginForm();
 
   return (
     <div>
-      <form className={cx('form')}>
+      <form className={cx('form')} onSubmit={handleSubmit}>
         <Input
           name="login"
-          value={loginValue}
           label="Email"
           placeholder="Enter your email"
-          onInputChange={setLoginValue}
-          onErrors={setFormErrors}
-          validation={validateLogin}
+          onChange={handleLoginChange}
+          errorMessage={errors.loginError}
           leftIcon={<LoginIcon />}
         />
 
-        {/* <Input
+        <Input
           name="password"
           label="Password"
           placeholder="Enter your password"
@@ -55,12 +48,11 @@ export const LoginForm = (): ReactElement => {
               {showPassword ? <EyeOffIcon /> : <EyeIcon />}
             </button>
           }
-        /> */}
+        />
 
-        {/* c с учетом того, что мы показываем сообщения под инпутами, не уверена что это сообщение надо вообще */}
-        {formErrors && <p className={cx('error')}>Please, check the form</p>}
+        <p className={cx('error')}>{errorMessage}</p>
 
-        <Button type="submit" size="large" disabled={loginValue === '' || formErrors}>
+        <Button type="submit" size="large" disabled={!isValid.login || !isValid.password}>
           Login
         </Button>
       </form>

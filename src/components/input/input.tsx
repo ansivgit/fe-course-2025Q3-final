@@ -1,70 +1,44 @@
 import classNames from 'classnames/bind';
 import type { ChangeEvent, ReactElement, ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './input.module.css';
 
 const cx = classNames.bind(styles);
 
 type InputProps = {
   name: string;
-  value: string;
   label?: string;
   type?: 'text' | 'password';
   placeholder?: string;
+  onChange: (isBlur: boolean, value: string) => void;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
-  onInputChange: (value: string) => void;
-  onErrors: (isError: boolean) => void;
-  validation: (value: string) => boolean;
+  errorMessage?: string;
 };
 
 export const Input = ({
   name,
-  value,
   label,
   type = 'text',
   placeholder = '',
+  onChange,
   leftIcon,
   rightIcon,
-  onInputChange,
-  onErrors,
-  validation,
+  errorMessage,
 }: InputProps): ReactElement => {
-  const [inputValue, setInputValue] = useState(value);
-  const [inputError, setInputError] = useState('');
-
-  const inputValidation = (value: string): void => {
-    onErrors(true);
-    const isInputValid = validation(value);
-
-    if (isInputValid) {
-      onErrors(false);
-      onInputChange(value);
-    } else {
-      setInputError('Invalid format');
-    }
-  };
+  const [value, setValue] = useState('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setInputError('');
-    const newValue = event.target.value;
-
-    setInputValue(newValue);
-    inputValidation(newValue);
+    const value = event.target.value;
+    setValue(value);
+    onChange(false, value);
   };
 
-  const handleLoginBlur = (): void => {
-    if (!inputValue) {
-      setInputError(''); // если поле стало пустое (написали и стерли), мы убираем сообщение об ошибке (не знаю, как ты хочешь это реализовать, если все равно должна быть ошибка - убери это)
-      return;
-    }
+  const handleBlur = (event: ChangeEvent<HTMLInputElement>): void => {
+    const value = event.target.value;
+    setValue(value);
+    onChange(true, value);
   };
-
-  useEffect(() => {
-    if (inputError) {
-      onErrors(true);
-    }
-  }, [inputError]);
 
   return (
     <>
@@ -75,11 +49,11 @@ export const Input = ({
 
           <input
             name={name}
-            value={inputValue}
             type={type}
             placeholder={placeholder}
+            value={value}
             onChange={handleChange}
-            onBlur={handleLoginBlur}
+            onBlur={handleBlur}
             className={cx('input', {
               'has-left': leftIcon,
               'has-right': rightIcon,
@@ -89,7 +63,7 @@ export const Input = ({
           {rightIcon && <span className={cx('input-icon', 'right')}>{rightIcon}</span>}
         </div>
       </label>
-      <p className={cx('error')}>{inputError}</p>
+      <p className={cx('error')}>{errorMessage}</p>
     </>
   );
 };
