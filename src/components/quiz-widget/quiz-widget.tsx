@@ -144,7 +144,7 @@ function QuizOption({
         selected: status === 'selected',
         correct: status === 'correct',
         wrong: status === 'wrong',
-        mssed: status === 'missed',
+        missed: status === 'missed',
       })}
       onClick={onToggle}
       onKeyDown={(event) => {
@@ -158,7 +158,18 @@ function QuizOption({
         <span className={cx('letter')}>{letters[index]}</span>
         <span className={cx('text')}>{option.value}</span>
       </div>
-      {status !== 'none' && <span>{Icon}</span>}
+      {status !== 'none' && (
+        <span
+          className={cx('icon', {
+            correct: status === 'correct' || status === 'missed',
+            wrong: status === 'wrong',
+            selected: status === 'selected',
+            missed: status === 'missed',
+          })}
+        >
+          {Icon}
+        </span>
+      )}
     </li>
   );
 }

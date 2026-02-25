@@ -29,8 +29,13 @@
   border: 1px solid var(--color-gray-800);
   border-radius: 0.75rem;
   background: var(--color-gray-900);
-  transition: var(--transition-default) var(--ease-in-cubic);
+  transition: all var(--transition-default) var(--ease-in-cubic);
   cursor: pointer;
+
+  &.wrong {
+    background: hsla(from var(--color-red-500) h s l / var(--opacity-15));
+    border: 1px solid hsla(from var(--color-red-500) h s l / var(--opacity-50));
+  }
 }
 
 .button-container {
@@ -65,6 +70,10 @@
   align-items: center;
   width: 1.25rem;
   height: 1.25rem;
+
+  &.wrong {
+    color: var(--color-red-500);
+  }
 }
 
 .icon svg {
@@ -78,8 +87,4 @@
 
 .correct {
   color: var(--color-green-400);
-}
-
-.wrong {
-  color: var(--color-red-500);
 }
