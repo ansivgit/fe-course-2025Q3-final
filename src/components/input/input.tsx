@@ -21,6 +21,7 @@ type InputProps = {
   onInputChange: (value: string) => void;
   setFormState: Dispatch<SetStateAction<FormState>>;
   validation: (value: string) => boolean;
+  errorMessage: string;
 };
 
 export const Input = ({
@@ -34,6 +35,7 @@ export const Input = ({
   onInputChange,
   setFormState,
   validation,
+  errorMessage,
 }: InputProps): ReactElement => {
   const [inputError, setInputError] = useState('');
 
@@ -59,7 +61,7 @@ export const Input = ({
       [name]: !isValid,
     }));
 
-    setInputError(isValid ? '' : 'Invalid format');
+    setInputError(isValid ? '' : errorMessage);
   };
 
   return (

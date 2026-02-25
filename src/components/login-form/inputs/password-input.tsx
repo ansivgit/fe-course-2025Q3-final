@@ -42,6 +42,7 @@ export const PasswordInput = ({
           {showPassword ? <EyeOffIcon /> : <EyeIcon />}
         </button>
       }
+      errorMessage="At least 8 chars, 1 number"
     />
   );
 };

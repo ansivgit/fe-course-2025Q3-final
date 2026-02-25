@@ -32,6 +32,7 @@ export const LoginInput = ({
       setFormState={setFormState}
       validation={validateLogin}
       leftIcon={<LoginIcon />}
+      errorMessage="Invalid email"
     />
   );
 };
