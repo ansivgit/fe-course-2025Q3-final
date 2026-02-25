@@ -14,8 +14,8 @@ import widgetsData from '../../../data/widgets/quiz.json';
 const cx = classNames.bind(styles);
 
 export const Quiz = (): ReactElement => {
-  const startedRef = useRef(false);
   const quizContainer = useRef<HTMLDivElement>(null);
+  const startedRef = useRef(false); //  Used to ensure the effect runs only once in dev mode in React Strict Mode
   const [quizCompleted, setQuizCompleted] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,6 @@ export const Quiz = (): ReactElement => {
     startedRef.current = true;
 
     registerStrategy(quizStrategy);
-
     const widgets = parseWidgets(widgetsData);
 
     if (quizContainer.current) {
