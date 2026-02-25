@@ -1,3 +1,4 @@
+import { CheckCircleIcon, ErrorCircleIcon } from '@/assets/icons';
 import { Button } from '@/components/button/button';
 import styles from '@/components/quiz-widget/quiz-widget.module.css';
 import { Subtitle } from '@/components/subtitle/subtitle';
@@ -13,18 +14,60 @@ const cx = classNames.bind(styles);
 type QuizWidgetProps = {
   widget: Widget & { type: 'quiz' };
   onAnswer: (answer: WidgetAnswerMap['quiz']) => void;
+  onNext?: () => void;
 };
 
-export function QuizWidget({ widget, onAnswer }: QuizWidgetProps): ReactElement {
+const letters = 'ABCDE';
+
+const isCorrectAnswer = (option: { name: string }, widget: Widget & { type: 'quiz' }): boolean =>
+  widget.payload.correctAnswersIds.includes(option.name);
+
+const getOptionStatus = (
+  option: { name: string },
+  selectedIds: string[],
+  isSubmitted: boolean,
+  widget: Widget & { type: 'quiz' },
+): 'correct' | 'wrong' | 'missed' | 'selected' | 'none' => {
+  if (!isSubmitted) {
+    return selectedIds.includes(option.name) ? 'selected' : 'none';
+  }
+  if (selectedIds.includes(option.name)) {
+    return isCorrectAnswer(option, widget) ? 'correct' : 'wrong';
+  }
+
+  if (isCorrectAnswer(option, widget)) {
+    return 'missed';
+  }
+
+  return 'none';
+};
+
+export function QuizWidget({ widget, onAnswer, onNext }: QuizWidgetProps): ReactElement {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const toggle = (id: string): void => {
+    if (isSubmitted) {
+      return;
+    }
     setSelectedIds((selected) =>
       selected.includes(id) ? selected.filter((x) => x !== id) : [...selected, id],
     );
   };
 
-  const letters = 'ABCDEF';
+  const handleSubmit = (): void => {
+    if (selectedIds.length === 0) {
+      return;
+    }
+    setIsSubmitted(true);
+  };
+
+  const handleNext = (): void => {
+    onAnswer({ selectedIds });
+    if (onNext) {
+      onNext();
+    }
+  };
 
   return (
     <div>
@@ -32,41 +75,90 @@ export function QuizWidget({ widget, onAnswer }: QuizWidgetProps): ReactElement 
         <Subtitle level="h2">{widget.payload.question}</Subtitle>
         <ul className={cx('options')}>
           {widget.payload.options.map((option, index) => {
-            const isSelected = selectedIds.includes(option.value);
+            const status = getOptionStatus(option, selectedIds, isSubmitted, widget);
             return (
-              <li
-                key={option.value}
-                className={cx('option', { optionSelected: isSelected })}
-                onClick={() => {
-                  toggle(option.value);
+              <QuizOption
+                key={option.name}
+                option={option}
+                index={index}
+                status={status}
+                isSubmitted={isSubmitted}
+                onToggle={() => {
+                  toggle(option.name);
                 }}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter') {
-                    event.preventDefault();
-                    toggle(option.value);
-                  }
-                }}
-              >
-                <div className={cx('option-content')}>
-                  <span className={cx('letter')}>{letters[index]}</span>
-                  <span className={cx('text')}>{option.value}</span>
-                </div>
-                {isSelected && <span className={cx('checkmark')}>✓</span>}
-              </li>
+              />
             );
           })}
         </ul>
       </div>
       <div className={cx('button-container')}>
         <Button
-          disabled={selectedIds.length === 0}
-          onClick={() => {
-            onAnswer({ selectedIds });
-          }}
+          disabled={selectedIds.length === 0 && !isSubmitted}
+          onClick={isSubmitted ? handleNext : handleSubmit}
         >
-          Submit
+          {isSubmitted ? 'Next' : 'Submit'}
         </Button>
       </div>
     </div>
+  );
+}
+
+type QuizOptionProps = {
+  option: { name: string; value: string };
+  index: number;
+  status: 'correct' | 'wrong' | 'missed' | 'selected' | 'none';
+  isSubmitted: boolean;
+  onToggle: () => void;
+};
+
+function QuizOption({
+  option,
+  index,
+  status,
+  isSubmitted,
+  onToggle,
+}: QuizOptionProps): ReactElement {
+  const cx = classNames.bind(styles);
+
+  let Icon: ReactElement | null = null;
+
+  if (!isSubmitted && status === 'selected') {
+    Icon = <CheckCircleIcon />;
+  } else if (isSubmitted) {
+    switch (status) {
+      case 'correct':
+      case 'missed': {
+        Icon = <CheckCircleIcon />;
+        break;
+      }
+      case 'wrong': {
+        Icon = <ErrorCircleIcon />;
+        break;
+      }
+    }
+  }
+
+  return (
+    <li
+      className={cx('option', {
+        selected: status === 'selected',
+        correct: status === 'correct',
+        wrong: status === 'wrong',
+        mssed: status === 'missed',
+      })}
+      onClick={onToggle}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          onToggle();
+        }
+      }}
+    >
+      <div className={cx('option-content')}>
+        <span className={cx('letter')}>{letters[index]}</span>
+        <span className={cx('text')}>{option.value}</span>
+      </div>
+      {status !== 'none' && <span>{Icon}</span>}
+    </li>
   );
 }

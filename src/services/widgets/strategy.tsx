@@ -1,12 +1,6 @@
 import { QuizWidget } from '@/components/quiz-widget/quiz-widget';
 
-import type {
-  Answer,
-  ValidationResult,
-  Widget,
-  WidgetAnswerMap,
-  WidgetStrategy,
-} from '@/types/widgets';
+import type { Answer, ValidationResult, Widget, WidgetStrategy } from '@/types/widgets';
 
 import { createRoot } from 'react-dom/client';
 
@@ -25,13 +19,12 @@ export const quizStrategy: WidgetStrategy<Widget, Answer> = {
 
     const root = createRoot(container);
 
-    const handleAnswer = (answer: WidgetAnswerMap['quiz']): void => {
-      onAnswer(answer);
+    const handleNext = (): void => {
       root.unmount();
       container.remove();
     };
 
-    root.render(<QuizWidget widget={widget} onAnswer={handleAnswer} />);
+    root.render(<QuizWidget widget={widget} onAnswer={onAnswer} onNext={handleNext} />);
     return container;
   },
 

@@ -23,3 +23,7 @@
   max-width: 48rem;
   padding: 0 2rem;
 }
+
+.quiz-completed {
+  text-align: center;
+}

@@ -29,7 +29,12 @@ export type WidgetAnswerMap = {
 
 export type WidgetStrategy<T extends Widget, A> = {
   type: T['type'];
-  run(widget: T, onAnswer: (answer: A) => void, parentContainer?: HTMLElement): void;
+  run(
+    widget: T,
+    onAnswer: (answer: A) => void,
+    parentContainer?: HTMLElement,
+    nextWidget?: () => void,
+  ): void;
   validate(widget: Widget, answer: Answer): ValidateReturn;
 };
 

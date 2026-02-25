@@ -18,7 +18,7 @@ export const AppRouter = (): ReactElement => (
     <Route path={'/'} element={<Login />} />
     <Route path={ROUTES.login} element={<Login />} />
     <Route path={ROUTES.practice} element={<Practice />} />
-    <Route path={`${ROUTES.practice}/quiz`} element={<Quiz />} />
+    <Route path={`${ROUTES.practice}/${ROUTES.quiz}`} element={<Quiz />} />
     <Route path={ROUTES.notFound} element={<NotFound />} />
   </Routes>
 );
