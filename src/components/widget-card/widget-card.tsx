@@ -10,6 +10,8 @@ const cx = classNames.bind(styles);
 
 import { ArrowIcon, ClockIcon, LightningIcon } from '@/assets/icons';
 
+import { useNavigate } from 'react-router-dom';
+
 type WidgetCard = {
   name: string;
   image: ComponentType<SVGProps<SVGSVGElement>>;
@@ -29,13 +31,14 @@ type WidgetCardProps = {
 export const WidgetCard = ({ widget }: WidgetCardProps): ReactElement => {
   const { name, image: Icon, heading, subheading, tasks, time, color = 'purple' } = widget;
   const path = `/${ROUTES.practice}/${name}`;
+  const navigate = useNavigate();
 
   return (
     <a
       href="/"
       onClick={(event) => {
         event.preventDefault();
-        console.log(path);
+        void navigate(path);
       }}
       className={cx('widget-card')}
     >

@@ -7,6 +7,7 @@ import { ROUTES } from '@/constants/constants';
 
 import type { ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { MatchGame } from './components/match-game/match-game';
 
 export function App(): ReactElement {
   return <AppRouter />;
@@ -17,6 +18,8 @@ export const AppRouter = (): ReactElement => (
     <Route path={'/'} element={<Login />} />
     <Route path={ROUTES.login} element={<Login />} />
     <Route path={ROUTES.practice} element={<Practice />} />
+    {/* TODO: Add nested routes */}
+    <Route path="/practice/match-game" element={<MatchGame />} />
     <Route path={ROUTES.notFound} element={<NotFound />} />
   </Routes>
 );
