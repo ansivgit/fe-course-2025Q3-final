@@ -5,6 +5,7 @@ import { ROUTES } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
 import type { ComponentType, ReactElement, SVGProps } from 'react';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -31,14 +32,7 @@ export const WidgetCard = ({ widget }: WidgetCardProps): ReactElement => {
   const path = `/${ROUTES.practice}/${name}`;
 
   return (
-    <a
-      href="/"
-      onClick={(event) => {
-        event.preventDefault();
-        console.log(path);
-      }}
-      className={cx('widget-card')}
-    >
+    <Link to={path} className={cx('widget-card')}>
       <div className={cx('image-container', color)}>
         <div className={cx('widget-image')}>
           <Icon className={cx(color)} />
@@ -69,6 +63,6 @@ export const WidgetCard = ({ widget }: WidgetCardProps): ReactElement => {
           <ArrowIcon />
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
