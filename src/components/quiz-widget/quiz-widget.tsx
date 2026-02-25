@@ -52,7 +52,7 @@ export function QuizWidget({ widget, onAnswer, onNext }: QuizWidgetProps): React
       return;
     }
     setSelectedIds((selected) =>
-      selected.includes(id) ? selected.filter((x) => x !== id) : [...selected, id],
+      selected.includes(id) ? selected.filter((item) => item !== id) : [...selected, id],
     );
   };
 
@@ -122,8 +122,6 @@ function QuizOption({
   isSubmitted,
   onToggle,
 }: QuizOptionProps): ReactElement {
-  const cx = classNames.bind(styles);
-
   let Icon: ReactElement | null = null;
 
   if (!isSubmitted && status === 'selected') {
