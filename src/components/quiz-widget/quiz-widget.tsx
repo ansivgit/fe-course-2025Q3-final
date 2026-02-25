@@ -1,5 +1,6 @@
 import { CheckCircleIcon, ErrorCircleIcon } from '@/assets/icons';
 import { Button } from '@/components/button/button';
+import { Paragraph } from '@/components/paragraph/paragraph';
 import styles from '@/components/quiz-widget/quiz-widget.module.css';
 import { Subtitle } from '@/components/subtitle/subtitle';
 
@@ -90,6 +91,9 @@ export function QuizWidget({ widget, onAnswer, onNext }: QuizWidgetProps): React
             );
           })}
         </ul>
+        {isSubmitted && widget.payload.explanation && (
+          <Explanation explanation={widget.payload.explanation} />
+        )}
       </div>
       <div className={cx('button-container')}>
         <Button
@@ -171,5 +175,14 @@ function QuizOption({
         </span>
       )}
     </li>
+  );
+}
+
+function Explanation({ explanation }: { explanation: string }): ReactElement {
+  return (
+    <div className={cx('explanation')}>
+      <h4>Explanation</h4>
+      <Paragraph text={explanation} />
+    </div>
   );
 }

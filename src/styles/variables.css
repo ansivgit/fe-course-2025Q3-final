@@ -21,6 +21,10 @@
 
   /* Green colors */
   --color-green-400: hsl(142, 76%, 50%);
+  --color-green-600: hsl(142, 76%, 36%);
+
+  /* Yellow colors */
+  --color-yellow-500: hsl(45, 90%, 45%);
 
   /* Red colors */
   --color-red-500: hsl(0, 84%, 60%);
