@@ -1,22 +1,10 @@
 export const loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
-export const validateLogin = (value: string): string => {
-  if (!value) {
-    return 'Email is required';
-  }
-  if (!loginRegex.test(value)) {
-    return 'Invalid email format';
-  }
-  return '';
+export const validateLogin = (value: string): boolean => {
+  return loginRegex.test(value);
 };
 
-export const validatePassword = (value: string): string => {
-  if (!value) {
-    return 'Password is required';
-  }
-  if (!passwordRegex.test(value)) {
-    return 'At least 8 characters and 1 digit';
-  }
-  return '';
+export const validatePassword = (value: string): boolean => {
+  return passwordRegex.test(value);
 };

@@ -1,57 +1,80 @@
 import classNames from 'classnames/bind';
-import type { ChangeEvent, ReactElement, ReactNode } from 'react';
+import type { ChangeEvent, Dispatch, ReactElement, ReactNode, SetStateAction } from 'react';
 import { useState } from 'react';
 import styles from './input.module.css';
 
 const cx = classNames.bind(styles);
 
+type FormState = {
+  login: boolean;
+  password: boolean;
+};
+
 type InputProps = {
   name: string;
+  value: string;
   label?: string;
   type?: 'text' | 'password';
   placeholder?: string;
-  onChange: (isBlur: boolean, value: string) => void;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
-  errorMessage?: string;
+  onInputChange: (value: string) => void;
+  setFormState: Dispatch<SetStateAction<FormState>>;
+  validation: (value: string) => boolean;
 };
 
 export const Input = ({
   name,
+  value,
   label,
   type = 'text',
   placeholder = '',
-  onChange,
   leftIcon,
   rightIcon,
-  errorMessage,
+  onInputChange,
+  setFormState,
+  validation,
 }: InputProps): ReactElement => {
-  const [value, setValue] = useState('');
+  const [inputError, setInputError] = useState('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const value = event.target.value;
-    setValue(value);
-    onChange(false, value);
+    const newValue = event.target.value;
+    onInputChange(newValue);
+
+    const isValid = validation(newValue);
+
+    setFormState((previous) => ({
+      ...previous,
+      [name]: !isValid,
+    }));
+
+    setInputError('');
   };
 
-  const handleBlur = (event: ChangeEvent<HTMLInputElement>): void => {
-    const value = event.target.value;
-    setValue(value);
-    onChange(true, value);
+  const handleBlur = (): void => {
+    const isValid = validation(value);
+
+    setFormState((previous) => ({
+      ...previous,
+      [name]: !isValid,
+    }));
+
+    setInputError(isValid ? '' : 'Invalid format');
   };
 
   return (
     <>
       <label className={cx('input-label')}>
         {label && <span>{label}</span>}
+
         <div className={cx('input-field')}>
           {leftIcon && <span className={cx('input-icon', 'left')}>{leftIcon}</span>}
 
           <input
             name={name}
+            value={value}
             type={type}
             placeholder={placeholder}
-            value={value}
             onChange={handleChange}
             onBlur={handleBlur}
             className={cx('input', {
@@ -63,7 +86,8 @@ export const Input = ({
           {rightIcon && <span className={cx('input-icon', 'right')}>{rightIcon}</span>}
         </div>
       </label>
-      <p className={cx('error')}>{errorMessage}</p>
+
+      <p className={cx('error')}>{inputError}</p>
     </>
   );
 };

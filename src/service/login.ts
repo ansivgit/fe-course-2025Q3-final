@@ -37,7 +37,7 @@ export const loginApi = async ({ login, password }: LoginCredentials): Promise<L
   } catch {
     return {
       data: null,
-      error: 'Server error',
+      error: 'Please register',
     };
   }
 };

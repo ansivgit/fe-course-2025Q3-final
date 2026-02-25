@@ -1,60 +1,72 @@
-import { EyeIcon, EyeOffIcon, LoginIcon, PasswordIcon } from '@/assets/icons';
 import { Button } from '@/components/button/button';
+import { loginApi } from '@/service/login';
 import { ROUTES } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
-import type { ReactElement } from 'react';
+import type { ReactElement, SyntheticEvent } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Input } from '../input/input';
+import { LoginInput } from './inputs/login-input';
+import { PasswordInput } from './inputs/password-input';
 import styles from './login-form.module.css';
-import { useLoginForm } from './use-login-form';
 
 const cx = classNames.bind(styles);
 
 export const LoginForm = (): ReactElement => {
-  const {
-    errorMessage,
-    errors,
-    isValid,
-    showPassword,
-    toggleShowPassword,
-    handleLoginChange,
-    handlePasswordChange,
-    handleSubmit,
-  } = useLoginForm();
+  const [loginValue, setLoginValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [serverError, setServerError] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const [formState, setFormState] = useState({
+    login: false,
+    password: false,
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = (): void => {
+    setShowPassword((previous) => !previous);
+  };
+
+  const isFormInvalid = Object.values(formState).some(Boolean) || !loginValue || !passwordValue;
+
+  const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>): Promise<void> => {
+    event.preventDefault();
+
+    setIsSubmitted(true);
+
+    if (isFormInvalid) {
+      return;
+    }
+
+    await loginUser(loginValue, passwordValue, setServerError);
+  };
 
   return (
     <div>
       <form className={cx('form')} onSubmit={handleSubmit}>
-        <Input
-          name="login"
-          label="Email"
-          placeholder="Enter your email"
-          onChange={handleLoginChange}
-          errorMessage={errors.loginError}
-          leftIcon={<LoginIcon />}
+        <LoginInput
+          value={loginValue}
+          setValue={setLoginValue}
+          setServerError={setServerError}
+          setFormState={setFormState}
         />
 
-        <Input
-          name="password"
-          label="Password"
-          placeholder="Enter your password"
-          type={showPassword ? 'text' : 'password'}
-          onChange={handlePasswordChange}
-          errorMessage={errors.passwordError}
-          leftIcon={<PasswordIcon />}
-          rightIcon={
-            <button type="button" onClick={toggleShowPassword}>
-              {showPassword ? <EyeOffIcon /> : <EyeIcon />}
-            </button>
-          }
+        <PasswordInput
+          value={passwordValue}
+          setValue={setPasswordValue}
+          showPassword={showPassword}
+          toggleShowPassword={toggleShowPassword}
+          setServerError={setServerError}
+          setFormState={setFormState}
         />
 
-        <p className={cx('error')}>{errorMessage}</p>
-
-        <Button type="submit" size="large" disabled={!isValid.login || !isValid.password}>
+        <Button type="submit" size="large" disabled={isFormInvalid}>
           Login
         </Button>
+
+        <p className={cx('error')}>{isSubmitted ? serverError : ''}</p>
       </form>
 
       <AuthToggle />
@@ -76,4 +88,14 @@ const AuthToggle = (): ReactElement => {
       </Link>
     </div>
   );
+};
+
+const loginUser = async (
+  login: string,
+  password: string,
+  setServerError: (value: string) => void,
+): Promise<void> => {
+  const result = await loginApi({ login, password });
+
+  setServerError(result.error ?? '');
 };
