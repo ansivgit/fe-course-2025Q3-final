@@ -1,5 +1,8 @@
 import type { LoginCredentials, LoginResponse } from '@/types/user';
 
+const API_URL = 'http://localhost:3000';
+const LOGIN_ENDPOINT = `${API_URL}/auth/login`;
+
 const USER_MESSAGES = {
   emptyFields: 'Please enter email and password',
   incorrectPassword: 'Incorrect password',
@@ -15,7 +18,7 @@ export const loginApi = async ({ login, password }: LoginCredentials): Promise<L
   }
 
   try {
-    const response = await fetch('http://localhost:3000/auth/login', {
+    const response = await fetch(LOGIN_ENDPOINT, {
       method: 'POST',
       body: JSON.stringify({ login, password }),
       headers: {
