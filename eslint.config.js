@@ -1,5 +1,8 @@
 import js from '@eslint/js';
 import { defineConfig } from 'eslint/config';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -25,12 +28,21 @@ export default defineConfig([
         tsconfigRootDir: import.meta.dirname,
       },
     },
-    settings: {},
+    plugins: {
+      'react': react,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
+    settings: {
+      'react': { version: 'detect' },
+    },
     linterOptions: {
       noInlineConfig: true,
     },
     rules: {
       // 🔴 Mandatory
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -104,15 +116,24 @@ export default defineConfig([
       'max-len': ['warn', { code: 120, ignoreComments: true }],
 
       // 🔧 Switched off
-      'unicorn/no-array-reduce': 'off',
-      'unicorn/no-array-for-each': 'off',
-      'unicorn/no-null': 'off',
-      'unicorn/filename-case': 'off',
-      'unicorn/number-literal-case': 'off',
-      'unicorn/prefer-query-selector': 'off',
+      'boundaries/element-types': 'off',
+      'no-undef': 'off',
+      'no-restricted-exports': 'off',
+      'react/prop-types': 'off',
+      'react/react-in-jsx-scope': 'off',
+      'react-refresh/only-export-components': ['off', { allowConstantExport: true }],
+
       '@typescript-eslint/no-misused-promises': 'off', //* switched off for now
       '@typescript-eslint/restrict-template-expressions': 'off', //* switched off for now
       '@typescript-eslint/no-inferrable-types': 'error',
+
+      'unicorn/no-array-reduce': 'off',
+      'unicorn/no-array-for-each': 'off',
+      'unicorn/no-null': 'off',
+      'unicorn/no-useless-undefined': 'off',
+      'unicorn/filename-case': 'off',
+      'unicorn/number-literal-case': 'off',
+      'unicorn/prefer-query-selector': 'off',
     },
   },
   {
