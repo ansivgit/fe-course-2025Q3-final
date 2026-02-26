@@ -1,13 +1,14 @@
+import { EyeIcon, EyeOffIcon, LoginIcon, PasswordIcon } from '@/assets/icons';
 import { Button } from '@/components/button/button';
 import { loginApi } from '@/service/login';
+import { validateLogin, validatePassword } from '@/utils/login-validation';
 import { ROUTES } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
 import type { ReactElement, SyntheticEvent } from 'react';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LoginInput } from './inputs/login-input';
-import { PasswordInput } from './inputs/password-input';
+import { Input } from '../input/input';
 import styles from './login-form.module.css';
 
 const cx = classNames.bind(styles);
@@ -18,10 +19,7 @@ export const LoginForm = (): ReactElement => {
   const [serverError, setServerError] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [formState, setFormState] = useState({
-    login: false,
-    password: false,
-  });
+  const [errors, setErrors] = useState({ login: '', password: '' });
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -29,7 +27,8 @@ export const LoginForm = (): ReactElement => {
     setShowPassword((previous) => !previous);
   };
 
-  const isFormInvalid = Object.values(formState).some(Boolean) || !loginValue || !passwordValue;
+  const isFormInvalid =
+    Object.values(errors).some((error) => error !== '') || !loginValue || !passwordValue;
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
@@ -40,26 +39,61 @@ export const LoginForm = (): ReactElement => {
       return;
     }
 
-    await loginUser(loginValue, passwordValue, setServerError);
+    const result = await loginApi({
+      login: loginValue,
+      password: passwordValue,
+    });
+
+    setServerError(result.error ?? '');
   };
 
   return (
     <div>
       <form className={cx('form')} onSubmit={handleSubmit}>
-        <LoginInput
+        <Input
+          name="login"
           value={loginValue}
-          setValue={setLoginValue}
-          setServerError={setServerError}
-          setFormState={setFormState}
+          label="Email"
+          placeholder="Enter your email"
+          leftIcon={<LoginIcon />}
+          validation={validateLogin}
+          errorMessage="Invalid email"
+          onChange={(value, isValid) => {
+            setServerError('');
+
+            setErrors((previous) => ({
+              ...previous,
+              login: isValid ? '' : 'Invalid email',
+            }));
+
+            setLoginValue(value);
+          }}
         />
 
-        <PasswordInput
+        <Input
+          name="password"
           value={passwordValue}
-          setValue={setPasswordValue}
-          showPassword={showPassword}
-          toggleShowPassword={toggleShowPassword}
-          setServerError={setServerError}
-          setFormState={setFormState}
+          label="Password"
+          placeholder="Enter your password"
+          type={showPassword ? 'text' : 'password'}
+          leftIcon={<PasswordIcon />}
+          rightIcon={
+            <button type="button" onClick={toggleShowPassword}>
+              {showPassword ? <EyeOffIcon /> : <EyeIcon />}
+            </button>
+          }
+          validation={validatePassword}
+          errorMessage="At least 8 chars, 1 number"
+          onChange={(value, isValid) => {
+            setServerError('');
+
+            setErrors((previous) => ({
+              ...previous,
+              password: isValid ? '' : 'At least 8 chars, 1 number',
+            }));
+
+            setPasswordValue(value);
+          }}
         />
 
         <Button type="submit" size="large" disabled={isFormInvalid}>
@@ -88,14 +122,4 @@ const AuthToggle = (): ReactElement => {
       </Link>
     </div>
   );
-};
-
-const loginUser = async (
-  login: string,
-  password: string,
-  setServerError: (value: string) => void,
-): Promise<void> => {
-  const result = await loginApi({ login, password });
-
-  setServerError(result.error ?? '');
 };

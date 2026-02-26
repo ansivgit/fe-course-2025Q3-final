@@ -1,14 +1,9 @@
 import classNames from 'classnames/bind';
-import type { ChangeEvent, Dispatch, ReactElement, ReactNode, SetStateAction } from 'react';
+import type { ChangeEvent, ReactElement, ReactNode } from 'react';
 import { useState } from 'react';
 import styles from './input.module.css';
 
 const cx = classNames.bind(styles);
-
-type FormState = {
-  login: boolean;
-  password: boolean;
-};
 
 type InputProps = {
   name: string;
@@ -18,8 +13,7 @@ type InputProps = {
   placeholder?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
-  onInputChange: (value: string) => void;
-  setFormState: Dispatch<SetStateAction<FormState>>;
+  onChange: (value: string, isValid: boolean) => void;
   validation: (value: string) => boolean;
   errorMessage: string;
 };
@@ -32,8 +26,7 @@ export const Input = ({
   placeholder = '',
   leftIcon,
   rightIcon,
-  onInputChange,
-  setFormState,
+  onChange,
   validation,
   errorMessage,
 }: InputProps): ReactElement => {
@@ -41,27 +34,20 @@ export const Input = ({
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const newValue = event.target.value;
-    onInputChange(newValue);
 
     const isValid = validation(newValue);
 
-    setFormState((previous) => ({
-      ...previous,
-      [name]: !isValid,
-    }));
-
     setInputError('');
+
+    onChange(newValue, isValid);
   };
 
   const handleBlur = (): void => {
     const isValid = validation(value);
 
-    setFormState((previous) => ({
-      ...previous,
-      [name]: !isValid,
-    }));
-
     setInputError(isValid ? '' : errorMessage);
+
+    onChange(value, isValid);
   };
 
   return (
