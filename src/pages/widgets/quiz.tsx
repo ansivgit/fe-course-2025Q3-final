@@ -6,7 +6,7 @@ import { quizStrategy } from '@/services/widgets/strategy';
 import type { ReactElement } from 'react';
 import widgetsData from '../../../data/widgets/quiz.json';
 
-export const Quiz = (): ReactElement => {
+export const QuizPage = (): ReactElement => {
   const [widget] = parseWidgets(widgetsData);
 
   return (
