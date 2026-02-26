@@ -1,7 +1,7 @@
-import styles from '@/components/layout/layout.module.css';
-
 import classNames from 'classnames/bind';
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+
+import styles from './layout.module.css';
 
 const cx = classNames.bind(styles);
 
@@ -12,7 +12,7 @@ type LayoutProps = {
   verticalAlign?: 'top' | 'center';
 };
 
-export const Layout = ({ children, verticalAlign = 'top' }: LayoutProps): ReactElement => {
+export const Layout = ({ children, verticalAlign = 'top' }: LayoutProps) => {
   return (
     <div className={cx('layout', verticalAlign)}>
       <header>

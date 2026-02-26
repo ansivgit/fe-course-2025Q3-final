@@ -1,12 +1,12 @@
+import classNames from 'classnames/bind';
+import type { ChangeEvent, SyntheticEvent } from 'react';
+import { useState } from 'react';
 import mailIcon from '@/assets/icons/email.svg';
 import eyeIcon from '@/assets/icons/eye.svg';
 import eyeOffIcon from '@/assets/icons/eye-off.svg';
 import passwordIcon from '@/assets/icons/password.svg';
-import { Button } from '@/components/button/button';
 
-import classNames from 'classnames/bind';
-import type { ChangeEvent, ReactElement, SyntheticEvent } from 'react';
-import { useState } from 'react';
+import { Button } from '../button/button';
 import { Input } from '../input/input';
 import styles from './login-form.module.css';
 
@@ -20,7 +20,7 @@ type AuthToggleProps = {
   isRegistered: boolean;
 };
 
-export const LoginForm = ({ isRegistered = true }: LoginFormProps): ReactElement => {
+export const LoginForm = ({ isRegistered = true }: LoginFormProps) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -81,7 +81,7 @@ export const LoginForm = ({ isRegistered = true }: LoginFormProps): ReactElement
   );
 };
 
-export const AuthToggle = ({ isRegistered }: AuthToggleProps): ReactElement => {
+export const AuthToggle = ({ isRegistered }: AuthToggleProps) => {
   const text = isRegistered ? 'No account?' : 'Already have an account?';
 
   const linkText = isRegistered ? 'Register' : 'Login';
