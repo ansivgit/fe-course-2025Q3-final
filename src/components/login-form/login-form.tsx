@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 export const LoginForm = (): ReactElement => {
   const [loginValue, setLoginValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
-  const [serverError, setServerError] = useState('');
+  const [formError, setFormError] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [errors, setErrors] = useState({ login: '', password: '' });
@@ -44,7 +44,7 @@ export const LoginForm = (): ReactElement => {
       password: passwordValue,
     });
 
-    setServerError(result.error ?? '');
+    setFormError(result.error ?? '');
   };
 
   return (
@@ -59,7 +59,7 @@ export const LoginForm = (): ReactElement => {
           validation={validateLogin}
           errorMessage="Invalid email"
           onChange={(value, isValid) => {
-            setServerError('');
+            setFormError('');
 
             setErrors((previous) => ({
               ...previous,
@@ -85,7 +85,7 @@ export const LoginForm = (): ReactElement => {
           validation={validatePassword}
           errorMessage="At least 8 chars, 1 number"
           onChange={(value, isValid) => {
-            setServerError('');
+            setFormError('');
 
             setErrors((previous) => ({
               ...previous,
@@ -100,7 +100,7 @@ export const LoginForm = (): ReactElement => {
           Login
         </Button>
 
-        <p className={cx('error')}>{isSubmitted ? serverError : ''}</p>
+        <p className={cx('error')}>{isSubmitted ? formError : ''}</p>
       </form>
 
       <AuthToggle />
