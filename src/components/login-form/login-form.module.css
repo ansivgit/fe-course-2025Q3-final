@@ -28,9 +28,10 @@
     }
   }
 
-  & button {
+  & a {
     text-decoration: none;
     font-weight: 500;
+    font-size: 1rem;
     color: var(--color-purple-300);
     transition: color 0.3s ease;
     cursor: pointer;
@@ -39,4 +40,25 @@
       color: var(--color-purple-500);
     }
   }
+}
+
+.error {
+  min-height: 1.2rem;
+  color: var(--color-red-500);
+  font-weight: var(--font-weight-bold);
+  font-size: 0.7rem;
+  margin: 0.5rem 0;
+  line-height: 1.2;
+  max-width: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &:not(:empty) {
+    opacity: 1;
+  }
+}
+
+.form svg {
+  width: 20px;
+  height: 20px;
 }

@@ -9,6 +9,11 @@
     .logo-icon-wrapper {
       width: 2.5rem;
       height: 2.5rem;
+
+      & svg {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
     }
 
     .logo-label {
@@ -30,6 +35,11 @@
     var(--color-purple-500),
     var(--color-teal-500)
   );
+
+  & svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 .logo-label {

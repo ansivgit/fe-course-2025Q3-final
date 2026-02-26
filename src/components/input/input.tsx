@@ -1,71 +1,95 @@
-console.log('input');
-// import classNames from 'classnames/bind';
-// import type { ChangeEvent, ReactElement, ReactNode } from 'react';
-// import { useState } from 'react';
-// import { ErrorMessage } from '../error/error-message';
-// import styles from './input.module.css';
+import classNames from 'classnames/bind';
+import type { ChangeEvent, Dispatch, ReactElement, ReactNode, SetStateAction } from 'react';
+import { useState } from 'react';
+import styles from './input.module.css';
 
-// const cx = classNames.bind(styles);
+const cx = classNames.bind(styles);
 
-// type InputProps = {
-//   name: string;
-//   label?: string;
-//   type?: 'text' | 'password';
-//   placeholder?: string;
-//   onChange: (isBlur: boolean, value: string) => void;
-//   leftIcon?: ReactNode;
-//   rightIcon?: ReactNode;
-//   errorMessage?: string;
-// };
+type FormState = {
+  login: boolean;
+  password: boolean;
+};
 
-// export const Input = ({
-//   name,
-//   label,
-//   type = 'text',
-//   placeholder = '',
-//   onChange,
-//   leftIcon,
-//   rightIcon,
-//   errorMessage,
-// }: InputProps): ReactElement => {
-//   const [value, setValue] = useState('');
+type InputProps = {
+  name: string;
+  value: string;
+  label?: string;
+  type?: 'text' | 'password';
+  placeholder?: string;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+  onInputChange: (value: string) => void;
+  setFormState: Dispatch<SetStateAction<FormState>>;
+  validation: (value: string) => boolean;
+  errorMessage: string;
+};
 
-//   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-//     const value = event.target.value;
-//     setValue(value);
-//     onChange(false, value);
-//   };
+export const Input = ({
+  name,
+  value,
+  label,
+  type = 'text',
+  placeholder = '',
+  leftIcon,
+  rightIcon,
+  onInputChange,
+  setFormState,
+  validation,
+  errorMessage,
+}: InputProps): ReactElement => {
+  const [inputError, setInputError] = useState('');
 
-//   const handleBlur = (event: ChangeEvent<HTMLInputElement>): void => {
-//     const value = event.target.value;
-//     setValue(value);
-//     onChange(true, value);
-//   };
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const newValue = event.target.value;
+    onInputChange(newValue);
 
-//   return (
-//     <>
-//       <label className={cx('input-label')}>
-//         {label && <span>{label}</span>}
-//         <div className={cx('input-field')}>
-//           {leftIcon && <span className={cx('input-icon', 'left')}>{leftIcon}</span>}
+    const isValid = validation(newValue);
 
-//           <input
-//             name={name}
-//             type={type}
-//             placeholder={placeholder}
-//             value={value}
-//             onChange={handleChange}
-//             onBlur={handleBlur}
-//             className={cx('input', {
-//               'has-left': leftIcon,
-//               'has-right': rightIcon,
-//             })}
-//           />
+    setFormState((previous) => ({
+      ...previous,
+      [name]: !isValid,
+    }));
 
-//           {rightIcon && <span className={cx('input-icon', 'right')}>{rightIcon}</span>}
-//         </div>
-//       </label>
-//       <ErrorMessage message={errorMessage} />
-//     </>
-//   );
-// };
+    setInputError('');
+  };
+
+  const handleBlur = (): void => {
+    const isValid = validation(value);
+
+    setFormState((previous) => ({
+      ...previous,
+      [name]: !isValid,
+    }));
+
+    setInputError(isValid ? '' : errorMessage);
+  };
+
+  return (
+    <>
+      <label className={cx('input-label')}>
+        {label && <span>{label}</span>}
+
+        <div className={cx('input-field')}>
+          {leftIcon && <span className={cx('input-icon', 'left')}>{leftIcon}</span>}
+
+          <input
+            name={name}
+            value={value}
+            type={type}
+            placeholder={placeholder}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={cx('input', {
+              'has-left': leftIcon,
+              'has-right': rightIcon,
+            })}
+          />
+
+          {rightIcon && <span className={cx('input-icon', 'right')}>{rightIcon}</span>}
+        </div>
+      </label>
+
+      <p className={cx('error')}>{inputError}</p>
+    </>
+  );
+};

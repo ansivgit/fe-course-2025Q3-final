@@ -21,9 +21,8 @@ export type RegisterCredentials = {
 };
 
 export type LoginResponse = {
-  success: boolean;
-  message: string;
-  user?: User;
+  data: User | null;
+  error: string | null;
 };
 
 export type RegisterResponse = {
@@ -38,14 +37,7 @@ export type LoginErrors = {
   passwordError?: string;
 };
 
-// export type InputProps = {
-//   value: string;
-//   onChange: (value: string, error?: string) => void;
-//   onBlur: (error?: string) => void;
-//   clearError?: boolean;
-// };
-
-// export type LoginErrors = {
-//   loginError?: string;
-//   passwordError?: string;
-// };
+export type FormState = {
+  login: boolean;
+  password: boolean;
+};
