@@ -1,4 +1,4 @@
-import { QuizWidget } from '@/components/widgets/quiz-widget/quiz-widget';
+import { Quiz } from '@/components/widgets/quiz-widget/quiz-widget';
 
 import type { Answer, ValidationResult, Widget, WidgetStrategy } from '@/types/widgets';
 
@@ -24,7 +24,7 @@ export const quizStrategy: WidgetStrategy<Widget, Answer> = {
       container.remove();
     };
 
-    root.render(<QuizWidget widget={widget} onAnswer={onAnswer} onNext={handleNext} />);
+    root.render(<Quiz widget={widget} onAnswer={onAnswer} onNext={handleNext} />);
     return container;
   },
 

@@ -13,7 +13,7 @@ import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-export function QuizWidget({ widget, onAnswer, onNext }: WidgetProps): ReactElement {
+export function Quiz({ widget, onAnswer, onNext }: WidgetProps): ReactElement {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
