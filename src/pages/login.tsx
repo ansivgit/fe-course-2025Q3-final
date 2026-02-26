@@ -1,4 +1,4 @@
-import { LoginForm } from '@/components/login-form/login-form';
+// import { LoginForm } from '@/components/login-form/login-form';
 import { Logo } from '@/components/logo/logo';
 import { Title } from '@/components/title/title';
 
@@ -12,7 +12,7 @@ export const Login = (): ReactElement => {
         <Title>Welcome to the platform!</Title>
         <p className={'description'}>Join us and start learning</p>
       </div>
-      <LoginForm />
+      {/* <LoginForm /> */}
     </div>
   );
 };

@@ -1,61 +1,62 @@
-import type { LoginErrors } from '@/types/user';
+console.log('login-validation');
+// import type { LoginErrors } from '@/types/user';
 
-export const loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+// export const loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
-export const validateLogin = (value: string): string => {
-  if (!value) {
-    return 'Email is required';
-  }
-  if (!loginRegex.test(value)) {
-    return 'Invalid email format';
-  }
-  return '';
-};
-
-export const validatePassword = (value: string): string => {
-  if (!value) {
-    return 'Password is required';
-  }
-  if (!passwordRegex.test(value)) {
-    return 'At least 8 characters, contain a number and have no spaces';
-  }
-  return '';
-};
-// OLD
-// export const validateName = (value: string): string | undefined => {
+// export const validateLogin = (value: string): string => {
 //   if (!value) {
-//     return '';
+//     return 'Email is required';
+//   }
+//   if (!loginRegex.test(value)) {
+//     return 'Invalid email format';
+//   }
+//   return '';
+// };
+
+// export const validatePassword = (value: string): string => {
+//   if (!value) {
+//     return 'Password is required';
+//   }
+//   if (!passwordRegex.test(value)) {
+//     return 'At least 8 characters, contain a number and have no spaces';
+//   }
+//   return '';
+// };
+// // OLD
+// // export const validateName = (value: string): string | undefined => {
+// //   if (!value) {
+// //     return '';
+// //   }
+
+// //   if (value.trim().length < 2) {
+// //     return 'Name must be at least 2 characters';
+// //   }
+
+// //   return '';
+// // };
+
+// export const validateName = (value: string): string => {
+//   if (!value.trim()) {
+//     return 'Name is required';
 //   }
 
 //   if (value.trim().length < 2) {
 //     return 'Name must be at least 2 characters';
 //   }
-
 //   return '';
 // };
 
-export const validateName = (value: string): string => {
-  if (!value.trim()) {
-    return 'Name is required';
-  }
+// // export const isValid = (errors: LoginErrors | undefined, isRegistered: boolean): boolean => {
+// //   if (!errors) {
+// //     return false;
+// //   }
 
-  if (value.trim().length < 2) {
-    return 'Name must be at least 2 characters';
-  }
-  return '';
-};
+// //   if (isRegistered) {
+// //     return errors.name === '' && errors.login === '' && errors.password === '';
+// //   }
 
-// export const isValid = (errors: LoginErrors | undefined, isRegistered: boolean): boolean => {
-//   if (!errors) {
-//     return false;
-//   }
-
-//   if (isRegistered) {
-//     return errors.name === '' && errors.login === '' && errors.password === '';
-//   }
-
-//   return errors.login === '' && errors.password === '';
-export const validate = (errors: LoginErrors): boolean => {
-  return Object.values(errors).every((error) => error === '');
-};
+// //   return errors.login === '' && errors.password === '';
+// export const validate = (errors: LoginErrors): boolean => {
+//   return Object.values(errors).every((error) => error === '');
+// };
