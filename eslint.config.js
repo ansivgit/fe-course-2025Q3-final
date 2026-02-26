@@ -137,6 +137,12 @@ export default defineConfig([
     },
   },
   {
+    files: ['**/*.tsx'],
+    rules: {
+      '@typescript-eslint/explicit-function-return-type': 'off',
+    }
+  },
+  {
     ignores: [
       '**/node_modules/**',
       '**/dist/**',
