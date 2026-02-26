@@ -23,24 +23,17 @@ export const LoginForm = (): ReactElement => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const isFormInvalid =
-    Object.values(errors).some((error) => error !== '') || !loginValue || !passwordValue;
+  const isFormValid =
+    !Object.values(errors).some((error) => error !== '') || !loginValue || !passwordValue;
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
-    setIsSubmitted(true);
-
-    if (isFormInvalid) {
-      return;
+    if (isFormValid) {
+      setIsSubmitted(true);
+      const result = await loginApi({ login: loginValue, password: passwordValue });
+      setFormError(result.error ?? '');
     }
-
-    const result = await loginApi({
-      login: loginValue,
-      password: passwordValue,
-    });
-
-    setFormError(result.error ?? '');
   };
 
   return (
@@ -97,7 +90,7 @@ export const LoginForm = (): ReactElement => {
           }}
         />
 
-        <Button type="submit" size="large" disabled={isFormInvalid}>
+        <Button type="submit" size="large" disabled={!isFormValid}>
           Login
         </Button>
 
