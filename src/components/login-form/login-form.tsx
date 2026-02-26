@@ -23,10 +23,6 @@ export const LoginForm = (): ReactElement => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const toggleShowPassword = (): void => {
-    setShowPassword((previous) => !previous);
-  };
-
   const isFormInvalid =
     Object.values(errors).some((error) => error !== '') || !loginValue || !passwordValue;
 
@@ -78,7 +74,12 @@ export const LoginForm = (): ReactElement => {
           type={showPassword ? 'text' : 'password'}
           leftIcon={<PasswordIcon />}
           rightIcon={
-            <button type="button" onClick={toggleShowPassword}>
+            <button
+              type="button"
+              onClick={() => {
+                setShowPassword((previous) => !previous);
+              }}
+            >
               {showPassword ? <EyeOffIcon /> : <EyeIcon />}
             </button>
           }
