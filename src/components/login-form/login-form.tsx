@@ -17,9 +17,7 @@ export const LoginForm = (): ReactElement => {
   const [loginValue, setLoginValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [formError, setFormError] = useState('');
-
   const [errors, setErrors] = useState({ login: '', password: '' });
-
   const [showPassword, setShowPassword] = useState(false);
 
   const isFormValid =
