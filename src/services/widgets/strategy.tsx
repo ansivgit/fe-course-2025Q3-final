@@ -7,21 +7,15 @@ import { createRoot } from 'react-dom/client';
 export const quizStrategy: WidgetStrategy<Widget, Answer> = {
   type: 'quiz',
 
-  run: (widget: Widget & { type: 'quiz' }, onAnswer, parentContainer?: HTMLDivElement) => {
-    const container = document.createElement('div');
-    container.id = `widget-${widget.id}`;
-
-    if (parentContainer) {
-      parentContainer.append(container);
-    } else {
-      document.body.append(container);
+  run: (widget: Widget & { type: 'quiz' }, onAnswer, container?: HTMLDivElement) => {
+    if (!container) {
+      return;
     }
 
     const root = createRoot(container);
 
     const handleNext = (): void => {
       root.unmount();
-      container.remove();
     };
 
     root.render(<Quiz widget={widget} onAnswer={onAnswer} onNext={handleNext} />);
