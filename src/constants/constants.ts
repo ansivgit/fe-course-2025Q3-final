@@ -5,3 +5,5 @@ export const ROUTES = {
   quiz: 'quiz',
   notFound: '*',
 } as const;
+
+export const LETTERS = 'ABCDE';

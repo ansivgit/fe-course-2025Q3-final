@@ -1,4 +1,4 @@
-import { QuizWidget } from '@/components/quiz-widget/quiz-widget';
+import { QuizWidget } from '@/components/widgets/quiz-widget/quiz-widget';
 
 import type { Answer, ValidationResult, Widget, WidgetStrategy } from '@/types/widgets';
 

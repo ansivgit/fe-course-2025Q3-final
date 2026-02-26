@@ -46,3 +46,9 @@ export type ValidateReturn = {
   isCorrect: boolean;
   result: ValidationResult;
 };
+
+export type WidgetProps = {
+  widget: Widget & { type: 'quiz' };
+  onAnswer: (answer: WidgetAnswerMap[WidgetType]) => void;
+  onNext?: () => void;
+};
