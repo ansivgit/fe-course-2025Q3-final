@@ -43,6 +43,14 @@ const getOptionStatus = (
   return 'none';
 };
 
+const statusIcon: Record<QuizOptionProps['status'], ReactElement | null> = {
+  none: null,
+  selected: <CheckCircleIcon />,
+  correct: <CheckCircleIcon />,
+  missed: <CheckCircleIcon />,
+  wrong: <ErrorCircleIcon />,
+};
+
 export function QuizWidget({ widget, onAnswer, onNext }: QuizWidgetProps): ReactElement {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -123,19 +131,9 @@ function QuizOption({
   let Icon: ReactElement | null = null;
 
   if (!isSubmitted && status === 'selected') {
-    Icon = <CheckCircleIcon />;
+    Icon = statusIcon.selected;
   } else if (isSubmitted) {
-    switch (status) {
-      case 'correct':
-      case 'missed': {
-        Icon = <CheckCircleIcon />;
-        break;
-      }
-      case 'wrong': {
-        Icon = <ErrorCircleIcon />;
-        break;
-      }
-    }
+    Icon = statusIcon[status];
   }
 
   return (
@@ -153,7 +151,7 @@ function QuizOption({
         <span className={cx('letter')}>{letters[index]}</span>
         <span className={cx('text')}>{option.value}</span>
       </div>
-      {status !== 'none' && (
+      {Icon && (
         <span
           className={cx('icon', {
             correct: status === 'correct' || status === 'missed',
