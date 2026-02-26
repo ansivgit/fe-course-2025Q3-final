@@ -23,8 +23,3 @@ export type LoginErrors = {
   loginError?: string;
   passwordError?: string;
 };
-
-export type FormState = {
-  login: boolean;
-  password: boolean;
-};
