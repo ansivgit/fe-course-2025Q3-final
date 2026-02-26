@@ -3,11 +3,11 @@ import '@/styles/index.css';
 import { Login } from '@/pages/login';
 import { NotFound } from '@/pages/not-found';
 import { Practice } from '@/pages/practice/practice';
+import { Quiz } from '@/pages/widgets/quiz';
 import { ROUTES } from '@/constants/constants';
 
 import type { ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Quiz } from './pages/practice/quiz';
 
 export function App(): ReactElement {
   return <AppRouter />;
