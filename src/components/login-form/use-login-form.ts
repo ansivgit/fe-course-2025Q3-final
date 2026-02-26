@@ -1,157 +1,159 @@
-import { loginApi, registerApi } from '@/service/login';
-import { validateLogin, validateName, validatePassword } from '@/utils/login-validation';
-import { ROUTES } from '@/constants/constants';
+console.log('use login form');
 
-import type { LoginErrors } from '@/types/user';
+// import { loginApi, registerApi } from '@/service/login';
+// import { validateLogin, validateName, validatePassword } from '@/utils/login-validation';
+// import { ROUTES } from '@/constants/constants';
 
-import type { SyntheticEvent } from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import type { LoginErrors } from '@/types/user';
 
-type UseLoginFormReturn = {
-  isRegistered: boolean;
-  resetSignal: number;
-  toggleAuth: () => void;
-  errorMessage: string;
-  errors: LoginErrors;
-  isValid: {
-    name: boolean;
-    login: boolean;
-    password: boolean;
-  };
-  showPassword: boolean;
-  toggleShowPassword: () => void;
-  handleNameChange: (isBlur: boolean, value: string) => void;
-  handleLoginChange: (isBlur: boolean, value: string) => void;
-  handlePasswordChange: (isBlur: boolean, value: string) => void;
-  handleSubmit: (event: SyntheticEvent<HTMLFormElement>) => void;
-};
+// import type { SyntheticEvent } from 'react';
+// import { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
 
-const initialErrors: LoginErrors = {
-  nameError: '',
-  loginError: '',
-  passwordError: '',
-};
+// type UseLoginFormReturn = {
+//   isRegistered: boolean;
+//   resetSignal: number;
+//   toggleAuth: () => void;
+//   errorMessage: string;
+//   errors: LoginErrors;
+//   isValid: {
+//     name: boolean;
+//     login: boolean;
+//     password: boolean;
+//   };
+//   showPassword: boolean;
+//   toggleShowPassword: () => void;
+//   handleNameChange: (isBlur: boolean, value: string) => void;
+//   handleLoginChange: (isBlur: boolean, value: string) => void;
+//   handlePasswordChange: (isBlur: boolean, value: string) => void;
+//   handleSubmit: (event: SyntheticEvent<HTMLFormElement>) => void;
+// };
 
-export const useLoginForm = (): UseLoginFormReturn => {
-  const navigate = useNavigate();
-  const [isRegistered, setIsRegistered] = useState(true);
-  const [resetSignal, setResetSignal] = useState(0);
+// const initialErrors: LoginErrors = {
+//   nameError: '',
+//   loginError: '',
+//   passwordError: '',
+// };
 
-  const toggleAuth = (): void => {
-    setIsRegistered((previous) => !previous);
+// export const useLoginForm = (): UseLoginFormReturn => {
+//   const navigate = useNavigate();
+//   const [isRegistered, setIsRegistered] = useState(true);
+//   const [resetSignal, setResetSignal] = useState(0);
 
-    setErrors(initialErrors);
-    setErrorMessage('');
-    setIsValid({
-      name: false,
-      login: false,
-      password: false,
-    });
-    setResetSignal((previous) => previous + 1);
-  };
+//   const toggleAuth = (): void => {
+//     setIsRegistered((previous) => !previous);
 
-  const [errors, setErrors] = useState(initialErrors);
-  const [errorMessage, setErrorMessage] = useState('');
+//     setErrors(initialErrors);
+//     setErrorMessage('');
+//     setIsValid({
+//       name: false,
+//       login: false,
+//       password: false,
+//     });
+//     setResetSignal((previous) => previous + 1);
+//   };
 
-  const [isValid, setIsValid] = useState({
-    name: false,
-    login: false,
-    password: false,
-  });
+//   const [errors, setErrors] = useState(initialErrors);
+//   const [errorMessage, setErrorMessage] = useState('');
 
-  const [showPassword, setShowPassword] = useState(false);
+//   const [isValid, setIsValid] = useState({
+//     name: false,
+//     login: false,
+//     password: false,
+//   });
 
-  const toggleShowPassword = (): void => {
-    setShowPassword((previous) => !previous);
-  };
+//   const [showPassword, setShowPassword] = useState(false);
 
-  const handleNameChange = (isBlur: boolean, value: string): void => {
-    const nameError = validateName(value);
+//   const toggleShowPassword = (): void => {
+//     setShowPassword((previous) => !previous);
+//   };
 
-    setIsValid((previous) => ({
-      ...previous,
-      name: !nameError,
-    }));
+//   const handleNameChange = (isBlur: boolean, value: string): void => {
+//     const nameError = validateName(value);
 
-    if (isBlur) {
-      setErrors((previous) => ({ ...previous, nameError }));
-    } else {
-      setErrors((previous) => ({ ...previous, nameError: '' }));
-      setErrorMessage('');
-    }
-  };
+//     setIsValid((previous) => ({
+//       ...previous,
+//       name: !nameError,
+//     }));
 
-  const handleLoginChange = (isBlur: boolean, value: string): void => {
-    const loginError = validateLogin(value);
+//     if (isBlur) {
+//       setErrors((previous) => ({ ...previous, nameError }));
+//     } else {
+//       setErrors((previous) => ({ ...previous, nameError: '' }));
+//       setErrorMessage('');
+//     }
+//   };
 
-    setIsValid((previous) => ({
-      ...previous,
-      login: !loginError,
-    }));
+//   const handleLoginChange = (isBlur: boolean, value: string): void => {
+//     const loginError = validateLogin(value);
 
-    if (isBlur) {
-      setErrors((previous) => ({ ...previous, loginError }));
-    } else {
-      setErrors((previous) => ({ ...previous, loginError: '' }));
-      setErrorMessage('');
-    }
-  };
+//     setIsValid((previous) => ({
+//       ...previous,
+//       login: !loginError,
+//     }));
 
-  const handlePasswordChange = (isBlur: boolean, value: string): void => {
-    const passwordError = validatePassword(value);
+//     if (isBlur) {
+//       setErrors((previous) => ({ ...previous, loginError }));
+//     } else {
+//       setErrors((previous) => ({ ...previous, loginError: '' }));
+//       setErrorMessage('');
+//     }
+//   };
 
-    setIsValid((previous) => ({
-      ...previous,
-      password: !passwordError,
-    }));
+//   const handlePasswordChange = (isBlur: boolean, value: string): void => {
+//     const passwordError = validatePassword(value);
 
-    if (isBlur) {
-      setErrors((previous) => ({ ...previous, passwordError }));
-    } else {
-      setErrors((previous) => ({ ...previous, passwordError: '' }));
-      setErrorMessage('');
-    }
-  };
+//     setIsValid((previous) => ({
+//       ...previous,
+//       password: !passwordError,
+//     }));
 
-  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
-    event.preventDefault();
+//     if (isBlur) {
+//       setErrors((previous) => ({ ...previous, passwordError }));
+//     } else {
+//       setErrors((previous) => ({ ...previous, passwordError: '' }));
+//       setErrorMessage('');
+//     }
+//   };
 
-    const formData = new FormData(event.currentTarget);
+//   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
+//     event.preventDefault();
 
-    const name = getString(formData, 'name');
-    const login = getString(formData, 'login');
-    const password = getString(formData, 'password');
+//     const formData = new FormData(event.currentTarget);
 
-    const response = isRegistered
-      ? loginApi({ login, password })
-      : registerApi({ name, login, password });
+//     const name = getString(formData, 'name');
+//     const login = getString(formData, 'login');
+//     const password = getString(formData, 'password');
 
-    setErrorMessage(response.message);
-    console.warn(response.user);
+//     const response = isRegistered
+//       ? loginApi({ login, password })
+//       : registerApi({ name, login, password });
 
-    if (response.success) {
-      void navigate(`/${ROUTES.practice}`);
-    }
-  };
+//     setErrorMessage(response.message);
+//     console.warn(response.user);
 
-  return {
-    isRegistered,
-    resetSignal,
-    toggleAuth,
-    errorMessage,
-    errors,
-    isValid,
-    showPassword,
-    toggleShowPassword,
-    handleNameChange,
-    handleLoginChange,
-    handlePasswordChange,
-    handleSubmit,
-  };
-};
+//     if (response.success) {
+//       void navigate(`/${ROUTES.practice}`);
+//     }
+//   };
 
-const getString = (formData: FormData, key: string): string => {
-  const value = formData.get(key);
-  return typeof value === 'string' ? value : '';
-};
+//   return {
+//     isRegistered,
+//     resetSignal,
+//     toggleAuth,
+//     errorMessage,
+//     errors,
+//     isValid,
+//     showPassword,
+//     toggleShowPassword,
+//     handleNameChange,
+//     handleLoginChange,
+//     handlePasswordChange,
+//     handleSubmit,
+//   };
+// };
+
+// const getString = (formData: FormData, key: string): string => {
+//   const value = formData.get(key);
+//   return typeof value === 'string' ? value : '';
+// };
