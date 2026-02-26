@@ -32,7 +32,7 @@ export const LoginForm = (): ReactElement => {
     if (isFormValid) {
       setIsSubmitted(true);
       const result = await loginApi({ login: loginValue, password: passwordValue });
-      setFormError(result.error ?? '');
+      setFormError(result.error.message);
     }
   };
 
