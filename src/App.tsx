@@ -7,6 +7,7 @@ import { ROUTES } from '@/constants/constants';
 
 import type { ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Register } from './pages/register';
 
 export function App(): ReactElement {
   return <AppRouter />;
@@ -16,6 +17,7 @@ export const AppRouter = (): ReactElement => (
   <Routes>
     <Route path={'/'} element={<Login />} />
     <Route path={ROUTES.login} element={<Login />} />
+    <Route path={ROUTES.register} element={<Register />} />
     <Route path={ROUTES.practice} element={<Practice />} />
     <Route path={ROUTES.notFound} element={<NotFound />} />
   </Routes>
