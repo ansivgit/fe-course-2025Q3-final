@@ -4,7 +4,7 @@ import { Paragraph } from '@/components/paragraph/paragraph';
 import styles from '@/components/quiz-widget/quiz-widget.module.css';
 import { Subtitle } from '@/components/subtitle/subtitle';
 
-import type { Widget, WidgetAnswerMap } from '@/types/widgets';
+import type { QuizPayload, Widget, WidgetAnswerMap } from '@/types/widgets';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
@@ -91,9 +91,7 @@ export function QuizWidget({ widget, onAnswer, onNext }: QuizWidgetProps): React
             );
           })}
         </ul>
-        {isSubmitted && widget.payload.explanation && (
-          <Explanation explanation={widget.payload.explanation} />
-        )}
+        {isSubmitted && Explanation(widget.payload.explanation)}
       </div>
       <div className={cx('button-container')}>
         <Button
@@ -142,12 +140,7 @@ function QuizOption({
 
   return (
     <li
-      className={cx('option', {
-        selected: status === 'selected',
-        correct: status === 'correct',
-        wrong: status === 'wrong',
-        missed: status === 'missed',
-      })}
+      className={cx('option', { [status]: true })}
       onClick={onToggle}
       onKeyDown={(event) => {
         if (event.key === 'Enter') {
@@ -176,7 +169,10 @@ function QuizOption({
   );
 }
 
-function Explanation({ explanation }: { explanation: string }): ReactElement {
+function Explanation(explanation: QuizPayload['explanation']): ReactElement | undefined {
+  if (!explanation) {
+    return;
+  }
   return (
     <div className={cx('explanation')}>
       <h4>Explanation</h4>
