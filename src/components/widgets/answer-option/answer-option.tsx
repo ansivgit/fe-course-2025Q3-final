@@ -53,18 +53,7 @@ export function AnswerOption({
         <span className={cx('letter')}>{LETTERS[index]}</span>
         <span className={cx('text')}>{option.value}</span>
       </div>
-      {Icon && (
-        <span
-          className={cx('icon', {
-            correct: status === 'correct' || status === 'missed',
-            wrong: status === 'wrong',
-            selected: status === 'selected',
-            missed: status === 'missed',
-          })}
-        >
-          {Icon}
-        </span>
-      )}
+      {Icon && <span className={cx('icon', { [status]: true })}>{Icon}</span>}
     </li>
   );
 }
