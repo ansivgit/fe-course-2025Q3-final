@@ -17,7 +17,6 @@ export const LoginForm = (): ReactElement => {
   const [loginValue, setLoginValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [formError, setFormError] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [errors, setErrors] = useState({ login: '', password: '' });
 
@@ -30,7 +29,6 @@ export const LoginForm = (): ReactElement => {
     event.preventDefault();
 
     if (isFormValid) {
-      setIsSubmitted(true);
       const result = await loginApi({ login: loginValue, password: passwordValue });
       setFormError(result.error.message);
     }
@@ -94,7 +92,7 @@ export const LoginForm = (): ReactElement => {
           Login
         </Button>
 
-        <p className={cx('error')}>{isSubmitted ? formError : ''}</p>
+        <p className={cx('error')}>{formError}</p>
       </form>
 
       <AuthToggle />
