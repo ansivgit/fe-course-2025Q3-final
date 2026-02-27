@@ -3,13 +3,13 @@ import { Paragraph } from '@/components/paragraph/paragraph';
 import { Subtitle } from '@/components/subtitle/subtitle';
 import { AnswerOption } from '@/components/widgets/answer-option/answer-option';
 import { getOptionStatus } from '@/components/widgets/helpers';
-import styles from '@/components/widgets/quiz-widget/quiz-widget.module.css';
 
 import type { QuizPayload, WidgetProps } from '@/types/widgets';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
 import { useState } from 'react';
+import styles from './quiz-widget.module.css';
 
 const cx = classNames.bind(styles);
 

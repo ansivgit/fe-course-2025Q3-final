@@ -1,9 +1,9 @@
 import { CheckCircleIcon, ErrorCircleIcon } from '@/assets/icons';
-import styles from '@/components/widgets/answer-option/answer-option.module.css';
 import { LETTERS } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
+import styles from './answer-option.module.css';
 
 const cx = classNames.bind(styles);
 
