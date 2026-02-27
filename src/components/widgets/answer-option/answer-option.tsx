@@ -1,5 +1,4 @@
 import { CheckCircleIcon, ErrorCircleIcon } from '@/assets/icons';
-import { LETTERS } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
@@ -9,7 +8,7 @@ const cx = classNames.bind(styles);
 
 type AnswerOptionProps = {
   option: { name: string; value: string };
-  index: number;
+  label: string;
   status: 'correct' | 'wrong' | 'missed' | 'selected' | 'none';
   isSubmitted: boolean;
   onToggle: () => void;
@@ -25,7 +24,7 @@ const statusIcon: Record<AnswerOptionProps['status'], ReactElement | null> = {
 
 export function AnswerOption({
   option,
-  index,
+  label,
   status,
   isSubmitted,
   onToggle,
@@ -42,7 +41,7 @@ export function AnswerOption({
     // biome-ignore lint/a11y/useKeyWithClickEvents: clickable list item
     <li className={cx('option', { [status]: true })} onClick={onToggle}>
       <div className={cx('option-content')}>
-        <span className={cx('letter')}>{LETTERS[index]}</span>
+        <span className={cx('letter')}>{label}</span>
         <span className={cx('text')}>{option.value}</span>
       </div>
       {Icon && <span className={cx('icon', { [status]: true })}>{Icon}</span>}

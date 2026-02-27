@@ -3,6 +3,7 @@ import { Paragraph } from '@/components/paragraph/paragraph';
 import { Subtitle } from '@/components/subtitle/subtitle';
 import { AnswerOption } from '@/components/widgets/answer-option/answer-option';
 import { getOptionStatus } from '@/components/widgets/helpers';
+import { LETTERS } from '@/constants/constants';
 
 import type { QuizPayload, WidgetProps } from '@/types/widgets';
 
@@ -47,11 +48,12 @@ export function Quiz({ widget, onAnswer, onNext }: WidgetProps): ReactElement {
         <ul className={cx('options')}>
           {widget.payload.options.map((option, index) => {
             const status = getOptionStatus(option, selectedIds, isSubmitted, widget);
+            const label = LETTERS[index];
             return (
               <AnswerOption
                 key={option.name}
                 option={option}
-                index={index}
+                label={label}
                 status={status}
                 isSubmitted={isSubmitted}
                 onToggle={() => {
