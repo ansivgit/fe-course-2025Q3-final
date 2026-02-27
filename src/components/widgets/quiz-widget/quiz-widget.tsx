@@ -42,7 +42,7 @@ export function Quiz({ widget, onAnswer, onNext }: WidgetProps): ReactElement {
   };
 
   return (
-    <div>
+    <>
       <div className={cx('quiz-widget')}>
         <Subtitle level="h2">{widget.payload.question}</Subtitle>
         <ul className={cx('options')}>
@@ -73,7 +73,7 @@ export function Quiz({ widget, onAnswer, onNext }: WidgetProps): ReactElement {
           {isSubmitted ? 'Next' : 'Submit'}
         </Button>
       </div>
-    </div>
+    </>
   );
 }
 
