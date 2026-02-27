@@ -1,4 +1,5 @@
 import { CheckCircleIcon, ErrorCircleIcon } from '@/assets/icons';
+import type { OptionStatus } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
@@ -7,10 +8,9 @@ import styles from './answer-option.module.css';
 const cx = classNames.bind(styles);
 
 type AnswerOptionProps = {
-  option: { name: string; value: string };
+  option: { id: string; name: string; value: string };
   label: string;
-  status: 'correct' | 'wrong' | 'missed' | 'selected' | 'none';
-  isSubmitted: boolean;
+  status: OptionStatus;
   onToggle: () => void;
 };
 
@@ -22,20 +22,8 @@ const statusIcon: Record<AnswerOptionProps['status'], ReactElement | null> = {
   wrong: <ErrorCircleIcon />,
 };
 
-export function AnswerOption({
-  option,
-  label,
-  status,
-  isSubmitted,
-  onToggle,
-}: AnswerOptionProps): ReactElement {
-  let Icon: ReactElement | null = null;
-
-  if (!isSubmitted && status === 'selected') {
-    Icon = statusIcon.selected;
-  } else if (isSubmitted) {
-    Icon = statusIcon[status];
-  }
+export function AnswerOption({ option, label, status, onToggle }: AnswerOptionProps): ReactElement {
+  const Icon: ReactElement | null = status === 'none' ? null : statusIcon[status];
 
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: clickable list item

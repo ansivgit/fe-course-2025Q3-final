@@ -8,6 +8,7 @@ export type Widget = {
 };
 
 export type WidgetOption = {
+  id: string;
   name: string;
   value: string;
 };

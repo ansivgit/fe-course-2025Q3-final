@@ -51,11 +51,10 @@ export function Quiz({ widget, onAnswer, onNext }: WidgetProps): ReactElement {
             const label = ALPHABET[index];
             return (
               <AnswerOption
-                key={option.name}
+                key={option.id}
                 option={option}
                 label={label}
                 status={status}
-                isSubmitted={isSubmitted}
                 onToggle={() => {
                   toggle(option.name);
                 }}

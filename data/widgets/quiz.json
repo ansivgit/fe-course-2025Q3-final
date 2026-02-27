@@ -6,11 +6,11 @@
     "payload": {
       "question": "Which values are falsy in JavaScript?",
       "options": [
-        { "name": "a", "value": "0" },
-        { "name": "b", "value": "{}" },
-        { "name": "c", "value": "null" },
-        { "name": "d", "value": "''" },
-        { "name": "e", "value": "undefined" }
+        { "id": "quiz-01-a", "name": "a", "value": "0" },
+        { "id": "quiz-01-b", "name": "b", "value": "{}" },
+        { "id": "quiz-01-c", "name": "c", "value": "null" },
+        { "id": "quiz-01-d", "name": "d", "value": "''" },
+        { "id": "quiz-01-e", "name": "e", "value": "undefined" }
       ],
       "correctAnswersIds": ["a", "c", "d", "e"],
       "explanation": "0, null, '', and undefined are falsy; any object is always truthy."
@@ -23,11 +23,11 @@
     "payload": {
       "question": "Which Array methods return a new array without modifying the original?",
       "options": [
-        { "name": "a", "value": "map()" },
-        { "name": "b", "value": "forEach()" },
-        { "name": "c", "value": "filter()" },
-        { "name": "d", "value": "push()" },
-        { "name": "e", "value": "slice()" }
+        { "id": "quiz-02-a", "name": "a", "value": "map()" },
+        { "id": "quiz-02-b", "name": "b", "value": "forEach()" },
+        { "id": "quiz-02-c", "name": "c", "value": "filter()" },
+        { "id": "quiz-02-d", "name": "d", "value": "push()" },
+        { "id": "quiz-02-e", "name": "e", "value": "slice()" }
       ],
       "correctAnswersIds": ["a", "c", "e"],
       "explanation": "map(), filter(), and slice() return new arrays; forEach() and push() modify the original."
@@ -40,11 +40,11 @@
     "payload": {
       "question": "Which tasks are handled in the microtask queue?",
       "options": [
-        { "name": "a", "value": "Promise.then callbacks" },
-        { "name": "b", "value": "setTimeout callbacks" },
-        { "name": "c", "value": "MutationObserver callbacks" },
-        { "name": "d", "value": "fetch() response handling" },
-        { "name": "e", "value": "requestAnimationFrame callbacks" }
+        { "id": "quiz-03-a", "name": "a", "value": "Promise.then callbacks" },
+        { "id": "quiz-03-b", "name": "b", "value": "setTimeout callbacks" },
+        { "id": "quiz-03-c", "name": "c", "value": "MutationObserver callbacks" },
+        { "id": "quiz-03-d", "name": "d", "value": "fetch() response handling" },
+        { "id": "quiz-03-e", "name": "e", "value": "requestAnimationFrame callbacks" }
       ],
       "correctAnswersIds": ["a", "c"],
       "explanation": "Promise.then and MutationObserver callbacks are microtasks; setTimeout, fetch(), and requestAnimationFrame are macrotasks."
