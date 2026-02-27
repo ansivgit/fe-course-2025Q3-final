@@ -55,7 +55,7 @@ export function Quiz({ widget, onAnswer, onNext }: WidgetProps): ReactElement {
                 option={option}
                 label={label}
                 status={status}
-                onToggle={() => {
+                onOptionClick={() => {
                   toggle(option.name);
                 }}
               />
