@@ -2,7 +2,10 @@ import { Quiz } from '@/components/widgets/quiz-widget/quiz-widget';
 
 import type { Answer, ValidationResult, Widget, WidgetStrategy } from '@/types/widgets';
 
+import type { Root } from 'react-dom/client';
 import { createRoot } from 'react-dom/client';
+
+const roots = new WeakMap<HTMLDivElement, Root>();
 
 export const quizStrategy: WidgetStrategy<Widget, Answer> = {
   type: 'quiz',
@@ -12,10 +15,15 @@ export const quizStrategy: WidgetStrategy<Widget, Answer> = {
       return;
     }
 
-    const root = createRoot(container);
+    let root = roots.get(container);
+    if (!root) {
+      root = createRoot(container);
+      roots.set(container, root);
+    }
 
     const handleNext = (): void => {
       root.unmount();
+      roots.delete(container);
     };
 
     root.render(<Quiz widget={widget} onAnswer={onAnswer} onNext={handleNext} />);
