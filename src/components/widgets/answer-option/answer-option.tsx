@@ -39,16 +39,8 @@ export function AnswerOption({
   }
 
   return (
-    <li
-      className={cx('option', { [status]: true })}
-      onClick={onToggle}
-      onKeyDown={(event) => {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          onToggle();
-        }
-      }}
-    >
+    // biome-ignore lint/a11y/useKeyWithClickEvents: clickable list item
+    <li className={cx('option', { [status]: true })} onClick={onToggle}>
       <div className={cx('option-content')}>
         <span className={cx('letter')}>{LETTERS[index]}</span>
         <span className={cx('text')}>{option.value}</span>
