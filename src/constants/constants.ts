@@ -6,4 +6,4 @@ export const ROUTES = {
   notFound: '*',
 } as const;
 
-export const LETTERS = 'ABCDE';
+export const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
