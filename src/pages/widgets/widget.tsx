@@ -29,36 +29,27 @@ export function WidgetPage({
   strategies,
 }: WidgetPageProps): ReactElement {
   const widgetContainer = useRef<HTMLDivElement>(null);
-  const startedRef = useRef(false); //  Used to ensure the effect runs only once in dev mode in React Strict Mode
   const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
-    if (startedRef.current) {
-      return;
-    }
-    startedRef.current = true;
-
     strategies.forEach((strategy) => {
       registerStrategy(strategy);
     });
 
     const widgets: Widget[] = parseWidgets(widgetsData);
 
-    if (widgetContainer.current) {
-      runWidgets(widgets, widgetContainer.current)
-        .then(() => {
-          setCompleted(true);
-        })
-        .catch((error: unknown) => {
-          if (error instanceof Error) {
-            console.error('Widgets error:', error.message);
-          } else {
-            console.error('Widgets error:', error);
-          }
-        });
+    if (!widgetContainer.current) {
+      return;
     }
-  }, [widgetsData, strategies]);
 
+    runWidgets(widgets, widgetContainer.current)
+      .then(() => {
+        setCompleted(true);
+      })
+      .catch((error: unknown) => {
+        console.error('Widgets error:', error);
+      });
+  }, [widgetsData, strategies]);
   return (
     <Layout>
       <section className={cx('title-section')}>
