@@ -49,7 +49,11 @@ export function WidgetPage(): ReactElement {
   }, [config]);
 
   if (!config) {
-    return <Paragraph text="Widget not found"></Paragraph>;
+    return (
+      <Layout>
+        <Paragraph text="Widget not found"></Paragraph>
+      </Layout>
+    );
   }
 
   const { title, Icon, completionText } = config;

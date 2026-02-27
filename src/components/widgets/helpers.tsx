@@ -1,3 +1,5 @@
+import type { OptionStatus } from '@/constants/constants';
+
 import type { Widget, WidgetType } from '@/types/widgets';
 
 export const isCorrectAnswer = (
@@ -10,7 +12,7 @@ export const getOptionStatus = (
   selectedIds: string[],
   isSubmitted: boolean,
   widget: Widget & { type: 'quiz' },
-): 'correct' | 'wrong' | 'missed' | 'selected' | 'none' => {
+): OptionStatus => {
   if (!isSubmitted) {
     return selectedIds.includes(option.name) ? 'selected' : 'none';
   }
