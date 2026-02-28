@@ -2,13 +2,13 @@
   "name": "fe-course-2025q3-final-frontend",
   "version": "1.0.0",
   "description": "RSS FE-course-2025q3 final-task. Frontend",
-  "homepage": "https://rss-mentoring-ansiv.github.io/fe-course-2025Q3-final",
+  "homepage": "https://ansivgit.github.io/fe-course-2025Q3-final",
   "bugs": {
-    "url": "https://github.com/rss-mentoring-ansiv/fe-course-2025Q3-final/issues"
+    "url": "https://github.com/ansivgit/fe-course-2025Q3-final/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rss-mentoring-ansiv/fe-course-2025Q3-final.git"
+    "url": "git+https://github.com/ansivgit/fe-course-2025Q3-final.git"
   },
   "license": "ISC",
   "author": "ZAS",
