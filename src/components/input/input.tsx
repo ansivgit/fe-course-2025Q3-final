@@ -7,47 +7,53 @@ const cx = classNames.bind(styles);
 
 type InputProps = {
   name: string;
-  value: string;
   label?: string;
   type?: 'text' | 'password';
   placeholder?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
-  onChange: (value: string, isValid: boolean) => void;
+  onInputChange: (value: string, isValid: boolean) => void;
   validation: (value: string) => boolean;
   errorMessage: string;
 };
 
 export const Input = ({
   name,
-  value,
   label,
   type = 'text',
   placeholder = '',
   leftIcon,
   rightIcon,
-  onChange,
+  onInputChange,
   validation,
   errorMessage,
 }: InputProps): ReactElement => {
+  const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const newValue = event.target.value;
-
-    const isValid = validation(newValue);
-
     setInputError('');
 
-    onChange(newValue, isValid);
+    const newValue = event.target.value;
+    const isValid = validation(newValue);
+    setInputValue(newValue);
+
+    if (isValid) {
+      onInputChange(newValue, isValid);
+    }
   };
 
   const handleBlur = (): void => {
-    const isValid = validation(value);
+    const isValid = validation(inputValue);
 
-    setInputError(isValid ? '' : errorMessage);
+    if (isValid) {
+      setInputError('');
+      onInputChange(inputValue, isValid);
 
-    onChange(value, isValid);
+      return;
+    }
+
+    setInputError(errorMessage);
   };
 
   return (
@@ -60,7 +66,7 @@ export const Input = ({
 
           <input
             name={name}
-            value={value}
+            value={inputValue}
             type={type}
             placeholder={placeholder}
             onChange={handleChange}
