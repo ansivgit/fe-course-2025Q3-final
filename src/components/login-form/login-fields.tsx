@@ -2,53 +2,49 @@ import { EyeIcon, EyeOffIcon, LoginIcon, PasswordIcon } from '@/assets/icons';
 import { validateLogin, validatePassword } from '@/utils/login-validation';
 
 import type { ReactElement } from 'react';
+import { useState } from 'react';
 import { Input } from '../input/input';
 
 type Props = {
   loginValue: string;
   passwordValue: string;
-  showPassword: boolean;
   onLoginChange: (value: string, isValid: boolean) => void;
   onPasswordChange: (value: string, isValid: boolean) => void;
-  togglePassword: () => void;
 };
 
-export const LoginFields = ({
-  loginValue,
-  passwordValue,
-  showPassword,
-  onLoginChange,
-  onPasswordChange,
-  togglePassword,
-}: Props): ReactElement => {
+export const LoginFields = ({ onLoginChange, onPasswordChange }: Props): ReactElement => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleVisibility = (): void => {
+    setShowPassword((previous) => !previous);
+  };
+
   return (
     <>
       <Input
         name="login"
-        value={loginValue}
         label="Email"
         placeholder="Enter your email"
         leftIcon={<LoginIcon />}
         validation={validateLogin}
         errorMessage="Invalid email"
-        onChange={onLoginChange}
+        onInputChange={onLoginChange}
       />
 
       <Input
         name="password"
-        value={passwordValue}
         label="Password"
         placeholder="Enter your password"
         type={showPassword ? 'text' : 'password'}
         leftIcon={<PasswordIcon />}
         rightIcon={
-          <button type="button" onClick={togglePassword}>
+          <button type="button" onClick={toggleVisibility}>
             {showPassword ? <EyeOffIcon /> : <EyeIcon />}
           </button>
         }
         validation={validatePassword}
         errorMessage="At least 8 chars, 1 number"
-        onChange={onPasswordChange}
+        onInputChange={onPasswordChange}
       />
     </>
   );
