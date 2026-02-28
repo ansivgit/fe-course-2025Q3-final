@@ -17,7 +17,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "deploy": "npm run build && gh-pages -d dist",
+    "deploy": "npm run build && vercel --prod --yes",
     "lint": "eslint",
     "format": "npx @biomejs/biome check",
     "format:fix": "npx @biomejs/biome check --write",
