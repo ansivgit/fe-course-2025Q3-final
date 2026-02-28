@@ -4,36 +4,13 @@ import { Title } from '@/components/title/title';
 import { WidgetCard } from '@/components/widget-card/widget-card';
 import { WIDGET_CARDS_CONFIG } from '@/components/widget-card/widget-card.config';
 import styles from '@/pages/practice/practice.module.css';
-import { parseWidgets, registerStrategy, runWidgets } from '@/services/widgets/engine';
-import { quizStrategy } from '@/services/widgets/strategy';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
-import { useEffect, useRef } from 'react';
-import widgetsData from '../../../data/widgets/quiz.json';
 
 const cx = classNames.bind(styles);
 
 export const Practice = (): ReactElement => {
-  const startedRef = useRef(false);
-  useEffect(() => {
-    if (startedRef.current) {
-      // TODO: Remove or change after UI implementation
-      return;
-    }
-
-    startedRef.current = true;
-    registerStrategy(quizStrategy);
-    const widgets = parseWidgets(widgetsData);
-
-    runWidgets(widgets).catch((error: unknown) => {
-      if (error instanceof Error) {
-        console.error('Widgets error:', error.message);
-      } else {
-        console.error('Widgets error:', error);
-      }
-    });
-  }, []);
   return (
     <Layout>
       <div className={cx('container')}>
