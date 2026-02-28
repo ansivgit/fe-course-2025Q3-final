@@ -6,7 +6,7 @@ export const ROUTES = {
   notFound: '*',
 } as const;
 
-export const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+export const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' as const;
 
 export const OPTION_STATUSES = ['correct', 'wrong', 'missed', 'selected', 'none'];
 

@@ -18,7 +18,7 @@ export function Quiz({ widget, onAnswer, onNext }: WidgetProps): ReactElement {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const toggle = (id: string): void => {
+  const changeStatus = (id: string): void => {
     if (isSubmitted) {
       return;
     }
@@ -56,7 +56,7 @@ export function Quiz({ widget, onAnswer, onNext }: WidgetProps): ReactElement {
                 label={label}
                 status={status}
                 onOptionClick={() => {
-                  toggle(option.name);
+                  changeStatus(option.name);
                 }}
               />
             );
