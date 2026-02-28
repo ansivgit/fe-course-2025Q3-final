@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Redirecting…</title>
-    <script type="text/javascript">
-      const repoBase = '/fe-course-2025Q3-final/';
-      const path = window.location.pathname + window.location.search + window.location.hash;
-      window.location.replace(repoBase + 'index.html' + window.location.hash);
-    </script>
-  </head>
-  <body></body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecting…</title>
+  <script>
+    const repo = '/fe-course-2025Q3-final/';
+    const path = window.location.pathname;
+    window.location.href = repo + 'index.html' + window.location.search + window.location.hash;
+  </script>
+</head>
+<body></body>
 </html>
