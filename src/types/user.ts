@@ -16,10 +16,12 @@ export type LoginCredentials = Pick<User, 'login' | 'password'>;
 
 export type LoginResponse = {
   data: User | null;
-  error: {
-    code: string;
-    message: string;
-  };
+  error: ErrorResponse | null;
+};
+
+export type ErrorResponse = {
+  code?: string;
+  message: string;
 };
 
 export type LoginErrors = {

@@ -1,7 +1,8 @@
+import { API_URL, ROUTES } from '@/constants/constants';
+
 import type { LoginCredentials, LoginResponse } from '@/types/user';
 
-const API_URL = 'http://localhost:3000';
-const LOGIN_ENDPOINT = `${API_URL}/auth/login`;
+const LOGIN_ENDPOINT = `${API_URL}/${ROUTES.auth}/${ROUTES.login}`;
 
 export const loginApi = async ({ login, password }: LoginCredentials): Promise<LoginResponse> => {
   try {
@@ -13,22 +14,13 @@ export const loginApi = async ({ login, password }: LoginCredentials): Promise<L
       },
     });
 
-    if (!response.ok) {
-      const error = await response.text();
-      console.error('Login API error:', error);
-
-      return {
-        data: null,
-        error: {
-          code: 'UNEXPECTED_SERVER_RESPONSE',
-          message: error,
-        },
-      };
-    }
-
     const result: LoginResponse = await response.json();
 
-    console.warn(`User successfully logged in: ${login}`);
+    if (!response.ok) {
+      console.error('Login API error:', result);
+    }
+
+    console.info(`User successfully logged in: ${login}`);
     return result;
   } catch (error) {
     console.error('Unexpected login error:', error);
