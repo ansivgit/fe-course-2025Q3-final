@@ -5,7 +5,7 @@ import styles from './input.module.css';
 
 const cx = classNames.bind(styles);
 
-type InputProps = {
+export type InputProps = {
   name: string;
   label?: string;
   type?: 'text' | 'password';

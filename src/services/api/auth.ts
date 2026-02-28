@@ -4,7 +4,7 @@ import type { LoginCredentials, LoginResponse } from '@/types/user';
 
 const LOGIN_ENDPOINT = `${API_URL}/${ROUTES.auth}/${ROUTES.login}`;
 
-export const loginApi = async ({ login, password }: LoginCredentials): Promise<LoginResponse> => {
+export const login = async ({ login, password }: LoginCredentials): Promise<LoginResponse> => {
   try {
     const response = await fetch(LOGIN_ENDPOINT, {
       method: 'POST',
