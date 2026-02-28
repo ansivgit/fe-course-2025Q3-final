@@ -5,7 +5,8 @@
   <title>Redirecting</title>
   <script>
     const repoBase = '/fe-course-2025Q3-final/';
-    window.location.replace(repoBase + 'index.html' + window.location.hash);
+    const path = window.location.pathname.replace(repoBase, '');
+    window.location.replace(repoBase + 'index.html#/' + path + window.location.search + window.location.hash);
   </script>
 </head>
 <body></body>
