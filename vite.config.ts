@@ -17,4 +17,5 @@ export default defineConfig({
       '@': new URL('src', import.meta.url).pathname,
     },
   },
+  base: '/fe-course-2025Q3-final/',
 });
