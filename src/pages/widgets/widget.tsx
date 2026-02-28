@@ -2,13 +2,14 @@ import { Layout } from '@/components/layout/layout';
 import { Paragraph } from '@/components/paragraph/paragraph';
 import { Title } from '@/components/title/title';
 import { parseWidgets, registerStrategy, runWidgets } from '@/services/widgets/engine';
+import { ROUTES } from '@/constants/constants';
 
 import type { Widget } from '@/types/widgets';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { widgetPageConfig } from './widget.config';
 import styles from './widget.module.css';
 
@@ -49,11 +50,7 @@ export function WidgetPage(): ReactElement {
   }, [config]);
 
   if (!config) {
-    return (
-      <Layout>
-        <Paragraph text="Widget not found"></Paragraph>
-      </Layout>
-    );
+    return <Navigate to={ROUTES.notFound} replace />;
   }
 
   const { title, Icon, completionText } = config;

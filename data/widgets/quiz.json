@@ -40,11 +40,31 @@
     "payload": {
       "question": "Which tasks are handled in the microtask queue?",
       "options": [
-        { "id": "quiz-03-a", "name": "a", "value": "Promise.then callbacks" },
-        { "id": "quiz-03-b", "name": "b", "value": "setTimeout callbacks" },
-        { "id": "quiz-03-c", "name": "c", "value": "MutationObserver callbacks" },
-        { "id": "quiz-03-d", "name": "d", "value": "fetch() response handling" },
-        { "id": "quiz-03-e", "name": "e", "value": "requestAnimationFrame callbacks" }
+        {
+          "id": "quiz-03-a",
+          "name": "a",
+          "value": "Promise.then callbacks"
+        },
+        {
+          "id": "quiz-03-b",
+          "name": "b",
+          "value": "setTimeout callbacks"
+        },
+        {
+          "id": "quiz-03-c",
+          "name": "c",
+          "value": "MutationObserver callbacks"
+        },
+        {
+          "id": "quiz-03-d",
+          "name": "d",
+          "value": "fetch() response handling"
+        },
+        {
+          "id": "quiz-03-e",
+          "name": "e",
+          "value": "requestAnimationFrame callbacks"
+        }
       ],
       "correctAnswersIds": ["a", "c"],
       "explanation": "Promise.then and MutationObserver callbacks are microtasks; setTimeout, fetch(), and requestAnimationFrame are macrotasks."
