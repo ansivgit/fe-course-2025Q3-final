@@ -1,9 +1,7 @@
 import classNames from 'classnames/bind';
 import { type SyntheticEvent, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/button/button';
 import { login } from '@/services/api/auth';
-import { ROUTES } from '@/constants/constants';
 
 import { LoginInput } from './inputs/login-input';
 import { PasswordInput } from './inputs/password-input';
@@ -27,8 +25,6 @@ export const LoginForm = () => {
   };
 
   useEffect(() => {
-    //! TODO: fix lint error
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     checkFormValidity();
   }, [loginValue, passwordValue, formErrorMessage]);
 
@@ -81,24 +77,6 @@ export const LoginForm = () => {
 
         <p className={cx('error')}>{formErrorMessage}</p>
       </form>
-
-      <AuthToggle />
-    </div>
-  );
-};
-
-const AuthToggle = () => {
-  const location = useLocation();
-
-  const isRegisterPage = location.pathname === `/${ROUTES.register}`;
-
-  return (
-    <div className={cx('form-link')}>
-      <span>{isRegisterPage ? 'Already have an account?' : 'No account?'} </span>
-
-      <Link to={isRegisterPage ? `/${ROUTES.login}` : `/${ROUTES.register}`}>
-        {isRegisterPage ? 'Login' : 'Register'}
-      </Link>
     </div>
   );
 };

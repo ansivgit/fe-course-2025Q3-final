@@ -1,5 +1,5 @@
-import { Route, Routes } from 'react-router-dom';
-import { Auth } from '@/pages/auth';
+import { Route, Routes } from 'react-router';
+import { Auth } from '@/pages/auth/auth';
 import { NotFound } from '@/pages/not-found';
 import { Practice } from '@/pages/practice/practice';
 import { WidgetPage } from '@/pages/widgets/widget';
