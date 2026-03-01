@@ -1,12 +1,13 @@
 import { Button } from '@/components/button/button';
-import { loginApi } from '@/service/login';
+import { login } from '@/services/api/auth';
 import { ROUTES } from '@/constants/constants';
 
 import classNames from 'classnames/bind';
 import type { ReactElement, SyntheticEvent } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LoginFields } from './login-fields';
+import { LoginInput } from './inputs/login-input';
+import { PasswordInput } from './inputs/password-input';
 import styles from './login-form.module.css';
 
 const cx = classNames.bind(styles);
@@ -14,63 +15,62 @@ const cx = classNames.bind(styles);
 export const LoginForm = (): ReactElement => {
   const [loginValue, setLoginValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
-  const [formError, setFormError] = useState('');
-  const [errors, setErrors] = useState({ login: '', password: '' });
-  const [showPassword, setShowPassword] = useState(false);
+  const [isFormValid, setFormValid] = useState(false);
+  const [errors, setErrors] = useState({ login: false, password: false });
+  const [formErrorMessage, setFormErrorMessage] = useState('');
 
-  const isFormValid =
-    !Object.values(errors).some((error) => error !== '') || !loginValue || !passwordValue;
+  const checkFormValidity = (): boolean => {
+    if (formErrorMessage) {
+      return false;
+    }
+
+    return Object.values(errors).every((error) => !error) && !!loginValue && !!passwordValue;
+  };
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: should be fixed after biome & es-lint rules update
+  useEffect(() => {
+    setFormValid(checkFormValidity());
+  }, [errors.login, errors.password, loginValue, passwordValue, formErrorMessage]);
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
     if (isFormValid) {
-      const result = await loginApi({ login: loginValue, password: passwordValue });
-      setFormError(result.error.message);
+      const result = await login({ login: loginValue, password: passwordValue });
+
+      if (result.error) {
+        setFormErrorMessage(result.error.message);
+      }
     }
   };
 
   const handleLoginChange = (value: string, isValid: boolean): void => {
-    setFormError('');
-
+    setLoginValue(value);
     setErrors((previous) => ({
       ...previous,
-      login: isValid ? '' : 'Invalid email',
+      login: !isValid,
     }));
-
-    setLoginValue(value);
   };
 
   const handlePasswordChange = (value: string, isValid: boolean): void => {
-    setFormError('');
-
+    setPasswordValue(value);
     setErrors((previous) => ({
       ...previous,
-      password: isValid ? '' : 'At least 8 chars, 1 number',
+      password: !isValid,
     }));
-
-    setPasswordValue(value);
   };
 
   return (
     <div>
       <form className={cx('form')} onSubmit={handleSubmit}>
-        <LoginFields
-          loginValue={loginValue}
-          passwordValue={passwordValue}
-          showPassword={showPassword}
-          onLoginChange={handleLoginChange}
-          onPasswordChange={handlePasswordChange}
-          togglePassword={() => {
-            setShowPassword((previous) => !previous);
-          }}
-        />
+        <LoginInput onInputChange={handleLoginChange} />
+        <PasswordInput onInputChange={handlePasswordChange} />
 
         <Button type="submit" size="large" disabled={!isFormValid}>
           Login
         </Button>
 
-        <p className={cx('error')}>{formError}</p>
+        <p className={cx('error')}>{formErrorMessage}</p>
       </form>
 
       <AuthToggle />
@@ -81,14 +81,14 @@ export const LoginForm = (): ReactElement => {
 const AuthToggle = (): ReactElement => {
   const location = useLocation();
 
-  const isLoginPage = location.pathname === `/${ROUTES.login}`;
+  const isRegisterPage = location.pathname === `/${ROUTES.register}`;
 
   return (
     <div className={cx('form-link')}>
-      <span>{isLoginPage ? 'No account?' : 'Already have an account?'} </span>
+      <span>{isRegisterPage ? 'Already have an account?' : 'No account?'} </span>
 
-      <Link to={isLoginPage ? `/${ROUTES.register}` : `/${ROUTES.login}`}>
-        {isLoginPage ? 'Register' : 'Login'}
+      <Link to={isRegisterPage ? `/${ROUTES.login}` : `/${ROUTES.register}`}>
+        {isRegisterPage ? 'Login' : 'Register'}
       </Link>
     </div>
   );

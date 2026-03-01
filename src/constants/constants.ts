@@ -2,7 +2,7 @@ export const API_URL = 'http://localhost:3000';
 
 export const ROUTES = {
   home: '/',
-  auth: '/auth',
+  auth: 'auth',
   login: 'login',
   register: 'register',
   practice: 'practice',

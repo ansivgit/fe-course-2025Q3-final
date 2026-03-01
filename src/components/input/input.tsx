@@ -36,11 +36,9 @@ export const Input = ({
 
     const newValue = event.target.value;
     const isValid = validation(newValue);
-    setInputValue(newValue);
 
-    if (isValid) {
-      onInputChange(newValue, isValid);
-    }
+    setInputValue(newValue);
+    onInputChange(newValue, isValid);
   };
 
   const handleBlur = (): void => {
