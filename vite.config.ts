@@ -17,4 +17,5 @@ export default defineConfig({
       '@': new URL('src', import.meta.url).pathname,
     },
   },
+  base: '/',
 });
