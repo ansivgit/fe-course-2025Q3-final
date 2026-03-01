@@ -29,8 +29,8 @@ export const LoginForm = () => {
   useEffect(() => {
     //! TODO: fix lint error
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setFormValid(checkFormValidity());
-  }, [errors.login, errors.password, loginValue, passwordValue, formErrorMessage]);
+    checkFormValidity();
+  }, [loginValue, passwordValue, formErrorMessage]);
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
@@ -40,24 +40,33 @@ export const LoginForm = () => {
 
       if (result.error) {
         setFormErrorMessage(result.error.message);
+        setFormValid(false);
       }
     }
   };
 
   const handleLoginChange = (value: string, isValid: boolean): void => {
+    setFormErrorMessage('');
+
     setLoginValue(value);
     setErrors((previous) => ({
       ...previous,
       login: !isValid,
     }));
+
+    setFormValid(checkFormValidity());
   };
 
   const handlePasswordChange = (value: string, isValid: boolean): void => {
+    setFormErrorMessage('');
+
     setPasswordValue(value);
     setErrors((previous) => ({
       ...previous,
       password: !isValid,
     }));
+
+    setFormValid(checkFormValidity());
   };
 
   return (
