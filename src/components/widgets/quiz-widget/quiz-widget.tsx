@@ -1,3 +1,5 @@
+import classNames from 'classnames/bind';
+import { type ReactElement, useState } from 'react';
 import { Button } from '@/components/button/button';
 import { Paragraph } from '@/components/paragraph/paragraph';
 import { Subtitle } from '@/components/subtitle/subtitle';
@@ -7,14 +9,11 @@ import { ALPHABET } from '@/constants/constants';
 
 import type { QuizPayload, WidgetProps } from '@/types/widgets';
 
-import classNames from 'classnames/bind';
-import type { ReactElement } from 'react';
-import { useState } from 'react';
 import styles from './quiz-widget.module.css';
 
 const cx = classNames.bind(styles);
 
-export function Quiz({ widget, onAnswer, onNext }: WidgetProps): ReactElement {
+export function Quiz({ widget, onAnswer, onNext }: WidgetProps) {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
 

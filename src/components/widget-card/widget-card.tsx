@@ -1,11 +1,11 @@
+import classNames from 'classnames/bind';
+import type { ComponentType, SVGProps } from 'react';
+import { Link } from 'react-router-dom';
 import { Paragraph } from '@/components/paragraph/paragraph';
 import { Subtitle } from '@/components/subtitle/subtitle';
-import styles from '@/components/widget-card/widget-card.module.css';
 import { ROUTES } from '@/constants/constants';
 
-import classNames from 'classnames/bind';
-import type { ComponentType, ReactElement, SVGProps } from 'react';
-import { Link } from 'react-router-dom';
+import styles from './widget-card.module.css';
 
 const cx = classNames.bind(styles);
 
@@ -27,7 +27,7 @@ type WidgetCardProps = {
   widget: WidgetCard;
 };
 
-export const WidgetCard = ({ widget }: WidgetCardProps): ReactElement => {
+export const WidgetCard = ({ widget }: WidgetCardProps) => {
   const { name, image: Icon, heading, subheading, tasks, time, color = 'purple' } = widget;
   const path = `/${ROUTES.practice}/${name}`;
 

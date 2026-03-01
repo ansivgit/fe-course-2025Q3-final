@@ -1,7 +1,6 @@
+import classNames from 'classnames/bind';
 import { LogoIcon } from '@/assets/icons';
 
-import classNames from 'classnames/bind';
-import type { ReactElement } from 'react';
 import styles from './logo.module.css';
 
 const cx = classNames.bind(styles);
@@ -12,7 +11,7 @@ type LogoProps = {
   onClick?: (event: Event) => void;
 };
 
-export const Logo = ({ className = '', size = 'default', onClick }: LogoProps): ReactElement => {
+export const Logo = ({ className = '', size = 'default', onClick }: LogoProps) => {
   return (
     <a
       href="/"

@@ -1,7 +1,6 @@
-import styles from '@/components/paragraph/paragraph.module.css';
-
 import classNames from 'classnames/bind';
-import type { ReactElement } from 'react';
+
+import styles from './paragraph.module.css';
 
 const cx = classNames.bind(styles);
 
@@ -9,6 +8,6 @@ type ParagraphProps = {
   text: string;
 };
 
-export const Paragraph = ({ text }: ParagraphProps): ReactElement => {
+export const Paragraph = ({ text }: ParagraphProps) => {
   return <p className={cx('paragraph')}>{text}</p>;
 };

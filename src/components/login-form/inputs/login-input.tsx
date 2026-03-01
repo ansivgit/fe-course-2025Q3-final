@@ -1,11 +1,9 @@
 import { LoginIcon } from '@/assets/icons';
 import { validateLogin } from '@/utils/login-validation';
 
-import type { ReactElement } from 'react';
-import type { InputProps } from '../../input/input';
-import { Input } from '../../input/input';
+import { Input, type InputProps } from '../../input/input';
 
-export const LoginInput = ({ onInputChange }: Pick<InputProps, 'onInputChange'>): ReactElement => {
+export const LoginInput = ({ onInputChange }: Pick<InputProps, 'onInputChange'>) => {
   return (
     <Input
       name="login"

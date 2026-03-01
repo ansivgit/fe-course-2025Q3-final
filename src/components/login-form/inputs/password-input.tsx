@@ -1,14 +1,10 @@
+import { useState } from 'react';
 import { EyeIcon, EyeOffIcon, PasswordIcon } from '@/assets/icons';
 import { validatePassword } from '@/utils/login-validation';
 
-import type { ReactElement } from 'react';
-import { useState } from 'react';
-import type { InputProps } from '../../input/input';
-import { Input } from '../../input/input';
+import { Input, type InputProps } from '../../input/input';
 
-export const PasswordInput = ({
-  onInputChange,
-}: Pick<InputProps, 'onInputChange'>): ReactElement => {
+export const PasswordInput = ({ onInputChange }: Pick<InputProps, 'onInputChange'>) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleVisibility = (): void => {

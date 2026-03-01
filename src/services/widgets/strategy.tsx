@@ -1,9 +1,7 @@
+import { createRoot, type Root } from 'react-dom/client';
 import { Quiz } from '@/components/widgets/quiz-widget/quiz-widget';
 
 import type { Answer, ValidationResult, Widget, WidgetStrategy } from '@/types/widgets';
-
-import type { Root } from 'react-dom/client';
-import { createRoot } from 'react-dom/client';
 
 const roots = new WeakMap<HTMLDivElement, Root>();
 

@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
-import type { ChangeEvent, ReactElement, ReactNode } from 'react';
-import { useState } from 'react';
+import { type ChangeEvent, type ReactNode, useState } from 'react';
+
 import styles from './input.module.css';
 
 const cx = classNames.bind(styles);
@@ -27,7 +27,7 @@ export const Input = ({
   onInputChange,
   validation,
   errorMessage,
-}: InputProps): ReactElement => {
+}: InputProps) => {
   const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState('');
 

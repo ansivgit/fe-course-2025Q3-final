@@ -1,7 +1,7 @@
-import styles from '@/components/button/button.module.css';
-
 import classNames from 'classnames/bind';
-import type { MouseEventHandler, ReactElement, ReactNode } from 'react';
+import type { MouseEventHandler, ReactNode } from 'react';
+
+import styles from './button.module.css';
 
 const cx = classNames.bind(styles);
 
@@ -29,7 +29,7 @@ export const Button = ({
   isActive = false,
   disabled = false,
   ...rest
-}: ButtonProps): ReactElement => {
+}: ButtonProps) => {
   return (
     <button
       type={type}
