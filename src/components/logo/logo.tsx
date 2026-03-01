@@ -1,4 +1,4 @@
-import LogoIcon from '@/assets/icons/logo.svg';
+import { LogoIcon } from '@/assets/icons';
 
 import classNames from 'classnames/bind';
 import type { ReactElement } from 'react';
@@ -23,7 +23,7 @@ export const Logo = ({ className = '', size = 'default', onClick }: LogoProps): 
       }}
     >
       <div className={cx('logo-icon-wrapper')}>
-        <img src={LogoIcon} alt="TANDEM logo" className={cx('logo-svg')} />
+        <LogoIcon className={cx('logo-svg')} />
       </div>
       <span className={cx('logo-label')}>Tandem</span>
     </a>
