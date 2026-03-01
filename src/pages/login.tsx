@@ -1,10 +1,18 @@
+// import { useNavigate } from 'react-router-dom';
+// import { Button } from '@/components/button/button';
+// import { Layout } from '@/components/layout/layout';
+
 import { LoginForm } from '@/components/login-form/login-form';
 import { Logo } from '@/components/logo/logo';
 import { Title } from '@/components/title/title';
 
-import type { ReactElement } from 'react';
+export const Login = () => {
+  // const navigate = useNavigate();
 
-export const Login = (): ReactElement => {
+  // const handleLogin = () => {
+  //   void navigate(`/${ROUTES.practice}`);
+  // };
+
   return (
     <div className="center">
       <div className={'title-section'}>

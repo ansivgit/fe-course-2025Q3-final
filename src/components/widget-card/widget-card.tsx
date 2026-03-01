@@ -1,17 +1,18 @@
+import classNames from 'classnames/bind';
+import type { ComponentType, SVGProps } from 'react';
+import { Link } from 'react-router-dom';
 import { Paragraph } from '@/components/paragraph/paragraph';
 import { Subtitle } from '@/components/subtitle/subtitle';
-import styles from '@/components/widget-card/widget-card.module.css';
 import { ROUTES } from '@/constants/constants';
 
-import classNames from 'classnames/bind';
-import type { ComponentType, ReactElement, SVGProps } from 'react';
+import styles from './widget-card.module.css';
 
 const cx = classNames.bind(styles);
 
 import { ArrowIcon, ClockIcon, LightningIcon } from '@/assets/icons';
 
-type WidgetCardProps = {
-  name?: string;
+type WidgetCard = {
+  name: string;
   image: ComponentType<SVGProps<SVGSVGElement>>;
   heading: string;
   subheading: string;
@@ -22,26 +23,16 @@ type WidgetCardProps = {
 
 type WidgetCardColor = 'purple' | 'teal' | 'pink';
 
-export const WidgetCard = ({
-  name,
-  image: Icon,
-  heading,
-  subheading,
-  tasks,
-  time,
-  color = 'purple',
-}: WidgetCardProps): ReactElement => {
+type WidgetCardProps = {
+  widget: WidgetCard;
+};
+
+export const WidgetCard = ({ widget }: WidgetCardProps) => {
+  const { name, image: Icon, heading, subheading, tasks, time, color = 'purple' } = widget;
   const path = `/${ROUTES.practice}/${name}`;
 
   return (
-    <a
-      href="/"
-      onClick={(event) => {
-        event.preventDefault();
-        console.log(path);
-      }}
-      className={cx('widget-card')}
-    >
+    <Link to={path} className={cx('widget-card')}>
       <div className={cx('image-container', color)}>
         <div className={cx('widget-image')}>
           <Icon className={cx(color)} />
@@ -72,6 +63,6 @@ export const WidgetCard = ({
           <ArrowIcon />
         </div>
       </div>
-    </a>
+    </Link>
   );
 };

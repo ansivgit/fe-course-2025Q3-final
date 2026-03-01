@@ -1,67 +1,57 @@
 import classNames from 'classnames/bind';
-import type { ChangeEvent, Dispatch, ReactElement, ReactNode, SetStateAction } from 'react';
-import { useState } from 'react';
+import { type ChangeEvent, type ReactNode, useState } from 'react';
+
 import styles from './input.module.css';
 
 const cx = classNames.bind(styles);
 
-type FormState = {
-  login: boolean;
-  password: boolean;
-};
-
-type InputProps = {
+export type InputProps = {
   name: string;
-  value: string;
   label?: string;
   type?: 'text' | 'password';
   placeholder?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
-  onInputChange: (value: string) => void;
-  setFormState: Dispatch<SetStateAction<FormState>>;
+  onInputChange: (value: string, isValid: boolean) => void;
   validation: (value: string) => boolean;
   errorMessage: string;
 };
 
 export const Input = ({
   name,
-  value,
   label,
   type = 'text',
   placeholder = '',
   leftIcon,
   rightIcon,
   onInputChange,
-  setFormState,
   validation,
   errorMessage,
-}: InputProps): ReactElement => {
+}: InputProps) => {
+  const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const newValue = event.target.value;
-    onInputChange(newValue);
+    setInputError('');
 
+    const newValue = event.target.value;
     const isValid = validation(newValue);
 
-    setFormState((previous) => ({
-      ...previous,
-      [name]: !isValid,
-    }));
-
-    setInputError('');
+    setInputValue(newValue);
+    onInputChange(newValue, isValid);
   };
 
   const handleBlur = (): void => {
-    const isValid = validation(value);
+    const isValid = validation(inputValue);
 
-    setFormState((previous) => ({
-      ...previous,
-      [name]: !isValid,
-    }));
+    if (isValid) {
+      setInputError('');
+      onInputChange(inputValue, isValid);
 
-    setInputError(isValid ? '' : errorMessage);
+      return;
+    }
+
+    setInputError(errorMessage);
   };
 
   return (
@@ -74,7 +64,7 @@ export const Input = ({
 
           <input
             name={name}
-            value={value}
+            value={inputValue}
             type={type}
             placeholder={placeholder}
             onChange={handleChange}

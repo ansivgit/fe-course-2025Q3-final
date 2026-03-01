@@ -1,48 +1,31 @@
+import { useState } from 'react';
 import { EyeIcon, EyeOffIcon, PasswordIcon } from '@/assets/icons';
-import { Input } from '@/components/input/input';
 import { validatePassword } from '@/utils/login-validation';
 
-import type { FormState } from '@/types/user';
+import { Input, type InputProps } from '../../input/input';
 
-import type { Dispatch, ReactElement, SetStateAction } from 'react';
+export const PasswordInput = ({ onInputChange }: Pick<InputProps, 'onInputChange'>) => {
+  const [showPassword, setShowPassword] = useState(false);
 
-type PasswordProps = {
-  value: string;
-  setValue: (value: string) => void;
-  showPassword: boolean;
-  toggleShowPassword: () => void;
-  setServerError: (value: string) => void;
-  setFormState: Dispatch<SetStateAction<FormState>>;
-};
+  const toggleVisibility = (): void => {
+    setShowPassword((previous) => !previous);
+  };
 
-export const PasswordInput = ({
-  value,
-  setValue,
-  showPassword,
-  toggleShowPassword,
-  setServerError,
-  setFormState,
-}: PasswordProps): ReactElement => {
   return (
     <Input
       name="password"
-      value={value}
       label="Password"
       placeholder="Enter your password"
       type={showPassword ? 'text' : 'password'}
-      onInputChange={(value) => {
-        setValue(value);
-        setServerError('');
-      }}
-      setFormState={setFormState}
-      validation={validatePassword}
       leftIcon={<PasswordIcon />}
       rightIcon={
-        <button type="button" onClick={toggleShowPassword}>
+        <button type="button" onClick={toggleVisibility}>
           {showPassword ? <EyeOffIcon /> : <EyeIcon />}
         </button>
       }
+      validation={validatePassword}
       errorMessage="At least 8 chars, 1 number"
+      onInputChange={onInputChange}
     />
   );
 };

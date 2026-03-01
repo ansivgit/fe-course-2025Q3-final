@@ -1,38 +1,18 @@
 import { LoginIcon } from '@/assets/icons';
-import { Input } from '@/components/input/input';
 import { validateLogin } from '@/utils/login-validation';
 
-import type { FormState } from '@/types/user';
+import { Input, type InputProps } from '../../input/input';
 
-import type { Dispatch, ReactElement, SetStateAction } from 'react';
-
-type LoginProps = {
-  value: string;
-  setValue: (value: string) => void;
-  setServerError: (value: string) => void;
-  setFormState: Dispatch<SetStateAction<FormState>>;
-};
-
-export const LoginInput = ({
-  value,
-  setValue,
-  setServerError,
-  setFormState,
-}: LoginProps): ReactElement => {
+export const LoginInput = ({ onInputChange }: Pick<InputProps, 'onInputChange'>) => {
   return (
     <Input
       name="login"
-      value={value}
       label="Email"
       placeholder="Enter your email"
-      onInputChange={(value) => {
-        setServerError('');
-        setValue(value);
-      }}
-      setFormState={setFormState}
-      validation={validateLogin}
       leftIcon={<LoginIcon />}
+      validation={validateLogin}
       errorMessage="Invalid email"
+      onInputChange={onInputChange}
     />
   );
 };

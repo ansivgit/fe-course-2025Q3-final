@@ -1,24 +1,23 @@
-import '@/styles/index.css';
-
+import { Route, Routes } from 'react-router-dom';
 import { Login } from '@/pages/login';
 import { NotFound } from '@/pages/not-found';
-import { Practice } from '@/pages/practice';
+import { Practice } from '@/pages/practice/practice';
+import { Register } from '@/pages/register';
+import { WidgetPage } from '@/pages/widgets/widget';
 import { ROUTES } from '@/constants/constants';
+import './styles/index.css';
 
-import type { ReactElement } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { Register } from './pages/register';
-
-export function App(): ReactElement {
+export function App() {
   return <AppRouter />;
 }
 
-export const AppRouter = (): ReactElement => (
+export const AppRouter = () => (
   <Routes>
     <Route path={'/'} element={<Login />} />
     <Route path={ROUTES.login} element={<Login />} />
     <Route path={ROUTES.register} element={<Register />} />
     <Route path={ROUTES.practice} element={<Practice />} />
+    <Route path={`${ROUTES.practice}/:widgetId`} element={<WidgetPage />} />
     <Route path={ROUTES.notFound} element={<NotFound />} />
   </Routes>
 );
