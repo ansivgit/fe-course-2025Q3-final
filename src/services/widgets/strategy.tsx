@@ -1,25 +1,33 @@
+import { Quiz } from '@/components/widgets/quiz-widget/quiz-widget';
+
 import type { Answer, ValidationResult, Widget, WidgetStrategy } from '@/types/widgets';
+
+import type { Root } from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
+
+const roots = new WeakMap<HTMLDivElement, Root>();
 
 export const quizStrategy: WidgetStrategy<Widget, Answer> = {
   type: 'quiz',
 
-  run: (widget, _onAnswer) => {
-    setTimeout(() => {
-      console.log('Question:', widget.payload.question);
-      console.log('Options:');
+  run: (widget: Widget & { type: 'quiz' }, onAnswer, container?: HTMLDivElement) => {
+    if (!container) {
+      return;
+    }
 
-      widget.payload.options.forEach((opt) => {
-        console.log(`${opt.name} - ${opt.value}`);
-      });
+    let root = roots.get(container);
+    if (!root) {
+      root = createRoot(container);
+      roots.set(container, root);
+    }
 
-      const correctAnswersIds = widget.payload.correctAnswersIds.map((id) => `'${id}'`);
+    const handleNext = (): void => {
+      root.unmount();
+      roots.delete(container);
+    };
 
-      console.log(
-        `➡ To answer, call: answerWidget('${widget.id}', { selectedIds: [${correctAnswersIds.join(
-          ', ',
-        )}] })`,
-      );
-    }, 0);
+    root.render(<Quiz widget={widget} onAnswer={onAnswer} onNext={handleNext} />);
+    return container;
   },
 
   validate: (widget, answer) => {
@@ -38,12 +46,6 @@ export const quizStrategy: WidgetStrategy<Widget, Answer> = {
     });
 
     const isCorrect = Object.values(result).every((state) => state === 'correct');
-
-    console.log('Selected:', selectedIds);
-    console.log('Boolean result:', isCorrect ? '✅ Correct' : '❌ Wrong');
-    console.log('Validation result:', result);
-    console.log('Explanation:', widget.payload.explanation);
-    console.log('---');
 
     return { isCorrect, result };
   },

@@ -8,6 +8,7 @@ export type Widget = {
 };
 
 export type WidgetOption = {
+  id: string;
   name: string;
   value: string;
 };
@@ -29,7 +30,12 @@ export type WidgetAnswerMap = {
 
 export type WidgetStrategy<T extends Widget, A> = {
   type: T['type'];
-  run(widget: T, onAnswer: (answer: A) => void): void;
+  run(
+    widget: T,
+    onAnswer: (answer: A) => void,
+    parentContainer?: HTMLElement,
+    nextWidget?: () => void,
+  ): void;
   validate(widget: Widget, answer: Answer): ValidateReturn;
 };
 
@@ -40,4 +46,10 @@ export type ValidationResult = Record<string, OptionValidationState>;
 export type ValidateReturn = {
   isCorrect: boolean;
   result: ValidationResult;
+};
+
+export type WidgetProps = {
+  widget: Widget & { type: 'quiz' };
+  onAnswer: (answer: WidgetAnswerMap[WidgetType]) => void;
+  onNext?: () => void;
 };
