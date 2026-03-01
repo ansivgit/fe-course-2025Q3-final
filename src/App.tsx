@@ -1,19 +1,17 @@
-import '@/styles/index.css';
-
+import { Route, Routes } from 'react-router-dom';
 import { Login } from '@/pages/login';
 import { NotFound } from '@/pages/not-found';
 import { Practice } from '@/pages/practice/practice';
 import { WidgetPage } from '@/pages/widgets/widget';
 import { ROUTES } from '@/constants/constants';
 
-import type { ReactElement } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import './styles/index.css';
 
-export function App(): ReactElement {
+export function App() {
   return <AppRouter />;
 }
 
-export const AppRouter = (): ReactElement => (
+export const AppRouter = () => (
   <Routes>
     <Route path={'/'} element={<Login />} />
     <Route path={ROUTES.login} element={<Login />} />

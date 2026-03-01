@@ -1,8 +1,4 @@
-.input-wrapper {
-  margin-bottom: 20px;
-}
-
-.input-label {
+.input-label span {
   display: block;
   color: var(--color-white);
   font-weight: 500;
@@ -23,6 +19,7 @@
   border: 1px solid var(--color-gray-800);
   font-size: 0.9rem;
   width: 100%;
+  outline: 2px solid transparent;
   transition: all 0.3s ease;
 
   &.has-left {
@@ -35,7 +32,7 @@
 
   &:focus {
     outline: 2px solid var(--color-purple-300);
-    border-color: transparent;
+    border: 1px solid transparent;
   }
 }
 
@@ -57,5 +54,21 @@
 
   img {
     width: 20px;
+  }
+}
+
+.error {
+  min-height: 1.2rem;
+  color: var(--color-red-500);
+  font-weight: var(--font-weight-bold);
+  font-size: 0.7rem;
+  margin: 0.5rem 0;
+  line-height: 1.2;
+  max-width: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &:not(:empty) {
+    opacity: 1;
   }
 }

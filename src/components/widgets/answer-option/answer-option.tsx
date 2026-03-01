@@ -1,8 +1,8 @@
+import classNames from 'classnames/bind';
+import type { ReactElement } from 'react';
 import { CheckCircleIcon, ErrorCircleIcon } from '@/assets/icons';
 import type { OptionStatus } from '@/constants/constants';
 
-import classNames from 'classnames/bind';
-import type { ReactElement } from 'react';
 import styles from './answer-option.module.css';
 
 const cx = classNames.bind(styles);
@@ -22,16 +22,10 @@ const statusIcon: Record<AnswerOptionProps['status'], ReactElement | null> = {
   wrong: <ErrorCircleIcon />,
 };
 
-export function AnswerOption({
-  option,
-  label,
-  status,
-  onOptionClick,
-}: AnswerOptionProps): ReactElement {
+export function AnswerOption({ option, label, status, onOptionClick }: AnswerOptionProps) {
   const Icon: ReactElement | null = status === 'none' ? null : statusIcon[status];
 
   return (
-    // biome-ignore lint/a11y/useKeyWithClickEvents: clickable list item
     <li className={cx('option', { [status]: true })} onClick={onOptionClick}>
       <div className={cx('option-content')}>
         <span className={cx('letter')}>{label}</span>
