@@ -1,3 +1,6 @@
+import classNames from 'classnames/bind';
+import { useEffect, useRef, useState } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
 import { Layout } from '@/components/layout/layout';
 import { Paragraph } from '@/components/paragraph/paragraph';
 import { Title } from '@/components/title/title';
@@ -6,16 +9,12 @@ import { ROUTES } from '@/constants/constants';
 
 import type { Widget } from '@/types/widgets';
 
-import classNames from 'classnames/bind';
-import type { ReactElement } from 'react';
-import { useEffect, useRef, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
 import { widgetPageConfig } from './widget.config';
 import styles from './widget.module.css';
 
 const cx = classNames.bind(styles);
 
-export function WidgetPage(): ReactElement {
+export function WidgetPage() {
   const { widgetId } = useParams<{ widgetId: string }>();
 
   const widgetContainer = useRef<HTMLDivElement>(null);

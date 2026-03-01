@@ -62,11 +62,13 @@ export default defineConfig([
       '@typescript-eslint/no-unsafe-assignment': 'off', //* switched off for now
       '@typescript-eslint/no-unsafe-call': 'off', //* switched off for now
 
+      'react-hooks/exhaustive-deps': 'warn',
+
       // 🟡 Good practices
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-magic-numbers': ['error', { ignore: [0, 1, 2, -1] }],
       'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
-      'max-lines-per-function': ['warn', { max: 60, skipBlankLines: true }],
+      'max-lines-per-function': ['warn', { max: 40, skipBlankLines: true, skipComments: true }],
       '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
       '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
       '@typescript-eslint/consistent-type-imports': [
@@ -140,6 +142,7 @@ export default defineConfig([
     files: ['**/*.tsx'],
     rules: {
       '@typescript-eslint/explicit-function-return-type': 'off',
+      'max-lines-per-function': ['warn', { max: 80, skipBlankLines: true, skipComments: true }],
     }
   },
   {

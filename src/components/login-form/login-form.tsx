@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
-import type { ReactElement, SyntheticEvent } from 'react';
-import { useEffect, useState } from 'react';
+import { type SyntheticEvent, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/button/button';
 import { login } from '@/services/api/auth';
@@ -12,7 +11,7 @@ import styles from './login-form.module.css';
 
 const cx = classNames.bind(styles);
 
-export const LoginForm = (): ReactElement => {
+export const LoginForm = () => {
   const [loginValue, setLoginValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [isFormValid, setFormValid] = useState(false);
@@ -27,8 +26,9 @@ export const LoginForm = (): ReactElement => {
     return Object.values(errors).every((error) => !error) && !!loginValue && !!passwordValue;
   };
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: should be fixed after biome & es-lint rules update
   useEffect(() => {
+    //! TODO: fix lint error
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFormValid(checkFormValidity());
   }, [errors.login, errors.password, loginValue, passwordValue, formErrorMessage]);
 
@@ -78,7 +78,7 @@ export const LoginForm = (): ReactElement => {
   );
 };
 
-const AuthToggle = (): ReactElement => {
+const AuthToggle = () => {
   const location = useLocation();
 
   const isRegisterPage = location.pathname === `/${ROUTES.register}`;
