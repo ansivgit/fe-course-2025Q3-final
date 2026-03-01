@@ -22,12 +22,7 @@ const statusIcon: Record<AnswerOptionProps['status'], ReactElement | null> = {
   wrong: <ErrorCircleIcon />,
 };
 
-export function AnswerOption({
-  option,
-  label,
-  status,
-  onOptionClick,
-}: AnswerOptionProps) {
+export function AnswerOption({ option, label, status, onOptionClick }: AnswerOptionProps) {
   const Icon: ReactElement | null = status === 'none' ? null : statusIcon[status];
 
   return (
