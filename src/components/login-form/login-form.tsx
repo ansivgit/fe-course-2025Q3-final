@@ -1,98 +1,95 @@
 import classNames from 'classnames/bind';
-import type { ChangeEvent, SyntheticEvent } from 'react';
-import { useState } from 'react';
-import mailIcon from '@/assets/icons/email.svg';
-import eyeIcon from '@/assets/icons/eye.svg';
-import eyeOffIcon from '@/assets/icons/eye-off.svg';
-import passwordIcon from '@/assets/icons/password.svg';
+import type { ReactElement, SyntheticEvent } from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Button } from '@/components/button/button';
+import { login } from '@/services/api/auth';
+import { ROUTES } from '@/constants/constants';
 
-import { Button } from '../button/button';
-import { Input } from '../input/input';
+import { LoginInput } from './inputs/login-input';
+import { PasswordInput } from './inputs/password-input';
 import styles from './login-form.module.css';
 
 const cx = classNames.bind(styles);
 
-type LoginFormProps = {
-  isRegistered?: boolean;
-};
+export const LoginForm = (): ReactElement => {
+  const [loginValue, setLoginValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [isFormValid, setFormValid] = useState(false);
+  const [errors, setErrors] = useState({ login: false, password: false });
+  const [formErrorMessage, setFormErrorMessage] = useState('');
 
-type AuthToggleProps = {
-  isRegistered: boolean;
-};
-
-export const LoginForm = ({ isRegistered = true }: LoginFormProps) => {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-
-  const toggleShowPassword = (): void => {
-    setShowPassword((previous) => !previous);
-  };
-
-  const handleLoginChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setLogin(event.target.value);
-  };
-
-  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setPassword(event.target.value);
-  };
-
-  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    if (!login || !password) {
-      console.warn('Please enter email and password');
-      return;
+  const checkFormValidity = (): boolean => {
+    if (formErrorMessage) {
+      return false;
     }
 
-    console.warn(`Logging in with\nEmail: ${login}\nPassword: ${password}`);
+    return Object.values(errors).every((error) => !error) && !!loginValue && !!passwordValue;
+  };
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: should be fixed after biome & es-lint rules update
+  useEffect(() => {
+    setFormValid(checkFormValidity());
+  }, [errors.login, errors.password, loginValue, passwordValue, formErrorMessage]);
+
+  const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>): Promise<void> => {
+    event.preventDefault();
+
+    if (isFormValid) {
+      const result = await login({ login: loginValue, password: passwordValue });
+
+      if (result.error) {
+        setFormErrorMessage(result.error.message);
+      }
+    }
+  };
+
+  const handleLoginChange = (value: string, isValid: boolean): void => {
+    setLoginValue(value);
+    setErrors((previous) => ({
+      ...previous,
+      login: !isValid,
+    }));
+  };
+
+  const handlePasswordChange = (value: string, isValid: boolean): void => {
+    setPasswordValue(value);
+    setErrors((previous) => ({
+      ...previous,
+      password: !isValid,
+    }));
   };
 
   return (
     <div>
       <form className={cx('form')} onSubmit={handleSubmit}>
-        <Input
-          id="login"
-          label="Email"
-          placeholder="Enter your email"
-          value={login}
-          onChange={handleLoginChange}
-          leftIcon={<img src={mailIcon} alt="" />}
-        />
+        <LoginInput onInputChange={handleLoginChange} />
+        <PasswordInput onInputChange={handlePasswordChange} />
 
-        <Input
-          id="password"
-          label="Password"
-          type={showPassword ? 'text' : 'password'}
-          placeholder="Enter your password"
-          value={password}
-          onChange={handlePasswordChange}
-          leftIcon={<img src={passwordIcon} alt="" />}
-          rightIcon={
-            <button type="button" onClick={toggleShowPassword}>
-              <img src={showPassword ? eyeOffIcon : eyeIcon} alt="" />
-            </button>
-          }
-        />
+        <Button type="submit" size="large" disabled={!isFormValid}>
+          Login
+        </Button>
 
-        <Button size="large">Login</Button>
+        <p className={cx('error')}>{formErrorMessage}</p>
       </form>
-      <AuthToggle isRegistered={isRegistered} />
+
+      <AuthToggle />
     </div>
   );
 };
 
-export const AuthToggle = ({ isRegistered }: AuthToggleProps) => {
-  const text = isRegistered ? 'No account?' : 'Already have an account?';
+const AuthToggle = (): ReactElement => {
+  const location = useLocation();
 
-  const linkText = isRegistered ? 'Register' : 'Login';
-  const linkHref = isRegistered ? '/register' : '/login';
+  const isRegisterPage = location.pathname === `/${ROUTES.register}`;
 
   return (
-    <div className={cx('form-footer')}>
-      <span>{text} </span>
-      <a href={linkHref} className={cx('link')}>
-        {linkText}
-      </a>
+    <div className={cx('form-link')}>
+      <span>{isRegisterPage ? 'Already have an account?' : 'No account?'} </span>
+
+      <Link to={isRegisterPage ? `/${ROUTES.login}` : `/${ROUTES.register}`}>
+        {isRegisterPage ? 'Login' : 'Register'}
+      </Link>
     </div>
   );
 };

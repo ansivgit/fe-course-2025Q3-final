@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import type { ComponentType, SVGProps } from 'react';
+import { Link } from 'react-router-dom';
 import { Paragraph } from '@/components/paragraph/paragraph';
 import { Subtitle } from '@/components/subtitle/subtitle';
 import { ROUTES } from '@/constants/constants';
@@ -31,14 +32,7 @@ export const WidgetCard = ({ widget }: WidgetCardProps) => {
   const path = `/${ROUTES.practice}/${name}`;
 
   return (
-    <a
-      href="/"
-      onClick={(event) => {
-        event.preventDefault();
-        console.log(path);
-      }}
-      className={cx('widget-card')}
-    >
+    <Link to={path} className={cx('widget-card')}>
       <div className={cx('image-container', color)}>
         <div className={cx('widget-image')}>
           <Icon className={cx(color)} />
@@ -69,6 +63,6 @@ export const WidgetCard = ({ widget }: WidgetCardProps) => {
           <ArrowIcon />
         </div>
       </div>
-    </a>
+    </Link>
   );
 };

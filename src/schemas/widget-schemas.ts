@@ -6,7 +6,7 @@ export const QuizWidgetSchema = z.object({
   tags: z.array(z.string()),
   payload: z.object({
     question: z.string(),
-    options: z.array(z.object({ name: z.string(), value: z.string() })),
+    options: z.array(z.object({ id: z.string(), name: z.string(), value: z.string() })),
     correctAnswersIds: z.array(z.string()),
     explanation: z.string().optional(),
   }),

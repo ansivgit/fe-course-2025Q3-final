@@ -1,0 +1,105 @@
+.option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid var(--color-gray-800);
+  border-radius: 0.75rem;
+  background: var(--color-gray-900);
+  transition: all var(--transition-default) var(--ease-in-cubic);
+  cursor: pointer;
+
+  &.selected {
+    background: hsla(from var(--color-purple-500) h s l / var(--opacity-15));
+    border: 1px solid
+      hsla(from var(--color-purple-500) h s l / var(--opacity-50));
+  }
+
+  &.wrong {
+    background: hsla(from var(--color-red-500) h s l / var(--opacity-15));
+    border: 1px solid hsla(from var(--color-red-500) h s l / var(--opacity-50));
+  }
+
+  &.correct {
+    background: hsla(from var(--color-green-600) h s l / var(--opacity-15));
+    border: 1px solid
+      hsla(from var(--color-green-600) h s l / var(--opacity-50));
+  }
+
+  &.missed {
+    background: hsla(from var(--color-yellow-500) h s l / var(--opacity-10));
+    border: 1px solid
+      hsla(from var(--color-yellow-500) h s l / var(--opacity-50));
+  }
+
+  &.selected .letter {
+    background: hsla(from var(--color-purple-500) h s l / var(--opacity-30));
+    color: var(--color-purple-500);
+  }
+
+  &.wrong .letter {
+    background: hsla(from var(--color-red-500) h s l / var(--opacity-30));
+    color: var(--color-red-500);
+  }
+
+  &.correct .letter {
+    background: hsla(from var(--color-green-600) h s l / var(--opacity-30));
+    color: var(--color-green-400);
+  }
+
+  &.missed .letter {
+    background: hsla(from var(--color-yellow-500) h s l / var(--opacity-30));
+    color: var(--color-yellow-500);
+  }
+}
+
+.option-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background: var(--color-gray-800);
+  color: var(--color-gray-500);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 500;
+  transition: all var(--transition-default) var(--ease-in-cubic);
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+
+  &.selected {
+    color: var(--color-purple-500);
+  }
+
+  &.wrong {
+    color: var(--color-red-500);
+  }
+
+  &.correct {
+    color: var(--color-green-400);
+  }
+
+  &.missed {
+    color: var(--color-yellow-500);
+  }
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}

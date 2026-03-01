@@ -1,28 +1,64 @@
 .form {
-  max-width: 450px;
+  width: 450px;
   border: 1px solid hsl(280 100% 65% / 0.5);
   border-radius: 1rem;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 0;
   background-color: var(--color-gray-900);
+
+  @media (max-width: 768px) {
+    & {
+      width: 100%;
+      padding: 1rem;
+    }
+  }
 }
 
-.form-footer {
+.form-link {
   max-width: 450px;
   text-align: center;
   font-size: 0.875rem;
   line-height: 1.4;
   color: var(--color-gray-500);
   margin-top: 1.5rem;
+
+  @media (max-width: 768px) {
+    & {
+      font-size: 0.8rem;
+      margin-top: 1rem;
+    }
+  }
+
+  & a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--color-purple-300);
+    transition: color 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-purple-500);
+    }
+  }
 }
 
-.link {
-  text-decoration: none;
-  font-weight: 500;
-  color: var(--color-purple-300);
-  transition: color 0.3s ease;
-  cursor: pointer;
+.error {
+  min-height: 1.2rem;
+  color: var(--color-red-500);
+  font-weight: var(--font-weight-bold);
+  font-size: 0.7rem;
+  margin: 0.5rem 0;
+  line-height: 1.2;
+  max-width: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 
-  &:hover {
-    color: var(--color-purple-500);
+  &:not(:empty) {
+    opacity: 1;
   }
+}
+
+.form svg {
+  width: 20px;
+  height: 20px;
 }

@@ -1,64 +1,86 @@
 import classNames from 'classnames/bind';
-import type { ChangeEvent, FocusEvent, ReactNode } from 'react';
+import type { ChangeEvent, ReactElement, ReactNode } from 'react';
+import { useState } from 'react';
 
 import styles from './input.module.css';
 
 const cx = classNames.bind(styles);
 
-type InputProps = {
-  id: string;
+export type InputProps = {
+  name: string;
   label?: string;
-  type?: 'text' | 'password' | 'email' | 'number';
+  type?: 'text' | 'password';
   placeholder?: string;
-  value?: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
-  className?: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  onInputChange: (value: string, isValid: boolean) => void;
+  validation: (value: string) => boolean;
+  errorMessage: string;
 };
 
 export const Input = ({
-  id,
+  name,
   label,
   type = 'text',
   placeholder = '',
-  value = '',
-  onChange = (): void => {
-    return;
-  },
-  onBlur = (event): void => {
-    console.warn('Validating email', event.target.value);
-  },
-  className = '',
   leftIcon,
   rightIcon,
-}: InputProps) => {
+  onInputChange,
+  validation,
+  errorMessage,
+}: InputProps): ReactElement => {
+  const [inputValue, setInputValue] = useState('');
+  const [inputError, setInputError] = useState('');
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setInputError('');
+
+    const newValue = event.target.value;
+    const isValid = validation(newValue);
+
+    setInputValue(newValue);
+    onInputChange(newValue, isValid);
+  };
+
+  const handleBlur = (): void => {
+    const isValid = validation(inputValue);
+
+    if (isValid) {
+      setInputError('');
+      onInputChange(inputValue, isValid);
+
+      return;
+    }
+
+    setInputError(errorMessage);
+  };
+
   return (
-    <div className={cx('input-wrapper', className)}>
-      {label && (
-        <label htmlFor={id} className={cx('input-label')}>
-          {label}
-        </label>
-      )}
-      <div className={cx('input-field')}>
-        {leftIcon && <span className={cx('input-icon', 'left')}>{leftIcon}</span>}
+    <>
+      <label className={cx('input-label')}>
+        {label && <span>{label}</span>}
 
-        <input
-          id={id}
-          type={type}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          onBlur={onBlur}
-          className={cx('input', {
-            'has-left': leftIcon,
-            'has-right': rightIcon,
-          })}
-        />
+        <div className={cx('input-field')}>
+          {leftIcon && <span className={cx('input-icon', 'left')}>{leftIcon}</span>}
 
-        {rightIcon && <span className={cx('input-icon', 'right')}>{rightIcon}</span>}
-      </div>
-    </div>
+          <input
+            name={name}
+            value={inputValue}
+            type={type}
+            placeholder={placeholder}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={cx('input', {
+              'has-left': leftIcon,
+              'has-right': rightIcon,
+            })}
+          />
+
+          {rightIcon && <span className={cx('input-icon', 'right')}>{rightIcon}</span>}
+        </div>
+      </label>
+
+      <p className={cx('error')}>{inputError}</p>
+    </>
   );
 };
