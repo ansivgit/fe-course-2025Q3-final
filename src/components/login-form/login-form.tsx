@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { type SyntheticEvent, useEffect, useState } from 'react';
+import { type SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/button/button';
 import { login } from '@/services/api/auth';
@@ -18,19 +18,18 @@ export const LoginForm = () => {
   const [errors, setErrors] = useState({ login: false, password: false });
   const [formErrorMessage, setFormErrorMessage] = useState('');
 
-  const checkFormValidity = (): boolean => {
+  const checkFormValidity = useCallback((): boolean => {
     if (formErrorMessage) {
       return false;
     }
 
     return Object.values(errors).every((error) => !error) && !!loginValue && !!passwordValue;
-  };
+  }, [errors, formErrorMessage, loginValue, passwordValue]);
 
   useEffect(() => {
     //! TODO: fix lint error
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     checkFormValidity();
-  }, [loginValue, passwordValue, formErrorMessage]);
+  }, [loginValue, passwordValue, formErrorMessage, checkFormValidity]);
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
