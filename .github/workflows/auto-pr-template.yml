@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v5
 
       - name: Extract branch info
         id: branch
@@ -26,7 +26,7 @@ jobs:
           echo "issue_number=$ISSUE_NUMBER" >> $GITHUB_OUTPUT
 
       - name: Set PR title to branch name
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const branchName = '${{ steps.branch.outputs.branch_name }}';
@@ -46,10 +46,10 @@ jobs:
               let description = issueTitle;
               const colonIndex = issueTitle.indexOf(': ');
               if (colonIndex !== -1) {
-                description = issueTitle.substring(colonIndex + 2); // +2 чтобы пропустить ": "
+                description = issueTitle.substring(colonIndex + 2);
               }
 
-              const afterNumber = branchName.substring(issueNumber.length + 1); // пропускаем "число-"
+              const afterNumber = branchName.substring(issueNumber.length + 1);
               const firstDash = afterNumber.indexOf('-');
               let type = 'task';
               if (firstDash !== -1) {
@@ -82,23 +82,6 @@ jobs:
               issue_number: context.payload.pull_request.number,
               assignees: [context.actor]
             });
-
-      # - name: Add reviewers
-      #   uses: actions/github-script@v8
-      #   with:
-      #     script: |
-      #       const reviewers = ['rika-milew', 'ViktorElenich', 'zena86'];
-      #       # const teamReviewers = ['team-slug'];
-
-      #       if (reviewers.length > 0 || teamReviewers.length > 0) {
-      #         await github.rest.pulls.requestReviewers({
-      #           owner: context.repo.owner,
-      #           repo: context.repo.repo,
-      #           pull_number: context.payload.pull_request.number,
-      #           reviewers: reviewers,
-      #           # team_reviewers: teamReviewers
-      #         });
-      #       }
 
       - name: Copy labels and replace placeholder in PR body
         if: steps.branch.outputs.issue_number != ''
