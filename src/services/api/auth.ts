@@ -20,7 +20,7 @@ export const login = async ({ login, password }: LoginCredentials): Promise<Logi
       console.error('Login API error:', result);
     }
 
-    console.warn(`User successfully logged in: ${login}`);
+    console.info(`User successfully logged in: ${login}`);
     return result;
   } catch (error) {
     console.error('Unexpected login error:', error);
