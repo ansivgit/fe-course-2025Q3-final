@@ -13,35 +13,6 @@
   }
 }
 
-.form-link {
-  max-width: 450px;
-  text-align: center;
-  font-size: 0.875rem;
-  line-height: 1.4;
-  color: var(--color-gray-500);
-  margin-top: 1.5rem;
-
-  @media (max-width: 768px) {
-    & {
-      font-size: 0.8rem;
-      margin-top: 1rem;
-    }
-  }
-
-  & a {
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    color: var(--color-purple-300);
-    transition: color 0.3s ease;
-    cursor: pointer;
-
-    &:hover {
-      color: var(--color-purple-500);
-    }
-  }
-}
-
 .error {
   min-height: 1.2rem;
   color: var(--color-red-500);

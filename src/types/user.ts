@@ -14,6 +14,8 @@ export type Session = unknown;
 
 export type LoginCredentials = Pick<User, 'login' | 'password'>;
 
+export type AuthFormFields = Pick<User, 'login' | 'password' | 'name'>;
+
 export type LoginResponse = {
   data: User | null;
   error: ErrorResponse | null;
