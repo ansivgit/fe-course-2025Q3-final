@@ -26,18 +26,17 @@ export const Auth = () => {
   const location = useLocation();
   const isRegisterPage = location.pathname === `/${ROUTES.register}`;
 
+  const page = isRegisterPage ? 'register' : 'login';
+
   return (
     <Layout>
       <div className={cx('page-container')}>
         <section className={cx('title-section')}>
-          <Title size="large">Welcome to the Tandem!</Title>
+          <Title size="large">Welcome to Tandem!</Title>
           <Paragraph text="Login or register to start learning"></Paragraph>
         </section>
-        {isRegisterPage ? (
-          <Paragraph text="Register form will be here soon"></Paragraph>
-        ) : (
-          <LoginForm />
-        )}
+        {/* TODO: change this construction to use the page parameter */}
+        {isRegisterPage ? <LoginForm page={page} /> : <LoginForm />}
         <AuthToggle isRegisterPage={isRegisterPage} />
       </div>
     </Layout>
