@@ -1,8 +1,5 @@
 import js from '@eslint/js';
 import { defineConfig } from 'eslint/config';
-import react from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -28,21 +25,12 @@ export default defineConfig([
         tsconfigRootDir: import.meta.dirname,
       },
     },
-    plugins: {
-      'react': react,
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
-    },
-    settings: {
-      'react': { version: 'detect' },
-    },
+    settings: {},
     linterOptions: {
       noInlineConfig: true,
     },
     rules: {
       // 🔴 Mandatory
-      ...react.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -62,13 +50,11 @@ export default defineConfig([
       '@typescript-eslint/no-unsafe-assignment': 'off', //* switched off for now
       '@typescript-eslint/no-unsafe-call': 'off', //* switched off for now
 
-      'react-hooks/exhaustive-deps': 'warn',
-
       // 🟡 Good practices
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-magic-numbers': ['error', { ignore: [0, 1, 2, -1] }],
       'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
-      'max-lines-per-function': ['warn', { max: 40, skipBlankLines: true, skipComments: true }],
+      'max-lines-per-function': ['warn', { max: 60, skipBlankLines: true }],
       '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
       '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
       '@typescript-eslint/consistent-type-imports': [
@@ -118,32 +104,16 @@ export default defineConfig([
       'max-len': ['warn', { code: 120, ignoreComments: true }],
 
       // 🔧 Switched off
-      'boundaries/element-types': 'off',
-      'no-undef': 'off',
-      'no-restricted-exports': 'off',
-      'react/prop-types': 'off',
-      'react/react-in-jsx-scope': 'off',
-      'react-refresh/only-export-components': ['off', { allowConstantExport: true }],
-
-      '@typescript-eslint/no-misused-promises': 'off', //* switched off for now
-      '@typescript-eslint/restrict-template-expressions': 'off', //* switched off for now
-      '@typescript-eslint/no-inferrable-types': 'error',
-
       'unicorn/no-array-reduce': 'off',
       'unicorn/no-array-for-each': 'off',
       'unicorn/no-null': 'off',
-      'unicorn/no-useless-undefined': 'off',
       'unicorn/filename-case': 'off',
       'unicorn/number-literal-case': 'off',
       'unicorn/prefer-query-selector': 'off',
+      '@typescript-eslint/no-misused-promises': 'off', //* switched off for now
+      '@typescript-eslint/restrict-template-expressions': 'off', //* switched off for now
+      '@typescript-eslint/no-inferrable-types': 'error',
     },
-  },
-  {
-    files: ['**/*.tsx'],
-    rules: {
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      'max-lines-per-function': ['warn', { max: 80, skipBlankLines: true, skipComments: true }],
-    }
   },
   {
     ignores: [

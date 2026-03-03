@@ -17,21 +17,14 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-      "correctness": {
-        "useExhaustiveDependencies": "off"
-      },
       "style": {
         "useImportType": {
           "level": "error",
           "options": {
-            "style": "auto"
+            "style": "separatedType"
           }
         },
         "noDefaultExport": "error"
-      },
-      "a11y": {
-        "useFocusableInteractive": "off",
-        "useKeyWithClickEvents": "off"
       }
     }
   },
@@ -57,8 +50,6 @@
             "groups": [
               ":URL:",
               ":NODE:",
-              ":PACKAGE:",
-              ":PACKAGE_WITH_PROTOCOL:",
               [
                 "@/**",
                 "!@/types.ts",
@@ -86,7 +77,7 @@
                 "*.types.ts"
               ],
               ":BLANK_LINE:",
-              ["classnames/bind", "*.css"]
+              "*.css"
             ]
           }
         }

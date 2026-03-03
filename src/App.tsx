@@ -1,22 +1,15 @@
-import { Route, Routes } from 'react-router';
-import { Auth } from '@/pages/auth/auth';
-import { NotFound } from '@/pages/not-found';
-import { Practice } from '@/pages/practice/practice';
-import { WidgetPage } from '@/pages/widgets/widget';
-import { ROUTES } from '@/constants/constants';
-import './styles/index.css';
+// import styles from './App.module.css';
+import styles from '@/App.module.css';
 
-export function App() {
-  return <AppRouter />;
+import classNames from 'classnames/bind';
+import type { ReactElement } from 'react';
+
+const cx = classNames.bind(styles);
+
+export function App(): ReactElement {
+  return (
+    <div>
+      <h1 className={cx('title')}>Hello, Tandem</h1>
+    </div>
+  );
 }
-
-export const AppRouter = () => (
-  <Routes>
-    <Route path={'/'} element={<Auth />} />
-    <Route path={ROUTES.login} element={<Auth />} />
-    <Route path={ROUTES.register} element={<Auth />} />
-    <Route path={ROUTES.practice} element={<Practice />} />
-    <Route path={`${ROUTES.practice}/:widgetId`} element={<WidgetPage />} />
-    <Route path={ROUTES.notFound} element={<NotFound />} />
-  </Routes>
-);
