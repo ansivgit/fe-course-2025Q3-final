@@ -20,7 +20,7 @@ export function registerStrategy<T extends Widget>(
   strategies.set(strategy.type, strategy);
 }
 
-export async function runWidgets(widgets: Widget[]): Promise<void> {
+export async function runWidgets(widgets: Widget[], container?: HTMLElement): Promise<void> {
   for (const widget of widgets) {
     const strategy = strategies.get(widget.type);
     if (!strategy) {
@@ -30,7 +30,7 @@ export async function runWidgets(widgets: Widget[]): Promise<void> {
 
     const answer: WidgetAnswerMap[Widget['type']] = await new Promise((resolve) => {
       pendingAnswers[widget.id] = resolve;
-      strategy.run(widget, resolve);
+      strategy.run(widget, resolve, container);
     });
 
     widgetAnswers[widget.id] = answer;
@@ -49,11 +49,6 @@ export function answerWidget(
   }
   resolve(answer);
   pendingAnswers[widgetId] = undefined;
-}
-
-if (import.meta.env.DEV) {
-  // added to the global scope for testing the widget in the console
-  globalThis.answerWidget = answerWidget;
 }
 
 function isWidgetData(item: unknown): item is { type: string } {

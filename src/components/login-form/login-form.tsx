@@ -1,98 +1,95 @@
-import mailIcon from '@/assets/icons/email.svg';
-import eyeIcon from '@/assets/icons/eye.svg';
-import eyeOffIcon from '@/assets/icons/eye-off.svg';
-import passwordIcon from '@/assets/icons/password.svg';
-import { Button } from '@/components/button/button';
-
 import classNames from 'classnames/bind';
-import type { ChangeEvent, ReactElement, SyntheticEvent } from 'react';
-import { useState } from 'react';
-import { Input } from '../input/input';
+import { type SyntheticEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { Button } from '@/components/button/button';
+import { login, register } from '@/services/api/auth';
+import { ROUTES } from '@/constants/constants';
+
+import type { AuthFormFields } from '@/types/user';
+
+import { LoginInput } from './inputs/login-input';
+import { PasswordInput } from './inputs/password-input';
+import { UserNameInput } from './inputs/user-name-input';
 import styles from './login-form.module.css';
 
 const cx = classNames.bind(styles);
 
-type LoginFormProps = {
-  isRegistered?: boolean;
-};
+export const LoginForm = ({ page = 'login' }: { page?: string }) => {
+  const navigate = useNavigate();
 
-type AuthToggleProps = {
-  isRegistered: boolean;
-};
+  const [loginValue, setLoginValue] = useState('');
+  const [userNameValue, setUserNameValue] = useState('Anonymous');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [isFormValid, setFormValid] = useState(false);
+  const [errors, setErrors] = useState({ login: false, userName: false, password: false });
+  const [formErrorMessage, setFormErrorMessage] = useState('');
 
-export const LoginForm = ({ isRegistered = true }: LoginFormProps): ReactElement => {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const isRegisterPage = page === 'register';
 
-  const toggleShowPassword = (): void => {
-    setShowPassword((previous) => !previous);
-  };
-
-  const handleLoginChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setLogin(event.target.value);
-  };
-
-  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setPassword(event.target.value);
-  };
-
-  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    if (!login || !password) {
-      console.warn('Please enter email and password');
-      return;
+  const checkFormValidity = (): boolean => {
+    if (formErrorMessage) {
+      return false;
     }
 
-    console.warn(`Logging in with\nEmail: ${login}\nPassword: ${password}`);
+    return Object.values(errors).every((error) => !error) && !!loginValue && !!passwordValue;
+  };
+
+  useEffect(() => {
+    checkFormValidity();
+  }, [loginValue, passwordValue, formErrorMessage]);
+
+  const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>): Promise<void> => {
+    event.preventDefault();
+
+    if (isFormValid) {
+      const result = isRegisterPage
+        ? await register({ login: loginValue, name: userNameValue, password: passwordValue })
+        : await login({ login: loginValue, password: passwordValue });
+
+      if (result.error) {
+        setFormErrorMessage(result.error.message);
+        setFormValid(false);
+        void navigate(`/${ROUTES.practice}`); //! o nly for testing! remove this line!
+      } else if (result.data) {
+        void navigate(`/${ROUTES.practice}`);
+      } else {
+        console.error('Unexpected login result:', result);
+      }
+    }
+  };
+
+  const createFieldHandler = (
+    fieldName: keyof AuthFormFields,
+    setValue: (value: string) => void,
+  ) => {
+    return (value: string, isValid: boolean): void => {
+      setFormErrorMessage('');
+
+      setValue(value);
+      setErrors((previous) => ({
+        ...previous,
+        [fieldName]: !isValid,
+      }));
+
+      setFormValid(checkFormValidity());
+    };
   };
 
   return (
     <div>
       <form className={cx('form')} onSubmit={handleSubmit}>
-        <Input
-          id="login"
-          label="Email"
-          placeholder="Enter your email"
-          value={login}
-          onChange={handleLoginChange}
-          leftIcon={<img src={mailIcon} alt="" />}
-        />
+        <LoginInput onInputChange={createFieldHandler('login', setLoginValue)} />
+        {isRegisterPage && (
+          <UserNameInput onInputChange={createFieldHandler('name', setUserNameValue)} />
+        )}
+        <PasswordInput onInputChange={createFieldHandler('password', setPasswordValue)} />
 
-        <Input
-          id="password"
-          label="Password"
-          type={showPassword ? 'text' : 'password'}
-          placeholder="Enter your password"
-          value={password}
-          onChange={handlePasswordChange}
-          leftIcon={<img src={passwordIcon} alt="" />}
-          rightIcon={
-            <button type="button" onClick={toggleShowPassword}>
-              <img src={showPassword ? eyeOffIcon : eyeIcon} alt="" />
-            </button>
-          }
-        />
+        <Button type="submit" size="large" disabled={!isFormValid}>
+          Login
+        </Button>
 
-        <Button size="large">Login</Button>
+        <p className={cx('error')}>{formErrorMessage}</p>
       </form>
-      <AuthToggle isRegistered={isRegistered} />
-    </div>
-  );
-};
-
-export const AuthToggle = ({ isRegistered }: AuthToggleProps): ReactElement => {
-  const text = isRegistered ? 'No account?' : 'Already have an account?';
-
-  const linkText = isRegistered ? 'Register' : 'Login';
-  const linkHref = isRegistered ? '/register' : '/login';
-
-  return (
-    <div className={cx('form-footer')}>
-      <span>{text} </span>
-      <a href={linkHref} className={cx('link')}>
-        {linkText}
-      </a>
     </div>
   );
 };

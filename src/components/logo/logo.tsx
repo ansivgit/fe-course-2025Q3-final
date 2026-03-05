@@ -1,7 +1,6 @@
-import LogoIcon from '@/assets/icons/logo.svg';
-
 import classNames from 'classnames/bind';
-import type { ReactElement } from 'react';
+import { LogoIcon } from '@/assets/icons';
+
 import styles from './logo.module.css';
 
 const cx = classNames.bind(styles);
@@ -12,7 +11,7 @@ type LogoProps = {
   onClick?: (event: Event) => void;
 };
 
-export const Logo = ({ className = '', size = 'default', onClick }: LogoProps): ReactElement => {
+export const Logo = ({ className = '', size = 'default', onClick }: LogoProps) => {
   return (
     <a
       href="/"
@@ -23,7 +22,7 @@ export const Logo = ({ className = '', size = 'default', onClick }: LogoProps): 
       }}
     >
       <div className={cx('logo-icon-wrapper')}>
-        <img src={LogoIcon} alt="TANDEM logo" className={cx('logo-svg')} />
+        <LogoIcon className={cx('logo-svg')} />
       </div>
       <span className={cx('logo-label')}>Tandem</span>
     </a>

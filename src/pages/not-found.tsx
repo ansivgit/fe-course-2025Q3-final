@@ -1,9 +1,7 @@
 import { Layout } from '@/components/layout/layout';
 import { Title } from '@/components/title/title';
 
-import type { ReactElement } from 'react';
-
-export const NotFound = (): ReactElement => {
+export const NotFound = () => {
   return (
     <Layout>
       <Title>Not Found</Title>

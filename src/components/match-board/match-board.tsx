@@ -1,13 +1,13 @@
 import classNames from 'classnames/bind';
-import type { ReactElement } from 'react';
 import { useState } from 'react';
+
 import { MatchCard } from '../match-card/match-card';
 import { MATCH_CARDS_CONFIG } from '../match-card/match-card.config';
 import styles from './match-board.module.css';
 
 const cx = classNames.bind(styles);
 
-export const MatchBoard = (): ReactElement => {
+export const MatchBoard = () => {
   const [openCards, setOpenCards] = useState<number[]>([]);
 
   const handleCardClick = (id: number): void => {

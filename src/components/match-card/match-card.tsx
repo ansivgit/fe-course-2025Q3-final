@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
-import type { ReactElement } from 'react';
 import { useEffect, useRef } from 'react';
+
 import styles from './match-card.module.css';
 
 const cx = classNames.bind(styles);
@@ -15,13 +15,7 @@ type MatchCardProps = {
 
 const AUTO_CLOSE_DELAY = 2000;
 
-export const MatchCard = ({
-  id,
-  content,
-  isFlipped,
-  onClick,
-  onClose,
-}: MatchCardProps): ReactElement => {
+export const MatchCard = ({ id, content, isFlipped, onClick, onClose }: MatchCardProps) => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {

@@ -1,14 +1,13 @@
+import classNames from 'classnames/bind';
 import { Layout } from '@/components/layout/layout';
 import { Title } from '@/components/title/title';
 
-import classNames from 'classnames/bind';
-import type { ReactElement } from 'react';
 import { MatchBoard } from '../match-board/match-board';
 import styles from './match-game.module.css';
 
 const cx = classNames.bind(styles);
 
-export const MatchGame = (): ReactElement => {
+export const MatchGame = () => {
   return (
     <Layout>
       <div className={cx('container')}>
