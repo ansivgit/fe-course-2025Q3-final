@@ -4,12 +4,24 @@
   border-radius: 1rem;
   padding: 1rem;
   background: var(--color-gray-900);
-  border: 1px solid rgb(43, 43, 59);
+  border: 1px solid var(--color-gray-800);
   cursor: pointer;
   perspective: 1000px;
   transition: all 0.6s ease;
   &:hover {
     transform: scale(1.05);
+  }
+
+  @media (max-width: 500px) {
+    width: 180px;
+  }
+
+  @media (max-width: 450px) {
+    width: 160px;
+  }
+
+  @media (max-width: 400px) {
+    width: 148px;
   }
 }
 
@@ -18,7 +30,7 @@
   border: 1px solid hsla(from var(--color-teal-500) h s l / var(--opacity-50));
   box-shadow: inset 0 0 20px
     hsla(from var(--color-teal-500) h s l / var(--opacity-10));
-  background-color: rgba(0, 255, 255, 0.15);
+  background-color: hsla(from var(--color-teal-500) h s l / var(--opacity-15));
 }
 
 .inner {
@@ -46,9 +58,14 @@
   height: 0;
   & .content {
     transform: rotateY(180deg);
-    color: rgb(102, 255, 255);
+    color: var(--color-teal-500);
     font-size: 1.25rem;
   }
+}
+
+.content {
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .card.flipped {
@@ -57,12 +74,14 @@
     width: 0;
     height: 0;
   }
+
   & .content-wrapper:last-child {
     opacity: 1;
   }
-}
 
-.content {
-  font-size: 1.5rem;
-  font-weight: 600;
+  & .content {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+  }
 }
