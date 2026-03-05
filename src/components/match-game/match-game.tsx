@@ -7,6 +7,10 @@ import styles from './match-game.module.css';
 
 const cx = classNames.bind(styles);
 
+{
+  /* TODO: Move to widget page config after strategy implementation */
+}
+
 export const MatchGame = () => {
   return (
     <Layout>
