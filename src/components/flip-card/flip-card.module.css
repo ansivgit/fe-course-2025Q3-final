@@ -53,6 +53,11 @@
   background: var(--color-gray-800);
 }
 
+.mask span {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
 .mask:last-child,
 .content:last-child {
   opacity: 0;
@@ -64,11 +69,6 @@
     color: var(--color-teal-500);
     font-size: 1.25rem;
   }
-}
-
-.mask span {
-  font-size: 1.5rem;
-  font-weight: 600;
 }
 
 .flip-card.flipped {
