@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import { useState } from 'react';
 
 import { MatchCard } from '../../flip-card/flip-card';
-import { FLIP_CARDS_CONFIG } from '../../flip-card/flip-card.config';
+import { MATCH_WIDGET_CONFIG } from './match-widget.config';
 import styles from './match-widget.module.css';
 
 const cx = classNames.bind(styles);
@@ -24,7 +24,7 @@ export const MatchWidget = () => {
 
   return (
     <div className={cx('game-board')}>
-      {FLIP_CARDS_CONFIG.map((card) => {
+      {MATCH_WIDGET_CONFIG.map((card) => {
         const { id, content } = card;
         return (
           <MatchCard

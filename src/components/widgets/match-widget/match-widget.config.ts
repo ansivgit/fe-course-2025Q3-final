@@ -1,9 +1,4 @@
-type FlipCardConfig = {
-  id: number;
-  content: string;
-};
-
-export const FLIP_CARDS_CONFIG: FlipCardConfig[] = [
+export const MATCH_WIDGET_CONFIG = [
   { id: 1, content: 'useState' },
   { id: 2, content: 'manage local state' },
 
