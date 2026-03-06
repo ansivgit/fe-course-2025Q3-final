@@ -1,8 +1,8 @@
-export type WidgetType = 'quiz';
+export type WidgetType = 'quiz' | 'match-game';
 
-export type Widget = {
+export type Widget<T extends WidgetType = WidgetType> = {
   id: string;
-  type: WidgetType;
+  type: T;
   tags: string[];
   payload: QuizPayload;
 };
@@ -26,6 +26,7 @@ export type Answer = {
 
 export type WidgetAnswerMap = {
   quiz: Answer;
+  'match-game': Answer;
 };
 
 export type WidgetStrategy<T extends Widget, A> = {

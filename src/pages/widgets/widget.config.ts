@@ -24,4 +24,13 @@ export const widgetPageConfig: WidgetPageConfig[] = [
     widgetsData: quizData,
     strategies: [quizStrategy],
   },
+  {
+    id: 'match-game',
+    type: 'match-game',
+    title: 'Memory Game',
+    Icon: QuizIcon,
+    completionText: 'Congratulations! You have matched them all!',
+    widgetsData: quizData,
+    strategies: [quizStrategy],
+  },
 ];
