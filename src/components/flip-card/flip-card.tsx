@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import { useEffect, useRef } from 'react';
 
-import styles from './match-card.module.css';
+import styles from './flip-card.module.css';
 
 const cx = classNames.bind(styles);
 

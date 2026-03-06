@@ -1,8 +1,8 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 
-import { MatchCard } from '../../match-card/match-card';
-import { MATCH_CARDS_CONFIG } from '../../match-card/match-card.config';
+import { MatchCard } from '../../flip-card/flip-card';
+import { FLIP_CARDS_CONFIG } from '../../flip-card/flip-card.config';
 import styles from './match-widget.module.css';
 
 const cx = classNames.bind(styles);
@@ -24,7 +24,7 @@ export const MatchWidget = () => {
 
   return (
     <div className={cx('grid')}>
-      {MATCH_CARDS_CONFIG.map((card) => {
+      {FLIP_CARDS_CONFIG.map((card) => {
         const { id, content } = card;
         return (
           <MatchCard

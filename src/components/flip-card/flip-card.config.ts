@@ -1,9 +1,9 @@
-type MatchCardConfig = {
+type FlipCardConfig = {
   id: number;
   content: string;
 };
 
-export const MATCH_CARDS_CONFIG: MatchCardConfig[] = [
+export const FLIP_CARDS_CONFIG: FlipCardConfig[] = [
   { id: 1, content: 'useState' },
   { id: 2, content: 'manage local state' },
 
