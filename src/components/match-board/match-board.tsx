@@ -24,16 +24,19 @@ export const MatchBoard = () => {
 
   return (
     <div className={cx('grid')}>
-      {MATCH_CARDS_CONFIG.map((card) => (
-        <MatchCard
-          key={card.id}
-          id={card.id}
-          content={card.content}
-          isFlipped={openCards.includes(card.id)}
-          onClick={handleCardClick}
-          onClose={handleCardClose}
-        />
-      ))}
+      {MATCH_CARDS_CONFIG.map((card) => {
+        const { id, content } = card;
+        return (
+          <MatchCard
+            key={id}
+            id={id}
+            content={content}
+            isFlipped={openCards.includes(id)}
+            onClick={handleCardClick}
+            onClose={handleCardClose}
+          />
+        );
+      })}
     </div>
   );
 };

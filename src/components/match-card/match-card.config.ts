@@ -1,4 +1,4 @@
-export type MatchCardConfig = {
+type MatchCardConfig = {
   id: number;
   content: string;
 };
