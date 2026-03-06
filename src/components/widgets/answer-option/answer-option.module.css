@@ -1,3 +1,18 @@
+.letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background: var(--color-gray-800);
+  color: var(--color-gray-500);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 500;
+  transition: all var(--transition-default) var(--ease-in-cubic);
+}
+
 .option {
   display: flex;
   justify-content: space-between;
@@ -58,21 +73,6 @@
   justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
-}
-
-.letter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 0.5rem;
-  background: var(--color-gray-800);
-  color: var(--color-gray-500);
-  font-size: 0.875rem;
-  line-height: 1.4;
-  font-weight: 500;
-  transition: all var(--transition-default) var(--ease-in-cubic);
 }
 
 .icon {
