@@ -37,7 +37,7 @@ export const MatchCard = ({ id, content, isFlipped, onClick, onClose }: MatchCar
   return (
     <button
       type="button"
-      className={cx('card', { flipped: isFlipped })}
+      className={cx('flip-card', { flipped: isFlipped })}
       onClick={() => {
         onClick(id);
       }}
