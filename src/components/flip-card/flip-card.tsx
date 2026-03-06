@@ -42,13 +42,13 @@ export const MatchCard = ({ id, content, isFlipped, onClick, onClose }: MatchCar
         onClick(id);
       }}
     >
-      <div className={cx('inner')}>
-        <div className={cx('content-wrapper')}>
-          <span className={cx('content')}>?</span>
+      <div className={cx('content-wrapper')}>
+        <div className={cx('mask')}>
+          <span>?</span>
         </div>
 
-        <div className={cx('content-wrapper')}>
-          <span className={cx('content')}>{content}</span>
+        <div className={cx('content')}>
+          <span className={cx('card-text')}>{content}</span>
         </div>
       </div>
     </button>
