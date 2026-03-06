@@ -1,6 +1,6 @@
 import { CodeIcon, MatchGameIcon, QuizIcon } from '@/assets/icons';
 
-export const MATCH_WIDGET_CONFIG = [
+export const WIDGET_CARDS_CONFIG = [
   {
     name: 'quiz',
     image: QuizIcon,

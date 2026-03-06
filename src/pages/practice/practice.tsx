@@ -4,7 +4,7 @@ import { Layout } from '@/components/layout/layout';
 import { Paragraph } from '@/components/paragraph/paragraph';
 import { Title } from '@/components/title/title';
 import { WidgetCard } from '@/components/widget-card/widget-card';
-import { MATCH_WIDGET_CONFIG } from '@/components/widgets/match-widget/match-widget.config';
+import { WIDGET_CARDS_CONFIG } from '@/components/widget-card/widget-card.config';
 
 import styles from './practice.module.css';
 
@@ -19,7 +19,7 @@ export const Practice = (): ReactElement => {
           <Paragraph text="Learn through play — a gamified approach to learning"></Paragraph>
         </section>
         <div className={cx('widget-container')}>
-          {MATCH_WIDGET_CONFIG.map((widget) => (
+          {WIDGET_CARDS_CONFIG.map((widget) => (
             <WidgetCard key={widget.name} widget={widget} />
           ))}
         </div>
