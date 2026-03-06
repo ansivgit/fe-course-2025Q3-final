@@ -1,3 +1,26 @@
+.logo-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+.logo-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(
+    135deg,
+    var(--color-purple-500),
+    var(--color-teal-500)
+  );
+}
+
 .logo-link {
   display: flex;
   align-items: center;
@@ -16,27 +39,4 @@
       line-height: 1.75rem;
     }
   }
-}
-
-.logo-icon-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 0.75rem;
-  background: linear-gradient(
-    135deg,
-    var(--color-purple-500),
-    var(--color-teal-500)
-  );
-}
-
-.logo-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--color-white);
 }
