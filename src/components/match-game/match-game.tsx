@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import { Layout } from '@/components/layout/layout';
 import { Title } from '@/components/title/title';
 
-import { MatchBoard } from '../match-board/match-board';
+import { MatchWidget } from '../widgets/match-widget/match-widget';
 import styles from './match-game.module.css';
 
 const cx = classNames.bind(styles);
@@ -18,7 +18,7 @@ export const MatchGame = () => {
         </section>
 
         <div className={cx('game-container')}>
-          <MatchBoard />
+          <MatchWidget />
         </div>
       </div>
     </Layout>
