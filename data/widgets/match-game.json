@@ -1,0 +1,178 @@
+[
+  {
+    "id": "match-game-01",
+    "type": "match-game",
+    "tags": ["variables", "array", "objects"],
+    "payload": [
+      { "id": 1, "front": "var", "back": "declare variable" },
+      {
+        "id": 2,
+        "front": "let / const",
+        "back": "declare block-scoped variable"
+      },
+
+      {
+        "id": 3,
+        "front": "map()",
+        "back": "create new array by transforming elements"
+      },
+      {
+        "id": 4,
+        "front": "filter()",
+        "back": "create new array with elements that pass test"
+      },
+
+      {
+        "id": 5,
+        "front": "reduce()",
+        "back": "accumulate array values into single result"
+      },
+      { "id": 6, "front": "forEach()", "back": "iterate over array elements" },
+
+      { "id": 7, "front": "{}", "back": "empty object literal" },
+      { "id": 8, "front": "Object.keys()", "back": "array of object keys" },
+
+      { "id": 9, "front": "Object.values()", "back": "array of object values" },
+      {
+        "id": 10,
+        "front": "Object.entries()",
+        "back": "array of [key, value] pairs"
+      },
+
+      {
+        "id": 11,
+        "front": "function declaration",
+        "back": "define named function"
+      },
+      {
+        "id": 12,
+        "front": "arrow function",
+        "back": "define function with => syntax"
+      }
+    ]
+  },
+  {
+    "id": "match-game-02",
+    "type": "match-game",
+    "tags": ["operators", "syntax", "strings", "functions", "modules"],
+    "payload": [
+      { "id": 13, "front": "==", "back": "loose equality comparison" },
+      { "id": 14, "front": "===", "back": "strict equality comparison" },
+
+      {
+        "id": 15,
+        "front": "ternary operator",
+        "back": "condition ? expr1 : expr2"
+      },
+      { "id": 16, "front": "&&", "back": "logical AND" },
+
+      { "id": 17, "front": "||", "back": "logical OR" },
+      { "id": 18, "front": "!", "back": "logical NOT" },
+
+      {
+        "id": 19,
+        "front": "destructuring",
+        "back": "extract values from array/object"
+      },
+      {
+        "id": 20,
+        "front": "spread operator",
+        "back": "expand iterable into elements"
+      },
+
+      {
+        "id": 21,
+        "front": "rest parameters",
+        "back": "collect remaining arguments"
+      },
+      {
+        "id": 22,
+        "front": "template literals",
+        "back": "interpolate expressions in strings"
+      },
+
+      {
+        "id": 23,
+        "front": "default parameters",
+        "back": "set default value for function arg"
+      },
+      {
+        "id": 24,
+        "front": "modules (import/export)",
+        "back": "import/export JS modules"
+      }
+    ]
+  },
+  {
+    "id": "match-game-03",
+    "type": "match-game",
+    "tags": ["async", "timers", "JSON", "storage", "array", "strings"],
+    "payload": [
+      {
+        "id": 25,
+        "front": "Promise",
+        "back": "represents eventual completion or failure"
+      },
+      {
+        "id": 26,
+        "front": "async/await",
+        "back": "syntax for handling promises"
+      },
+
+      {
+        "id": 27,
+        "front": "setTimeout()",
+        "back": "schedule code execution after delay"
+      },
+      {
+        "id": 28,
+        "front": "setInterval()",
+        "back": "repeat code execution at intervals"
+      },
+
+      {
+        "id": 29,
+        "front": "JSON.stringify()",
+        "back": "convert JS object to JSON string"
+      },
+      {
+        "id": 30,
+        "front": "JSON.parse()",
+        "back": "parse JSON string to JS object"
+      },
+
+      {
+        "id": 31,
+        "front": "localStorage",
+        "back": "store key/value in browser"
+      },
+      {
+        "id": 32,
+        "front": "sessionStorage",
+        "back": "store key/value for session"
+      },
+
+      {
+        "id": 33,
+        "front": "Array.includes()",
+        "back": "check if array contains value"
+      },
+      {
+        "id": 34,
+        "front": "String.includes()",
+        "back": "check if string contains substring"
+      },
+
+      {
+        "id": 35,
+        "front": "Array.find()",
+        "back": "return first element matching condition"
+      },
+      {
+        "id": 36,
+        "front": "Array.findIndex()",
+        "back": "return index of first matching element"
+      }
+    ]
+  }
+]

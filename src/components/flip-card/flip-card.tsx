@@ -1,21 +1,21 @@
 import classNames from 'classnames/bind';
 import { useEffect, useRef } from 'react';
+import { ANIMATION_DURATION } from '@/constants/constants';
 
 import styles from './flip-card.module.css';
 
 const cx = classNames.bind(styles);
 
-type MatchCardProps = {
+type FlipCardProps = {
   id: number;
   content: string;
   isFlipped: boolean;
   onClick: (id: number) => void;
   onClose: (id: number) => void;
+  className?: string;
 };
 
-const AUTO_FLIP_DELAY = 2000;
-
-export const MatchCard = ({ id, content, isFlipped, onClick, onClose }: MatchCardProps) => {
+export const FlipCard = ({ id, content, isFlipped, onClick, onClose }: FlipCardProps) => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export const MatchCard = ({ id, content, isFlipped, onClick, onClose }: MatchCar
 
     timeoutRef.current = setTimeout(() => {
       onClose(id);
-    }, AUTO_FLIP_DELAY);
+    }, ANIMATION_DURATION);
 
     return (): void => {
       if (timeoutRef.current) {

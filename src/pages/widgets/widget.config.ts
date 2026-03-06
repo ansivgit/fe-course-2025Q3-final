@@ -1,6 +1,7 @@
+import matchGameData from '@/../data/widgets/match-game.json';
 import quizData from '@/../data/widgets/quiz.json';
 import { QuizIcon } from '@/assets/icons';
-import { quizStrategy } from '@/services/widgets/strategy';
+import { matchStrategy, quizStrategy } from '@/services/widgets/strategy';
 
 import type { Widget, WidgetAnswerMap, WidgetStrategy, WidgetType } from '@/types/widgets';
 
@@ -11,7 +12,7 @@ export type WidgetPageConfig = {
   Icon?: React.ElementType;
   completionText: string;
   widgetsData: unknown;
-  strategies: WidgetStrategy<Widget, WidgetAnswerMap[Widget['type']]>[];
+  strategies: WidgetStrategy<WidgetType, WidgetAnswerMap[Widget['type']]>[];
 };
 
 export const widgetPageConfig: WidgetPageConfig[] = [
@@ -30,7 +31,7 @@ export const widgetPageConfig: WidgetPageConfig[] = [
     title: 'Memory Game',
     Icon: QuizIcon,
     completionText: 'Congratulations! You have matched them all!',
-    widgetsData: quizData,
-    strategies: [quizStrategy],
+    widgetsData: matchGameData,
+    strategies: [matchStrategy],
   },
 ];

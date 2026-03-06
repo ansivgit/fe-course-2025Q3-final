@@ -4,7 +4,7 @@ import { WidgetSchemas } from '../../schemas/widget-schemas';
 
 const strategies = new Map<
   Widget['type'],
-  WidgetStrategy<Widget, WidgetAnswerMap[Widget['type']]>
+  WidgetStrategy<WidgetType, WidgetAnswerMap[Widget['type']]>
 >();
 
 export const widgetAnswers: Record<string, WidgetAnswerMap[WidgetType] | undefined> = {};
@@ -15,7 +15,7 @@ export const pendingAnswers: Record<
 > = {};
 
 export function registerStrategy<T extends Widget>(
-  strategy: WidgetStrategy<T, WidgetAnswerMap[T['type']]>,
+  strategy: WidgetStrategy<WidgetType, WidgetAnswerMap[T['type']]>,
 ): void {
   strategies.set(strategy.type, strategy);
 }
