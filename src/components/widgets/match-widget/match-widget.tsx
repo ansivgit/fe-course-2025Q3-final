@@ -23,7 +23,7 @@ export const MatchWidget = () => {
   };
 
   return (
-    <div className={cx('grid')}>
+    <div className={cx('game-board')}>
       {FLIP_CARDS_CONFIG.map((card) => {
         const { id, content } = card;
         return (

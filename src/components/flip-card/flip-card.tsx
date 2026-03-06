@@ -13,7 +13,7 @@ type MatchCardProps = {
   onClose: (id: number) => void;
 };
 
-const AUTO_CLOSE_DELAY = 2000;
+const AUTO_FLIP_DELAY = 2000;
 
 export const MatchCard = ({ id, content, isFlipped, onClick, onClose }: MatchCardProps) => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -25,7 +25,7 @@ export const MatchCard = ({ id, content, isFlipped, onClick, onClose }: MatchCar
 
     timeoutRef.current = setTimeout(() => {
       onClose(id);
-    }, AUTO_CLOSE_DELAY);
+    }, AUTO_FLIP_DELAY);
 
     return (): void => {
       if (timeoutRef.current) {
