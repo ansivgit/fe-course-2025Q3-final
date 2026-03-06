@@ -4,7 +4,7 @@ import { Layout } from '@/components/layout/layout';
 import { Paragraph } from '@/components/paragraph/paragraph';
 import { Title } from '@/components/title/title';
 import { WidgetCard } from '@/components/widget-card/widget-card';
-import { WIDGET_CARDS_CONFIG } from '@/components/widget-card/widget-card.config';
+import { WIDGET_CARDS_CONFIG } from '@/pages/practice/widget-cards.config';
 
 import styles from './practice.module.css';
 
