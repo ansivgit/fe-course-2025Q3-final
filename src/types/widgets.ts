@@ -92,3 +92,8 @@ export type MatchWidgetProps = {
   onCardStateChange: (cardState: MatchCardState) => void;
   onNext?: () => void;
 };
+
+export type WidgetApiResponse = {
+  data: Widget[];
+  error: string | null;
+};

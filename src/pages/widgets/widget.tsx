@@ -7,7 +7,7 @@ import { Title } from '@/components/title/title';
 import { parseWidgets, registerStrategy, runWidgets } from '@/services/widgets/engine';
 import { ROUTES } from '@/constants/constants';
 
-import type { Widget } from '@/types/widgets';
+import type { Widget, WidgetApiResponse } from '@/types/widgets';
 
 import { widgetPageConfig } from './widget.config';
 import styles from './widget.module.css';
@@ -27,25 +27,44 @@ export function WidgetPage() {
       return;
     }
 
-    const { strategies, widgetsData } = config;
+    const { strategies } = config;
 
     strategies.forEach((strategy) => {
       registerStrategy(strategy);
     });
 
-    const widgets: Widget[] = parseWidgets(widgetsData);
+    async function initWidgets() {
+      try {
+        if (!config) {
+          return;
+        }
+        const response = await fetch(`http://localhost:3000/data/${config.id}`, {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch widget data');
+        }
+        const json: WidgetApiResponse = await response.json();
 
-    if (!widgetContainer.current) {
-      return;
+        if (!widgetContainer.current) {
+          return;
+        }
+
+        const widgets: Widget[] = parseWidgets(json.data);
+
+        await runWidgets(widgets, widgetContainer.current);
+        setCompleted(true);
+      } catch (error) {
+        console.error('Widgets error:', error);
+      }
     }
 
-    runWidgets(widgets, widgetContainer.current)
-      .then(() => {
-        setCompleted(true);
-      })
-      .catch((error: unknown) => {
-        console.error('Widgets error:', error);
-      });
+    initWidgets().catch((error: unknown) => {
+      console.error('initWidgets promise error', error);
+    });
   }, [config]);
 
   if (!config) {
