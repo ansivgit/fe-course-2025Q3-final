@@ -1,16 +1,31 @@
-export type WidgetType = 'quiz';
+export type WidgetType = 'quiz' | 'match-game';
 
-export type Widget = {
+export type QuizWidget = Widget<'quiz'>;
+
+export type Widget<T extends WidgetType = WidgetType> = {
   id: string;
-  type: WidgetType;
+  type: T;
   tags: string[];
-  payload: QuizPayload;
+  payload: WidgetPayloadMap[T];
 };
 
 export type WidgetOption = {
   id: string;
   name: string;
   value: string;
+};
+
+export type WidgetPayloadMap = {
+  quiz: QuizPayload;
+  'match-game': MatchPayload;
+};
+
+export type MatchPayload = MatchCard[];
+
+export type MatchCard = {
+  id: number;
+  value: string;
+  content: string;
 };
 
 export type QuizPayload = {
@@ -24,19 +39,25 @@ export type Answer = {
   selectedIds: string[];
 };
 
-export type WidgetAnswerMap = {
-  quiz: Answer;
+export type MatchAnswer = {
+  solvedPairs: number;
+  totalPairs: number;
 };
 
-export type WidgetStrategy<T extends Widget, A> = {
-  type: T['type'];
+export type WidgetAnswerMap = {
+  quiz: Answer;
+  'match-game': MatchAnswer;
+};
+
+export type WidgetStrategy<T extends WidgetType, A> = {
+  type: T;
   run(
-    widget: T,
+    widget: Widget<T>,
     onAnswer: (answer: A) => void,
     parentContainer?: HTMLElement,
     nextWidget?: () => void,
   ): void;
-  validate(widget: Widget, answer: Answer): ValidateReturn;
+  validate(widget: Widget<T>, answer: A): ValidateReturn;
 };
 
 type OptionValidationState = 'correct' | 'wrong' | 'missed';
@@ -45,11 +66,29 @@ export type ValidationResult = Record<string, OptionValidationState>;
 
 export type ValidateReturn = {
   isCorrect: boolean;
-  result: ValidationResult;
+  result: ValidationResult | MatchGameValidationResult;
 };
 
-export type WidgetProps = {
-  widget: Widget & { type: 'quiz' };
-  onAnswer: (answer: WidgetAnswerMap[WidgetType]) => void;
+export type MatchGameValidationResult = {
+  solvedPairs: number;
+  totalPairs: number;
+};
+
+export type WidgetProps<T extends WidgetType = 'quiz'> = {
+  widget: Widget<T>;
+  onAnswer: (answer: WidgetAnswerMap[T]) => void;
+  onNext?: () => void;
+};
+
+export type CardState = 'closed' | 'opened' | 'solved';
+
+export type MatchCardState = {
+  cardId: number;
+  state: CardState;
+};
+
+export type MatchWidgetProps = {
+  widget: Widget<'match-game'>;
+  onCardStateChange: (cardState: MatchCardState) => void;
   onNext?: () => void;
 };

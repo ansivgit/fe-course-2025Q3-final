@@ -1,42 +1,91 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { Button } from '@/components/button/button';
+import { ANIMATION_DURATION } from '@/constants/constants';
 
-import { MatchCard } from '../../flip-card/flip-card';
-import { MATCH_WIDGET_CONFIG } from './match-widget.config';
+import type { MatchWidgetProps } from '@/types/widgets';
+
+import { FlipCard } from '../../flip-card/flip-card';
 import styles from './match-widget.module.css';
 
 const cx = classNames.bind(styles);
 
-export const MatchWidget = () => {
-  const [openCards, setOpenCards] = useState<number[]>([]);
+import { shuffle } from '../helpers';
 
-  const handleCardClick = (id: number): void => {
-    if (openCards.length >= 2 || openCards.includes(id)) {
+export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetProps) => {
+  const [openCards, setOpenCards] = useState<number[]>([]);
+  const [solvedCards, setSolvedCards] = useState<number[]>([]);
+
+  const cards = useMemo(() => shuffle(widget.payload), [widget.payload]);
+
+  const handleCardClick = (id: number) => {
+    if (
+      (openCards.length >= 2 && !openCards.every((cardId) => solvedCards.includes(cardId))) ||
+      openCards.includes(id) ||
+      solvedCards.includes(id)
+    ) {
       return;
     }
 
-    setOpenCards((previous) => [...previous, id]);
+    const nextCards = [...openCards, id];
+    setOpenCards(nextCards);
+    onCardStateChange({ cardId: id, state: 'opened' });
+
+    if (nextCards.length === 2) {
+      const [first, second] = nextCards;
+      const firstCard = widget.payload.find((c) => c.id === first);
+      const secondCard = widget.payload.find((c) => c.id === second);
+
+      if (!firstCard || !secondCard) {
+        return;
+      }
+
+      const isMatch = firstCard.value === secondCard.value;
+
+      if (isMatch) {
+        setSolvedCards((previuos) => [...previuos, first, second]);
+
+        onCardStateChange({ cardId: first, state: 'solved' });
+        onCardStateChange({ cardId: second, state: 'solved' });
+      }
+
+      setTimeout(() => {
+        setOpenCards([]);
+      }, ANIMATION_DURATION);
+    }
   };
 
-  const handleCardClose = (id: number): void => {
-    setOpenCards((previous) => previous.filter((cardId) => cardId !== id));
-  };
+  const allSolved = solvedCards.length === widget.payload.length && widget.payload.length > 0;
 
   return (
-    <div className={cx('game-board')}>
-      {MATCH_WIDGET_CONFIG.map((card) => {
-        const { id, content } = card;
-        return (
-          <MatchCard
-            key={id}
-            id={id}
-            content={content}
-            isFlipped={openCards.includes(id)}
-            onClick={handleCardClick}
-            onClose={handleCardClose}
-          />
-        );
-      })}
+    <div>
+      <div className={cx('game-board')}>
+        {cards.map((card) => {
+          const { id, content } = card;
+          const isFlipped = openCards.includes(card.id);
+          const isSolved = solvedCards.includes(card.id);
+          return (
+            <FlipCard
+              key={id}
+              id={id}
+              content={content}
+              isFlipped={isFlipped}
+              isSolved={isSolved}
+              onClick={handleCardClick}
+              onClose={() => {
+                setOpenCards((previous) => {
+                  return previous.filter((index) => index !== card.id);
+                });
+              }}
+            />
+          );
+        })}
+      </div>
+      <div className={cx('button-container')}>
+        <Button disabled={!allSolved} onClick={onNext}>
+          Next
+        </Button>
+      </div>
     </div>
   );
 };

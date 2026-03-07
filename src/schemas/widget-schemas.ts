@@ -12,8 +12,22 @@ export const QuizWidgetSchema = z.object({
   }),
 });
 
+const MatchCardSchema = z.object({
+  id: z.number(),
+  value: z.string(),
+  content: z.string(),
+});
+
+export const MatchWidgetSchema = z.object({
+  id: z.string(),
+  type: z.literal('match-game'),
+  tags: z.array(z.string()),
+  payload: z.array(MatchCardSchema),
+});
+
 import type { Widget } from '@/types/widgets';
 
 export const WidgetSchemas: Record<string, z.ZodType<Widget>> = {
   quiz: QuizWidgetSchema,
+  'match-game': MatchWidgetSchema,
 };
