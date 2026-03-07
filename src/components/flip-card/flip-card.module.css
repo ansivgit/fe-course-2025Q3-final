@@ -3,7 +3,6 @@
 }
 
 .flip-card {
-  width: 200px;
   aspect-ratio: 1 / 1;
   border-radius: 1rem;
   padding: 1rem;
@@ -39,18 +38,6 @@
 
   &.solved .card-text {
     color: var(--color-purple-500);
-  }
-
-  @media (max-width: 500px) {
-    width: 180px;
-  }
-
-  @media (max-width: 450px) {
-    width: 160px;
-  }
-
-  @media (max-width: 400px) {
-    width: 148px;
   }
 }
 

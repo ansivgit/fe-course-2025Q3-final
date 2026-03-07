@@ -77,22 +77,22 @@ export const matchStrategy: WidgetStrategy<'match-game', MatchAnswer> = {
     const boardState = new Map<number, 'closed' | 'opened' | 'solved'>();
 
     const handleNext = () => {
+      const solvedCount = [...boardState.values()].filter((card) => card === 'solved').length;
+
+      const totalPairs = widget.payload.length / 2;
+      const solvedPairs = solvedCount / 2;
+
+      onAnswer({
+        solvedPairs,
+        totalPairs,
+      });
+
       root.unmount();
       matchGameRoots.delete(container);
     };
 
     const handleCardState = (cardState: MatchCardState) => {
       boardState.set(cardState.cardId, cardState.state);
-
-      const solvedCount = [...boardState.values()].filter((card) => card === 'solved').length;
-      const totalPairs = widget.payload.length / 2;
-
-      if (solvedCount === widget.payload.length) {
-        onAnswer({
-          solvedPairs: totalPairs,
-          totalPairs,
-        });
-      }
     };
 
     root.render(

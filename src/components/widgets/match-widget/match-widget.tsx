@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import { useMemo, useState } from 'react';
+import { Button } from '@/components/button/button';
 import { ANIMATION_DURATION } from '@/constants/constants';
 
 import type { MatchWidgetProps } from '@/types/widgets';
@@ -9,14 +10,7 @@ import styles from './match-widget.module.css';
 
 const cx = classNames.bind(styles);
 
-const shuffle = <T,>(array: T[]): T[] => {
-  const copy = [...array];
-  for (let index = copy.length - 1; index > 0; index--) {
-    const index_ = Math.floor(Math.random() * (index + 1));
-    [copy[index], copy[index_]] = [copy[index_], copy[index]];
-  }
-  return copy;
-};
+import { shuffle } from '../helpers';
 
 export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetProps) => {
   const [openCards, setOpenCards] = useState<number[]>([]);
@@ -25,7 +19,11 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
   const cards = useMemo(() => shuffle(widget.payload), [widget.payload]);
 
   const handleCardClick = (id: number) => {
-    if (openCards.length >= 2 || openCards.includes(id) || solvedCards.includes(id)) {
+    if (
+      (openCards.length >= 2 && !openCards.every((cardId) => solvedCards.includes(cardId))) ||
+      openCards.includes(id) ||
+      solvedCards.includes(id)
+    ) {
       return;
     }
 
@@ -83,12 +81,11 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
           );
         })}
       </div>
-
-      {allSolved && (
-        <button type="button" className={cx('next-button')} onClick={onNext}>
-          Next round
-        </button>
-      )}
+      <div className={cx('button-container')}>
+        <Button disabled={!allSolved} onClick={onNext}>
+          Next
+        </Button>
+      </div>
     </div>
   );
 };
