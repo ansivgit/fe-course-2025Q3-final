@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
-import { useEffect, useRef } from 'react';
-import { ANIMATION_DURATION } from '@/constants/constants';
+import { useEffect } from 'react';
 
 import styles from './flip-card.module.css';
 
@@ -16,22 +15,10 @@ type FlipCardProps = {
 };
 
 export const FlipCard = ({ id, content, isFlipped, isSolved, onClick, onClose }: FlipCardProps) => {
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
   useEffect(() => {
     if (!isFlipped || isSolved) {
       return;
     }
-
-    timeoutRef.current = setTimeout(() => {
-      onClose(id);
-    }, ANIMATION_DURATION);
-
-    return (): void => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
   }, [isFlipped, isSolved, id, onClose]);
 
   return (

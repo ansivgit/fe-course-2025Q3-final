@@ -19,11 +19,8 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
   const cards = useMemo(() => shuffle(widget.payload), [widget.payload]);
 
   const handleCardClick = (id: number) => {
-    if (
-      (openCards.length >= 2 && !openCards.every((cardId) => solvedCards.includes(cardId))) ||
-      openCards.includes(id) ||
-      solvedCards.includes(id)
-    ) {
+    const activeCards = openCards.filter((id) => !solvedCards.includes(id));
+    if (activeCards.length >= 2 || solvedCards.includes(id) || activeCards.includes(id)) {
       return;
     }
 
@@ -31,31 +28,30 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
     setOpenCards(nextCards);
     onCardStateChange({ cardId: id, state: 'opened' });
 
-    if (nextCards.length === 2) {
-      const [first, second] = nextCards;
-      const firstCard = widget.payload.find((card) => card.id === first);
-      const secondCard = widget.payload.find((card) => card.id === second);
+    if (activeCards.length === 1) {
+      const first = activeCards[0];
+      const second = id;
+      const firstCard = cards.find((card) => card.id === first);
+      const secondCard = cards.find((card) => card.id === second);
 
       if (!firstCard || !secondCard) {
         return;
       }
 
-      const isMatch = firstCard.value === secondCard.value;
-
-      if (isMatch) {
-        setSolvedCards((previuos) => [...previuos, first, second]);
-
+      if (firstCard.value === secondCard.value) {
+        setSolvedCards((previous) => [...previous, first, second]);
         onCardStateChange({ cardId: first, state: 'solved' });
         onCardStateChange({ cardId: second, state: 'solved' });
-      }
-
-      setTimeout(() => {
         setOpenCards([]);
-      }, ANIMATION_DURATION);
+      } else {
+        setTimeout(() => {
+          setOpenCards((previous) => previous.filter((card) => card !== first && card !== second));
+        }, ANIMATION_DURATION);
+      }
     }
   };
 
-  const allCardsSolved = solvedCards.length === widget.payload.length && widget.payload.length > 0;
+  const allCardsSolved = solvedCards.length === cards.length && cards.length > 0;
 
   return (
     <div>
