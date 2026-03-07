@@ -1,6 +1,6 @@
-import type { Widget, WidgetAnswerMap, WidgetStrategy, WidgetType } from '@/types/widgets';
+import { WidgetSchemas } from '@/schemas/widget-schemas';
 
-import { WidgetSchemas } from '../../schemas/widget-schemas';
+import type { Widget, WidgetAnswerMap, WidgetStrategy, WidgetType } from '@/types/widgets';
 
 const strategies = new Map<
   Widget['type'],

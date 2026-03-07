@@ -1,11 +1,11 @@
 import classNames from 'classnames/bind';
 import { useMemo, useState } from 'react';
 import { Button } from '@/components/button/button';
+import { FlipCard } from '@/components/flip-card/flip-card';
 import { ANIMATION_DURATION } from '@/constants/constants';
 
 import type { MatchWidgetProps } from '@/types/widgets';
 
-import { FlipCard } from '../../flip-card/flip-card';
 import styles from './match-widget.module.css';
 
 const cx = classNames.bind(styles);
