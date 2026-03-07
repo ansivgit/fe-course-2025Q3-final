@@ -87,9 +87,9 @@ export const matchStrategy: WidgetStrategy<'match-game', MatchAnswer> = {
       const solvedCount = [...boardState.values()].filter((card) => card === 'solved').length;
       const totalPairs = widget.payload.length / 2;
 
-      if (solvedCount / 2 === totalPairs) {
+      if (solvedCount === widget.payload.length) {
         onAnswer({
-          solvedPairs: solvedCount / 2,
+          solvedPairs: totalPairs,
           totalPairs,
         });
       }

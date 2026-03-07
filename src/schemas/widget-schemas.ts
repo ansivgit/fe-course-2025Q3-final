@@ -14,8 +14,8 @@ export const QuizWidgetSchema = z.object({
 
 const MatchCardSchema = z.object({
   id: z.number(),
-  front: z.string(),
-  back: z.string(),
+  value: z.string(),
+  content: z.string(),
 });
 
 export const MatchWidgetSchema = z.object({

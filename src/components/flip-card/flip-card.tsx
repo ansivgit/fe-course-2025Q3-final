@@ -10,16 +10,16 @@ type FlipCardProps = {
   id: number;
   content: string;
   isFlipped: boolean;
+  isSolved: boolean;
   onClick: (id: number) => void;
   onClose: (id: number) => void;
-  className?: string;
 };
 
-export const FlipCard = ({ id, content, isFlipped, onClick, onClose }: FlipCardProps) => {
+export const FlipCard = ({ id, content, isFlipped, isSolved, onClick, onClose }: FlipCardProps) => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    if (!isFlipped) {
+    if (!isFlipped || isSolved) {
       return;
     }
 
@@ -32,12 +32,15 @@ export const FlipCard = ({ id, content, isFlipped, onClick, onClose }: FlipCardP
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [isFlipped, id, onClose]);
+  }, [isFlipped, isSolved, id, onClose]);
 
   return (
     <button
       type="button"
-      className={cx('flip-card', { flipped: isFlipped })}
+      className={cx('flip-card', {
+        flipped: isFlipped || isSolved,
+        solved: isSolved,
+      })}
       onClick={() => {
         onClick(id);
       }}

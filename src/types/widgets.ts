@@ -24,8 +24,8 @@ export type MatchPayload = MatchCard[];
 
 export type MatchCard = {
   id: number;
-  front: string;
-  back: string;
+  value: string;
+  content: string;
 };
 
 export type QuizPayload = {

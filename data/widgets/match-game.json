@@ -2,176 +2,197 @@
   {
     "id": "match-game-01",
     "type": "match-game",
-    "tags": ["variables", "array", "objects"],
+    "tags": ["variables", "objects"],
     "payload": [
-      { "id": 1, "front": "var", "back": "declare variable" },
-      {
-        "id": 2,
-        "front": "let / const",
-        "back": "declare block-scoped variable"
-      },
-
+      { "id": 1, "value": "var", "content": "var" },
+      { "id": 2, "value": "var", "content": "declare variable" },
       {
         "id": 3,
-        "front": "map()",
-        "back": "create new array by transforming elements"
+        "value": "let / const",
+        "content": "let / const"
       },
       {
         "id": 4,
-        "front": "filter()",
-        "back": "create new array with elements that pass test"
+        "value": "let / const",
+        "content": "declare block-scoped variable"
       },
-
       {
         "id": 5,
-        "front": "reduce()",
-        "back": "accumulate array values into single result"
+        "value": "function declaration",
+        "content": "function declaration"
       },
-      { "id": 6, "front": "forEach()", "back": "iterate over array elements" },
-
-      { "id": 7, "front": "{}", "back": "empty object literal" },
-      { "id": 8, "front": "Object.keys()", "back": "array of object keys" },
-
-      { "id": 9, "front": "Object.values()", "back": "array of object values" },
+      {
+        "id": 6,
+        "value": "function declaration",
+        "content": "define named function"
+      },
+      {
+        "id": 7,
+        "value": "arrow function",
+        "content": "arrow function"
+      },
+      {
+        "id": 8,
+        "value": "arrow function",
+        "content": "define function with => syntax"
+      },
+      {
+        "id": 9,
+        "value": "{}",
+        "content": "{}"
+      },
       {
         "id": 10,
-        "front": "Object.entries()",
-        "back": "array of [key, value] pairs"
+        "value": "{}",
+        "content": "empty object literal"
       },
-
       {
         "id": 11,
-        "front": "function declaration",
-        "back": "define named function"
+        "value": "modules (import/export)",
+        "content": "modules (import/export)"
       },
       {
         "id": 12,
-        "front": "arrow function",
-        "back": "define function with => syntax"
+        "value": "modules (import/export)",
+        "content": "import/export JS modules"
       }
     ]
   },
   {
     "id": "match-game-02",
     "type": "match-game",
-    "tags": ["operators", "syntax", "strings", "functions", "modules"],
+    "tags": ["operators", "syntax"],
     "payload": [
-      { "id": 13, "front": "==", "back": "loose equality comparison" },
-      { "id": 14, "front": "===", "back": "strict equality comparison" },
-
+      {
+        "id": 13,
+        "value": "==",
+        "content": "=="
+      },
+      {
+        "id": 14,
+        "value": "==",
+        "content": "loose equality comparison"
+      },
       {
         "id": 15,
-        "front": "ternary operator",
-        "back": "condition ? expr1 : expr2"
+        "value": "===",
+        "content": "==="
       },
-      { "id": 16, "front": "&&", "back": "logical AND" },
-
-      { "id": 17, "front": "||", "back": "logical OR" },
-      { "id": 18, "front": "!", "back": "logical NOT" },
-
+      {
+        "id": 16,
+        "value": "===",
+        "content": "strict equality comparison"
+      },
+      {
+        "id": 17,
+        "value": "ternary operator",
+        "content": "ternary operator"
+      },
+      {
+        "id": 18,
+        "value": "ternary operator",
+        "content": "condition ? expr1 : expr2"
+      },
       {
         "id": 19,
-        "front": "destructuring",
-        "back": "extract values from array/object"
+        "value": "&&",
+        "content": "&&"
       },
       {
         "id": 20,
-        "front": "spread operator",
-        "back": "expand iterable into elements"
+        "value": "&&",
+        "content": "logical AND"
       },
-
       {
         "id": 21,
-        "front": "rest parameters",
-        "back": "collect remaining arguments"
+        "value": "||",
+        "content": "||"
       },
       {
         "id": 22,
-        "front": "template literals",
-        "back": "interpolate expressions in strings"
+        "value": "||",
+        "content": "logical OR"
       },
-
       {
         "id": 23,
-        "front": "default parameters",
-        "back": "set default value for function arg"
+        "value": "!",
+        "content": "!"
       },
       {
         "id": 24,
-        "front": "modules (import/export)",
-        "back": "import/export JS modules"
+        "value": "!",
+        "content": "logical NOT"
       }
     ]
   },
   {
     "id": "match-game-03",
     "type": "match-game",
-    "tags": ["async", "timers", "JSON", "storage", "array", "strings"],
+    "tags": ["async", "timers", "JSON", "storage", "arrays", "strings"],
     "payload": [
       {
         "id": 25,
-        "front": "Promise",
-        "back": "represents eventual completion or failure"
+        "value": "map()",
+        "content": "map()"
       },
       {
         "id": 26,
-        "front": "async/await",
-        "back": "syntax for handling promises"
+        "value": "map()",
+        "content": "create new array by transforming elements"
       },
-
       {
         "id": 27,
-        "front": "setTimeout()",
-        "back": "schedule code execution after delay"
+        "value": "filter()",
+        "content": "filter()"
       },
       {
         "id": 28,
-        "front": "setInterval()",
-        "back": "repeat code execution at intervals"
+        "value": "filter()",
+        "content": "create new array with elements that pass test"
       },
-
       {
         "id": 29,
-        "front": "JSON.stringify()",
-        "back": "convert JS object to JSON string"
+        "value": "reduce()",
+        "content": "reduce()"
       },
       {
         "id": 30,
-        "front": "JSON.parse()",
-        "back": "parse JSON string to JS object"
+        "value": "reduce()",
+        "content": "accumulate array values into single result"
       },
-
       {
         "id": 31,
-        "front": "localStorage",
-        "back": "store key/value in browser"
-      },
-      {
-        "id": 32,
-        "front": "sessionStorage",
-        "back": "store key/value for session"
+        "value": "forEach()",
+        "content": "forEach()"
       },
 
       {
-        "id": 33,
-        "front": "Array.includes()",
-        "back": "check if array contains value"
+        "id": 32,
+        "value": "forEach()",
+        "content": "iterate over array elements"
       },
       {
+        "id": 33,
+        "value": "Array.find()",
+        "content": "Array.find()"
+      },
+
+      {
         "id": 34,
-        "front": "String.includes()",
-        "back": "check if string contains substring"
+        "value": "Array.find()",
+        "content": "return first element matching condition"
       },
 
       {
         "id": 35,
-        "front": "Array.find()",
-        "back": "return first element matching condition"
+        "value": "Array.findIndex()",
+        "content": "Array.findIndex()"
       },
+
       {
         "id": 36,
-        "front": "Array.findIndex()",
-        "back": "return index of first matching element"
+        "value": "Array.findIndex()",
+        "content": "return index of first matching element"
       }
     ]
   }

@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ANIMATION_DURATION } from '@/constants/constants';
 
 import type { MatchWidgetProps } from '@/types/widgets';
@@ -9,9 +9,20 @@ import styles from './match-widget.module.css';
 
 const cx = classNames.bind(styles);
 
+const shuffle = <T,>(array: T[]): T[] => {
+  const copy = [...array];
+  for (let index = copy.length - 1; index > 0; index--) {
+    const index_ = Math.floor(Math.random() * (index + 1));
+    [copy[index], copy[index_]] = [copy[index_], copy[index]];
+  }
+  return copy;
+};
+
 export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetProps) => {
   const [openCards, setOpenCards] = useState<number[]>([]);
   const [solvedCards, setSolvedCards] = useState<number[]>([]);
+
+  const cards = useMemo(() => shuffle(widget.payload), [widget.payload]);
 
   const handleCardClick = (id: number) => {
     if (openCards.length >= 2 || openCards.includes(id) || solvedCards.includes(id)) {
@@ -31,12 +42,15 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
         return;
       }
 
-      const isMatch = firstCard.back === secondCard.back;
+      const isMatch = firstCard.value === secondCard.value;
+
       if (isMatch) {
         setSolvedCards((previuos) => [...previuos, first, second]);
+
         onCardStateChange({ cardId: first, state: 'solved' });
         onCardStateChange({ cardId: second, state: 'solved' });
       }
+
       setTimeout(() => {
         setOpenCards([]);
       }, ANIMATION_DURATION);
@@ -48,23 +62,23 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
   return (
     <div>
       <div className={cx('game-board')}>
-        {widget.payload.map((card) => {
-          const { id, front, back } = card;
+        {cards.map((card) => {
+          const { id, content } = card;
           const isFlipped = openCards.includes(card.id);
           const isSolved = solvedCards.includes(card.id);
           return (
             <FlipCard
               key={id}
               id={id}
-              content={isFlipped || isSolved ? back : front}
+              content={content}
               isFlipped={isFlipped}
+              isSolved={isSolved}
               onClick={handleCardClick}
               onClose={() => {
                 setOpenCards((previous) => {
                   return previous.filter((index) => index !== card.id);
                 });
               }}
-              className={cx({ solved: isSolved })}
             />
           );
         })}
