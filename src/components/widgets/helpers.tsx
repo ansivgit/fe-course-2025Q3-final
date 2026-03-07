@@ -26,10 +26,10 @@ export const getOptionStatus = (
 };
 
 export const shuffle = <T,>(array: T[]): T[] => {
-  const copy = [...array];
-  for (let index = copy.length - 1; index > 0; index--) {
+  const shuffledArray = [...array];
+  for (let index = shuffledArray.length - 1; index > 0; index--) {
     const index_ = Math.floor(Math.random() * (index + 1));
-    [copy[index], copy[index_]] = [copy[index_], copy[index]];
+    [shuffledArray[index], shuffledArray[index_]] = [shuffledArray[index_], shuffledArray[index]];
   }
-  return copy;
+  return shuffledArray;
 };

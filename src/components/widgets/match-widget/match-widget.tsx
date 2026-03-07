@@ -33,8 +33,8 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
 
     if (nextCards.length === 2) {
       const [first, second] = nextCards;
-      const firstCard = widget.payload.find((c) => c.id === first);
-      const secondCard = widget.payload.find((c) => c.id === second);
+      const firstCard = widget.payload.find((card) => card.id === first);
+      const secondCard = widget.payload.find((card) => card.id === second);
 
       if (!firstCard || !secondCard) {
         return;
@@ -55,7 +55,7 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
     }
   };
 
-  const allSolved = solvedCards.length === widget.payload.length && widget.payload.length > 0;
+  const allCardsSolved = solvedCards.length === widget.payload.length && widget.payload.length > 0;
 
   return (
     <div>
@@ -82,7 +82,7 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
         })}
       </div>
       <div className={cx('button-container')}>
-        <Button disabled={!allSolved} onClick={onNext}>
+        <Button disabled={!allCardsSolved} onClick={onNext}>
           Next
         </Button>
       </div>
