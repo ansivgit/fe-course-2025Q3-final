@@ -1,5 +1,6 @@
 import { MatchGameIcon, QuizIcon } from '@/assets/icons';
-import { matchStrategy, quizStrategy } from '@/services/widgets/strategy';
+import { matchStrategy } from '@/services/widgets/match-game-strategy';
+import { quizStrategy } from '@/services/widgets/quiz-strategy';
 
 import type { Widget, WidgetAnswerMap, WidgetStrategy, WidgetType } from '@/types/widgets';
 
