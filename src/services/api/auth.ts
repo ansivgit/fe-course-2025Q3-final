@@ -2,8 +2,8 @@ import { API_ENDPOINTS, API_URL } from '@/constants/constants';
 
 import type { AuthFormFields, LoginCredentials, LoginResponse } from '@/types/user';
 
-const LOGIN_ENDPOINT = `${API_URL}${API_ENDPOINTS.AUTH.LOGIN}`;
-const SIGNUP_ENDPOINT = `${API_URL}${API_ENDPOINTS.AUTH.SIGNUP}`;
+const LOGIN_ENDPOINT = `${API_URL}/${API_ENDPOINTS.AUTH.LOGIN}`;
+const SIGNUP_ENDPOINT = `${API_URL}/${API_ENDPOINTS.AUTH.SIGNUP}`;
 
 export const login = async ({ login, password }: LoginCredentials): Promise<LoginResponse> => {
   try {
