@@ -24,28 +24,25 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
       return;
     }
 
-    const nextCards = [...openCards, id];
-    setOpenCards(nextCards);
+    setOpenCards([...openCards, id]);
     onCardStateChange({ cardId: id, state: 'opened' });
 
     if (activeCards.length === 1) {
-      const first = activeCards[0];
-      const second = id;
-      const firstCard = cards.find((card) => card.id === first);
-      const secondCard = cards.find((card) => card.id === second);
+      const firstCard = cards.find((card) => card.id === activeCards[0]);
+      const secondCard = cards.find((card) => card.id === id);
 
       if (!firstCard || !secondCard) {
         return;
       }
 
       if (firstCard.value === secondCard.value) {
-        setSolvedCards((previous) => [...previous, first, second]);
-        onCardStateChange({ cardId: first, state: 'solved' });
-        onCardStateChange({ cardId: second, state: 'solved' });
+        setSolvedCards((previous) => [...previous, firstCard.id, secondCard.id]);
+        onCardStateChange({ cardId: firstCard.id, state: 'solved' });
+        onCardStateChange({ cardId: secondCard.id, state: 'solved' });
         setOpenCards([]);
       } else {
         setTimeout(() => {
-          setOpenCards((previous) => previous.filter((card) => card !== first && card !== second));
+          setOpenCards([]);
         }, ANIMATION_DURATION);
       }
     }

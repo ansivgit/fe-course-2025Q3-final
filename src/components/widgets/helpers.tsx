@@ -2,7 +2,7 @@ import type { OptionStatus } from '@/constants/constants';
 
 import type { QuizWidget } from '@/types/widgets';
 
-export const isCorrectAnswer = (option: { name: string }, widget: QuizWidget): boolean =>
+export const isCorrectQuizAnswer = (option: { name: string }, widget: QuizWidget): boolean =>
   widget.payload.correctAnswersIds.includes(option.name);
 
 export const getOptionStatus = (
@@ -15,10 +15,10 @@ export const getOptionStatus = (
     return selectedIds.includes(option.name) ? 'selected' : 'none';
   }
   if (selectedIds.includes(option.name)) {
-    return isCorrectAnswer(option, widget) ? 'correct' : 'wrong';
+    return isCorrectQuizAnswer(option, widget) ? 'correct' : 'wrong';
   }
 
-  if (isCorrectAnswer(option, widget)) {
+  if (isCorrectQuizAnswer(option, widget)) {
     return 'missed';
   }
 

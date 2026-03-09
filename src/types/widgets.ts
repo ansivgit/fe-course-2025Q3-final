@@ -71,11 +71,9 @@ export type WidgetProps<T extends WidgetType = 'quiz'> = {
   onNext?: () => void;
 };
 
-export type CardState = 'closed' | 'opened' | 'solved';
-
 export type MatchCardState = {
   cardId: number;
-  state: CardState;
+  state: 'closed' | 'opened' | 'solved';
 };
 
 export type MatchWidgetProps = {
