@@ -35,14 +35,9 @@ export type Answer = {
   selectedIds: string[];
 };
 
-export type MatchAnswer = {
-  solvedPairs: number;
-  totalPairs: number;
-};
-
 export type WidgetAnswerMap = {
   quiz: Answer;
-  'match-game': MatchAnswer;
+  'match-game': MatchGameResult;
 };
 
 export type WidgetStrategy<T extends WidgetType, A> = {
@@ -62,10 +57,10 @@ export type ValidationResult = Record<string, OptionValidationState>;
 
 export type ValidateReturn = {
   isCorrect: boolean;
-  result: ValidationResult | MatchGameValidationResult;
+  result: ValidationResult | MatchGameResult;
 };
 
-export type MatchGameValidationResult = {
+export type MatchGameResult = {
   solvedPairs: number;
   totalPairs: number;
 };

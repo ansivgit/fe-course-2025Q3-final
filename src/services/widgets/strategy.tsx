@@ -4,8 +4,8 @@ import { Quiz } from '@/components/widgets/quiz-widget/quiz-widget';
 
 import type {
   Answer,
-  MatchAnswer,
   MatchCardState,
+  MatchGameResult,
   ValidateReturn,
   ValidationResult,
   Widget,
@@ -60,7 +60,7 @@ export const quizStrategy: WidgetStrategy<'quiz', Answer> = {
 
 const matchGameRoots = new WeakMap<HTMLDivElement, Root>();
 
-export const matchStrategy: WidgetStrategy<'match-game', MatchAnswer> = {
+export const matchStrategy: WidgetStrategy<'match-game', MatchGameResult> = {
   type: 'match-game',
 
   run: (widget: Widget<'match-game'>, onAnswer, container?: HTMLDivElement) => {
@@ -102,7 +102,7 @@ export const matchStrategy: WidgetStrategy<'match-game', MatchAnswer> = {
     return container;
   },
 
-  validate: (widget: Widget<'match-game'>, answer: MatchAnswer): ValidateReturn => {
+  validate: (widget: Widget<'match-game'>, answer: MatchGameResult): ValidateReturn => {
     const totalPairs = widget.payload.length / 2;
     const isComplete = answer.solvedPairs === totalPairs;
 
