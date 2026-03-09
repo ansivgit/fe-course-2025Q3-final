@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/button/button';
 import { FlipCard } from '@/components/flip-card/flip-card';
 import { ANIMATION_DURATION } from '@/constants/constants';
@@ -16,7 +16,7 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
   const [openCards, setOpenCards] = useState<MatchCardState['cardId'][]>([]);
   const [solvedCards, setSolvedCards] = useState<MatchCardState['cardId'][]>([]);
 
-  const cards = useMemo(() => arrayShuffle(widget.payload), [widget.payload]);
+  const [cards] = useState(() => arrayShuffle(widget.payload));
 
   const handleCardClick = (id: number) => {
     const activeCards = openCards.filter((id) => !solvedCards.includes(id));
