@@ -1,3 +1,5 @@
+import type { MatchWidgetSchemaType, QuizWidgetSchemaType } from '@/schemas/widget-schemas';
+
 export type WidgetType = 'quiz' | 'match-game';
 
 export type QuizWidget = Widget<'quiz'>;
@@ -20,20 +22,14 @@ export type WidgetPayloadMap = {
   'match-game': MatchPayload;
 };
 
-export type MatchPayload = MatchCard[];
-
 export type MatchCard = {
   id: number;
   value: string;
   content: string;
 };
 
-export type QuizPayload = {
-  question: string;
-  options: WidgetOption[];
-  correctAnswersIds: string[];
-  explanation?: string;
-};
+export type QuizPayload = QuizWidgetSchemaType['payload'];
+export type MatchPayload = MatchWidgetSchemaType['payload'];
 
 export type Answer = {
   selectedIds: string[];

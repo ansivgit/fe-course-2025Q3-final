@@ -31,3 +31,6 @@ export const WidgetSchemas: Record<string, z.ZodType<Widget>> = {
   quiz: QuizWidgetSchema,
   'match-game': MatchWidgetSchema,
 };
+
+export type QuizWidgetSchemaType = z.infer<typeof QuizWidgetSchema>;
+export type MatchWidgetSchemaType = z.infer<typeof MatchWidgetSchema>;
