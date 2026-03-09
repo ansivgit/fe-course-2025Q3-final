@@ -4,7 +4,7 @@ import { Button } from '@/components/button/button';
 import { FlipCard } from '@/components/flip-card/flip-card';
 import { ANIMATION_DURATION } from '@/constants/constants';
 
-import type { MatchWidgetProps } from '@/types/widgets';
+import type { MatchCardState, MatchWidgetProps } from '@/types/widgets';
 
 import styles from './match-widget.module.css';
 
@@ -13,8 +13,8 @@ const cx = classNames.bind(styles);
 import { arrayShuffle } from '@/utils/array-shuffle';
 
 export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetProps) => {
-  const [openCards, setOpenCards] = useState<number[]>([]);
-  const [solvedCards, setSolvedCards] = useState<number[]>([]);
+  const [openCards, setOpenCards] = useState<MatchCardState['cardId'][]>([]);
+  const [solvedCards, setSolvedCards] = useState<MatchCardState['cardId'][]>([]);
 
   const cards = useMemo(() => arrayShuffle(widget.payload), [widget.payload]);
 
