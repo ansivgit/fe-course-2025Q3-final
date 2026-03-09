@@ -11,15 +11,14 @@ type FlipCardProps = {
   isFlipped: boolean;
   isSolved: boolean;
   onClick: (id: number) => void;
-  onClose: (id: number) => void;
 };
 
-export const FlipCard = ({ id, content, isFlipped, isSolved, onClick, onClose }: FlipCardProps) => {
+export const FlipCard = ({ id, content, isFlipped, isSolved, onClick }: FlipCardProps) => {
   useEffect(() => {
     if (!isFlipped || isSolved) {
       return;
     }
-  }, [isFlipped, isSolved, id, onClose]);
+  }, [isFlipped, isSolved, id]);
 
   return (
     <button

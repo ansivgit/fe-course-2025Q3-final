@@ -68,11 +68,6 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
               isFlipped={isFlipped}
               isSolved={isSolved}
               onClick={handleCardClick}
-              onClose={() => {
-                setOpenCards((previous) => {
-                  return previous.filter((index) => index !== card.id);
-                });
-              }}
             />
           );
         })}
