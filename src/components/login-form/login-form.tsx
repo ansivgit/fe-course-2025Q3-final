@@ -3,6 +3,7 @@ import { type SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Button } from '@/components/button/button';
 import { login, register } from '@/services/api/auth';
+import { userStore } from '@/store/store';
 import { ROUTES } from '@/constants/constants';
 
 import type { AuthFormFields } from '@/types/user';
@@ -23,6 +24,8 @@ export const LoginForm = ({ page = 'login' }: { page?: string }) => {
   const [isFormValid, setFormValid] = useState(false);
   const [errors, setErrors] = useState({ login: false, userName: false, password: false });
   const [formErrorMessage, setFormErrorMessage] = useState('');
+
+  const { setUser } = userStore();
 
   const isRegisterPage = page === 'register';
 
@@ -50,8 +53,11 @@ export const LoginForm = ({ page = 'login' }: { page?: string }) => {
         setFormErrorMessage(result.error.message);
         setFormValid(false);
         void navigate(`/${ROUTES.practice}`); //! o nly for testing! remove this line!
+        console.log(userStore.getState());
       } else if (result.data) {
+        setUser(result.data);
         void navigate(`/${ROUTES.practice}`);
+        console.log(userStore.getState());
       } else {
         console.error('Unexpected login result:', result);
       }
