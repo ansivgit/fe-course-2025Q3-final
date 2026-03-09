@@ -16,6 +16,7 @@ export const API_ENDPOINTS = {
     SIGNUP: '/auth/signup',
   },
   DOC: '/api-doc',
+  DATA: '/data',
 } as const;
 
 export const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' as const;

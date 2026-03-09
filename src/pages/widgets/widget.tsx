@@ -4,6 +4,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { Layout } from '@/components/layout/layout';
 import { Paragraph } from '@/components/paragraph/paragraph';
 import { Title } from '@/components/title/title';
+import { fetchData } from '@/services/api/data';
 import { parseWidgets, registerStrategy, runWidgets } from '@/services/widgets/engine';
 import { ROUTES } from '@/constants/constants';
 
@@ -38,16 +39,8 @@ export function WidgetPage() {
         if (!config) {
           return;
         }
-        const response = await fetch(`http://localhost:3000/data/${config.id}`, {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Failed to fetch widget data');
-        }
-        const json: WidgetApiResponse = await response.json();
+
+        const json: WidgetApiResponse = await fetchData(config.id);
 
         if (!widgetContainer.current) {
           return;
