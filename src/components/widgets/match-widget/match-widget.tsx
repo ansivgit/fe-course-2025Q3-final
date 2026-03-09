@@ -10,13 +10,13 @@ import styles from './match-widget.module.css';
 
 const cx = classNames.bind(styles);
 
-import { shuffle } from '../helpers';
+import { arrayShuffle } from '@/utils/array-shuffle';
 
 export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetProps) => {
   const [openCards, setOpenCards] = useState<number[]>([]);
   const [solvedCards, setSolvedCards] = useState<number[]>([]);
 
-  const cards = useMemo(() => shuffle(widget.payload), [widget.payload]);
+  const cards = useMemo(() => arrayShuffle(widget.payload), [widget.payload]);
 
   const handleCardClick = (id: number) => {
     const activeCards = openCards.filter((id) => !solvedCards.includes(id));
