@@ -58,8 +58,8 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
       <div className={cx('game-board')}>
         {cards.map((card) => {
           const { id, content } = card;
-          const isFlipped = openCards.includes(card.id);
-          const isSolved = solvedCards.includes(card.id);
+          const isFlipped = openCards.includes(id);
+          const isSolved = solvedCards.includes(id);
           return (
             <FlipCard
               key={id}
