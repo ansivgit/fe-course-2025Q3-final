@@ -40,13 +40,13 @@ export function WidgetPage() {
           return;
         }
 
-        const json: WidgetApiResponse = await fetchData(config.id);
+        const widgetData: WidgetApiResponse = await fetchData(config.id);
 
         if (!widgetContainer.current) {
           return;
         }
 
-        const widgets: Widget[] = parseWidgets(json.data);
+        const widgets: Widget[] = parseWidgets(widgetData.data);
 
         await runWidgets(widgets, widgetContainer.current);
         setCompleted(true);
