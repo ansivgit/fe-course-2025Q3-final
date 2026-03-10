@@ -40,17 +40,17 @@
   color: var(--color-teal-500);
 }
 
-.bubble {
+.content {
   padding: 0.875rem 1rem;
   border-radius: 0.75rem;
 }
 
-.message.ai .bubble {
+.message.ai .content {
   background: var(--color-purple-900);
   border-top-left-radius: 0.25rem;
 }
 
-.message.user .bubble {
+.message.user .content {
   background: linear-gradient(
     135deg,
     hsla(from var(--color-purple-500) h s l / var(--opacity-30)),

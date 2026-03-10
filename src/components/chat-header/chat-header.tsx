@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import { type ChangeEvent, useState } from 'react';
 import { LogoIcon } from '@/assets/icons';
 import { Button } from '@/components/button/button';
+import { Select } from '@/components/select/select';
 
 import styles from './chat-header.module.css';
 
@@ -39,7 +40,7 @@ export const ChatHeader = ({ onStart }: ChatHeaderProps) => {
     onStart(topic, difficulty);
   };
 
-  const currentTopicLabel = TOPICS.find((t) => t.value === topic)?.label ?? '';
+  const currentTopicLabel = TOPICS.find((item) => item.value === topic)?.label ?? '';
 
   return (
     <div className={cx('chat-header')}>
@@ -48,30 +49,14 @@ export const ChatHeader = ({ onStart }: ChatHeaderProps) => {
           <LogoIcon className={cx('avatar-icon')} />
         </div>
         <div className={cx('meta')}>
-          <span className={cx('title')}>AI Интервьюер</span>
-          <span className={cx('topic')}>
-            <span className={cx('status-dot')} />
-            {currentTopicLabel}
-          </span>
+          <h2 className={cx('title')}>AI Интервьюер</h2>
+          <p className={cx('topic')}>{currentTopicLabel}</p>
         </div>
       </div>
 
       <div className={cx('controls')}>
-        <select className={cx('select')} value={topic} onChange={handleTopicChange}>
-          {TOPICS.map((t) => (
-            <option key={t.value} value={t.value}>
-              {t.label}
-            </option>
-          ))}
-        </select>
-
-        <select className={cx('select')} value={difficulty} onChange={handleDifficultyChange}>
-          {DIFFICULTIES.map((d) => (
-            <option key={d.value} value={d.value}>
-              {d.label}
-            </option>
-          ))}
-        </select>
+        <Select options={TOPICS} value={topic} onChange={handleTopicChange} />
+        <Select options={DIFFICULTIES} value={difficulty} onChange={handleDifficultyChange} />
 
         <Button color="gradient" size="small" onClick={handleStart}>
           Поехали!

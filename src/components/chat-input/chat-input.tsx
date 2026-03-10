@@ -1,6 +1,8 @@
 import classNames from 'classnames/bind';
 import { type ChangeEvent, type SyntheticEvent, useState } from 'react';
 import { SendIcon } from '@/assets/icons';
+import { IconButton } from '@/components/icon-button/icon-button';
+import { TextInput } from '@/components/text-input/text-input';
 
 import styles from './chat-input.module.css';
 
@@ -32,17 +34,21 @@ export const ChatInput = ({ onSend, disabled = false }: ChatInputProps) => {
 
   return (
     <form className={cx('chat-input')} onSubmit={handleSubmit}>
-      <input
+      <TextInput
         className={cx('input')}
-        type="text"
-        placeholder="Введите ваш ответ..."
         value={value}
         onChange={handleChange}
+        placeholder="Введите ваш ответ..."
         disabled={disabled}
       />
-      <button className={cx('send-button')} type="submit" disabled={disabled || !value.trim()}>
+      <IconButton
+        type="submit"
+        disabled={disabled || !value.trim()}
+        ariaLabel="Отправить сообщение"
+        className={cx('send-button')}
+      >
         <SendIcon className={cx('send-icon')} />
-      </button>
+      </IconButton>
     </form>
   );
 };

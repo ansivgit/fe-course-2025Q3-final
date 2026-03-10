@@ -7,12 +7,7 @@ export type ChatMessage = {
   timestamp: string;
 };
 
-export type ChatTopic = {
-  value: string;
-  label: string;
-};
-
-export type ChatDifficulty = {
+export type SelectOption = {
   value: string;
   label: string;
 };

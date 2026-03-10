@@ -16,7 +16,7 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
   const isAi = role === 'ai';
 
   return (
-    <div className={cx('message', role)}>
+    <article className={cx('message', role)}>
       <div className={cx('avatar')}>
         {isAi ? (
           <LogoIcon className={cx('avatar-icon')} />
@@ -24,10 +24,10 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
           <UserIcon className={cx('avatar-icon')} />
         )}
       </div>
-      <div className={cx('bubble')}>
+      <div className={cx('content')}>
         <p className={cx('text')}>{text}</p>
-        <span className={cx('timestamp')}>{timestamp}</span>
+        <time className={cx('timestamp')}>{timestamp}</time>
       </div>
-    </div>
+    </article>
   );
 };

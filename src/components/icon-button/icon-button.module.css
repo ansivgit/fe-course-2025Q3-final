@@ -1,0 +1,26 @@
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--color-purple-500),
+    var(--color-teal-500)
+  );
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity var(--transition-default) ease;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  &:not(:disabled):hover {
+    opacity: 0.85;
+  }
+}
