@@ -27,7 +27,7 @@ export const MatchWidget = ({ widget, onCardStateChange, onNext }: MatchWidgetPr
     setOpenCards([...openCards, id]);
     onCardStateChange({ cardId: id, state: 'opened' });
 
-    if (activeCards.length > 0) {
+    if (activeCards.length > 1) {
       const firstCard = cards.find((card) => card.id === activeCards[0]);
       const secondCard = cards.find((card) => card.id === id);
 
