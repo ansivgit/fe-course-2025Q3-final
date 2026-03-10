@@ -5,10 +5,10 @@ import { Layout } from '@/components/layout/layout';
 import { Paragraph } from '@/components/paragraph/paragraph';
 import { Title } from '@/components/title/title';
 import { fetchData } from '@/services/api/data';
-import { parseWidgets, registerStrategy, runWidgets } from '@/services/widgets/engine';
+import { registerStrategy, runWidgets } from '@/services/widgets/engine';
 import { ROUTES } from '@/constants/constants';
 
-import type { Widget, WidgetApiResponse } from '@/types/widgets';
+import type { Widget } from '@/types/widgets';
 
 import { widgetPageConfig } from './widget.config';
 import styles from './widget.module.css';
@@ -20,6 +20,7 @@ export function WidgetPage() {
 
   const widgetContainer = useRef<HTMLDivElement>(null);
   const [completed, setCompleted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const config = widgetPageConfig.find((widget) => widget.id === widgetId);
 
@@ -40,18 +41,17 @@ export function WidgetPage() {
           return;
         }
 
-        const widgetData: WidgetApiResponse = await fetchData(config.id);
+        const widgetData: Widget[] = await fetchData(config.id);
 
         if (!widgetContainer.current) {
           return;
         }
 
-        const widgets: Widget[] = parseWidgets(widgetData.data);
-
-        await runWidgets(widgets, widgetContainer.current);
+        await runWidgets(widgetData, widgetContainer.current);
         setCompleted(true);
       } catch (error) {
         console.error('Widgets error:', error);
+        setError('Failed to load widgets');
       }
     }
 
@@ -73,6 +73,11 @@ export function WidgetPage() {
         <Title size="small">{title}</Title>
       </section>
       <div ref={widgetContainer} className={cx('widget-container')} />
+      {error && (
+        <div>
+          <Paragraph text={error} />
+        </div>
+      )}
       {completed && (
         <div>
           <Paragraph text={completionText} />

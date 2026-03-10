@@ -65,14 +65,14 @@ function isWidgetData(item: unknown): item is { type: string } {
 
 export function parseWidgets(data: unknown): Widget[] {
   if (!Array.isArray(data)) {
-    return [];
+    throw new TypeError('Widgets data must be an array');
   }
 
   const widgets: Widget[] = [];
 
   for (const item of data) {
     if (!isWidgetData(item)) {
-      continue;
+      throw new Error('Invalid widget structure');
     }
 
     const type = item.type;
@@ -82,6 +82,7 @@ export function parseWidgets(data: unknown): Widget[] {
       widgets.push(schema.parse(item));
     } catch (error) {
       console.warn('Invalid widget data:', error);
+      throw error;
     }
   }
 

@@ -1,8 +1,9 @@
+import { parseWidgets } from '@/services/widgets/engine';
 import { API_ENDPOINTS, API_URL } from '@/constants/constants';
 
-import type { WidgetApiResponse } from '@/types/widgets';
+import type { Widget, WidgetApiResponse } from '@/types/widgets';
 
-export async function fetchData(id: string): Promise<WidgetApiResponse> {
+export async function fetchData(id: string): Promise<Widget[]> {
   const response = await fetch(`${API_URL}/${API_ENDPOINTS.DATA}/${id}`, {
     method: 'GET',
     headers: {
@@ -16,5 +17,15 @@ export async function fetchData(id: string): Promise<WidgetApiResponse> {
 
   const data: WidgetApiResponse = await response.json();
 
-  return data;
+  if (!Array.isArray(data) || typeof data !== 'object' || !('data' in data)) {
+    throw new Error('Invalid data format');
+  }
+
+  const widgets: Widget[] = parseWidgets(data.data);
+
+  if (widgets.length === 0) {
+    throw new Error('No valid widgets received');
+  }
+
+  return widgets;
 }
