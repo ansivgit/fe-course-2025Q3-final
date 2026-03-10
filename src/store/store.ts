@@ -4,12 +4,11 @@ import type { Session, User } from '@/types/user';
 
 export type UserStore = {
   user: User | null;
-
   setUser: (user: User | null) => void;
   addSession: (session: Session) => void;
 };
 
-export const useUserStore = create<UserStore>((set, get) => ({
+export const useUserStore = create<UserStore>((set) => ({
   user: null,
   isLoggedIn: false,
   loading: false,
@@ -20,14 +19,17 @@ export const useUserStore = create<UserStore>((set, get) => ({
   },
 
   addSession: (session): void => {
-    const state = get();
-    if (state.user) {
-      set({
+    set((state) => {
+      if (!state.user) {
+        return state;
+      }
+
+      return {
         user: {
           ...state.user,
           session: [...state.user.session, session],
         },
-      });
-    }
+      };
+    });
   },
 }));
