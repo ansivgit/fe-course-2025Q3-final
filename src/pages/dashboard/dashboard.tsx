@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import { Layout } from '@/components/layout/layout';
+import { Profile } from '@/components/profile/profile';
 import { Title } from '@/components/title/title';
 
 import styles from './dashboard.module.css';
@@ -11,6 +12,7 @@ export const Dashboard = () => {
     <Layout>
       <div className={cx('container')}>
         <Title>Dashboard</Title>
+        <Profile></Profile>
       </div>
     </Layout>
   );
