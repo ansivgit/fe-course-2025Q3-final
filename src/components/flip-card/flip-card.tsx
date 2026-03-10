@@ -18,7 +18,7 @@ export const FlipCard = ({ id, content, isFlipped, isSolved, onClick }: FlipCard
     if (!isFlipped || isSolved) {
       return;
     }
-  }, [isFlipped, isSolved, id]);
+  }, [isFlipped, isSolved]);
 
   return (
     <button
