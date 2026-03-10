@@ -17,7 +17,7 @@ export async function fetchData(id: string): Promise<Widget[]> {
 
   const data: WidgetApiResponse = await response.json();
 
-  if (!Array.isArray(data) || typeof data !== 'object' || !('data' in data)) {
+  if (typeof data !== 'object' || !('data' in data)) {
     throw new Error('Invalid data format');
   }
 
