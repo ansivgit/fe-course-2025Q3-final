@@ -1,12 +1,6 @@
 import { create } from 'zustand';
 
-import type { Session, User } from '@/types/user';
-
-export type UserStore = {
-  user: User | null;
-  setUser: (user: User | null) => void;
-  addSession: (session: Session) => void;
-};
+import type { UserStore } from '@/types/store';
 
 export const useUserStore = create<UserStore>((set) => ({
   user: null,
