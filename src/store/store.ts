@@ -4,9 +4,6 @@ import type { UserStore } from '@/types/store';
 
 export const useUserStore = create<UserStore>((set) => ({
   user: null,
-  isLoggedIn: false,
-  loading: false,
-  error: null,
 
   setUser: (user): void => {
     set({ user });
