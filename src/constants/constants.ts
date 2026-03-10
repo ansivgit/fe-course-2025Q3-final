@@ -12,10 +12,10 @@ export const ROUTES = {
 export const API_ENDPOINTS = {
   BASE_URL: '/',
   AUTH: {
-    LOGIN: 'auth/login',
-    SIGNUP: 'auth/signup',
+    LOGIN: '/auth/login',
+    SIGNUP: '/auth/signup',
   },
-  DOC: 'api-doc',
+  DOC: '/api-doc',
 } as const;
 
 export const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' as const;
