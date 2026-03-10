@@ -3,7 +3,7 @@ import { type SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Button } from '@/components/button/button';
 import { login, register } from '@/services/api/auth';
-import { useUserStore } from '@/store/store';
+import { useUserStore } from '@/store/useUserStore';
 import { ROUTES } from '@/constants/constants';
 
 import type { AuthFormFields } from '@/types/user';
