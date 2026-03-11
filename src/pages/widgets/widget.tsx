@@ -4,7 +4,8 @@ import { Navigate, useParams } from 'react-router-dom';
 import { Layout } from '@/components/layout/layout';
 import { Paragraph } from '@/components/paragraph/paragraph';
 import { Title } from '@/components/title/title';
-import { parseWidgets, registerStrategy, runWidgets } from '@/services/widgets/engine';
+import { fetchData } from '@/services/api/data';
+import { registerStrategy, runWidgets } from '@/services/widgets/engine';
 import { ROUTES } from '@/constants/constants';
 
 import type { Widget } from '@/types/widgets';
@@ -19,6 +20,7 @@ export function WidgetPage() {
 
   const widgetContainer = useRef<HTMLDivElement>(null);
   const [completed, setCompleted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const config = widgetPageConfig.find((widget) => widget.id === widgetId);
 
@@ -27,25 +29,35 @@ export function WidgetPage() {
       return;
     }
 
-    const { strategies, widgetsData } = config;
+    const { strategies } = config;
 
     strategies.forEach((strategy) => {
       registerStrategy(strategy);
     });
 
-    const widgets: Widget[] = parseWidgets(widgetsData);
+    async function initWidgets() {
+      try {
+        if (!config) {
+          return;
+        }
 
-    if (!widgetContainer.current) {
-      return;
+        const widgetData: Widget[] = await fetchData(config.id);
+
+        if (!widgetContainer.current) {
+          return;
+        }
+
+        await runWidgets(widgetData, widgetContainer.current);
+        setCompleted(true);
+      } catch (error) {
+        console.error('Widgets error:', error);
+        setError('Failed to load widgets');
+      }
     }
 
-    runWidgets(widgets, widgetContainer.current)
-      .then(() => {
-        setCompleted(true);
-      })
-      .catch((error: unknown) => {
-        console.error('Widgets error:', error);
-      });
+    initWidgets().catch((error: unknown) => {
+      console.error('initWidgets promise error', error);
+    });
   }, [config]);
 
   if (!config) {
@@ -61,6 +73,12 @@ export function WidgetPage() {
         <Title size="small">{title}</Title>
       </section>
       <div ref={widgetContainer} className={cx('widget-container')} />
+      {/* TODO: add user-friendly error-handler  */}
+      {error && (
+        <div>
+          <Paragraph text={error} />
+        </div>
+      )}
       {completed && (
         <div>
           <Paragraph text={completionText} />

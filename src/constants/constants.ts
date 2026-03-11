@@ -12,10 +12,10 @@ export const ROUTES = {
 export const API_ENDPOINTS = {
   BASE_URL: '/',
   AUTH: {
-    LOGIN: '/auth/login',
-    SIGNUP: '/auth/signup',
+    LOGIN: 'auth/login',
+    SIGNUP: 'auth/signup',
   },
-  DOC: '/api-doc',
+  DATA: 'data',
 } as const;
 
 export const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' as const;
@@ -23,3 +23,5 @@ export const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' as const;
 export const OPTION_STATUSES = ['correct', 'wrong', 'missed', 'selected', 'none'];
 
 export type OptionStatus = (typeof OPTION_STATUSES)[number];
+
+export const ANIMATION_DURATION = 2000;
