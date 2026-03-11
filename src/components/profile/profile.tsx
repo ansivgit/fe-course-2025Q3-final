@@ -38,9 +38,9 @@ export const Profile = () => {
           </div>
         </div>
       </div>
-      <div className={cx('ponts-container')}>
-        <span className={cx('ponts-value')}>4,250</span>
-        <span className={cx('ponts-text')}>points</span>
+      <div className={cx('points-container')}>
+        <span className={cx('points-value')}>4,250</span>
+        <span className={cx('points-text')}>points</span>
       </div>
     </div>
   );

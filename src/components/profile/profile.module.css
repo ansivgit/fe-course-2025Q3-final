@@ -80,7 +80,7 @@
   max-width: 9rem;
 }
 
-.ponts-container {
+.points-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -91,7 +91,7 @@
   background: var(--color-gray-950);
 }
 
-.ponts-value {
+.points-value {
   background: linear-gradient(
     135deg,
     var(--color-purple-500),
@@ -106,7 +106,7 @@
   line-height: 2.25rem;
 }
 
-.ponts-text {
+.points-text {
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: var(--color-gray-500);
