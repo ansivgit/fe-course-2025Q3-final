@@ -2,15 +2,24 @@ import { create } from 'zustand';
 
 import type { User } from '@/types/user';
 
-type UserStore = {
-  user: User | null;
-  setUser: (user: User | null) => void;
+type UserStore = Pick<User, 'name' | 'login' | 'createdAt'> & {
+  setUser: (user: User) => void;
 };
 
 export const useUserStore = create<UserStore>((set) => ({
-  user: null,
+  name: '',
+  login: '',
+  createdAt: '',
 
   setUser: (user): void => {
-    set({ user });
+    set(() => {
+      const { name, login, createdAt } = user;
+
+      return {
+        name,
+        login,
+        createdAt,
+      };
+    });
   },
 }));
