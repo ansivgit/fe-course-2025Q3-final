@@ -1,43 +1,32 @@
 import classNames from 'classnames/bind';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import styles from './flip-card.module.css';
 
 const cx = classNames.bind(styles);
 
-type MatchCardProps = {
+type FlipCardProps = {
   id: number;
   content: string;
   isFlipped: boolean;
+  isSolved: boolean;
   onClick: (id: number) => void;
-  onClose: (id: number) => void;
 };
 
-const AUTO_FLIP_DELAY = 2000;
-
-export const MatchCard = ({ id, content, isFlipped, onClick, onClose }: MatchCardProps) => {
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
+export const FlipCard = ({ id, content, isFlipped, isSolved, onClick }: FlipCardProps) => {
   useEffect(() => {
-    if (!isFlipped) {
+    if (!isFlipped || isSolved) {
       return;
     }
-
-    timeoutRef.current = setTimeout(() => {
-      onClose(id);
-    }, AUTO_FLIP_DELAY);
-
-    return (): void => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, [isFlipped, id, onClose]);
+  }, [isFlipped, isSolved]);
 
   return (
     <button
       type="button"
-      className={cx('flip-card', { flipped: isFlipped })}
+      className={cx('flip-card', {
+        flipped: isFlipped || isSolved,
+        solved: isSolved,
+      })}
       onClick={() => {
         onClick(id);
       }}

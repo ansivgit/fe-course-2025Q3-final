@@ -5,10 +5,10 @@ import type { Answer, ValidationResult, Widget, WidgetStrategy } from '@/types/w
 
 const roots = new WeakMap<HTMLDivElement, Root>();
 
-export const quizStrategy: WidgetStrategy<Widget, Answer> = {
+export const quizStrategy: WidgetStrategy<'quiz', Answer> = {
   type: 'quiz',
 
-  run: (widget: Widget & { type: 'quiz' }, onAnswer, container?: HTMLDivElement) => {
+  run: (widget: Widget<'quiz'>, onAnswer, container?: HTMLDivElement) => {
     if (!container) {
       return;
     }
@@ -28,7 +28,7 @@ export const quizStrategy: WidgetStrategy<Widget, Answer> = {
     return container;
   },
 
-  validate: (widget, answer) => {
+  validate: (widget: Widget<'quiz'>, answer: Answer) => {
     const correctAnswersIds = widget.payload.correctAnswersIds;
     const selectedIds = answer.selectedIds;
 
