@@ -85,6 +85,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 8rem;
   padding: 1rem;
   text-align: center;
   border-radius: 0.75rem;

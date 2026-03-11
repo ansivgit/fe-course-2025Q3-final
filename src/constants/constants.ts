@@ -28,3 +28,6 @@ export type OptionStatus = (typeof OPTION_STATUSES)[number];
 export const ANIMATION_DURATION = 2000;
 
 export const MS_IN_SECOND = 1000;
+
+export const QUIZ_POINTS = 100;
+export const MATCH_GAME_POINTS = 200;

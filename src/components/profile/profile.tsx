@@ -11,7 +11,7 @@ import styles from './profile.module.css';
 const cx = classNames.bind(styles);
 
 export const Profile = () => {
-  const { name, login, createdAt, setUser } = useUserStore();
+  const { name, login, createdAt, setUser, points } = useUserStore();
 
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(name);
@@ -82,7 +82,7 @@ export const Profile = () => {
         </div>
       </div>
       <div className={cx('points-container')}>
-        <span className={cx('points-value')}>4,250</span>
+        <span className={cx('points-value')}>{points.toLocaleString()}</span>
         <span className={cx('points-text')}>points</span>
       </div>
     </div>

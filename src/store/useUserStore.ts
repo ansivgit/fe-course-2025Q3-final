@@ -4,7 +4,10 @@ import { persist } from 'zustand/middleware';
 import type { User } from '@/types/user';
 
 type UserStore = Pick<User, 'name' | 'login' | 'createdAt'> & {
+  points: number;
   setUser: (user: Pick<User, 'name' | 'login' | 'createdAt'>) => void;
+  setPoints: (points: number) => void;
+  addPoints: (amount: number) => void;
 };
 
 export const useUserStore = create<UserStore>()(
@@ -13,6 +16,7 @@ export const useUserStore = create<UserStore>()(
       name: '',
       login: '',
       createdAt: '',
+      points: 0,
 
       setUser: (user): void => {
         set(() => {
@@ -24,6 +28,15 @@ export const useUserStore = create<UserStore>()(
             createdAt,
           };
         });
+      },
+
+      setPoints: (points: number): void => {
+        set({ points });
+      },
+
+      addPoints: (amount): void => {
+        const current = useUserStore.getState().points;
+        useUserStore.getState().setPoints(current + amount);
       },
     }),
     {
