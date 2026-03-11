@@ -1,11 +1,12 @@
 import { API_ENDPOINTS, API_URL } from '@/constants/constants';
 
-import type { AuthFormFields, LoginCredentials, LoginResponse } from '@/types/user';
+import type { HttpResponse } from '@/types/responses';
+import type { AuthFormFields, LoginCredentials, User } from '@/types/user';
 
 const LOGIN_ENDPOINT = `${API_URL}/${API_ENDPOINTS.AUTH.LOGIN}`;
 const SIGNUP_ENDPOINT = `${API_URL}/${API_ENDPOINTS.AUTH.SIGNUP}`;
 
-export const login = async ({ login, password }: LoginCredentials): Promise<LoginResponse> => {
+export const login = async ({ login, password }: LoginCredentials): Promise<HttpResponse<User>> => {
   try {
     const response = await fetch(LOGIN_ENDPOINT, {
       method: 'POST',
@@ -15,7 +16,7 @@ export const login = async ({ login, password }: LoginCredentials): Promise<Logi
       },
     });
 
-    const result: LoginResponse = await response.json();
+    const result: HttpResponse<User> = await response.json();
 
     if (!response.ok) {
       console.error('Login API error:', result);
@@ -33,7 +34,7 @@ export const register = async ({
   login,
   name,
   password,
-}: AuthFormFields): Promise<LoginResponse> => {
+}: AuthFormFields): Promise<HttpResponse<User>> => {
   try {
     const response = await fetch(SIGNUP_ENDPOINT, {
       method: 'POST',
@@ -43,7 +44,7 @@ export const register = async ({
       },
     });
 
-    const result: LoginResponse = await response.json();
+    const result: HttpResponse<User> = await response.json();
 
     if (!response.ok) {
       console.error('Signup API error:', result);

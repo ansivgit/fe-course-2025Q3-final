@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router';
 import { Button } from '@/components/button/button';
 import { login, register } from '@/services/api/auth';
 import { useUserStore } from '@/store/useUserStore';
-import { ROUTES } from '@/constants/constants';
+import { ERROR_CODE_KEYS, ROUTES } from '@/constants/constants';
 
-import type { AuthFormFields } from '@/types/user';
+import type { HttpResponse } from '@/types/responses';
+import type { AuthFormFields, User } from '@/types/user';
 
 import { LoginInput } from './inputs/login-input';
 import { PasswordInput } from './inputs/password-input';
@@ -45,19 +46,24 @@ export const LoginForm = ({ page = 'login' }: { page?: string }) => {
     event.preventDefault();
 
     if (isFormValid) {
-      const result = isRegisterPage
+      const result: HttpResponse<User> = isRegisterPage
         ? await register({ login: loginValue, name: userNameValue, password: passwordValue })
         : await login({ login: loginValue, password: passwordValue });
+
+      if (result.data) {
+        setUser(result.data);
+        void navigate(`/${ROUTES.practice}`);
+      }
 
       if (result.error) {
         setFormErrorMessage(result.error.message);
         setFormValid(false);
-        void navigate(`/${ROUTES.practice}`); //! o nly for testing! remove this line!
-      } else if (result.data) {
-        setUser(result.data);
-        void navigate(`/${ROUTES.practice}`);
-      } else {
-        console.error('Unexpected login result:', result);
+
+        if (result.error.errorCode === ERROR_CODE_KEYS.USER_NOT_FOUND) {
+          void navigate(`/${ROUTES.register}`);
+        } else {
+          console.error('Unexpected login result:', result);
+        }
       }
     }
   };

@@ -25,3 +25,15 @@ export const OPTION_STATUSES = ['correct', 'wrong', 'missed', 'selected', 'none'
 export type OptionStatus = (typeof OPTION_STATUSES)[number];
 
 export const ANIMATION_DURATION = 2000;
+
+export const ERROR_CODE_KEYS = {
+  BAD_REQUEST: 'BAD_REQUEST',
+  UNAUTHORIZED: 'UNAUTHORIZED',
+  FORBIDDEN: 'FORBIDDEN',
+  NOT_FOUND: 'NOT_FOUND',
+  CONFLICT: 'CONFLICT',
+  INTERNAL_ERROR: 'INTERNAL_ERROR',
+  VALIDATION_ERROR: 'VALIDATION_ERROR',
+  DATABASE_ERROR: 'DATABASE_ERROR',
+  USER_NOT_FOUND: 'USER_NOT_FOUND',
+} as const;
