@@ -11,4 +11,5 @@ export { default as LogoIcon } from './logo.svg?react';
 export { default as MatchGameIcon } from './match-game.svg?react';
 export { default as PasswordIcon } from './password.svg?react';
 export { default as QuizIcon } from './quiz.svg?react';
+export { default as SendIcon } from './send.svg?react';
 export { default as UserIcon } from './user.svg?react';

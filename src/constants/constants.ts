@@ -6,6 +6,7 @@ export const ROUTES = {
   register: 'register',
   practice: 'practice',
   quiz: 'quiz',
+  aiChat: 'ai-chat',
   notFound: '*',
 } as const;
 

@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router';
+import { AiChat } from '@/pages/ai-chat/ai-chat';
 import { Auth } from '@/pages/auth/auth';
 import { NotFound } from '@/pages/not-found';
 import { Practice } from '@/pages/practice/practice';
@@ -18,6 +19,7 @@ export const AppRouter = () => (
     <Route path={ROUTES.login} element={<Auth />} />
     <Route path={ROUTES.register} element={<Auth />} />
     <Route path={ROUTES.practice} element={<Practice />} />
+    <Route path={ROUTES.aiChat} element={<AiChat />} />
     {/* TODO: Add nested routes */}
     <Route path="/practice/match-game" element={<MatchGame />} />
     <Route path={`${ROUTES.practice}/:widgetId`} element={<WidgetPage />} />

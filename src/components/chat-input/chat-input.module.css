@@ -1,0 +1,18 @@
+.chat-input {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--color-gray-900);
+  border-top: 1px solid var(--color-gray-800);
+}
+
+.input {
+  flex: 1;
+}
+
+.send-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-white);
+}
