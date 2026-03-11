@@ -24,7 +24,7 @@ export async function runWidgets(widgets: Widget[], container?: HTMLElement): Pr
   for (const widget of widgets) {
     const strategy = strategies.get(widget.type);
     if (!strategy) {
-      console.warn('No strategy for widget type:', widget.type);
+      console.info('No strategy for widget type:', widget.type);
       continue;
     }
 
@@ -44,7 +44,7 @@ export function answerWidget(
 ): void {
   const resolve = pendingAnswers[widgetId];
   if (!resolve) {
-    console.warn('No pending question for widget:', widgetId);
+    console.info('No pending question for widget:', widgetId);
     return;
   }
   resolve(answer);
@@ -81,7 +81,7 @@ export function parseWidgets(data: unknown): Widget[] {
     try {
       widgets.push(schema.parse(item));
     } catch (error) {
-      console.warn('Invalid widget data:', error);
+      console.error('Invalid widget data:', error);
     }
   }
 

@@ -48,6 +48,7 @@ export default defineConfig([
         {
           argsIgnorePattern: '^_',
           varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
         },
       ],
       '@typescript-eslint/no-explicit-any': 'error',
@@ -65,7 +66,7 @@ export default defineConfig([
       'react-hooks/exhaustive-deps': 'warn',
 
       // 🟡 Good practices
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'no-console': ['warn', { allow: ['info', 'error'] }],
       'no-magic-numbers': ['error', { ignore: [0, 1, 2, -1] }],
       'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
       'max-lines-per-function': ['warn', { max: 40, skipBlankLines: true, skipComments: true }],

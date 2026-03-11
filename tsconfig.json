@@ -5,6 +5,7 @@
     "module": "ESNext",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+    "incremental": true,
     "types": ["vite/client", "vite-plugin-svgr/client"],
     "jsx": "react-jsx",
     "baseUrl": ".",
