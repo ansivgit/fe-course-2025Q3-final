@@ -73,6 +73,7 @@ export function WidgetPage() {
         <Title size="small">{title}</Title>
       </section>
       <div ref={widgetContainer} className={cx('widget-container')} />
+      {/* TODO: add user-friendly error-handler  */}
       {error && (
         <div>
           <Paragraph text={error} />
