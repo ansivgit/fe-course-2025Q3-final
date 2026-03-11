@@ -4,7 +4,7 @@ import { persist } from 'zustand/middleware';
 import type { User } from '@/types/user';
 
 type UserStore = Pick<User, 'name' | 'login' | 'createdAt'> & {
-  setUser: (user: User) => void;
+  setUser: (user: Pick<User, 'name' | 'login' | 'createdAt'>) => void;
 };
 
 export const useUserStore = create<UserStore>()(
