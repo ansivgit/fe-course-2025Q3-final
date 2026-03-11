@@ -1,10 +1,10 @@
-import type { Widget, WidgetAnswerMap, WidgetStrategy, WidgetType } from '@/types/widgets';
+import { WidgetSchemas } from '@/schemas/widget-schemas';
 
-import { WidgetSchemas } from '../../schemas/widget-schemas';
+import type { Widget, WidgetAnswerMap, WidgetStrategy, WidgetType } from '@/types/widgets';
 
 const strategies = new Map<
   Widget['type'],
-  WidgetStrategy<Widget, WidgetAnswerMap[Widget['type']]>
+  WidgetStrategy<WidgetType, WidgetAnswerMap[Widget['type']]>
 >();
 
 export const widgetAnswers: Record<string, WidgetAnswerMap[WidgetType] | undefined> = {};
@@ -15,7 +15,7 @@ export const pendingAnswers: Record<
 > = {};
 
 export function registerStrategy<T extends Widget>(
-  strategy: WidgetStrategy<T, WidgetAnswerMap[T['type']]>,
+  strategy: WidgetStrategy<WidgetType, WidgetAnswerMap[T['type']]>,
 ): void {
   strategies.set(strategy.type, strategy);
 }
@@ -65,14 +65,14 @@ function isWidgetData(item: unknown): item is { type: string } {
 
 export function parseWidgets(data: unknown): Widget[] {
   if (!Array.isArray(data)) {
-    return [];
+    throw new TypeError('Widgets data must be an array');
   }
 
   const widgets: Widget[] = [];
 
   for (const item of data) {
     if (!isWidgetData(item)) {
-      continue;
+      throw new Error('Invalid widget structure');
     }
 
     const type = item.type;
@@ -82,6 +82,7 @@ export function parseWidgets(data: unknown): Widget[] {
       widgets.push(schema.parse(item));
     } catch (error) {
       console.warn('Invalid widget data:', error);
+      throw error;
     }
   }
 
