@@ -1,10 +1,12 @@
 import classNames from 'classnames/bind';
-import { useRef, useState } from 'react';
+import { type ChangeEvent, type SyntheticEvent, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { SendIcon } from '@/assets/icons';
 import { ChatHeader } from '@/components/chat-header/chat-header';
-import { ChatInput } from '@/components/chat-input/chat-input';
 import { ChatMessage } from '@/components/chat-message/chat-message';
+import { IconButton } from '@/components/icon-button/icon-button';
 import { Layout } from '@/components/layout/layout';
+import { TextInput } from '@/components/text-input/text-input';
 import { formatTime } from '@/utils/format-time';
 
 import type { ChatMessage as ChatMessageType } from '@/types/chat';
@@ -20,20 +22,33 @@ const handleStart = (_topic: string, _difficulty: string): void => {
 
 export const AiChat = () => {
   const [messages, setMessages] = useState<ChatMessageType[]>(MOCK_MESSAGES);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [inputValue, setInputValue] = useState('');
+  const messagesEndReference = useRef<HTMLDivElement>(null);
 
-  const handleSend = (text: string): void => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = (event: SyntheticEvent): void => {
+    event.preventDefault();
+    const trimmed = inputValue.trim();
+
+    if (!trimmed) {
+      return;
+    }
+
     const newMessage: ChatMessageType = {
       id: uuidv4(),
       role: 'user',
-      text,
+      text: trimmed,
       timestamp: formatTime(),
     };
 
     setMessages((previous) => [...previous, newMessage]);
+    setInputValue('');
 
     setTimeout(() => {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      messagesEndReference.current?.scrollIntoView({ behavior: 'smooth' });
     }, 0);
   };
 
@@ -46,10 +61,20 @@ export const AiChat = () => {
           {messages.map((message) => (
             <ChatMessage key={message.id} message={message} />
           ))}
-          <div ref={messagesEndRef} />
+          <div ref={messagesEndReference} />
         </section>
 
-        <ChatInput onSend={handleSend} />
+        <form className={cx('chat-input')} onSubmit={handleSubmit}>
+          <TextInput
+            className={cx('input')}
+            value={inputValue}
+            onChange={handleChange}
+            placeholder="Enter your answer..."
+          />
+          <IconButton type="submit" disabled={!inputValue.trim()} ariaLabel="Send message">
+            <SendIcon className={cx('send-icon')} />
+          </IconButton>
+        </form>
       </div>
     </Layout>
   );

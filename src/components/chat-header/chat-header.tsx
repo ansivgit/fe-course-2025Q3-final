@@ -49,7 +49,7 @@ export const ChatHeader = ({ onStart }: ChatHeaderProps) => {
           <LogoIcon className={cx('avatar-icon')} />
         </div>
         <div className={cx('meta')}>
-          <h2 className={cx('title')}>AI Интервьюер</h2>
+          <h2 className={cx('title')}>AI Interviewer</h2>
           <p className={cx('topic')}>{currentTopicLabel}</p>
         </div>
       </div>
@@ -58,8 +58,8 @@ export const ChatHeader = ({ onStart }: ChatHeaderProps) => {
         <Select options={TOPICS} value={topic} onChange={handleTopicChange} />
         <Select options={DIFFICULTIES} value={difficulty} onChange={handleDifficultyChange} />
 
-        <Button color="gradient" size="small" onClick={handleStart}>
-          Поехали!
+        <Button size="small" onClick={handleStart}>
+          Lets Go!
         </Button>
       </div>
     </div>

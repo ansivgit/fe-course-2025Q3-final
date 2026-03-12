@@ -33,8 +33,10 @@
   --color-pink-500: hsl(320, 100%, 50%);
 
   /* OPACITY  */
+  --opacity-85: 0.85;
   --opacity-70: 0.7;
   --opacity-50: 0.5;
+  --opacity-40: 0.4;
   --opacity-30: 0.3;
   --opacity-15: 0.15;
   --opacity-10: 0.1;

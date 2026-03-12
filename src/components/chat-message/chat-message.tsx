@@ -13,7 +13,7 @@ type ChatMessageProps = {
 
 export const ChatMessage = ({ message }: ChatMessageProps) => {
   const { role, text, timestamp } = message;
-  const isAi = role === 'ai';
+  const isAi = role === 'mentor';
 
   return (
     <article className={cx('message', role)}>

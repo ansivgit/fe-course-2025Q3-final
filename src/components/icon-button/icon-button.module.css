@@ -16,11 +16,11 @@
   transition: opacity var(--transition-default) ease;
 
   &:disabled {
-    opacity: 0.4;
+    opacity: var(--opacity-40);
     cursor: default;
   }
 
   &:not(:disabled):hover {
-    opacity: 0.85;
+    opacity: var(--opacity-85);
   }
 }
