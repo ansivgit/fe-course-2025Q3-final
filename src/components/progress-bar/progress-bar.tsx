@@ -11,10 +11,16 @@ type ProgressBarProps = {
 };
 
 export const ProgressBar = ({ completed, total }: ProgressBarProps) => {
-  const percentage = total > 0 ? (completed / total) * MAX_PERCENTAGE : 0;
+  const percentage = total > 0 ? Math.round((completed / total) * MAX_PERCENTAGE) : 0;
 
   return (
     <div className={cx('progress-bar')}>
+      <div className={cx('info')}>
+        <div className={cx('round')}>
+          Round {completed} of {total}
+        </div>
+        <div className={cx('percentage')}>{percentage}%</div>
+      </div>
       <div className={cx('progress-track')}>
         <div className={cx('progress')} style={{ width: `${percentage}%` }} />
       </div>

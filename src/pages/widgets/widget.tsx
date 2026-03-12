@@ -79,7 +79,9 @@ export function WidgetPage() {
         <div className={cx('icon')}>{Icon && <Icon />}</div>
         <Title size="small">{title}</Title>
       </section>
-      {progress.total > 0 && <ProgressBar completed={progress.completed} total={progress.total} />}
+      {!completed && progress.total > 0 && (
+        <ProgressBar completed={progress.completed} total={progress.total} />
+      )}
       <div ref={widgetContainer} className={cx('widget-container')} />
       {/* TODO: add user-friendly error-handler  */}
       {error && (
