@@ -26,7 +26,7 @@ export const useUserStore = create<UserStore>()(
             name,
             login,
             createdAt,
-            points,
+            points: points ?? 0,
           };
         });
       },
