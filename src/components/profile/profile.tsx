@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
-import { CalendarIcon, EditIcon, MailIcon } from '@/assets/icons';
+import { CalendarIcon, EditIcon, LoginIcon } from '@/assets/icons';
 import { Button } from '@/components/button/button';
 import { Title } from '@/components/title/title';
 import { useUserStore } from '@/store/useUserStore';
@@ -45,7 +45,7 @@ export const Profile = () => {
           <div className={cx('profile-data')}>
             <div>
               <div className={cx('profile-icon')}>
-                <MailIcon />
+                <LoginIcon />
               </div>
               <span>{login}</span>
             </div>

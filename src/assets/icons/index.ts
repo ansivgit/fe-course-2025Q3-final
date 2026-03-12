@@ -10,7 +10,6 @@ export { default as EyeIcon } from './eye.svg?react';
 export { default as EyeOffIcon } from './eye-off.svg?react';
 export { default as LightningIcon } from './lightning.svg?react';
 export { default as LogoIcon } from './logo.svg?react';
-export { default as MailIcon } from './mail.svg?react';
 export { default as MatchGameIcon } from './match-game.svg?react';
 export { default as PasswordIcon } from './password.svg?react';
 export { default as QuizIcon } from './quiz.svg?react';
