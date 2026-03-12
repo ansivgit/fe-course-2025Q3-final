@@ -28,20 +28,22 @@ export const Profile = () => {
           <span>{name[0].toUpperCase()}</span>
         </div>
         <div>
-          {isEditing ? (
-            <input
-              type="text"
-              value={editName}
-              onChange={(event) => {
-                setEditName(event.target.value);
-              }}
-              required
-              minLength={1}
-              className={cx('edit-input')}
-            />
-          ) : (
-            <Title>{name}</Title>
-          )}
+          <div className={cx('profile-title')}>
+            {isEditing ? (
+              <input
+                type="text"
+                value={editName}
+                onChange={(event) => {
+                  setEditName(event.target.value);
+                }}
+                required
+                minLength={1}
+                className={cx('edit-input')}
+              />
+            ) : (
+              <Title>{name}</Title>
+            )}
+          </div>
           <div className={cx('profile-data')}>
             <div>
               <div className={cx('profile-icon')}>
