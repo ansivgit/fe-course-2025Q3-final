@@ -27,7 +27,7 @@ export const Profile = () => {
         <div className={cx('profile-image')}>
           <span>{name[0].toUpperCase()}</span>
         </div>
-        <div>
+        <div className={cx('user-info')}>
           <div className={cx('profile-title')}>
             {isEditing ? (
               <input
