@@ -1,0 +1,25 @@
+.progress-bar {
+  width: 100%;
+  max-width: 56rem;
+  margin: 0 auto 1.5rem;
+  color: var(--color-white);
+}
+
+.progress-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: #21212c;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    var(--color-purple-400),
+    hsla(from var(--color-purple-600) h s l / var(--opacity-80))
+  );
+  transition: width var(--transition-default) var(--ease-in-cubic);
+}

@@ -15,7 +15,9 @@ export const ProgressBar = ({ completed, total }: ProgressBarProps) => {
 
   return (
     <div className={cx('progress-bar')}>
-      <div className={cx('progress')} style={{ width: `${percentage}%` }} />
+      <div className={cx('progress-track')}>
+        <div className={cx('progress')} style={{ width: `${percentage}%` }} />
+      </div>
     </div>
   );
 };
