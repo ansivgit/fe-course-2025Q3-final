@@ -73,7 +73,7 @@
   flex-direction: row;
   align-items: center;
   gap: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
   margin-bottom: 1rem;
   font-size: 0.875rem;
   font-weight: 400;
@@ -144,6 +144,7 @@
 }
 
 .edit-input {
+  width: 100%;
   height: 100%;
   padding: 0.25rem 0.5rem;
   font-size: 1.3rem;
@@ -160,4 +161,12 @@
   border: 1px solid hsla(from var(--color-purple-500) h s l / var(--opacity-50));
   box-shadow: inset 0 0 20px
     hsla(from var(--color-purple-500) h s l / var(--opacity-10));
+}
+
+.error-text {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-red-500);
+  line-height: 1.2;
 }

@@ -4,7 +4,8 @@ import { CalendarIcon, EditIcon, LoginIcon } from '@/assets/icons';
 import { Button } from '@/components/button/button';
 import { Title } from '@/components/title/title';
 import { useUserStore } from '@/store/useUserStore';
-import { MS_IN_SECOND } from '@/constants/constants';
+import { formatTimestampToMonthYear } from '@/utils/format-data';
+import { validateUserName } from '@/utils/login-validation';
 
 import styles from './profile.module.css';
 
@@ -15,11 +16,9 @@ export const Profile = () => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(name);
+  const [nameError, setNameError] = useState('');
 
-  const formattedDate = new Date(Number(createdAt) * MS_IN_SECOND).toLocaleDateString('en-US', {
-    month: 'long',
-    year: 'numeric',
-  });
+  const date = formatTimestampToMonthYear(createdAt);
 
   return (
     <div className={cx('profile-container')}>
@@ -29,20 +28,14 @@ export const Profile = () => {
         </div>
         <div className={cx('user-info')}>
           <div className={cx('profile-title')}>
-            {isEditing ? (
-              <input
-                type="text"
-                value={editName}
-                onChange={(event) => {
-                  setEditName(event.target.value);
-                }}
-                required
-                minLength={1}
-                className={cx('edit-input')}
-              />
-            ) : (
-              <Title>{name}</Title>
-            )}
+            <NameField
+              isEditing={isEditing}
+              editName={editName}
+              setEditName={setEditName}
+              name={name}
+              nameError={nameError}
+              setNameError={setNameError}
+            />
           </div>
           <div className={cx('profile-data')}>
             <div>
@@ -55,7 +48,7 @@ export const Profile = () => {
               <div className={cx('profile-icon')}>
                 <CalendarIcon />
               </div>
-              <span>Since {formattedDate}</span>
+              <span>Since {date}</span>
             </div>
           </div>
           <div className={cx('button-container')}>
@@ -64,12 +57,18 @@ export const Profile = () => {
               size="small"
               isActive
               onClick={() => {
-                if (!editName.trim()) {
+                const trimmedName = editName.trim();
+                if (!trimmedName) {
+                  setNameError('Name cannot be empty');
+                  return;
+                }
+                if (!validateUserName(trimmedName)) {
+                  setNameError('Use only latin letters and numbers');
                   return;
                 }
                 if (isEditing) {
                   setUser({
-                    name: editName,
+                    name: trimmedName,
                     login,
                     createdAt,
                   });
@@ -88,5 +87,38 @@ export const Profile = () => {
         <span className={cx('points-text')}>points</span>
       </div>
     </div>
+  );
+};
+
+const NameField = ({
+  isEditing,
+  editName,
+  setEditName,
+  name,
+  nameError,
+  setNameError,
+}: {
+  isEditing: boolean;
+  editName: string;
+  setEditName: (v: string) => void;
+  name: string;
+  nameError: string;
+  setNameError: (v: string) => void;
+}) => {
+  return isEditing ? (
+    <>
+      <input
+        type="text"
+        value={editName}
+        onChange={(event) => {
+          setEditName(event.target.value);
+          setNameError('');
+        }}
+        className={cx('edit-input')}
+      />
+      {nameError && <span className={cx('error-text')}>{nameError}</span>}
+    </>
+  ) : (
+    <Title>{name}</Title>
   );
 };
