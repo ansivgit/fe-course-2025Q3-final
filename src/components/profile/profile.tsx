@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { CalendarIcon, EditIcon, LoginIcon } from '@/assets/icons';
 import { Button } from '@/components/button/button';
+import { IconItem } from '@/components/icon-item/icon-item';
 import { Title } from '@/components/title/title';
 import { useUserStore } from '@/store/useUserStore';
 import { formatTimestampToMonthYear } from '@/utils/format-data';
@@ -38,18 +39,8 @@ export const Profile = () => {
             />
           </div>
           <div className={cx('profile-data')}>
-            <div>
-              <div className={cx('profile-icon')}>
-                <LoginIcon />
-              </div>
-              <span>{login}</span>
-            </div>
-            <div>
-              <div className={cx('profile-icon')}>
-                <CalendarIcon />
-              </div>
-              <span>Since {date}</span>
-            </div>
+            <IconItem icon={LoginIcon} text={login} />
+            <IconItem icon={CalendarIcon} text={`Since ${date}`} />
           </div>
           <div className={cx('button-container')}>
             <Button
@@ -76,15 +67,14 @@ export const Profile = () => {
                 setIsEditing(!isEditing);
               }}
             >
-              <EditIcon className={cx('edit-icon')} />
-              {isEditing ? 'Save' : 'Edit'}
+              <IconItem icon={EditIcon} text={isEditing ? 'Save' : 'Edit'} />
             </Button>
           </div>
         </div>
       </div>
       <div className={cx('points-container')}>
-        <span className={cx('points-value')}>{points.toLocaleString()}</span>
-        <span className={cx('points-text')}>points</span>
+        <div className={cx('points-value')}>{points.toLocaleString()}</div>
+        <div className={cx('points-text')}>points</div>
       </div>
     </div>
   );
