@@ -41,7 +41,9 @@ export async function runWidgets(widgets: Widget[], container?: HTMLElement): Pr
 
         if (validation.isCorrect) {
           const points = WIDGET_POINTS[widget.type] ?? 0;
-          useUserStore.getState().addPoints(points);
+
+          const store = useUserStore.getState();
+          store.changePoints(points);
 
           // TODO: remove after tests
           console.log('Points after answer:', useUserStore.getState().points);

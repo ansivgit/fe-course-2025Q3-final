@@ -5,9 +5,9 @@ import type { User } from '@/types/user';
 
 type UserStore = Pick<User, 'name' | 'login' | 'createdAt'> & {
   points: number;
-  setUser: (user: Pick<User, 'name' | 'login' | 'createdAt'>) => void;
-  setPoints: (points: number) => void;
-  addPoints: (amount: number) => void;
+  setUser: (user: Pick<User, 'name' | 'login' | 'createdAt'> & { points?: number }) => void;
+  setName: (name: string) => void;
+  changePoints: (amount: number) => void;
 };
 
 export const useUserStore = create<UserStore>()(
@@ -20,23 +20,23 @@ export const useUserStore = create<UserStore>()(
 
       setUser: (user): void => {
         set(() => {
-          const { name, login, createdAt } = user;
+          const { name, login, createdAt, points } = user;
 
           return {
             name,
             login,
             createdAt,
+            points,
           };
         });
       },
 
-      setPoints: (points: number): void => {
-        set({ points });
+      setName: (name: string): void => {
+        set({ name });
       },
 
-      addPoints: (amount): void => {
-        const current = useUserStore.getState().points;
-        useUserStore.getState().setPoints(current + amount);
+      changePoints: (amount: number): void => {
+        set((state) => ({ points: state.points + amount }));
       },
     }),
     {

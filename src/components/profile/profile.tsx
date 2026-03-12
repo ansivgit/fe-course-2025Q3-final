@@ -13,7 +13,7 @@ import styles from './profile.module.css';
 const cx = classNames.bind(styles);
 
 export const Profile = () => {
-  const { name, login, createdAt, setUser, points } = useUserStore();
+  const { name, login, createdAt, setName, points } = useUserStore();
 
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(name);
@@ -58,11 +58,7 @@ export const Profile = () => {
                   return;
                 }
                 if (isEditing) {
-                  setUser({
-                    name: trimmedName,
-                    login,
-                    createdAt,
-                  });
+                  setName(trimmedName);
                 }
                 setIsEditing(!isEditing);
               }}
