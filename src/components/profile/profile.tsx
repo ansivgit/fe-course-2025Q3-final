@@ -13,11 +13,20 @@ import styles from './profile.module.css';
 const cx = classNames.bind(styles);
 
 export const Profile = () => {
-  const { name, login, createdAt, setName, points } = useUserStore();
+  const user = useUserStore();
 
   const [isEditing, setIsEditing] = useState(false);
-  const [editName, setEditName] = useState(name);
+  const [editName, setEditName] = useState(user.name || 'Guest');
   const [nameError, setNameError] = useState('');
+
+  const name = user.name || 'Guest';
+  const login = user.login || '';
+
+  const points = user.points;
+
+  const [createdAt] = useState(() =>
+    typeof user.createdAt === 'number' ? user.createdAt : Date.now(),
+  );
 
   const date = formatTimestampToMonthYear(createdAt);
 
@@ -35,7 +44,7 @@ export const Profile = () => {
     }
 
     if (isEditing) {
-      setName(trimmedName);
+      user.setName(trimmedName);
     }
 
     setIsEditing(!isEditing);
