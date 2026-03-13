@@ -1,5 +1,4 @@
 import classNames from 'classnames/bind';
-import { MAX_PERCENTAGE } from '@/constants/constants';
 
 import styles from './progress-bar.module.css';
 
@@ -11,7 +10,7 @@ type ProgressBarProps = {
 };
 
 export const ProgressBar = ({ completed, total }: ProgressBarProps) => {
-  const percentage = total > 0 ? Math.round((completed / total) * MAX_PERCENTAGE) : 0;
+  const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
     <div className={cx('progress-bar')}>
