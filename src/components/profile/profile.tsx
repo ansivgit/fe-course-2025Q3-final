@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { CalendarIcon, EditIcon, LoginIcon } from '@/assets/icons';
 import { Button } from '@/components/button/button';
-import { IconItem } from '@/components/icon-item/icon-item';
+import { IconText } from '@/components/icon-text/icon-text';
 import { Title } from '@/components/title/title';
 import { useUserStore } from '@/store/useUserStore';
 import { formatTimestampToMonthYear } from '@/utils/format-data';
@@ -39,8 +39,8 @@ export const Profile = () => {
             />
           </div>
           <div className={cx('profile-data')}>
-            <IconItem icon={LoginIcon} text={login} />
-            <IconItem icon={CalendarIcon} text={`Since ${date}`} />
+            <IconText icon={LoginIcon} text={login} />
+            <IconText icon={CalendarIcon} text={`Since ${date}`} />
           </div>
           <div className={cx('button-container')}>
             <Button
@@ -63,7 +63,7 @@ export const Profile = () => {
                 setIsEditing(!isEditing);
               }}
             >
-              <IconItem icon={EditIcon} text={isEditing ? 'Save' : 'Edit'} />
+              <IconText icon={EditIcon} text={isEditing ? 'Save' : 'Edit'} />
             </Button>
           </div>
         </div>
