@@ -5,23 +5,20 @@ import styles from './progress-bar.module.css';
 const cx = classNames.bind(styles);
 
 type ProgressBarProps = {
-  completed: number;
-  total: number;
+  leftText: string;
+  rightText: string;
+  widthPercent: number;
 };
 
-export const ProgressBar = ({ completed, total }: ProgressBarProps) => {
-  const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
-
+export const ProgressBar = ({ leftText, rightText, widthPercent }: ProgressBarProps) => {
   return (
     <div className={cx('progress-bar')}>
       <div className={cx('info')}>
-        <div className={cx('round')}>
-          Round {completed} of {total}
-        </div>
-        <div className={cx('percentage')}>{percentage}%</div>
+        <div className={cx('round')}>{leftText}</div>
+        <div className={cx('percentage')}>{rightText}</div>
       </div>
       <div className={cx('progress-track')}>
-        <div className={cx('progress')} style={{ width: `${percentage}%` }} />
+        <div className={cx('progress')} style={{ width: `${widthPercent}%` }} />
       </div>
     </div>
   );

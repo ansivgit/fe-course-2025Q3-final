@@ -25,4 +25,3 @@ export const OPTION_STATUSES = ['correct', 'wrong', 'missed', 'selected', 'none'
 export type OptionStatus = (typeof OPTION_STATUSES)[number];
 
 export const ANIMATION_DURATION = 2000;
-

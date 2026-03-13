@@ -73,6 +73,13 @@ export function WidgetPage() {
 
   const { title, Icon, completionText } = config;
 
+  const roundNumber = `Round ${progress.completed} of ${progress.total}`;
+
+  const percentage =
+    progress.total > 0 ? Math.round((progress.completed / progress.total) * 100) : 0;
+
+  const percentageNumber = `${percentage}%`;
+
   return (
     <Layout>
       <section className={cx('title-section')}>
@@ -80,7 +87,11 @@ export function WidgetPage() {
         <Title size="small">{title}</Title>
       </section>
       {progress.total > 0 && (
-        <ProgressBar completed={progress.completed} total={progress.total} />
+        <ProgressBar
+          leftText={roundNumber}
+          rightText={percentageNumber}
+          widthPercent={percentage}
+        />
       )}
       <div ref={widgetContainer} className={cx('widget-container')} />
       {/* TODO: add user-friendly error-handler  */}
