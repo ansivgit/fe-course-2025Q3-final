@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { Layout } from '@/components/layout/layout';
 import { Paragraph } from '@/components/paragraph/paragraph';
+import { ProgressBar } from '@/components/progress-bar/progress-bar';
 import { Title } from '@/components/title/title';
 import { fetchData } from '@/services/api/data';
 import { registerStrategy, runWidgets } from '@/services/widgets/engine';
@@ -21,6 +22,8 @@ export function WidgetPage() {
   const widgetContainer = useRef<HTMLDivElement>(null);
   const [completed, setCompleted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const [progress, setProgress] = useState({ completed: 0, total: 0 });
 
   const config = widgetPageConfig.find((widget) => widget.id === widgetId);
 
@@ -47,7 +50,11 @@ export function WidgetPage() {
           return;
         }
 
-        await runWidgets(widgetData, widgetContainer.current);
+        setProgress({ completed: 0, total: widgetData.length });
+
+        await runWidgets(widgetData, widgetContainer.current, () => {
+          setProgress((previous) => ({ ...previous, completed: previous.completed + 1 }));
+        });
         setCompleted(true);
       } catch (error) {
         console.error('Widgets error:', error);
@@ -66,12 +73,26 @@ export function WidgetPage() {
 
   const { title, Icon, completionText } = config;
 
+  const roundNumber = `Round ${progress.completed + 1} of ${progress.total}`;
+
+  const percentage =
+    progress.total > 0 ? Math.round((progress.completed / progress.total) * 100) : 0;
+
+  const percentageNumber = `${percentage}%`;
+
   return (
     <Layout>
       <section className={cx('title-section')}>
         <div className={cx('icon')}>{Icon && <Icon />}</div>
         <Title size="small">{title}</Title>
       </section>
+      {progress.total > 0 && (
+        <ProgressBar
+          leftText={progress.completed < progress.total ? roundNumber : ''}
+          rightText={percentageNumber}
+          widthPercent={percentage}
+        />
+      )}
       <div ref={widgetContainer} className={cx('widget-container')} />
       {/* TODO: add user-friendly error-handler  */}
       {error && (

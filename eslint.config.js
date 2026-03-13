@@ -66,7 +66,7 @@ export default defineConfig([
 
       // 🟡 Good practices
       'no-console': ['warn', { allow: ['warn', 'error'] }],
-      'no-magic-numbers': ['error', { ignore: [0, 1, 2, -1] }],
+      'no-magic-numbers': ['error', { ignore: [0, 1, 2, -1, 100] }],
       'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
       'max-lines-per-function': ['warn', { max: 40, skipBlankLines: true, skipComments: true }],
       '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],

@@ -20,7 +20,11 @@ export function registerStrategy<T extends Widget>(
   strategies.set(strategy.type, strategy);
 }
 
-export async function runWidgets(widgets: Widget[], container?: HTMLElement): Promise<void> {
+export async function runWidgets(
+  widgets: Widget[],
+  container?: HTMLElement,
+  onWidgetCompleted?: () => void,
+): Promise<void> {
   for (const widget of widgets) {
     const strategy = strategies.get(widget.type);
     if (!strategy) {
@@ -29,8 +33,14 @@ export async function runWidgets(widgets: Widget[], container?: HTMLElement): Pr
     }
 
     const answer: WidgetAnswerMap[Widget['type']] = await new Promise((resolve) => {
-      pendingAnswers[widget.id] = resolve;
-      strategy.run(widget, resolve, container);
+      const completeWidget = (answer: WidgetAnswerMap[Widget['type']]): void => {
+        resolve(answer);
+        if (onWidgetCompleted) {
+          onWidgetCompleted();
+        }
+      };
+
+      strategy.run(widget, completeWidget, container);
     });
 
     widgetAnswers[widget.id] = answer;
