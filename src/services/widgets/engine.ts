@@ -33,14 +33,14 @@ export async function runWidgets(
     }
 
     const answer: WidgetAnswerMap[Widget['type']] = await new Promise((resolve) => {
-      const wrappedResolve = (answer: WidgetAnswerMap[Widget['type']]): void => {
+      const completeWidget = (answer: WidgetAnswerMap[Widget['type']]): void => {
         resolve(answer);
         if (onWidgetCompleted) {
           onWidgetCompleted();
         }
       };
 
-      strategy.run(widget, wrappedResolve, container);
+      strategy.run(widget, completeWidget, container);
     });
 
     widgetAnswers[widget.id] = answer;

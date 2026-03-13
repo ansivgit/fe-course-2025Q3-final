@@ -50,7 +50,7 @@ export function WidgetPage() {
           return;
         }
 
-        setProgress({ completed: 1, total: widgetData.length });
+        setProgress({ completed: 0, total: widgetData.length });
 
         await runWidgets(widgetData, widgetContainer.current, () => {
           setProgress((previous) => ({ ...previous, completed: previous.completed + 1 }));
@@ -79,7 +79,7 @@ export function WidgetPage() {
         <div className={cx('icon')}>{Icon && <Icon />}</div>
         <Title size="small">{title}</Title>
       </section>
-      {!completed && progress.total > 0 && (
+      {progress.total > 0 && (
         <ProgressBar completed={progress.completed} total={progress.total} />
       )}
       <div ref={widgetContainer} className={cx('widget-container')} />
