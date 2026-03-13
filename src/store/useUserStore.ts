@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 
 import type { User } from '@/types/user';
 
@@ -10,37 +9,30 @@ type UserStore = Pick<User, 'name' | 'login' | 'createdAt'> & {
   changePoints: (amount: number) => void;
 };
 
-export const useUserStore = create<UserStore>()(
-  persist(
-    (set) => ({
-      name: '',
-      login: '',
-      createdAt: '',
-      points: 0,
+export const useUserStore = create<UserStore>()((set) => ({
+  name: '',
+  login: '',
+  createdAt: '',
+  points: 0,
 
-      setUser: (user): void => {
-        set(() => {
-          const { name, login, createdAt, points } = user;
+  setUser: (user): void => {
+    set(() => {
+      const { name, login, createdAt, points } = user;
 
-          return {
-            name,
-            login,
-            createdAt,
-            points: points ?? 0,
-          };
-        });
-      },
+      return {
+        name,
+        login,
+        createdAt,
+        points: points ?? 0,
+      };
+    });
+  },
 
-      setName: (name: string): void => {
-        set({ name });
-      },
+  setName: (name: string): void => {
+    set({ name });
+  },
 
-      changePoints: (amount: number): void => {
-        set((state) => ({ points: state.points + amount }));
-      },
-    }),
-    {
-      name: 'user-storage',
-    },
-  ),
-);
+  changePoints: (amount: number): void => {
+    set((state) => ({ points: state.points + amount }));
+  },
+}));
