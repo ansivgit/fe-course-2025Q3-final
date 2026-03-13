@@ -42,30 +42,29 @@ export const Profile = () => {
             <IconText icon={LoginIcon} text={login} />
             <IconText icon={CalendarIcon} text={`Since ${date}`} />
           </div>
-          <div className={cx('button-container')}>
-            <Button
-              color="outline"
-              size="small"
-              isActive
-              onClick={() => {
-                const trimmedName = editName.trim();
-                if (!trimmedName) {
-                  setNameError('Name cannot be empty');
-                  return;
-                }
-                if (!validateUserName(trimmedName)) {
-                  setNameError('Use only latin letters and numbers');
-                  return;
-                }
-                if (isEditing) {
-                  setName(trimmedName);
-                }
-                setIsEditing(!isEditing);
-              }}
-            >
-              <IconText icon={EditIcon} text={isEditing ? 'Save' : 'Edit'} />
-            </Button>
-          </div>
+          <Button
+            className={cx('profile-button')}
+            color="outline"
+            size="small"
+            isActive
+            onClick={() => {
+              const trimmedName = editName.trim();
+              if (!trimmedName) {
+                setNameError('Name cannot be empty');
+                return;
+              }
+              if (!validateUserName(trimmedName)) {
+                setNameError('Use only latin letters and numbers');
+                return;
+              }
+              if (isEditing) {
+                setName(trimmedName);
+              }
+              setIsEditing(!isEditing);
+            }}
+          >
+            <IconText icon={EditIcon} text={isEditing ? 'Save' : 'Edit'} />
+          </Button>
         </div>
       </div>
       <div className={cx('points-container')}>
