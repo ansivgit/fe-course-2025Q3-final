@@ -73,7 +73,7 @@ export function WidgetPage() {
 
   const { title, Icon, completionText } = config;
 
-  const roundNumber = `Round ${progress.completed} of ${progress.total}`;
+  const roundNumber = `Round ${progress.completed + 1} of ${progress.total}`;
 
   const percentage =
     progress.total > 0 ? Math.round((progress.completed / progress.total) * 100) : 0;
@@ -88,7 +88,7 @@ export function WidgetPage() {
       </section>
       {progress.total > 0 && (
         <ProgressBar
-          leftText={roundNumber}
+          leftText={progress.completed < progress.total ? roundNumber : ''}
           rightText={percentageNumber}
           widthPercent={percentage}
         />
