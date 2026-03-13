@@ -1,5 +1,7 @@
 import { createRoot, type Root } from 'react-dom/client';
 import { MatchWidget } from '@/components/widgets/match-widget/match-widget';
+import { useUserStore } from '@/store/useUserStore';
+import { MATCH_GAME_POINTS } from '@/constants/constants';
 
 import type {
   MatchCardState,
@@ -64,5 +66,10 @@ export const matchStrategy: WidgetStrategy<'match-game', MatchGameResult> = {
         totalPairs,
       },
     };
+  },
+
+  onAnswerCorrect: () => {
+    const store = useUserStore.getState();
+    store.changePoints(MATCH_GAME_POINTS);
   },
 };

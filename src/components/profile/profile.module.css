@@ -1,0 +1,156 @@
+.profile-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid hsla(from var(--color-purple-500) h s l / var(--opacity-50));
+  border-radius: 1rem;
+  box-shadow: inset 0 0 20px
+    hsla(from var(--color-purple-500) h s l / var(--opacity-10));
+  background: var(--color-gray-900);
+
+  @media (max-width: 620px) {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+.profile-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 1rem;
+  box-shadow: hsla(from var(--color-purple-500) h s l / var(--opacity-30)) 0px
+    0px 40px;
+  background: linear-gradient(
+    135deg,
+    var(--color-purple-500),
+    var(--color-teal-500)
+  );
+
+  & span {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    color: var(--color-white);
+  }
+}
+
+.edit-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  @media (max-width: 620px) {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: 620px) {
+    align-items: center;
+  }
+}
+
+.profile-data {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  color: var(--color-gray-500);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+.profile-button {
+  width: 9rem;
+}
+
+.points-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 8rem;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 0.75rem;
+  background: var(--color-gray-950);
+}
+
+.points-value {
+  background: linear-gradient(
+    135deg,
+    var(--color-purple-500),
+    var(--color-teal-500)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.points-text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-gray-500);
+}
+
+.profile-title {
+  height: 32px;
+}
+
+.edit-input {
+  width: 100%;
+  height: 100%;
+  padding: 0.25rem 0.5rem;
+  font-size: 1.3rem;
+  line-height: 1.1;
+  outline: none;
+  font-weight: 500;
+  color: var(--color-white);
+  border: 1px solid var(--color-gray-500);
+  background: var(--color-gray-950);
+  border-radius: 0.5rem;
+}
+
+.edit-input:focus {
+  border: 1px solid hsla(from var(--color-purple-500) h s l / var(--opacity-50));
+  box-shadow: inset 0 0 20px
+    hsla(from var(--color-purple-500) h s l / var(--opacity-10));
+}
+
+.error-text {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-red-500);
+  line-height: 1.2;
+}

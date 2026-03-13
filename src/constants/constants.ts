@@ -4,6 +4,7 @@ export const ROUTES = {
   home: '/',
   login: 'login',
   register: 'register',
+  dashboard: 'dashboard',
   practice: 'practice',
   quiz: 'quiz',
   notFound: '*',
@@ -25,3 +26,6 @@ export const OPTION_STATUSES = ['correct', 'wrong', 'missed', 'selected', 'none'
 export type OptionStatus = (typeof OPTION_STATUSES)[number];
 
 export const ANIMATION_DURATION = 2000;
+
+export const QUIZ_POINTS = 100;
+export const MATCH_GAME_POINTS = 200;

@@ -52,10 +52,10 @@ export const LoginForm = ({ page = 'login' }: { page?: string }) => {
       if (result.error) {
         setFormErrorMessage(result.error.message);
         setFormValid(false);
-        void navigate(`/${ROUTES.practice}`); //! o nly for testing! remove this line!
+        void navigate(`/${ROUTES.dashboard}`); //! o nly for testing! remove this line!
       } else if (result.data) {
         setUser(result.data);
-        void navigate(`/${ROUTES.practice}`);
+        void navigate(`/${ROUTES.dashboard}`);
       } else {
         console.error('Unexpected login result:', result);
       }

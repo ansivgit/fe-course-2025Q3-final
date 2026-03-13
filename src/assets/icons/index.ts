@@ -1,7 +1,9 @@
 export { default as ArrowIcon } from './arrow.svg?react';
+export { default as CalendarIcon } from './calendar.svg?react';
 export { default as CheckCircleIcon } from './check-circle.svg?react';
 export { default as ClockIcon } from './clock.svg?react';
 export { default as CodeIcon } from './code.svg?react';
+export { default as EditIcon } from './edit.svg?react';
 export { default as LoginIcon } from './email.svg?react';
 export { default as ErrorCircleIcon } from './error-circle.svg?react';
 export { default as EyeIcon } from './eye.svg?react';
@@ -11,4 +13,5 @@ export { default as LogoIcon } from './logo.svg?react';
 export { default as MatchGameIcon } from './match-game.svg?react';
 export { default as PasswordIcon } from './password.svg?react';
 export { default as QuizIcon } from './quiz.svg?react';
+export { default as StarIcon } from './star.svg?react';
 export { default as UserIcon } from './user.svg?react';

@@ -34,7 +34,11 @@ export async function runWidgets(widgets: Widget[], container?: HTMLElement): Pr
     });
 
     widgetAnswers[widget.id] = answer;
-    strategy.validate(widget, answer);
+    const validation = strategy.validate(widget, answer);
+
+    if (validation.isCorrect && strategy.onAnswerCorrect) {
+      strategy.onAnswerCorrect();
+    }
   }
 }
 

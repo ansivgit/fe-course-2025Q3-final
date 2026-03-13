@@ -3,23 +3,36 @@ import { create } from 'zustand';
 import type { User } from '@/types/user';
 
 type UserStore = Pick<User, 'name' | 'login' | 'createdAt'> & {
-  setUser: (user: User) => void;
+  points: number;
+  setUser: (user: Pick<User, 'name' | 'login' | 'createdAt'> & { points?: number }) => void;
+  setName: (name: string) => void;
+  changePoints: (amount: number) => void;
 };
 
-export const useUserStore = create<UserStore>((set) => ({
+export const useUserStore = create<UserStore>()((set) => ({
   name: '',
   login: '',
   createdAt: '',
+  points: 0,
 
   setUser: (user): void => {
     set(() => {
-      const { name, login, createdAt } = user;
+      const { name, login, createdAt, points } = user;
 
       return {
         name,
         login,
         createdAt,
+        points: points ?? 0,
       };
     });
+  },
+
+  setName: (name: string): void => {
+    set({ name });
+  },
+
+  changePoints: (amount: number): void => {
+    set((state) => ({ points: state.points + amount }));
   },
 }));
