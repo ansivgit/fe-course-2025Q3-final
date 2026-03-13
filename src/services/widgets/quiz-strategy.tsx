@@ -1,5 +1,7 @@
 import { createRoot, type Root } from 'react-dom/client';
 import { Quiz } from '@/components/widgets/quiz-widget/quiz-widget';
+import { useUserStore } from '@/store/useUserStore';
+import { QUIZ_POINTS } from '@/constants/constants';
 
 import type { Answer, ValidationResult, Widget, WidgetStrategy } from '@/types/widgets';
 
@@ -46,5 +48,10 @@ export const quizStrategy: WidgetStrategy<'quiz', Answer> = {
     const isCorrect = Object.values(result).every((state) => state === 'correct');
 
     return { isCorrect, result };
+  },
+
+  onAnswerCorrect: () => {
+    const store = useUserStore.getState();
+    store.changePoints(QUIZ_POINTS);
   },
 };

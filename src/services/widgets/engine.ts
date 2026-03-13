@@ -1,6 +1,4 @@
 import { WidgetSchemas } from '@/schemas/widget-schemas';
-import { useUserStore } from '@/store/useUserStore';
-import { MATCH_GAME_POINTS, QUIZ_POINTS } from '@/constants/constants';
 
 import type { Widget, WidgetAnswerMap, WidgetStrategy, WidgetType } from '@/types/widgets';
 
@@ -8,11 +6,6 @@ const strategies = new Map<
   Widget['type'],
   WidgetStrategy<WidgetType, WidgetAnswerMap[Widget['type']]>
 >();
-
-const WIDGET_POINTS: Record<string, number> = {
-  quiz: QUIZ_POINTS,
-  'match-game': MATCH_GAME_POINTS,
-};
 
 export const widgetAnswers: Record<string, WidgetAnswerMap[WidgetType] | undefined> = {};
 
@@ -36,28 +29,16 @@ export async function runWidgets(widgets: Widget[], container?: HTMLElement): Pr
     }
 
     const answer: WidgetAnswerMap[Widget['type']] = await new Promise((resolve) => {
-      const wrappedResolve = (answer: WidgetAnswerMap[Widget['type']]): void => {
-        const validation = strategy.validate(widget, answer);
-
-        if (validation.isCorrect) {
-          const points = WIDGET_POINTS[widget.type] ?? 0;
-
-          const store = useUserStore.getState();
-          store.changePoints(points);
-
-          // TODO: remove after tests
-          console.log('Points after answer:', useUserStore.getState().points);
-        }
-
-        resolve(answer);
-      };
-
-      pendingAnswers[widget.id] = wrappedResolve;
-      strategy.run(widget, wrappedResolve, container);
+      pendingAnswers[widget.id] = resolve;
+      strategy.run(widget, resolve, container);
     });
 
     widgetAnswers[widget.id] = answer;
-    strategy.validate(widget, answer);
+    const validation = strategy.validate(widget, answer);
+
+    if (validation.isCorrect && strategy.onAnswerCorrect) {
+      strategy.onAnswerCorrect();
+    }
   }
 }
 

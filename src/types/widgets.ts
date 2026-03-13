@@ -49,6 +49,7 @@ export type WidgetStrategy<T extends WidgetType, A> = {
     nextWidget?: () => void,
   ): void;
   validate(widget: Widget<T>, answer: A): ValidateReturn;
+  onAnswerCorrect?: () => void;
 };
 
 type OptionValidationState = 'correct' | 'wrong' | 'missed';
