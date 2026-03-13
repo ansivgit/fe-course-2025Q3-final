@@ -21,6 +21,26 @@ export const Profile = () => {
 
   const date = formatTimestampToMonthYear(createdAt);
 
+  const handleEditClick = () => {
+    const trimmedName = editName.trim();
+
+    if (!trimmedName) {
+      setNameError('Name cannot be empty');
+      return;
+    }
+
+    if (!validateUserName(trimmedName)) {
+      setNameError('Use only latin letters and numbers');
+      return;
+    }
+
+    if (isEditing) {
+      setName(trimmedName);
+    }
+
+    setIsEditing(!isEditing);
+  };
+
   return (
     <div className={cx('profile-container')}>
       <div className={cx('profile-info')}>
@@ -47,21 +67,7 @@ export const Profile = () => {
             color="outline"
             size="small"
             isActive
-            onClick={() => {
-              const trimmedName = editName.trim();
-              if (!trimmedName) {
-                setNameError('Name cannot be empty');
-                return;
-              }
-              if (!validateUserName(trimmedName)) {
-                setNameError('Use only latin letters and numbers');
-                return;
-              }
-              if (isEditing) {
-                setName(trimmedName);
-              }
-              setIsEditing(!isEditing);
-            }}
+            onClick={handleEditClick}
           >
             <IconText icon={EditIcon} text={isEditing ? 'Save' : 'Edit'} />
           </Button>
