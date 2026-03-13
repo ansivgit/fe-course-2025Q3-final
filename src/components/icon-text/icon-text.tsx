@@ -12,9 +12,7 @@ type IconTextProps = {
 
 export const IconText = ({ icon: Icon, text }: IconTextProps) => (
   <div className={cx('icon-text')}>
-    <div className={cx('icon')}>
-      <Icon />
-    </div>
-    <span>{text}</span>
+    <Icon className={cx('icon')} />
+    {text}
   </div>
 );
