@@ -11,10 +11,10 @@ type StatCardProps = {
   text: string;
   change?: number;
 };
-export const StatCard = ({ icon: Icon, number, text, change }:StatCardProps) => {
+export const StatCard = ({ icon: Icon, number, text, change }: StatCardProps) => {
   return (
     <div className={cx('stat-card')}>
-      <div className={cx('content')}> 
+      <div className={cx('content')}>
         <Icon className={cx('icon')} />
         <div className={cx('number')}>{number}</div>
         <div className={cx('text')}>{text}</div>
