@@ -32,6 +32,9 @@
   /* Pink colors */
   --color-pink-500: hsl(320, 100%, 50%);
 
+  /* Orange colors */
+  --color-orange-500: hsla(25, 100%, 50%);
+
   /* OPACITY  */
   --opacity-70: 0.7;
   --opacity-50: 0.5;

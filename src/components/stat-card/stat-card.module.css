@@ -1,0 +1,134 @@
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
+  padding: 1.5rem;
+  padding-bottom: 0.5rem;
+  border: 1px solid var(--color-gray-800);
+  border-radius: 1rem;
+  color: var(--color-white);
+  background: var(--color-gray-900);
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: -1.5rem;
+  right: -1.5rem;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  filter: blur(2rem);
+  opacity: var(--opacity-30);
+}
+
+.purple::after {
+  background: var(--color-purple-500);
+}
+
+.teal::after {
+  background: var(--color-teal-500);
+}
+
+.green::after {
+  background: var(--color-green-400);
+}
+
+.orange::after {
+  background: var(--color-orange-500);
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.change {
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--color-green-400);
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+
+  &.purple {
+    background-color: hsla(
+      from var(--color-purple-500) h s l /
+      var(--opacity-15)
+    );
+  }
+
+  &.teal {
+    background-color: hsla(
+      from var(--color-teal-500) h s l /
+      var(--opacity-15)
+    );
+  }
+
+  &.green {
+    background-color: hsla(
+      from var(--color-green-400) h s l /
+      var(--opacity-15)
+    );
+  }
+
+  &.orange {
+    background-color: hsla(
+      from var(--color-orange-500) h s l /
+      var(--opacity-15)
+    );
+  }
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+
+  &.purple {
+    color: var(--color-purple-500);
+  }
+
+  &.teal {
+    color: var(--color-teal-500);
+  }
+
+  &.green {
+    color: var(--color-green-400);
+  }
+
+  &.orange {
+    color: var(--color-orange-500);
+  }
+}
+
+.number {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.number-container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.text {
+  color: var(--color-gray-500);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
