@@ -6,23 +6,33 @@ import styles from './stat-card.module.css';
 
 const cx = classNames.bind(styles);
 
-type StatCardProps = {
+type StatCard = {
+  id: string;
   icon: ComponentType<SVGProps<SVGSVGElement>>;
-  number: number;
+  number: string;
   text: string;
+  extraText?: string;
   change?: number;
   color?: StatCardColor;
 };
 
-type StatCardColor = 'purple' | 'teal' | 'pink';
+type StatCardColor = 'purple' | 'teal' | 'green' | 'orange';
 
-export const StatCard = ({ icon: Icon, number, text, change, color = 'purple' }: StatCardProps) => {
+type StatCardProps = {
+  statCard: StatCard;
+};
+
+export const StatCard = ({ statCard }: StatCardProps) => {
+  const { icon: Icon, number, text, extraText, change, color = 'purple' } = statCard;
   return (
-    <div className={cx('stat-card')}>
-      <div className={cx('icon-container')}>
+    <div className={cx('stat-card', color)}>
+      <div className={cx('icon-container', color)}>
         <Icon className={cx('icon', color)} />
       </div>
-      <div className={cx('number')}>{number}</div>
+      <div className={cx('number-container')}>
+        <div className={cx('number')}>{number}</div>
+        {extraText && <span className={cx('text')}>{extraText}</span>}
+      </div>
       <div className={cx('content')}>
         <Paragraph text={text}></Paragraph>
         {change !== undefined && (
